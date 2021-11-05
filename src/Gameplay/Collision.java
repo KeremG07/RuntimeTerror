@@ -16,10 +16,10 @@ public class Collision {
 
     public static boolean compareCoordinates(Body body1, Body body2){
         boolean crashingCoordinates = false;
-        int x1 = body1.x;
-        int y1 = body1.y;
-        int x2 = body2.x;
-        int y2 = body2.y;
+        double x1 = body1.x;
+        double y1 = body1.y;
+        double x2 = body2.x;
+        double y2 = body2.y;
 
         int width1 = body1.width;
         int length1 = body1.length;

@@ -1,12 +1,12 @@
 package Body;
 
 public class Body {
-    public int x;
-    public int y;
+    public double x;
+    public double y;
     public int length;
     public int width;
-    public Body (int x_coordinates,
-                 int y_coordinates,
+    public Body (double x_coordinates,
+                 double y_coordinates,
                  int length,
                  int width){
         x = x_coordinates;
