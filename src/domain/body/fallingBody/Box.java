@@ -1,7 +1,7 @@
-package Body.Obstacle;
+package domain.body.fallingBody;
 
-public class ExplosiveObstacle extends Obstacle{
-    public ExplosiveObstacle(int x_coordinates,
+public class Box extends FallingBody{
+    public Box(int x_coordinates,
                          int y_coordinates,
                          int length,
                          int width){

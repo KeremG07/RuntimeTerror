@@ -1,8 +1,7 @@
-package Body;
+package domain.body.obstacle;
 
-public class NoblePhantasm extends Body {
-
-    public NoblePhantasm(int x_coordinates,
+public class ExplosiveObstacle extends Obstacle{
+    public ExplosiveObstacle(int x_coordinates,
                          int y_coordinates,
                          int length,
                          int width){
