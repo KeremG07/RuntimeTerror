@@ -1,4 +1,4 @@
-package Body;
+package domain.body;
 
 public class EnchantedSphere extends Body {
 

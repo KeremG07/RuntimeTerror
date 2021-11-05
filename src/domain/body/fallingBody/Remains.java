@@ -1,7 +1,7 @@
-package Body.FallingBody;
+package domain.body.fallingBody;
 
-public class Box extends FallingBody{
-    public Box(int x_coordinates,
+public class Remains extends FallingBody{
+    public Remains(int x_coordinates,
                          int y_coordinates,
                          int length,
                          int width){

@@ -1,4 +1,4 @@
-package Body.Obstacle;
+package domain.body.obstacle;
 
 public class GiftObstacle extends Obstacle{
     public GiftObstacle(int x_coordinates,

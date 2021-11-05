@@ -1,6 +1,6 @@
-package Gameplay;
-import Body.*;
-import Body.Obstacle.Obstacle;
+package domain.gameplay;
+import domain.body.*;
+import domain.body.obstacle.Obstacle;
 import java.lang.Math;
 
 public class Collision {

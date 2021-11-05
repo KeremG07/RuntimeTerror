@@ -1,6 +1,6 @@
-package Gameplay;
+package domain.gameplay;
 
-import Body.Obstacle.Obstacle;
+import domain.body.obstacle.Obstacle;
 
 
 public interface ObstacleMove {

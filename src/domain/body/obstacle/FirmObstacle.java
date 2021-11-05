@@ -1,7 +1,7 @@
-package Body.Obstacle;
+package domain.body.obstacle;
 
-public class SimpleObstacle extends Obstacle {
-    public SimpleObstacle(int x_coordinates,
+public class FirmObstacle extends Obstacle{
+    public FirmObstacle(int x_coordinates,
                          int y_coordinates,
                          int length,
                          int width){

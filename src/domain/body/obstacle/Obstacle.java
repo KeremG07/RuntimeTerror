@@ -1,6 +1,6 @@
-package Body.Obstacle;
+package domain.body.obstacle;
 
-import Body.Body;
+import domain.body.Body;
 
 public class Obstacle extends Body {
 
