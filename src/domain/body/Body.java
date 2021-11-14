@@ -21,6 +21,10 @@ public class Body {
         this.vx = vx;
         this.vy = vy;
     }
+    
+    public void getCoordinates(){
+        
+    }
 
     public boolean compareCoordinates(Body body) {
         boolean crashingCoordinates = false;
