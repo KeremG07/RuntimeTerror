@@ -20,6 +20,7 @@ public class NoblePhantasm extends Body {
     public void updateLocation(double x) {
         this.x = x;
     }
+    
 
     public void moveRight() {
         updateLocation(x + length/2);
@@ -45,5 +46,21 @@ public class NoblePhantasm extends Body {
     public void rotateLeft() {
         normalAngle += 20;
         if(normalAngle > 135) normalAngle = 135;
+    }
+    
+    public void updateRotation(){
+        
+    }
+    
+    public void activateMagicalHex(){
+        
+    }
+    
+    public void doubleNP(){
+        
+    }
+    
+    public void moveNoblePhantasm(){
+        
     }
 }
