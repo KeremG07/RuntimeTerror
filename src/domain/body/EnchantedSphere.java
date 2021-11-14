@@ -24,4 +24,12 @@ public class EnchantedSphere extends Body {
     public void reflect() {
 
     }
+    
+    public void shootEnchantedSphere(){
+        
+    }
+    
+    public void unstoppableES(){
+        
+    }
 }
