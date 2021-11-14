@@ -9,5 +9,16 @@ public class Statistics {
     public int chances;
     public ArrayList<Obstacle> obstacleList;
     public double timeElapsed;
+    
+    public void addObstacle(Obstacle obs){
+
+    }
+    public void removeObstacle(Obstacle obs){
+
+    }
+    
+    public void buildGame(){
+        
+    }
 
 }
