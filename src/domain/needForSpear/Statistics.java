@@ -11,10 +11,10 @@ public class Statistics {
     public static double timeElapsed;
     
     public static void addObstacle(Obstacle obs){
-
+        obstacleList.add(obs);
     }
     public static void removeObstacle(Obstacle obs){
-
+        obstacleList.remove(obs);
     }
     
     public static void buildGame(){
