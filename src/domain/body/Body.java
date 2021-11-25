@@ -1,5 +1,7 @@
 package domain.body;
 
+import domain.needForSpear.Controller;
+
 public class Body {
     public double x;
     public double y;
@@ -60,5 +62,16 @@ public class Body {
             }
         }
         return crashingCoordinates;
+    }
+    public boolean compareFrame(){
+        double[] corner1 = Controller.getFrameBorders()[0];
+        double[] corner2 = Controller.getFrameBorders()[1];
+        if(this.x + this.width < corner2[0]
+                && this.y - this.length > corner1[1]
+                && this.x > corner1[0]
+                && this.y < corner2[1]){
+            return false;
+        }
+        return true;
     }
 }

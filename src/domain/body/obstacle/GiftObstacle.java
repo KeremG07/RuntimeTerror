@@ -10,12 +10,11 @@ public class GiftObstacle extends Obstacle{
                         double vx,
                         double vy,
                         String name,
-                        boolean moving,
-                        double movingProbability,
                         int numberOfHits,
                         String giftType) {
-        super(x_coordinates, y_coordinates, length, width, vx, vy, name, moving, movingProbability, numberOfHits);
+        super(x_coordinates, y_coordinates, length, width, vx, vy, name, numberOfHits);
         this.giftType=giftType;
+        this.moving = false;
     }
 
     @Override

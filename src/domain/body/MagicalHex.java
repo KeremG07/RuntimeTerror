@@ -1,5 +1,7 @@
 package domain.body;
 
+import domain.needForSpear.Controller;
+
 public class MagicalHex extends Body {
 
     public MagicalHex(double x_coordinates,
@@ -16,9 +18,6 @@ public class MagicalHex extends Body {
 
     }
 
-    public boolean compareFrame() {
-        return false;
-    }
 
     public void move() {
 

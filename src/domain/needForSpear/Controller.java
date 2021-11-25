@@ -1,39 +1,43 @@
 package domain.needForSpear;
-
+import java.util.*;
 public class Controller {
-    public void buildGame() {
+    public static void buildGame() {
 
     }
 
-    public void startGame() {
+    public static void startGame() {
 
     }
 
-    public void moveNoblePhantasm() {
+    public static void moveNoblePhantasm() {
 
     }
 
-    public void shootEnchantedSphere() {
+    public static void shootEnchantedSphere() {
 
     }
 
-    public void endGame() {
+    public static void endGame() {
 
     }
 
-    public void doActions() {
+    public static void doActions() {
 
     }
 
-    public void getFrameBorders() {
+    public static double[][] getFrameBorders() {
+        double[][] borders = new double[2][2];
+        //borders[0] = UI.corner1;
+        //borders[1] = UI.corner2;
+
+        return borders;
+    }
+
+    public static void addObstacle() {
 
     }
 
-    public void addObstacle() {
-
-    }
-
-    public void destroyObstacle() {
+    public static void destroyObstacle() {
 
     }
 }

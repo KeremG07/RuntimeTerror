@@ -1,4 +1,5 @@
 package domain.body.obstacle;
+import domain.needForSpear.*;
 
 public class SimpleObstacle extends Obstacle {
 
@@ -9,14 +10,30 @@ public class SimpleObstacle extends Obstacle {
                           double vx,
                           double vy,
                           String name,
-                          boolean moving,
-                          double movingProbability,
                           int numberOfHits) {
-        super(x_coordinates, y_coordinates, length, width, vx, vy, name, moving, movingProbability, numberOfHits);
+        super(x_coordinates, y_coordinates, length, width, vx, vy, name, numberOfHits);
     }
 
     @Override
     public void move() {
+        if(moving){
+            boolean canMoveRight = true;
+            boolean canMoveLeft = true;
+            SimpleObstacle copyR = new SimpleObstacle(this.x + this.vx, this.y, this.length, this.width, this.vx, this.vy, this.name, this.numberOfHits);
+            SimpleObstacle copyL = new SimpleObstacle(this.x - this.vx, this.y, this.length, this.width, this.vx, this.vy, this.name, this.numberOfHits);
 
+            for (Obstacle obstacle : Statistics.obstacleList){
+                canMoveRight &= copyR.compareCoordinates(obstacle);
+                canMoveLeft &= copyL.compareCoordinates(obstacle);
+            }
+            canMoveRight &= copyR.compareFrame();
+            canMoveLeft &= copyL.compareFrame();
+
+            if(canMoveRight){
+                this.x += this.vx;
+            } else if(canMoveLeft){
+                this.x -= this.vx;
+            }
+        }
     }
 }
