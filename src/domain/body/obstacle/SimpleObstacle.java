@@ -19,16 +19,16 @@ public class SimpleObstacle extends Obstacle {
         if(moving){
             boolean canMoveRight = true;
             boolean canMoveLeft = true;
-            SimpleObstacle copyR = new SimpleObstacle(this.x + this.vx, this.y, this.length, this.width, this.vx, this.vy, this.name, this.numberOfHits);
-            SimpleObstacle copyL = new SimpleObstacle(this.x - this.vx, this.y, this.length, this.width, this.vx, this.vy, this.name, this.numberOfHits);
-            //compareCoordinates kordinatları yazıcak şekilde olsun
             for (Obstacle obstacle : Statistics.obstacleList){
-                canMoveRight &= copyR.compareCoordinates(obstacle);
-                canMoveLeft &= copyL.compareCoordinates(obstacle);
+                canMoveRight &= obstacle.compareCoordinates(this.x + this.vx, this.y, this.length, this.width);
+                canMoveLeft &= obstacle.compareCoordinates(this.x - this.vx, this.y, this.length, this.width);
             }
-            canMoveRight &= copyR.compareFrame();
-            canMoveLeft &= copyL.compareFrame();
-
+            if(!Controller.hitFrame(this.x + this.vx, this.y, this.length, this.width).equals("None")){
+                canMoveRight = false;
+            }
+            if(!Controller.hitFrame(this.x - this.vx, this.y, this.length, this.width).equals("None")){
+                canMoveLeft = false;
+            }
             if(canMoveRight){
                 this.x += this.vx;
             } else if(canMoveLeft){

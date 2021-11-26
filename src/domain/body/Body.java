@@ -1,7 +1,5 @@
 package domain.body;
 
-import domain.needForSpear.Controller;
-
 public class Body {
     public double x;
     public double y;
@@ -28,50 +26,36 @@ public class Body {
         
     }
 
-    public boolean compareCoordinates(Body body) {
+    public boolean compareCoordinates(double x, double y, double length, double width) {
         boolean crashingCoordinates = false;
         double x1 = this.x;
         double y1 = this.y;
-        double x2 = body.x;
-        double y2 = body.y;
 
         double width1 = this.width;
         double length1 = this.length;
-        double width2 = body.width;
-        double length2 = body.length;
 
-        if (Math.abs(x2-x1) <= Math.max(width1,width2)){
-            if (y2 >= y1){
-                if((y2-y1) <= length2) {
+        if (Math.abs(x-x1) <= Math.max(width1,width)){
+            if (y >= y1){
+                if((y-y1) <= length) {
                     crashingCoordinates = true;
                 }
             } else {
-                if((y1-y2) <= length1) {
+                if((y1-y) <= length1) {
                     crashingCoordinates = true;
                 }
             }
-        } else if (Math.abs(y2-y1) <= Math.max(length1,length2)){
-            if (x2 >= x1){
-                if((x2-x1) <= width2) {
+        } else if (Math.abs(y-y1) <= Math.max(length1,length)){
+            if (x >= x1){
+                if((x-x1) <= width) {
                     crashingCoordinates = true;
                 }
             } else {
-                if((x1-x2) <= width1) {
+                if((x1-x) <= width1) {
                     crashingCoordinates = true;
                 }
             }
         }
         return crashingCoordinates;
     }
-    public boolean compareFrame(){ // will be updated such that it will return the wall that the object hits
-        double[] corner1 = Controller.getFrameBorders()[0];
-        double[] corner2 = Controller.getFrameBorders()[1];
-        if(this.x + this.width < corner2[0]
-                && this.y - this.length > corner1[1]
-                && this.x > corner1[0]
-                && this.y < corner2[1]){
-            return false;
-        }
-        return true;
-    }
+
 }

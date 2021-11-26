@@ -1,5 +1,6 @@
 package domain.body;
 
+import domain.needForSpear.Controller;
 import ui.swing.PlayModeFrame;
 
 public class NoblePhantasm extends Body {
@@ -25,15 +26,23 @@ public class NoblePhantasm extends Body {
         if(x < 0) x = 0;
         if(x > PlayModeFrame.getInstance().getWidth()) x = PlayModeFrame.getInstance().getWidth();
         this.x = x;
+        /*
+        if(Controller.hitFrame(x, this.y, this.length, this.width) == "None"){
+            this.x = x;
+        */
+
     }
 
-    public void moveRight() { updateX(x + 0.1);
+    public void moveRight() {
+        updateX(x + 0.1);
     }
 
-    public void moveLeft() { updateX(x - 0.1);
+    public void moveLeft() {
+        updateX(x - 0.1);
     }
 
-    public void slideRight() { updateX(x + 0.2);
+    public void slideRight() {
+        updateX(x + 0.2);
     }
 
     public void slideLeft() {
