@@ -21,7 +21,7 @@ public class SimpleObstacle extends Obstacle {
             boolean canMoveLeft = true;
             SimpleObstacle copyR = new SimpleObstacle(this.x + this.vx, this.y, this.length, this.width, this.vx, this.vy, this.name, this.numberOfHits);
             SimpleObstacle copyL = new SimpleObstacle(this.x - this.vx, this.y, this.length, this.width, this.vx, this.vy, this.name, this.numberOfHits);
-
+            //compareCoordinates kordinatları yazıcak şekilde olsun
             for (Obstacle obstacle : Statistics.obstacleList){
                 canMoveRight &= copyR.compareCoordinates(obstacle);
                 canMoveLeft &= copyL.compareCoordinates(obstacle);

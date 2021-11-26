@@ -58,7 +58,7 @@ public class NoblePhantasm extends Body {
         
     }
     
-    public void moveNoblePhantasm(int input){
+    public void moveNoblePhantasm(int input){ //make input left or right - easy to read the code
         if(input == 37) {
             moveLeft();
         }

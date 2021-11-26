@@ -23,8 +23,8 @@ public abstract class Obstacle extends Body {
         super(x_coordinates,y_coordinates, length, width, vx, vy);
         this.name=name;
         movingProbability = randi.nextInt(10);
-        if(movingProbability<=7){ moving = true; }
-        else { moving = false; }
+        if(movingProbability<=7){ moving = false; }
+        else { moving = true; }
         this.numberOfHits=numberOfHits;
     }
     public abstract void move();
