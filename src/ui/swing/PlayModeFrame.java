@@ -1,4 +1,16 @@
-package UI.swing;
+package ui.swing;
 
-public class PlayModeFrame {
+import javax.swing.*;
+
+public class PlayModeFrame extends JPanel {
+    private static PlayModeFrame instance;
+    private PlayModeFrame() {}
+
+    public static PlayModeFrame getInstance() {
+        if (instance == null)
+            instance = new PlayModeFrame();
+        return instance;
+    }
+
+
 }

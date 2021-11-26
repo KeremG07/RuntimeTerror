@@ -1,4 +1,4 @@
-package UI.swing;
+package ui.swing;
 
 public class BuildModeFrame {
 }
