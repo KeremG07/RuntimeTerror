@@ -63,7 +63,7 @@ public class Body {
         }
         return crashingCoordinates;
     }
-    public boolean compareFrame(){
+    public boolean compareFrame(){ // will be updated such that it will return the wall that the object hits
         double[] corner1 = Controller.getFrameBorders()[0];
         double[] corner2 = Controller.getFrameBorders()[1];
         if(this.x + this.width < corner2[0]
