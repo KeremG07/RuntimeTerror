@@ -1,7 +1,6 @@
 package domain.body;
 
 import domain.needForSpear.Controller;
-import ui.swing.PlayModeFrame;
 
 public class NoblePhantasm extends Body {
 
@@ -24,13 +23,8 @@ public class NoblePhantasm extends Body {
 
     public void updateX(double x) {
         if(x < 0) x = 0;
-        if(x > PlayModeFrame.getInstance().getWidth()) x = PlayModeFrame.getInstance().getWidth();
+        if(x > (Controller.getPlayModeFrameBorders())[0]) x = (Controller.getPlayModeFrameBorders())[0];
         this.x = x;
-        /*
-        if(Controller.hitFrame(x, this.y, this.length, this.width) == "None"){
-            this.x = x;
-        */
-
     }
 
     public void moveRight() {

@@ -1,4 +1,7 @@
 package domain.needForSpear;
+
+import ui.swing.PlayModeFrame;
+
 import java.util.*;
 public class Controller {
     public static void buildGame() {
@@ -63,6 +66,16 @@ public class Controller {
             return "None";
         }
     }
+
+    public static double[] getPlayModeFrameBorders() {
+        double[] borders = new double[2];
+
+        borders[0] = PlayModeFrame.getInstance().getWidth();
+        borders[1] = PlayModeFrame.getInstance().getHeight();
+
+        return borders;
+    }
+
     public static void addObstacle() {
 
     }
