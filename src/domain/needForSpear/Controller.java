@@ -4,6 +4,21 @@ import ui.swing.PlayModeFrame;
 
 import java.util.*;
 public class Controller {
+    private static Controller instance;
+
+    BuildGame buildGame;
+    Player player;
+    boolean isPaused = false;
+    boolean isOver = false;
+    public int timeLeft;
+
+    private Controller() {}
+
+    public static Controller getInstance() {
+        if (instance == null)
+            instance = new Controller();
+        return instance;
+    }
     public static void buildGame() {
 
     }

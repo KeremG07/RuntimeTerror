@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class PlayModeFrame extends JPanel {
     private static PlayModeFrame instance;
-
+    
     private PlayModeFrame(LayoutManager layout) {
         super(layout);
     }
