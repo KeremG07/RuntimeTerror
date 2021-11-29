@@ -9,4 +9,7 @@ public class Inventory {
     public void addGifts(){
 
     }
+    public void updateInventory(String abilityType){
+        
+    }
 }

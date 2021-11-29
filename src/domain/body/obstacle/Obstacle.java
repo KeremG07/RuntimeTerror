@@ -1,12 +1,16 @@
 package domain.body.obstacle;
-
+import domain.needForSpear.Controller;
 import domain.body.Body;
+
+import java.util.Random;
 
 public abstract class Obstacle extends Body {
     public String name;
     public boolean moving;
-    public double movingProbability;
+    public int movingProbability;
     public int numberOfHits;
+
+    public Random randi = new Random();
 
     public Obstacle(double x_coordinates,
                     double y_coordinates,
@@ -15,17 +19,14 @@ public abstract class Obstacle extends Body {
                     double vx,
                     double vy,
                     String name,
-                    boolean moving,
-                    double movingProbability,
                     int numberOfHits){
-        super(x_coordinates,y_coordinates, length, width,vx,vy);
+        super(x_coordinates,y_coordinates, length, width, vx, vy);
         this.name=name;
-        this.moving=moving;
-        this.movingProbability=movingProbability;
+        movingProbability = randi.nextInt(10);
+        if(movingProbability<=7){ moving = false; }
+        else { moving = true; }
         this.numberOfHits=numberOfHits;
     }
     public abstract void move();
-    public void compareFrame(){
 
-    }
 }

@@ -8,10 +8,7 @@ public class BuildGame {
     public ArrayList<Integer> obstacleCounts;
     public ArrayList<Integer> giftCounts;
 
-    public void addObstacle(){
-
-    }
-    public void removeObstacle(){
-
+    public void buildGame(){
+        
     }
 }

@@ -1,5 +1,7 @@
 package domain.body;
 
+import domain.needForSpear.Controller;
+
 public class EnchantedSphere extends Body {
     public boolean unstoppable;
 
@@ -13,9 +15,6 @@ public class EnchantedSphere extends Body {
         unstoppable=false;
     }
 
-    public boolean compareFrame() {
-        return false;
-    }
 
     public void move() {
 
@@ -23,5 +22,13 @@ public class EnchantedSphere extends Body {
 
     public void reflect() {
 
+    }
+    
+    public void shootEnchantedSphere(){
+        
+    }
+    
+    public void unstoppableES(){
+        
     }
 }

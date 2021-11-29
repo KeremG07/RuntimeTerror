@@ -29,4 +29,11 @@ public class Player {
     public void fireMagicalHex(){
 
     }
+    
+    public void useAbility(String abilityType){
+        
+    }
+    public void increaseChance(){
+        
+    }
 }

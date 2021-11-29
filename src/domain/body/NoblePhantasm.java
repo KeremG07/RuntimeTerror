@@ -1,9 +1,12 @@
 package domain.body;
 
+import domain.needForSpear.Controller;
+import ui.swing.PlayModeFrame;
+
 public class NoblePhantasm extends Body {
 
     public double normalAngle;
-    public boolean magicalHex;
+    public boolean hasMagicalHex;
 
     public NoblePhantasm(double x_coordinates,
                          double y_coordinates,
@@ -13,37 +16,63 @@ public class NoblePhantasm extends Body {
                          double vy){
         super(x_coordinates, y_coordinates, length, width,vx,vy);
         normalAngle=90;
-        magicalHex=false;
+        hasMagicalHex =false;
     }
 
 
-    public void updateLocation(double x) {
+
+
+    public void updateX(double x) {
+        if(x < 0) x = 0;
+        if(x > PlayModeFrame.getInstance().getWidth()) x = PlayModeFrame.getInstance().getWidth();
         this.x = x;
+        /*
+        if(Controller.hitFrame(x, this.y, this.length, this.width) == "None"){
+            this.x = x;
+        */
+
     }
 
     public void moveRight() {
-        updateLocation(x + length/2);
+        updateX(x + 0.1);
     }
 
     public void moveLeft() {
-        updateLocation(x - length/2);
+        updateX(x - 0.1);
     }
 
     public void slideRight() {
-        updateLocation(x + 2*length);
+        updateX(x + 0.2);
     }
 
     public void slideLeft() {
-        updateLocation(x - 2*length);
+        updateX(x - 0.2);
     }
 
     public void rotateRight() {
-        normalAngle -= 20;
+        normalAngle -= 0.1;
         if(normalAngle < 45) normalAngle = 45;
     }
 
     public void rotateLeft() {
-        normalAngle += 20;
+        normalAngle += 0.1;
         if(normalAngle > 135) normalAngle = 135;
+    }
+    
+    public void activateMagicalHex(){
+        
+    }
+    
+    public void doubleNP(){
+        
+    }
+    
+    public void moveNoblePhantasm(int input){ //make input left or right - easy to read the code
+        if(input == 37) {
+            moveLeft();
+        }
+        else if(input == 39) {
+            moveRight();
+        }
     }
 }
