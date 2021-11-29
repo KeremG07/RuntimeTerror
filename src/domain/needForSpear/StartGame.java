@@ -1,7 +1,5 @@
 package domain.needForSpear;
 
-import ui.swing.PlayModeFrame;
-
 public class StartGame {
     BuildGame buildGame;
     Controller controller;

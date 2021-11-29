@@ -2,7 +2,6 @@ package domain.needForSpear;
 
 import ui.swing.PlayModeFrame;
 
-import java.util.*;
 public class Controller {
     private static Controller instance;
 
