@@ -60,7 +60,4 @@ public class BuildModeFrame extends JFrame {
         gbc.gridx=4;
         numberPanel.add(giftObstacle,gbc);
     }
-    public static void main(String[] args) {
-        BuildModeFrame.getInstance(savePlace);
-    }
 }
