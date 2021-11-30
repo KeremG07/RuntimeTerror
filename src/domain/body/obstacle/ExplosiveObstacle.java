@@ -6,11 +6,9 @@ public class ExplosiveObstacle extends Obstacle {
                              double y_coordinates,
                              double length,
                              double width,
-                             double vx,
-                             double vy,
                              String name,
                              int numberOfHits) {
-        super(x_coordinates, y_coordinates, length, width, vx, vy, name, numberOfHits);
+        super(x_coordinates, y_coordinates, length, width, name, numberOfHits);
     }
 
     @Override

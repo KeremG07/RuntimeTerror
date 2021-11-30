@@ -11,8 +11,8 @@ public class Player {
 
     public Player() {
         inventory = new Inventory();
-        noblePhantasm = new NoblePhantasm(450, 590, 100, 8, 0, 0);
-        enchantedSphere = new EnchantedSphere(494, 578, 12, 12, 0, 0);
+        noblePhantasm = new NoblePhantasm(450, 590, 100, 8);
+        enchantedSphere = new EnchantedSphere(494, 578, 12, 12, noblePhantasm);
     }
 
     public Inventory getInventory() {
@@ -54,5 +54,8 @@ public class Player {
     }
     public void increaseChance(){
         
+    }
+    public void loseChance(){
+
     }
 }

@@ -8,10 +8,8 @@ public class Remains extends FallingBody {
                    double y_coordinates,
                    double length,
                    double width,
-                   double vx,
-                   double vy,
                    int remainNumber) {
-        super(x_coordinates, y_coordinates, length, width, vx, vy);
+        super(x_coordinates, y_coordinates, length, width);
         this.remainNumber=remainNumber;
     }
 

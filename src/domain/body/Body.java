@@ -11,15 +11,11 @@ public class Body {
     public Body(double x_coordinates,
                 double y_coordinates,
                 double length,
-                double width,
-                double vx,
-                double vy) {
+                double width) {
         x = x_coordinates;
         y = y_coordinates;
         this.length = length;
         this.width = width;
-        this.vx = vx;
-        this.vy = vy;
     }
     
     public void getCoordinates(){

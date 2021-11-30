@@ -5,7 +5,8 @@ import ui.swing.PlayModeFrame;
 
 public class Controller {
     private static Controller instance;
-
+    //How often the movements on the screen is updated.
+    public final static int ticksPerSecond = 30;
 
 
     Player player;
@@ -23,6 +24,11 @@ public class Controller {
         return instance;
     }
 
+    public void updateMovement(){
+        player.noblePhantasm.moveRight();
+        player.enchantedSphere.move();
+
+    }
     public Player getPlayer() {
         return player;
     }
@@ -31,38 +37,38 @@ public class Controller {
         return BuildGame.getInstance();
     }
 
-    public static GameScreen buildGame() {
+    public GameScreen buildGame() {
         return GameScreen.getInstance();
     }
 
-    public static void startGame() {
+    public void startGame() {
 
     }
 
-    public static void moveNoblePhantasm() {
+    public void moveNoblePhantasm() {
 
     }
 
-    public static void shootEnchantedSphere() {
+    public void shootEnchantedSphere() {
 
     }
 
-    public static void endGame() {
+    public void endGame() {
 
     }
 
-    public static void doActions() {
+    public void doActions() {
 
     }
 
-    public static double[][] getFrameBorders() {
+    public double[][] getFrameBorders() {
         double[][] borders = new double[2][2];
         //borders[0] = UI.corner1;
         //borders[1] = UI.corner2;
 
         return borders;
     }
-    public static String hitFrame(double x, double y, double length, double width ){
+    public String hitFrame(double x, double y, double length, double width ){
         double[] corner1 = getFrameBorders()[0];
         double[] corner2 = getFrameBorders()[1];
         if(y - length <= corner1[1] && x + width >= corner2[0]){
@@ -94,7 +100,7 @@ public class Controller {
         }
     }
 
-    public static double[] getPlayModeFrameBorders() {
+    public double[] getPlayModeFrameBorders() {
         double[] borders = new double[2];
 
         borders[0] = PlayModeFrame.getInstance().getWidth();
@@ -103,11 +109,11 @@ public class Controller {
         return borders;
     }
 
-    public static void addObstacle() {
+    public void addObstacle() {
 
     }
 
-    public static void destroyObstacle() {
+    public void destroyObstacle() {
 
     }
 }

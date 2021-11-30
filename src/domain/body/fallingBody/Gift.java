@@ -8,11 +8,9 @@ public class Gift extends FallingBody{
                 double y_coordinates,
                 double length,
                 double width,
-                double vx,
-                double vy,
                 String giftName,
                 int duration) {
-        super(x_coordinates, y_coordinates, length, width, vx, vy);
+        super(x_coordinates, y_coordinates, length, width);
         this.giftName=giftName;
         this.duration=duration;
     }

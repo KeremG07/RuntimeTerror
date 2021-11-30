@@ -10,37 +10,33 @@ public class NoblePhantasm extends Body {
     public NoblePhantasm(double x_coordinates,
                          double y_coordinates,
                          double length,
-                         double width,
-                         double vx,
-                         double vy){
-        super(x_coordinates, y_coordinates, length, width, vx, vy);
+                         double width){
+        super(x_coordinates, y_coordinates, length, width);
         normalAngle=90;
         hasMagicalHex =false;
     }
 
-
-
-
     public void updateX(double x) {
-        if(x < 0) x = 0;
-        if(x > (Controller.getPlayModeFrameBorders())[0]) x = (Controller.getPlayModeFrameBorders())[0];
-        this.x = x;
+        if(Controller.getInstance().hitFrame(x, this.y, this.length, this.width).equals("None")){
+            this.x = x;
+        }
     }
 
+    //This is called ticksPerSecond times per second.
     public void moveRight() {
-        updateX(x + 0.1);
+        updateX(x + (width / Controller.ticksPerSecond));
     }
 
     public void moveLeft() {
-        updateX(x - 0.1);
+        updateX(x - (width / Controller.ticksPerSecond));
     }
 
     public void slideRight() {
-        updateX(x + 0.2);
+        updateX(x + (2*width / Controller.ticksPerSecond));
     }
 
     public void slideLeft() {
-        updateX(x - 0.2);
+        updateX(x - (2*width / Controller.ticksPerSecond));
     }
 
     public void rotateRight() {
@@ -59,14 +55,5 @@ public class NoblePhantasm extends Body {
     
     public void doubleNP(){
         
-    }
-    
-    public void moveNoblePhantasm(int input){ //make input left or right - easy to read the code
-        if(input == 37) {
-            moveLeft();
-        }
-        else if(input == 39) {
-            moveRight();
-        }
     }
 }
