@@ -1,25 +1,38 @@
 package domain.needForSpear;
 
+import ui.swing.GameScreen;
 import ui.swing.PlayModeFrame;
 
 public class Controller {
     private static Controller instance;
 
-    BuildGame buildGame;
+
+
     Player player;
     boolean isPaused = false;
     boolean isOver = false;
     public int timeLeft;
 
-    private Controller() {}
+    private Controller() {
+        player = new Player();
+    }
 
     public static Controller getInstance() {
         if (instance == null)
             instance = new Controller();
         return instance;
     }
-    public static void buildGame() {
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public BuildGame getBuildGame() {
+        return BuildGame.getInstance();
+    }
+
+    public static GameScreen buildGame() {
+        return GameScreen.getInstance();
     }
 
     public static void startGame() {

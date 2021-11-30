@@ -13,7 +13,7 @@ public class NoblePhantasm extends Body {
                          double width,
                          double vx,
                          double vy){
-        super(x_coordinates, y_coordinates, length, width,vx,vy);
+        super(x_coordinates, y_coordinates, length, width, vx, vy);
         normalAngle=90;
         hasMagicalHex =false;
     }

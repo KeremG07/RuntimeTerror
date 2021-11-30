@@ -15,6 +15,7 @@ public class BuildGame {
     }
 
     public int simpleObstacle = 75, firmObstacle = 10, explosiveObstacle = 5, giftObstacle = 10;
+    public int width = 1000, height = 600;
 
     public void setObstacles(String[] obstacles) {
         try {
