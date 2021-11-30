@@ -12,7 +12,7 @@ public class Player {
     public Player() {
         inventory = new Inventory();
         noblePhantasm = new NoblePhantasm(450, 590, 100, 8, 0, 0);
-        enchantedSphere = new EnchantedSphere(496, 574, 8, 8, 0, 0);
+        enchantedSphere = new EnchantedSphere(494, 578, 12, 12, 0, 0);
     }
 
     public Inventory getInventory() {
