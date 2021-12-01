@@ -31,4 +31,7 @@ public abstract class Obstacle extends Body {
     public void setNumberOfHits(int x){
         numberOfHits = Math.max(x, 0);
     }
+    public boolean isMoving() {
+        return moving;
+    }
 }
