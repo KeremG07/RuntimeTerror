@@ -42,8 +42,8 @@ public class Controller {
     public void startPlaying(){
         playing = true;
     }
-    public void updateEverything(int action){
-        handler.doAction(action);
+    public void updateEverything(){
+        //handler.doAction(action);
         updateObstacleConditions();
         if(playing){
             updateMovementAfterShoot();
@@ -54,6 +54,8 @@ public class Controller {
         player.moveNoblePhantasm(npAction);
         player.updateEnchantedSphere();
     }
+
+
     //This method will be called the handler.
     public void rotateNoblePhantasm(String npAction){
         player.rotateNoblePhantasm(npAction);
