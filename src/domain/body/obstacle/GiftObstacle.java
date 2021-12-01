@@ -3,10 +3,10 @@ package domain.body.obstacle;
 public class GiftObstacle extends Obstacle{
     public String giftType;
     private String name;
-    public GiftObstacle(double x_coordinates,
-                        double y_coordinates,
-                        double length,
-                        double width,
+    public GiftObstacle(int x_coordinates,
+                        int y_coordinates,
+                        int length,
+                        int width,
                         int numberOfHits,
                         String giftType) {
         super(x_coordinates, y_coordinates, length, width, numberOfHits);

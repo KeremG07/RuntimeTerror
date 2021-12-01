@@ -1,32 +1,35 @@
 package domain.body;
 
 public class Body {
-    protected double x;
-    protected double y;
-    public double length;
-    public double width;
+    protected int x;
+    protected int y;
+    public int length;
+    public int width;
 
-    public Body(double x_coordinates,
-                double y_coordinates,
-                double length,
-                double width) {
+    public Body(int x_coordinates,
+                int y_coordinates,
+                int length,
+                int width) {
         x = x_coordinates;
         y = y_coordinates;
         this.length = length;
         this.width = width;
     }
     
-    public double[] getCoordinates(){
-        return new double[] {x,y};
+    public int[] getCoordinates(){
+        return new int[] {x,y};
     }
-
-    public boolean compareCoordinates(double x, double y, double length, double width) {
+    public void setCoordinates(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+    public boolean compareCoordinates(int x, int y, int length, int width) {
         boolean crashingCoordinates = false;
-        double x1 = this.x;
-        double y1 = this.y;
+        int x1 = this.x;
+        int y1 = this.y;
 
-        double width1 = this.width;
-        double length1 = this.length;
+        int width1 = this.width;
+        int length1 = this.length;
 
         if (Math.abs(x-x1) <= Math.max(width1,width)){
             if (y >= y1){

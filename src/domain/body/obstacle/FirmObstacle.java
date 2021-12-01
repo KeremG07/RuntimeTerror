@@ -4,12 +4,12 @@ import domain.needForSpear.Controller;
 import domain.needForSpear.Statistics;
 
 public class FirmObstacle extends Obstacle{
-    private double vx;
+    private int vx;
     private String name;
-    public FirmObstacle(double x_coordinates,
-                        double y_coordinates,
-                        double length,
-                        double width,
+    public FirmObstacle(int x_coordinates,
+                        int y_coordinates,
+                        int length,
+                        int width,
                         int numberOfHits) {
         super(x_coordinates, y_coordinates, length, width, numberOfHits);
         vx = Controller.getInstance().getPlayer().getNoblePhantasm().width/(4*Controller.ticksPerSecond);
