@@ -13,8 +13,11 @@ public class GiftObstacle extends Obstacle{
         this.giftType=giftType;
         this.moving = false;
         name = "Gift";
+        vx = 0;
     }
-
+    public String getName(){
+        return name;
+    }
     @Override
     public void move() {
 

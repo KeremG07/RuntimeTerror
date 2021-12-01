@@ -15,7 +15,9 @@ public class FirmObstacle extends Obstacle{
         vx = Controller.getInstance().getPlayer().getNoblePhantasm().width/(4*Controller.ticksPerSecond);
         name = "Firm";
     }
-
+    public String getName(){
+        return name;
+    }
     @Override
     public void move() {
         if(moving){

@@ -58,6 +58,7 @@ public class EnchantedSphere extends Body {
                     break;
                 }
             }
+
             //It will reflect according to the obstacle that it hit. The reflection is based on whether the obstacle moves,
             //where the enchanted sphere hit it from. Comparing coordinates of the two (seeing which one is on the left/
             //right or up/down compared to the other) will help decide how it will reflect.

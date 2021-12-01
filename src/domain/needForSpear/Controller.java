@@ -72,8 +72,8 @@ public class Controller {
 
     public double[] getFrameBorders() {
         double[] borders = new double[2];
-        borders[0] = PlayModeFrame.getInstance().getWidth();
-        borders[1] = PlayModeFrame.getInstance().getHeight();
+        borders[0] = BuildGame.getInstance().width;
+        borders[1] = BuildGame.getInstance().height;
         return borders;
     }
     public String hitFrame(double x, double y, double length, double width ){
@@ -108,22 +108,19 @@ public class Controller {
         }
     }
 
-    public Obstacle addObstacle(String typeOfObstacle) {
+    public Obstacle addObstacle(String typeOfObstacle, int x, int y) {
         Obstacle createdObstacle;
         if(typeOfObstacle.equals("Simple")){
-            createdObstacle = new SimpleObstacle((int) getFrameBorders()[0]/2, (int) getFrameBorders()[1]/2,
-                    20, player.getNoblePhantasm().width/5, 1);
+            createdObstacle = new SimpleObstacle(x, y, 20, player.getNoblePhantasm().width/5, 1);
         }
         else if(typeOfObstacle.equals("Firm")){
-            createdObstacle = new FirmObstacle((int) getFrameBorders()[0]/2, (int) getFrameBorders()[1]/2,
-                    20, player.getNoblePhantasm().width/5, 3);
+            createdObstacle = new FirmObstacle(x, y, 20, player.getNoblePhantasm().width/5, 3);
         }
         else if(typeOfObstacle.equals("Explosive")){
-            createdObstacle = new ExplosiveObstacle((int) getFrameBorders()[0]/2, (int) getFrameBorders()[1]/2, 15, 15, 1);
+            createdObstacle = new ExplosiveObstacle(x, y, 15, 15, 1);
         }
         else {
-            createdObstacle = new GiftObstacle((int) getFrameBorders()[0]/2, (int) getFrameBorders()[1]/2,
-                    20, player.getNoblePhantasm().width/5, 1, "chance");
+            createdObstacle = new GiftObstacle(x, y, 20, player.getNoblePhantasm().width/5, 1, "chance");
         }
         Statistics.addObstacle(createdObstacle);
         return createdObstacle;

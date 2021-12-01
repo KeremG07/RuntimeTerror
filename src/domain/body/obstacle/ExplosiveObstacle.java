@@ -18,15 +18,20 @@ public class ExplosiveObstacle extends Obstacle {
                              int numberOfHits) {
         super(x_coordinates, y_coordinates, length, width, numberOfHits);
         name = "Explosive";
+        vx = Controller.getInstance().getPlayer().getNoblePhantasm().width/(4*Controller.ticksPerSecond);
     }
-
+    public String getName(){
+        return name;
+    }
     //Doesn't move with the correct speed yet. Needs testing.
     @Override
     public void move() {
-        //double velocity = Controller.getInstance().getPlayer().getNoblePhantasm().width/(4*Controller.ticksPerSecond);
+        //
+        //
         degree += 0.5;
         double rads = Math.toRadians(degree - 90); // 0 becomes the top
         this.x = Math.round((float) (circleCenterX + Math.cos(rads) * circleRadius));
         this.y = Math.round((float) (circleCenterY + Math.sin(rads) * circleRadius));
     }
+
 }
