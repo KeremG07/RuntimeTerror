@@ -7,16 +7,16 @@ public class NoblePhantasm extends Body {
     public double normalAngle;
     public boolean hasMagicalHex;
 
-    public NoblePhantasm(double x_coordinates,
-                         double y_coordinates,
-                         double length,
-                         double width){
+    public NoblePhantasm(int x_coordinates,
+                         int y_coordinates,
+                         int length,
+                         int width){
         super(x_coordinates, y_coordinates, length, width);
         normalAngle=90;
         hasMagicalHex =false;
     }
 
-    public void updateX(double x) {
+    public void updateX(int x) {
         if(Controller.getInstance().hitFrame(x, this.y, this.length, this.width).equals("None")){
             this.x = x;
         }

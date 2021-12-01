@@ -6,13 +6,13 @@ import domain.needForSpear.*;
 public class EnchantedSphere extends Body {
     private boolean unstoppable;
     private NoblePhantasm np;
-    private double vx;
-    private double vy;
+    private int vx;
+    private int vy;
     private boolean notShot = true;
-    public EnchantedSphere(double x_coordinates,
-                           double y_coordinates,
-                           double length,
-                           double width,
+    public EnchantedSphere(int x_coordinates,
+                           int y_coordinates,
+                           int length,
+                           int width,
                            NoblePhantasm np) {
         super(x_coordinates, y_coordinates, length, width);
         unstoppable=false;
@@ -71,8 +71,8 @@ public class EnchantedSphere extends Body {
     public void shootEnchantedSphere(){
         if(notShot){
             double normalAngle = np.normalAngle;
-            vx = 2*np.width*Math.cos(Math.toRadians(normalAngle));
-            vy = 2*np.width*Math.sin(Math.toRadians(normalAngle));
+            vx = (int) (2*np.width*Math.cos(Math.toRadians(normalAngle)));
+            vy = (int) (2*np.width*Math.sin(Math.toRadians(normalAngle)));
             notShot = false;
         }
     }
