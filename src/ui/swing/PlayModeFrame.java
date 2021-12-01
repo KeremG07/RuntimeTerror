@@ -4,24 +4,28 @@ import domain.needForSpear.Controller;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PlayModeFrame extends JFrame {
     Controller controller;
     private static final Color BACKGROUND_COLOR = new Color(140, 140, 140);
     JButton pauseGame = new JButton("Pause Game");
+    public int clockMs;
 
     private static PlayModeFrame instance;
     
     private PlayModeFrame() {
         super("Need For Spear by Runtime Terror");
         controller = Controller.getInstance();
+        clockMs = Controller.ticksPerSecond*1000;
 
-        setBounds(0, 0, 1000, 800);
-        setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        GameScreen gameScreen = GameScreen.getInstance();
 
+        initializeFrame();
+
+        // Panels Start Here
         JPanel mainPanel = initializeMainPanel();
-        GameScreen gameScreen = controller.buildGame();
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -38,9 +42,22 @@ public class PlayModeFrame extends JFrame {
         mainPanel.add(buttonPanel);
         initializeButton(gbc, buttonPanel);
         //initializeScores(gbc, scorePanel);
+        // ...
+        // Panels End Here
+
         gameScreen.setBorder(BorderFactory.createLineBorder(Color.red));
 
         setVisible(true);
+
+        ActionListener tickListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Calls to controller are called here
+            }
+        };
+
+        Timer timer = new Timer(clockMs, tickListener);
+        timer.start();
     }
 
     public static PlayModeFrame getInstance() {
@@ -68,5 +85,11 @@ public class PlayModeFrame extends JFrame {
 
     private void initializeScores(GridBagConstraints gbc, JPanel scorePanel) {
         // TODO: fill with score informations
+    }
+
+    private void initializeFrame() {
+        setBounds(0, 0, 1000, 800);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
