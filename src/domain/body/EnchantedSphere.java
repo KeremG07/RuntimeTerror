@@ -18,7 +18,7 @@ public class EnchantedSphere extends Body {
         unstoppable=false;
         this.np = np;
     }
-    //In the beginning of the game Enchanted Sphere is moves with Noble Phantasm.
+    //In the beginning of the game Enchanted Sphere moves with Noble Phantasm.
     public void updateWithNP() {
         if(notShot){
             x = np.x + 44;
@@ -33,7 +33,7 @@ public class EnchantedSphere extends Body {
     //Handles reflection of Enchanted Sphere, it will be called every time before it executes its movement.
     public void reflect() {
         String wall = Controller.getInstance().hitFrame(x,y,length,width);
-        boolean hitObstacle = false;
+        boolean hitObstacle;
         if(wall.equals("UpperLeft") || wall.equals("UpperRight")){
             vx = -vx;
             vy = -vy;
@@ -48,6 +48,10 @@ public class EnchantedSphere extends Body {
             Controller.getInstance().getPlayer().loseChance();
             updateWithNP();
         }
+        //np reflect (movement and corner cases are ignored)
+        else if(this.compareCoordinates(np.x, np.y, np.length, np.width)){
+            vy = -vy;
+        }
         else {
             Obstacle crashingObstacle;
             for(Obstacle obstacle : Statistics.obstacleList){
@@ -55,16 +59,48 @@ public class EnchantedSphere extends Body {
                 if(hitObstacle){
                     crashingObstacle = obstacle;
                     crashingObstacle.setNumberOfHits(crashingObstacle.getNumberOfHits()-1);
+                    //non-moving obstacle hit reflect
+                    if(!crashingObstacle.isMoving()){
+                        //hit from top or bottom
+                        if((x + length/2) >= crashingObstacle.x
+                                && (x + length/2) <= crashingObstacle.x + crashingObstacle.length){
+                            vy = -vy;
+                        }
+                        //hit from left or right
+                        else if((y + width/2) >= crashingObstacle.y
+                                && (x + width/2) <= crashingObstacle.y + crashingObstacle.width){
+                            vx = -vx;
+                        }
+                    }
+                    //moving obstacle hit reflect
+                    else{
+                        //hit from top or bottom
+                        if((x + length/2) >= crashingObstacle.x
+                                && (x + length/2) <= crashingObstacle.x + crashingObstacle.length){
+                            vy = -vy;
+                            if(vx * crashingObstacle.getVx() > 0){
+                                //vx should be increased
+                            }
+                            else if(vx * crashingObstacle.getVx() < 0){
+                                vx = -vx;
+                            }
+                            else{
+                                if(crashingObstacle.getVx() > 0){
+                                    vx += Math.abs(vy);
+                                }
+                                else{
+                                    vx -= Math.abs(vy);
+                                }
+                            }
+                        }
+                        //hit from right or left (same with non-moving for now)
+                        else if((y + width/2) >= crashingObstacle.y
+                                && (x + width/2) <= crashingObstacle.y + crashingObstacle.width){
+                            vx = -vx;
+                        }
+                    }
                     break;
                 }
-            }
-
-            //It will reflect according to the obstacle that it hit. The reflection is based on whether the obstacle moves,
-            //where the enchanted sphere hit it from. Comparing coordinates of the two (seeing which one is on the left/
-            //right or up/down compared to the other) will help decide how it will reflect.
-            if(!hitObstacle){
-                //If the enchanted sphere didn't hit an obstacle it should be checked whether it hit noble phantasm and
-                //reflect accordingly.
             }
         }
     }
