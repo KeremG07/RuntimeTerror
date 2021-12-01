@@ -76,7 +76,8 @@ public class BuildModeFrame extends JFrame {
         startGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PlayModeFrame.getInstance();
+                String[] obstaclesCount = new String[]{simpleObstacle.getText(), firmObstacle.getText(), explosiveObstacle.getText(), giftObstacle.getText()};
+                controller.startNewGame(obstaclesCount);
                 dispose();
             }
         });
@@ -115,10 +116,6 @@ public class BuildModeFrame extends JFrame {
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.CENTER;
         buttonPanel.add(startGame,gbc);
-    }
-
-    private void randomObstacles(int simple, int firm, int gift, int explosive) {
-
     }
 
 }
