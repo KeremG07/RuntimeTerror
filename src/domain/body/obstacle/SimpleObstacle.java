@@ -9,11 +9,8 @@ public class SimpleObstacle extends Obstacle {
                           int width,
                           int numberOfHits) {
         super(x_coordinates, y_coordinates, length, width, numberOfHits);
-        vx = Controller.getInstance().getPlayer().getNoblePhantasm().width/(4*Controller.ticksPerSecond);
+        vx = 100/(4*Controller.ticksPerSecond);
         name = "Simple";
-    }
-    public String getName(){
-        return name;
     }
     @Override
     public void move() {

@@ -42,7 +42,7 @@ public class BuildModeFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel mainPanel = initializeMainPanel();
-        GameScreen gameScreen = controller.buildGame();
+        GameScreen gameScreen = GameScreen.getInstance();
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(10, 10, 10, 10);
