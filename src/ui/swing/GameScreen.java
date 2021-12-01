@@ -41,7 +41,7 @@ public class GameScreen extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         AffineTransform at = new AffineTransform();
         AffineTransform old = g2d.getTransform();
-        at.translate(noblePhantasm.x, noblePhantasm.y);
+        at.translate(noblePhantasm.getCoordinates()[0], noblePhantasm.getCoordinates()[1]);
         g2d.drawImage(images.get("noblePhantasm"), at , null);
         g2d.setTransform(old);
     }
@@ -51,7 +51,7 @@ public class GameScreen extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         AffineTransform at = new AffineTransform();
         AffineTransform old = g2d.getTransform();
-        at.translate(enchantedSphere.x, enchantedSphere.y);
+        at.translate(enchantedSphere.getCoordinates()[0], enchantedSphere.getCoordinates()[1]);
         g2d.drawImage(images.get("enchantedSphere"), at , null);
         g2d.setTransform(old);
     }

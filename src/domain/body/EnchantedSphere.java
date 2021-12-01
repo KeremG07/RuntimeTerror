@@ -1,14 +1,14 @@
 package domain.body;
 
-import domain.body.obstacle.Obstacle;
-import domain.needForSpear.Controller;
-import domain.needForSpear.Statistics;
+import domain.body.obstacle.*;
+import domain.needForSpear.*;
 
 public class EnchantedSphere extends Body {
     private boolean unstoppable;
     private NoblePhantasm np;
     private double vx;
     private double vy;
+    private boolean notShot = true;
     public EnchantedSphere(double x_coordinates,
                            double y_coordinates,
                            double length,
@@ -18,17 +18,19 @@ public class EnchantedSphere extends Body {
         unstoppable=false;
         this.np = np;
     }
-
+    //In the beginning of the game Enchanted Sphere is moves with Noble Phantasm.
     public void updateWithNP() {
-        x = np.x + 44;
-        y = np.y - length;
+        if(notShot){
+            x = np.x + 44;
+            y = np.y - length;
+        }
     }
     public void move() {
         reflect();
         x += vx/Controller.ticksPerSecond;
         y += vy/Controller.ticksPerSecond;
     }
-
+    //Handles reflection of Enchanted Sphere, it will be called every time before it executes its movement.
     public void reflect() {
         String wall = Controller.getInstance().hitFrame(x,y,length,width);
         boolean hitObstacle = false;
@@ -52,6 +54,7 @@ public class EnchantedSphere extends Body {
                 hitObstacle = this.compareCoordinates(obstacle.x, obstacle.y, obstacle.length, obstacle.width);
                 if(hitObstacle){
                     crashingObstacle = obstacle;
+                    crashingObstacle.setNumberOfHits(crashingObstacle.getNumberOfHits()-1);
                     break;
                 }
             }
@@ -64,10 +67,14 @@ public class EnchantedSphere extends Body {
             }
         }
     }
-    
+    //Initializes the speed of the Enchanted sphere according to Noble Phantasm's angle.
     public void shootEnchantedSphere(){
-        vx = 0;
-        vy = 2*np.width;
+        if(notShot){
+            double normalAngle = np.normalAngle;
+            vx = 2*np.width*Math.cos(Math.toRadians(normalAngle));
+            vy = 2*np.width*Math.sin(Math.toRadians(normalAngle));
+            notShot = false;
+        }
     }
     
     public void setUnstoppableES(boolean bool){

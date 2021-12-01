@@ -6,12 +6,13 @@ import domain.body.NoblePhantasm;
 public class Player {
 
     public Inventory inventory;
-    public NoblePhantasm noblePhantasm;
-    public EnchantedSphere enchantedSphere;
-
+    private NoblePhantasm noblePhantasm;
+    private EnchantedSphere enchantedSphere;
+    public static final double screenWidth = Controller.getInstance().getFrameBorders()[0];
+    public static final double screenHeight = Controller.getInstance().getFrameBorders()[1];
     public Player() {
         inventory = new Inventory();
-        noblePhantasm = new NoblePhantasm(450, 590, 100, 8);
+        noblePhantasm = new NoblePhantasm(450, 590, screenWidth/10, screenHeight/10);
         enchantedSphere = new EnchantedSphere(494, 578, 12, 12, noblePhantasm);
     }
 
@@ -40,9 +41,29 @@ public class Player {
 
     }
     public void shootEnchantedSphere(){
-
+        enchantedSphere.shootEnchantedSphere();
     }
-    public void moveNoblePhantasm(){
+    public void updateEnchantedSphere(){
+        enchantedSphere.updateWithNP();
+    }
+    public void moveEnchantedSphere(){
+        enchantedSphere.move();
+    }
+    public void moveNoblePhantasm(String action){
+        switch (action) {
+            case "HeldRight":
+                noblePhantasm.slideRight();
+                break;
+            case "HeldLeft":
+                noblePhantasm.slideLeft();
+                break;
+            case "PressedRight":
+                noblePhantasm.moveRight();
+                break;
+            default:
+                noblePhantasm.moveLeft();
+                break;
+        }
 
     }
     public void fireMagicalHex(){

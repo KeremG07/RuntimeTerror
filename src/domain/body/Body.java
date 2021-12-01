@@ -1,12 +1,10 @@
 package domain.body;
 
 public class Body {
-    public double x;
-    public double y;
+    protected double x;
+    protected double y;
     public double length;
     public double width;
-    public double vx;
-    public double vy;
 
     public Body(double x_coordinates,
                 double y_coordinates,
@@ -18,8 +16,8 @@ public class Body {
         this.width = width;
     }
     
-    public void getCoordinates(){
-        
+    public double[] getCoordinates(){
+        return new double[] {x,y};
     }
 
     public boolean compareCoordinates(double x, double y, double length, double width) {

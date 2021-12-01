@@ -1,6 +1,6 @@
 package domain.body;
 
-import domain.needForSpear.Controller;
+import domain.needForSpear.*;
 
 public class NoblePhantasm extends Body {
 

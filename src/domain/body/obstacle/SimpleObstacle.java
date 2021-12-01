@@ -3,14 +3,15 @@ import domain.needForSpear.*;
 
 public class SimpleObstacle extends Obstacle {
     private double vx;
+    private String name;
     public SimpleObstacle(double x_coordinates,
                           double y_coordinates,
                           double length,
                           double width,
-                          String name,
                           int numberOfHits) {
-        super(x_coordinates, y_coordinates, length, width, name, numberOfHits);
-        vx = Controller.getInstance().getPlayer().noblePhantasm.width/(4*Controller.ticksPerSecond);
+        super(x_coordinates, y_coordinates, length, width, numberOfHits);
+        vx = Controller.getInstance().getPlayer().getNoblePhantasm().width/(4*Controller.ticksPerSecond);
+        name = "Simple";
     }
 
     @Override
