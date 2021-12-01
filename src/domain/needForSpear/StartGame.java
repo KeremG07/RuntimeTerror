@@ -2,12 +2,13 @@ package domain.needForSpear;
 
 public class StartGame {
     BuildGame buildGame;
-    Controller controller;
-    public StartGame(String [] obstacles, String savePlace) {
+    public StartGame() {
+        //Controller.getInstance().player = new Player();
+        //Controller.getInstance().timeLeft= 600*1000;
+    }
 
-        BuildGame buildGame = BuildGame.getInstance();
-        buildGame.setObstacles(obstacles);
-        Controller.getInstance().player = new Player();
-        Controller.getInstance().timeLeft= 600*1000;
+    public BuildGame buildNewGame(String[] numOfObstaclesReq){
+        buildGame = new BuildGame(numOfObstaclesReq);
+        return buildGame;
     }
 }

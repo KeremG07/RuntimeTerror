@@ -66,6 +66,10 @@ public class Player {
         }
 
     }
+    //will be implemented later
+    public void rotateNoblePhantasm(String action){
+
+    }
     public void fireMagicalHex(){
 
     }

@@ -8,10 +8,15 @@ public class Controller {
     private static Controller instance;
     //How often the movements on the screen is updated.
     public final static int ticksPerSecond = 30;
-
+    KeyHandler handler = new KeyHandler();
     Player player;
     Statistics statistics;
-
+    //The next three lines will be in the method called startNewGame, here for test purposes.
+    StartGame newGame = new StartGame();
+    String[] numOfObstaclesReq = {"3", "34", "2", "6"};
+    BuildGame buildGame = newGame.buildNewGame(numOfObstaclesReq);
+    //To check whether we shot the enchanted sphere or not:
+    boolean playing = false;
     boolean isPaused = false;
     boolean isOver = false;
     public int timeLeft;
@@ -26,11 +31,32 @@ public class Controller {
             instance = new Controller();
         return instance;
     }
+    //Commented out for test purposes.
+    public void startNewGame(String[] numOfObstaclesReq) {
+        //StartGame newGame = new StartGame();
+        //BuildGame buildGame = newGame.buildNewGame(numOfObstaclesReq);
+    }
+    public void startTimer(){
 
-    //This method will be called ticksPerSecond per second.
+    }
+    public void startPlaying(){
+        playing = true;
+    }
+    public void updateEverything(int action){
+        handler.doAction(action);
+        updateObstacleConditions();
+        if(playing){
+            updateMovementAfterShoot();
+        }
+    }
+    //This method will be called the handler.
     public void updateMovementNP(String npAction){
         player.moveNoblePhantasm(npAction);
         player.updateEnchantedSphere();
+    }
+    //This method will be called the handler.
+    public void rotateNoblePhantasm(String npAction){
+        player.rotateNoblePhantasm(npAction);
     }
     //This method will be called ticksPerSecond per second and only after player starts playing the game by shooting
     //the enchanted sphere.
@@ -54,17 +80,8 @@ public class Controller {
     }
     public Statistics getStatistics() { return statistics; }
     public BuildGame getBuildGame() {
-        return BuildGame.getInstance();
+        return buildGame;
     }
-
-    public GameScreen buildGame() {
-        return GameScreen.getInstance();
-    }
-
-    public void startGame() {
-
-    }
-
 
     public void endGame() {
 
@@ -72,8 +89,8 @@ public class Controller {
 
     public double[] getFrameBorders() {
         double[] borders = new double[2];
-        borders[0] = BuildGame.getInstance().width;
-        borders[1] = BuildGame.getInstance().height;
+        borders[0] = buildGame.gameScreenWidth;
+        borders[1] = buildGame.gameScreenHeight;
         return borders;
     }
     public String hitFrame(double x, double y, double length, double width ){
@@ -106,24 +123,6 @@ public class Controller {
         else{
             return "None";
         }
-    }
-
-    public Obstacle addObstacle(String typeOfObstacle, int x, int y) {
-        Obstacle createdObstacle;
-        if(typeOfObstacle.equals("Simple")){
-            createdObstacle = new SimpleObstacle(x, y, 20, player.getNoblePhantasm().width/5, 1);
-        }
-        else if(typeOfObstacle.equals("Firm")){
-            createdObstacle = new FirmObstacle(x, y, 20, player.getNoblePhantasm().width/5, 3);
-        }
-        else if(typeOfObstacle.equals("Explosive")){
-            createdObstacle = new ExplosiveObstacle(x, y, 15, 15, 1);
-        }
-        else {
-            createdObstacle = new GiftObstacle(x, y, 20, player.getNoblePhantasm().width/5, 1, "chance");
-        }
-        Statistics.addObstacle(createdObstacle);
-        return createdObstacle;
     }
 
     public void destroyObstacle(Obstacle obstacle) {

@@ -15,9 +15,6 @@ public class GiftObstacle extends Obstacle{
         name = "Gift";
         vx = 0;
     }
-    public String getName(){
-        return name;
-    }
     @Override
     public void move() {
 

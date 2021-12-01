@@ -5,7 +5,7 @@ public class ExplosiveObstacle extends Obstacle {
     private int vx;
     private int vy;
     //The coordinates and the radius of the circle that the obstacle will move around.
-    private final int circleRadius = 3*Controller.getInstance().getPlayer().getNoblePhantasm().width/2;
+    private final int circleRadius = 3*100/2;
     private final int circleCenterX = this.x + width/2;
     private final int circleCenterY = this.y + length + circleRadius;
     //The degree between the circle's center and the obstacle.
@@ -18,16 +18,12 @@ public class ExplosiveObstacle extends Obstacle {
                              int numberOfHits) {
         super(x_coordinates, y_coordinates, length, width, numberOfHits);
         name = "Explosive";
-        vx = Controller.getInstance().getPlayer().getNoblePhantasm().width/(4*Controller.ticksPerSecond);
+        vx = 100/(4*Controller.ticksPerSecond);
     }
-    public String getName(){
-        return name;
-    }
+
     //Doesn't move with the correct speed yet. Needs testing.
     @Override
     public void move() {
-        //
-        //
         degree += 0.5;
         double rads = Math.toRadians(degree - 90); // 0 becomes the top
         this.x = Math.round((float) (circleCenterX + Math.cos(rads) * circleRadius));

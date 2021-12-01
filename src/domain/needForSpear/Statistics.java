@@ -9,10 +9,9 @@ public class Statistics {
     public static int chances;
     public static double timeElapsed;
 
-    public static ArrayList<Obstacle> obstacleList;
+    public static ArrayList<Obstacle> obstacleList= new ArrayList<Obstacle>();;
 
     public Statistics() {
-        obstacleList = new ArrayList<Obstacle>();
     }
 
     public static ArrayList<Obstacle> getObstacleList() {

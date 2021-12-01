@@ -9,6 +9,7 @@ public abstract class Obstacle extends Body {
     private int movingProbability;
     private int numberOfHits;
     protected int vx;
+    protected String name;
     public Random randi = new Random();
 
     public Obstacle(int x_coordinates,
@@ -24,6 +25,9 @@ public abstract class Obstacle extends Body {
     public abstract void move();
     public int getVx(){
         return vx;
+    }
+    public String getName(){
+        return name;
     }
     public int getNumberOfHits(){
         return numberOfHits;
