@@ -7,6 +7,8 @@ import java.awt.*;
 
 public class PlayModeFrame extends JFrame {
     Controller controller;
+    private static final Color BACKGROUND_COLOR = new Color(140, 140, 140);
+    JButton pauseGame = new JButton("Pause Game");
 
     private static PlayModeFrame instance;
     
@@ -18,7 +20,25 @@ public class PlayModeFrame extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        JPanel mainPanel = initializeMainPanel();
         GameScreen gameScreen = controller.buildGame();
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        JPanel scorePanel = new JPanel(new GridBagLayout());
+        JPanel buttonPanel = new JPanel(new GridBagLayout());
+        scorePanel.setBounds(0,0,1000,50);
+        scorePanel.setBackground(BACKGROUND_COLOR);
+        buttonPanel.setBounds(0,0,1000,50);
+        buttonPanel.setBackground(BACKGROUND_COLOR);
+        gameScreen.setBounds(0,0,1000,600);
+        mainPanel.add(scorePanel);
+        mainPanel.add(gameScreen);
+        mainPanel.add(buttonPanel);
+        initializeButton(gbc, buttonPanel);
+        //initializeScores(gbc, scorePanel);
+        gameScreen.setBorder(BorderFactory.createLineBorder(Color.red));
 
         setVisible(true);
     }
@@ -30,5 +50,23 @@ public class PlayModeFrame extends JFrame {
         return instance;
     }
 
+    private JPanel initializeMainPanel() {
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        add(mainPanel);
+        return mainPanel;
+    }
 
+    private void initializeButton(GridBagConstraints gbc, JPanel buttonPanel) {
+        gbc.gridx=0;
+        gbc.gridy=1;
+        gbc.weighty = 0.5;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.CENTER;
+        buttonPanel.add(pauseGame,gbc);
+    }
+
+    private void initializeScores(GridBagConstraints gbc, JPanel scorePanel) {
+        // TODO: fill with score informations
+    }
 }
