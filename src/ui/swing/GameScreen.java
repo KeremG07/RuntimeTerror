@@ -65,7 +65,6 @@ public class GameScreen extends JPanel {
                         for(Obstacle o: obstacleList) {
                             if (bounds2.contains(e.getPoint())) {
                                 obstacleDragged = o;
-                                controller.getStatistics().removeObstacle(o);
                                 break;
                             }
                         }
@@ -89,8 +88,11 @@ public class GameScreen extends JPanel {
                     dragPoint.x += clickOffset.x;
                     dragPoint.y += clickOffset.y;
                     locations.put(dragImage, dragPoint);
-                    obstacleDragged.setCoordinates(dragPoint.x,dragPoint.y);
-                    controller.getStatistics().addObstacle(obstacleDragged);
+                    for(Obstacle o: obstacleList) {
+                        if(o.equals(obstacleDragged)) {
+                            o.setCoordinates(dragPoint.x, dragPoint.y);
+                        }
+                    }
                     repaint();
                 }
             }
@@ -103,8 +105,8 @@ public class GameScreen extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        //drawNoblePhantasm(g);
-        //drawEnchantedSphere(g);
+        drawNoblePhantasm(g);
+        drawEnchantedSphere(g);
         if(initObstacles) {
             drawObstacles();
         }

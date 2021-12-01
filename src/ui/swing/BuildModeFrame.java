@@ -110,15 +110,6 @@ public class BuildModeFrame extends JFrame {
     }
 
     private void randomObstacles(int simple, int firm, int gift, int explosive) {
-        /*for(int i = 0; i<simple; i++) {
-            if(obstacleList.isEmpty()) {
-                Random r = new Random();
-                controller.getStatistics().addObstacle(new SimpleObstacle(r.nextInt(921), r.nextInt(392), 80, 8, 1));
-            } else {
-                for(Obstacle o: obstacleList) {
 
-                }
-            }
-        }*/
     }
 }
