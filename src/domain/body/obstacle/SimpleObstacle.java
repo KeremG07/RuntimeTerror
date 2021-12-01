@@ -13,7 +13,9 @@ public class SimpleObstacle extends Obstacle {
         vx = Controller.getInstance().getPlayer().getNoblePhantasm().width/(4*Controller.ticksPerSecond);
         name = "Simple";
     }
-
+    public int getVx(){
+        return vx;
+    }
     @Override
     public void move() {
         if(moving){

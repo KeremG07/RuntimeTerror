@@ -20,13 +20,19 @@ public class ExplosiveObstacle extends Obstacle {
         name = "Explosive";
     }
 
+
+    public int getVx(){
+        return vx;
+    }
     //Doesn't move with the correct speed yet. Needs testing.
     @Override
     public void move() {
+        //
         //double velocity = Controller.getInstance().getPlayer().getNoblePhantasm().width/(4*Controller.ticksPerSecond);
         degree += 0.5;
         double rads = Math.toRadians(degree - 90); // 0 becomes the top
         this.x = Math.round((float) (circleCenterX + Math.cos(rads) * circleRadius));
         this.y = Math.round((float) (circleCenterY + Math.sin(rads) * circleRadius));
     }
+
 }

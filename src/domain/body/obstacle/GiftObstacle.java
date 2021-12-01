@@ -15,6 +15,7 @@ public class GiftObstacle extends Obstacle{
         name = "Gift";
     }
 
+
     @Override
     public void move() {
 
