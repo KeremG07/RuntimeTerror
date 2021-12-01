@@ -3,6 +3,7 @@ package ui.swing;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import javax.swing.*;
 public class StartFrame extends JFrame implements ActionListener {
 
@@ -13,7 +14,15 @@ public class StartFrame extends JFrame implements ActionListener {
     public static void main(String args[]) {
         StartFrame sf = new StartFrame();
         LayoutManager layout = new GridBagLayout();
-        JPanel panel = new JPanel(layout);
+        JPanel panel = new JPanel(layout) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                Image logoImage = new ImageIcon("src/utilities/startLogo.png").getImage();
+                super.paintComponent(g);
+                g.drawImage(logoImage, 600, 250, null);
+            }
+
+        };
 
         JButton newGameButton = new JButton("New Game");
         newGameButton.setActionCommand("new game");
@@ -24,6 +33,7 @@ public class StartFrame extends JFrame implements ActionListener {
         JButton quitGameButton = new JButton("Quit");
         quitGameButton.setActionCommand("quit");
         quitGameButton.addActionListener(sf);
+
 
         panel.add(newGameButton);
         panel.add(loadGameButton);
