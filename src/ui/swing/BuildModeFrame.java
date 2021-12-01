@@ -83,7 +83,6 @@ public class BuildModeFrame extends JFrame {
             }
         });
     }
-
     private JPanel initializeMainPanel() {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
