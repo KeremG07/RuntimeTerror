@@ -108,6 +108,24 @@ public class Controller {
         }
     }
 
+    public Obstacle addObstacle(String typeOfObstacle, int x, int y) {
+        Obstacle createdObstacle;
+        if(typeOfObstacle.equals("Simple")){
+            createdObstacle = new SimpleObstacle(x, y, 20, player.getNoblePhantasm().width/5, 1);
+        }
+        else if(typeOfObstacle.equals("Firm")){
+            createdObstacle = new FirmObstacle(x, y, 20, player.getNoblePhantasm().width/5, 3);
+        }
+        else if(typeOfObstacle.equals("Explosive")){
+            createdObstacle = new ExplosiveObstacle(x, y, 15, 15, 1);
+        }
+        else {
+            createdObstacle = new GiftObstacle(x, y, 20, player.getNoblePhantasm().width/5, 1, "chance");
+        }
+        Statistics.addObstacle(createdObstacle);
+        return createdObstacle;
+    }
+
     public void destroyObstacle(Obstacle obstacle) {
         Statistics.removeObstacle(obstacle);
     }

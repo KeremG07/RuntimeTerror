@@ -2,7 +2,6 @@ package domain.body.obstacle;
 import domain.needForSpear.*;
 
 public class SimpleObstacle extends Obstacle {
-    private int vx;
     private String name;
     public SimpleObstacle(int x_coordinates,
                           int y_coordinates,
@@ -13,8 +12,8 @@ public class SimpleObstacle extends Obstacle {
         vx = Controller.getInstance().getPlayer().getNoblePhantasm().width/(4*Controller.ticksPerSecond);
         name = "Simple";
     }
-    public int getVx(){
-        return vx;
+    public String getName(){
+        return name;
     }
     @Override
     public void move() {

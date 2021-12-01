@@ -18,6 +18,7 @@ public class BuildGame {
 
     }
 
+
     public Obstacle addObstacle(String typeOfObstacle, int x, int y) {
         Obstacle createdObstacle;
         if(typeOfObstacle.equals("Simple")){
