@@ -69,6 +69,8 @@ public class BuildModeFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 gameScreen.initObstacles = true;
+                String[] obstaclesCount = new String[]{simpleObstacle.getText(), firmObstacle.getText(), explosiveObstacle.getText(), giftObstacle.getText()};
+                controller.startNewGame(obstaclesCount);
                 gameScreen.repaint(50L);
             }
         });
@@ -76,8 +78,7 @@ public class BuildModeFrame extends JFrame {
         startGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String[] obstaclesCount = new String[]{simpleObstacle.getText(), firmObstacle.getText(), explosiveObstacle.getText(), giftObstacle.getText()};
-                controller.startNewGame(obstaclesCount);
+                PlayModeFrame.getInstance();
                 dispose();
             }
         });
