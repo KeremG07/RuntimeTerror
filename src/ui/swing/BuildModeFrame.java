@@ -72,6 +72,14 @@ public class BuildModeFrame extends JFrame {
                 gameScreen.repaint(50L);
             }
         });
+
+        startGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PlayModeFrame.getInstance();
+                dispose();
+            }
+        });
     }
 
     private JPanel initializeMainPanel() {
@@ -112,4 +120,5 @@ public class BuildModeFrame extends JFrame {
     private void randomObstacles(int simple, int firm, int gift, int explosive) {
 
     }
+
 }
