@@ -110,15 +110,15 @@ public class Controller {
                     20, player.getNoblePhantasm().width/5, 1);
         }
         else if(typeOfObstacle.equals("Firm")){
-            createdObstacle = new SimpleObstacle(getFrameBorders()[0]/2, getFrameBorders()[1]/2,
+            createdObstacle = new FirmObstacle(getFrameBorders()[0]/2, getFrameBorders()[1]/2,
                     20, player.getNoblePhantasm().width/5, 3);
         }
         else if(typeOfObstacle.equals("Explosive")){
-            createdObstacle = new SimpleObstacle(getFrameBorders()[0]/2, getFrameBorders()[1]/2, 15, 15, 1);
+            createdObstacle = new ExplosiveObstacle(getFrameBorders()[0]/2, getFrameBorders()[1]/2, 15, 15, 1);
         }
         else {
-            createdObstacle = new SimpleObstacle(getFrameBorders()[0]/2, getFrameBorders()[1]/2,
-                    20, player.getNoblePhantasm().width/5, 1);
+            createdObstacle = new GiftObstacle(getFrameBorders()[0]/2, getFrameBorders()[1]/2,
+                    20, player.getNoblePhantasm().width/5, 1, "chance");
         }
         Statistics.addObstacle(createdObstacle);
         return createdObstacle;
