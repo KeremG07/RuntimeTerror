@@ -2,19 +2,19 @@ package domain.body.obstacle;
 import domain.needForSpear.*;
 public class ExplosiveObstacle extends Obstacle {
 
-    private double vx;
-    private double vy;
+    private int vx;
+    private int vy;
     //The coordinates and the radius of the circle that the obstacle will move around.
-    private final double circleRadius = 3*Controller.getInstance().getPlayer().getNoblePhantasm().width/2;
-    private final double circleCenterX = this.x + width/2;
-    private final double circleCenterY = this.y + length + circleRadius;
+    private final int circleRadius = 3*Controller.getInstance().getPlayer().getNoblePhantasm().width/2;
+    private final int circleCenterX = this.x + width/2;
+    private final int circleCenterY = this.y + length + circleRadius;
     //The degree between the circle's center and the obstacle.
     private double degree = 90;
     private String name;
-    public ExplosiveObstacle(double x_coordinates,
-                             double y_coordinates,
-                             double length,
-                             double width,
+    public ExplosiveObstacle(int x_coordinates,
+                             int y_coordinates,
+                             int length,
+                             int width,
                              int numberOfHits) {
         super(x_coordinates, y_coordinates, length, width, numberOfHits);
         name = "Explosive";

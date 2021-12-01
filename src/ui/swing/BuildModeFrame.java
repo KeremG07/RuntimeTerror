@@ -1,12 +1,20 @@
 package ui.swing;
 
+import domain.body.obstacle.Obstacle;
+import domain.body.obstacle.SimpleObstacle;
 import domain.needForSpear.Controller;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class BuildModeFrame extends JFrame {
     Controller controller;
+    private ArrayList<Obstacle> obstacleList;
+
     private static final Color BACKGROUND_COLOR = new Color(140, 140, 140);
     JTextField simpleObstacle = new JTextField(5);
     JTextField firmObstacle = new JTextField(5);
@@ -27,13 +35,14 @@ public class BuildModeFrame extends JFrame {
     private BuildModeFrame(String savePlace) {
         super("Building Window");
         controller = Controller.getInstance();
+        obstacleList = controller.getStatistics().getObstacleList();
         this.savePlace=savePlace;
         setBounds(0, 0, 1000, 800);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel mainPanel = initializeMainPanel();
-        JPanel gameScreen = controller.buildGame();
+        GameScreen gameScreen = controller.buildGame();
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -50,11 +59,19 @@ public class BuildModeFrame extends JFrame {
         mainPanel.add(buttonPanel);
         initializeObstacleNumbers(gbc, numberPanel);
         gameScreen.setBorder(BorderFactory.createLineBorder(Color.red));
-        System.out.println(numberPanel.getBounds());
+        /*System.out.println(numberPanel.getBounds());
         System.out.println(buttonPanel.getBounds());
-        System.out.println(gameScreen.getBounds());
+        System.out.println(gameScreen.getBounds());*/
         initializeButton(gbc, buttonPanel);
         setVisible(true);
+
+        initObstacles.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gameScreen.initObstacles = true;
+                gameScreen.repaint(50L);
+            }
+        });
     }
 
     private JPanel initializeMainPanel() {
@@ -90,5 +107,18 @@ public class BuildModeFrame extends JFrame {
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.CENTER;
         buttonPanel.add(startGame,gbc);
+    }
+
+    private void randomObstacles(int simple, int firm, int gift, int explosive) {
+        /*for(int i = 0; i<simple; i++) {
+            if(obstacleList.isEmpty()) {
+                Random r = new Random();
+                controller.getStatistics().addObstacle(new SimpleObstacle(r.nextInt(921), r.nextInt(392), 80, 8, 1));
+            } else {
+                for(Obstacle o: obstacleList) {
+
+                }
+            }
+        }*/
     }
 }

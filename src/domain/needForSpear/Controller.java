@@ -8,13 +8,17 @@ public class Controller {
     private static Controller instance;
     //How often the movements on the screen is updated.
     public final static int ticksPerSecond = 30;
+
     Player player;
+    Statistics statistics;
+
     boolean isPaused = false;
     boolean isOver = false;
     public int timeLeft;
 
     private Controller() {
         player = new Player();
+        statistics = new Statistics();
     }
 
     public static Controller getInstance() {
@@ -22,6 +26,7 @@ public class Controller {
             instance = new Controller();
         return instance;
     }
+
     //This method will be called ticksPerSecond per second.
     public void updateMovementNP(String npAction){
         player.moveNoblePhantasm(npAction);
@@ -47,7 +52,7 @@ public class Controller {
     public Player getPlayer() {
         return player;
     }
-
+    public Statistics getStatistics() { return statistics; }
     public BuildGame getBuildGame() {
         return BuildGame.getInstance();
     }
@@ -106,18 +111,18 @@ public class Controller {
     public Obstacle addObstacle(String typeOfObstacle) {
         Obstacle createdObstacle;
         if(typeOfObstacle.equals("Simple")){
-            createdObstacle = new SimpleObstacle(getFrameBorders()[0]/2, getFrameBorders()[1]/2,
+            createdObstacle = new SimpleObstacle((int) getFrameBorders()[0]/2, (int) getFrameBorders()[1]/2,
                     20, player.getNoblePhantasm().width/5, 1);
         }
         else if(typeOfObstacle.equals("Firm")){
-            createdObstacle = new FirmObstacle(getFrameBorders()[0]/2, getFrameBorders()[1]/2,
+            createdObstacle = new FirmObstacle((int) getFrameBorders()[0]/2, (int) getFrameBorders()[1]/2,
                     20, player.getNoblePhantasm().width/5, 3);
         }
         else if(typeOfObstacle.equals("Explosive")){
-            createdObstacle = new ExplosiveObstacle(getFrameBorders()[0]/2, getFrameBorders()[1]/2, 15, 15, 1);
+            createdObstacle = new ExplosiveObstacle((int) getFrameBorders()[0]/2, (int) getFrameBorders()[1]/2, 15, 15, 1);
         }
         else {
-            createdObstacle = new GiftObstacle(getFrameBorders()[0]/2, getFrameBorders()[1]/2,
+            createdObstacle = new GiftObstacle((int) getFrameBorders()[0]/2, (int) getFrameBorders()[1]/2,
                     20, player.getNoblePhantasm().width/5, 1, "chance");
         }
         Statistics.addObstacle(createdObstacle);

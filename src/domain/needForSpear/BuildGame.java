@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class BuildGame {
     private static BuildGame instance;
     public void buildGame(){
-
     }
 
     public static BuildGame getInstance() {
