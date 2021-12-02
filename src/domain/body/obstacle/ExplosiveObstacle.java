@@ -2,7 +2,6 @@ package domain.body.obstacle;
 import domain.needForSpear.*;
 public class ExplosiveObstacle extends Obstacle {
 
-    private int vx;
     private int vy;
     //The coordinates and the radius of the circle that the obstacle will move around.
     private final int circleRadius = 3*100/2;
@@ -10,7 +9,6 @@ public class ExplosiveObstacle extends Obstacle {
     private final int circleCenterY = this.y + length + circleRadius;
     //The degree between the circle's center and the obstacle.
     private double degree = 90;
-    private String name;
     public ExplosiveObstacle(int x_coordinates,
                              int y_coordinates,
                              int length,

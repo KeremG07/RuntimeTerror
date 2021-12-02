@@ -2,7 +2,6 @@ package domain.body.obstacle;
 import domain.needForSpear.*;
 
 public class SimpleObstacle extends Obstacle {
-    private String name;
     public SimpleObstacle(int x_coordinates,
                           int y_coordinates,
                           int length,

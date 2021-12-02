@@ -40,7 +40,7 @@ public class GameScreen extends JPanel {
         this.controller = Controller.getInstance();
         obstacleList = controller.getStatistics().getObstacleList();
         setImages();
-        setPreferredSize(new Dimension(controller.getBuildGame().gameScreenWidth, controller.getBuildGame().gameScreenHeight));
+        setPreferredSize(new Dimension(controller.gameScreenWidth, controller.gameScreenHeight));
         MouseAdapter ma = new MouseAdapter() {
 
             private Image dragImage;

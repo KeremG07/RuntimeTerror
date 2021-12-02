@@ -2,7 +2,6 @@ package domain.body.obstacle;
 
 public class GiftObstacle extends Obstacle{
     public String giftType;
-    private String name;
     public GiftObstacle(int x_coordinates,
                         int y_coordinates,
                         int length,
