@@ -3,7 +3,7 @@ package ui.swing;
 import com.sun.corba.se.impl.orbutil.graph.Graph;
 import domain.body.EnchantedSphere;
 import domain.body.NoblePhantasm;
-import domain.body.obstacle.Obstacle;
+import domain.body.obstacle.*;
 import domain.needForSpear.Controller;
 
 import javax.swing.*;
@@ -21,12 +21,14 @@ public class GameScreen extends JPanel {
     private static GameScreen instance;
     private static int count = 0;
     public static boolean initObstacles = false;
+    public static boolean enabled;
 
     public static GameScreen getInstance() {
         if (instance == null)
-            count++;
             //System.out.println(count);
             instance = new GameScreen();
+        count++;
+        enabled = count != 2;
         return instance;
     }
 
@@ -45,13 +47,14 @@ public class GameScreen extends JPanel {
 
             private Image dragImage;
             private Point clickOffset;
-            private Boolean enabled = count != 2;
             private Obstacle obstacleDragged;
+
             @Override
             public void mousePressed(MouseEvent e) {
                 if(!enabled) {
                     return;
                 }
+
                 for (Map.Entry<Point, Image> entry : locations.entrySet()) {
                     Image image = entry.getValue();
                     Point point = entry.getKey();
@@ -85,8 +88,8 @@ public class GameScreen extends JPanel {
                     dragPoint.x += clickOffset.x;
                     dragPoint.y += clickOffset.y;
                     locations.put(dragPoint, dragImage);
-                    System.out.println(dragPoint);
-                    System.out.println(clickOffset);
+                    //System.out.println(dragPoint);
+                    //System.out.println(clickOffset);
                     for(Obstacle o: obstacleList) {
                         if(o.equals(obstacleDragged)) {
                             o.setCoordinates(dragPoint.x, dragPoint.y);
@@ -110,7 +113,7 @@ public class GameScreen extends JPanel {
         drawNoblePhantasm(g);
         locations.clear();
         for (Obstacle o: obstacleList) {
-            System.out.printf(String.valueOf(o.getCoordinates()[0]) + "," + String.valueOf(o.getCoordinates()[1]) + "\n");
+            //System.out.printf(String.valueOf(o.getCoordinates()[0]) + "," + String.valueOf(o.getCoordinates()[1]) + "\n");
             drawObstacles(g, o);
         }
         Graphics2D g2d = (Graphics2D) g.create();
@@ -138,12 +141,22 @@ public class GameScreen extends JPanel {
     }
 
     void drawObstacles(Graphics g, Obstacle o) {
-        locations.put(new Point(o.getCoordinates()[0], o.getCoordinates()[1]),images.get("obstacle"));
         Graphics2D g2d = (Graphics2D) g;
         AffineTransform at = new AffineTransform();
         AffineTransform old = g2d.getTransform();
         at.translate(o.getCoordinates()[0], o.getCoordinates()[1]);
-        g2d.drawImage(images.get("obstacle"), at , null);
+        Image imageToDraw;
+        if (o instanceof SimpleObstacle) {
+            imageToDraw = images.get("simpleObstacle");
+        } else if (o instanceof FirmObstacle) {
+            imageToDraw = images.get("firmObstacle");
+        } else if (o instanceof ExplosiveObstacle) {
+            imageToDraw = images.get("explosiveObstacle");
+        } else {
+            imageToDraw = images.get("giftObstacle");
+        }
+        locations.put(new Point(o.getCoordinates()[0], o.getCoordinates()[1]),imageToDraw);
+        g2d.drawImage(imageToDraw, at , null);
         //g2d.setTransform(old);
     }
 
@@ -152,11 +165,17 @@ public class GameScreen extends JPanel {
         NoblePhantasm noblePhantasm = controller.getPlayer().getNoblePhantasm();
         Image noblePhantasmImage = new ImageIcon("src/utilities/NoblePhantasm.png").getImage();
         Image enchantedSphereImage = new ImageIcon("src/utilities/EnchantedSphere.png").getImage();
-        Image obstacleImage = new ImageIcon("src/utilities/simpleObs.png").getImage();
+        Image simpleObstacleImage = new ImageIcon("src/utilities/simpleObs.png").getImage();
+        Image firmObstacleImage = new ImageIcon("src/utilities/firmObs.png").getImage();
+        Image explosiveObstacleImage = new ImageIcon("src/utilities/explosiveObs.png").getImage();
+        Image giftObstacleImage = new ImageIcon("src/utilities/giftObs.png").getImage();
         //locations.put(enchantedSphereImage, new Point(enchantedSphere.getCoordinates()[0], enchantedSphere.getCoordinates()[1]));
         //locations.put(noblePhantasmImage, new Point(noblePhantasm.getCoordinates()[0], noblePhantasm.getCoordinates()[1]));
         images.put("noblePhantasm", noblePhantasmImage);
         images.put("enchantedSphere", enchantedSphereImage);
-        images.put("obstacle", obstacleImage);
+        images.put("simpleObstacle", simpleObstacleImage);
+        images.put("firmObstacle", firmObstacleImage);
+        images.put("explosiveObstacle", explosiveObstacleImage);
+        images.put("giftObstacle", giftObstacleImage);
     }
 }
