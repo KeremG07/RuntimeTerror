@@ -15,7 +15,7 @@ public class BuildGame {
 
     //Creates however many obstacles were asked to be created.
     public BuildGame(String[] numOfObstaclesReq){
-        setObstacles(numOfObstaclesReq);
+        setNumObstacles(numOfObstaclesReq);
         //The GameScreen is divided into cells (size: 10x10) where objects can be put. The objects are put into the
         // empty cells chosen randomly.
         boolean[][] locationCells = new boolean[(gameScreenHeight-200)/40][gameScreenWidth/100];
@@ -69,7 +69,7 @@ public class BuildGame {
 
     }
     //Gets the number of obstacles entered as input from the user.
-    public void setObstacles(String[] numOfObstaclesReq) {
+    public void setNumObstacles(String[] numOfObstaclesReq) {
         try {
             simpleObstacle = Math.max(Integer.parseInt(numOfObstaclesReq[0]), simpleObstacleReq);
         }
@@ -94,13 +94,13 @@ public class BuildGame {
         catch(NumberFormatException exception) {
             giftObstacle = giftObstacleReq;
         }
-        if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle >= 200){
+        if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle >= 100){
             giftObstacle = giftObstacleReq;
-            if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle >= 200) {
+            if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle >= 100) {
                 explosiveObstacle = explosiveObstacleReq;
-                if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle >= 200){
+                if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle >= 100){
                     firmObstacle = firmObstacleReq;
-                    if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle >= 200){
+                    if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle >= 100){
                         simpleObstacle = simpleObstacleReq;
                     }
                 }
