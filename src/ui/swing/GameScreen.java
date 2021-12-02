@@ -58,12 +58,9 @@ public class GameScreen extends JPanel {
                     Rectangle bounds1 = new Rectangle(
                             point.x, point.y,
                             image.getWidth(GameScreen.this), image.getHeight(GameScreen.this));
-                    Rectangle bounds2 = new Rectangle(
-                            point.x-image.getWidth(GameScreen.this), point.y-image.getHeight(GameScreen.this),
-                            image.getWidth(GameScreen.this), image.getHeight(GameScreen.this));
                     if (bounds1.contains(e.getPoint())) {
                         for(Obstacle o: obstacleList) {
-                            if (bounds2.contains(e.getPoint())) {
+                            if (o.getCoordinates()[0] == point.x && o.getCoordinates()[1] == point.y) {
                                 obstacleDragged = o;
                                 break;
                             }
@@ -88,6 +85,8 @@ public class GameScreen extends JPanel {
                     dragPoint.x += clickOffset.x;
                     dragPoint.y += clickOffset.y;
                     locations.put(dragPoint, dragImage);
+                    System.out.println(dragPoint);
+                    System.out.println(clickOffset);
                     for(Obstacle o: obstacleList) {
                         if(o.equals(obstacleDragged)) {
                             o.setCoordinates(dragPoint.x, dragPoint.y);
@@ -109,6 +108,7 @@ public class GameScreen extends JPanel {
         super.paint(g);
         drawEnchantedSphere(g);
         drawNoblePhantasm(g);
+        locations.clear();
         for (Obstacle o: obstacleList) {
             System.out.printf(String.valueOf(o.getCoordinates()[0]) + "," + String.valueOf(o.getCoordinates()[1]) + "\n");
             drawObstacles(g, o);
