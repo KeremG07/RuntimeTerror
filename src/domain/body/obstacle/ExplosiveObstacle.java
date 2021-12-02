@@ -4,7 +4,7 @@ public class ExplosiveObstacle extends Obstacle {
 
     private int vy;
     //The coordinates and the radius of the circle that the obstacle will move around.
-    private final int circleRadius = 3*100/2;
+    private final int circleRadius = 3*25/2;
     private final int circleCenterX = this.x + width/2;
     private final int circleCenterY = this.y + length + circleRadius;
     //The degree between the circle's center and the obstacle.
@@ -22,7 +22,7 @@ public class ExplosiveObstacle extends Obstacle {
     //Doesn't move with the correct speed yet. Needs testing.
     @Override
     public void move() {
-        degree += 0.5;
+        degree += 1;
         double rads = Math.toRadians(degree - 90); // 0 becomes the top
         this.x = Math.round((float) (circleCenterX + Math.cos(rads) * circleRadius));
         this.y = Math.round((float) (circleCenterY + Math.sin(rads) * circleRadius));

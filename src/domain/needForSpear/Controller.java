@@ -45,7 +45,7 @@ public class Controller {
         //handler.doAction(action);
         updateObstacleConditions();
         if(playing){
-            updateMovementAfterShoot();
+            shootEnchantedSphere();
         }
     }
     //This method will be called by  the handler.
@@ -61,12 +61,8 @@ public class Controller {
     }
     //This method will be called ticksPerSecond per second and only after player starts playing the game by shooting
     //the enchanted sphere.
-    public void updateMovementAfterShoot(){
+    public void shootEnchantedSphere(){
         player.shootEnchantedSphere();
-        player.moveEnchantedSphere();
-        for(Obstacle obstacle : Statistics.obstacleList){
-            obstacle.move();
-        }
     }
     ////This method will be called ticksPerSecond per second.
     public void updateObstacleConditions(){
@@ -74,6 +70,9 @@ public class Controller {
             if(obstacle.getNumberOfHits() <= 0){
                 destroyObstacle(obstacle);
             }
+        }
+        for(Obstacle obstacle : Statistics.obstacleList){
+            obstacle.move();
         }
     }
     public Player getPlayer() {

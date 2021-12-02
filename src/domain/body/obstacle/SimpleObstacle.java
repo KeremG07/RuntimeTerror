@@ -8,7 +8,7 @@ public class SimpleObstacle extends Obstacle {
                           int width,
                           int numberOfHits) {
         super(x_coordinates, y_coordinates, length, width, numberOfHits);
-        vx = 100/(4*Controller.ticksPerSecond);
+        vx = 1;
         name = "Simple";
     }
     @Override
@@ -17,8 +17,10 @@ public class SimpleObstacle extends Obstacle {
             boolean canMoveRight = true;
             boolean canMoveLeft = true;
             for (Obstacle obstacle : Statistics.obstacleList){
-                canMoveRight &= obstacle.compareCoordinates(this.x + this.vx, this.y, this.length, this.width);
-                canMoveLeft &= obstacle.compareCoordinates(this.x - this.vx, this.y, this.length, this.width);
+                if(!(obstacle.getCoordinates()[0] == this.x && obstacle.getCoordinates()[1] == this.y)){
+                    canMoveRight &= !(obstacle.compareCoordinates(this.x + this.vx, this.y, this.length, this.width));
+                    canMoveLeft &= !(obstacle.compareCoordinates(this.x - this.vx, this.y, this.length, this.width));
+                }
             }
             if(!Controller.getInstance().hitFrame(this.x + this.vx, this.y, this.length, this.width).equals("None")){
                 canMoveRight = false;

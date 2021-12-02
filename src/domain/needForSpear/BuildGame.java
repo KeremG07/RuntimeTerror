@@ -16,9 +16,9 @@ public class BuildGame {
     //Creates however many obstacles were asked to be created.
     public BuildGame(String[] numOfObstaclesReq){
         setObstacles(numOfObstaclesReq);
-        //The GameScreen is divided into cells (size: 20x10) where objects can be put. The objects are put into the
+        //The GameScreen is divided into cells (size: 10x10) where objects can be put. The objects are put into the
         // empty cells chosen randomly.
-        boolean[][] locationCells = new boolean[(gameScreenHeight-200)/20][gameScreenWidth/100];
+        boolean[][] locationCells = new boolean[(gameScreenHeight-200)/40][gameScreenWidth/100];
         for(int i=0; i<simpleObstacle; i++){
             putObstacleInCell(locationCells, "Simple");
         }
@@ -44,7 +44,7 @@ public class BuildGame {
             createdObstacle = new FirmObstacle(x, y, 8, 80, 3);
         }
         else if(typeOfObstacle.equals("Explosive")){
-            createdObstacle = new ExplosiveObstacle(x, y, 15, 15, 1);
+            createdObstacle = new ExplosiveObstacle(x, y, 32, 32, 1);
         }
         else {
             createdObstacle = new GiftObstacle(x, y, 8, 80, 1, "chance");
@@ -56,13 +56,13 @@ public class BuildGame {
         int column;
         int row;
         column = randi.nextInt(10);
-        row = randi.nextInt(20);
+        row = randi.nextInt(10);
         while(locationCells[row][column]){
             column = randi.nextInt(10);
-            row = randi.nextInt(20);
+            row = randi.nextInt(10);
         }
         int x = column*100;
-        int y = row*20;
+        int y = row*40;
         Obstacle newCreatedObstacle = createObstacle(typeOfObstacle, x, y);
         Statistics.addObstacle(newCreatedObstacle);
         locationCells[row][column] = true;

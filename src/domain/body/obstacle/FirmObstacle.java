@@ -10,7 +10,7 @@ public class FirmObstacle extends Obstacle{
                         int width,
                         int numberOfHits) {
         super(x_coordinates, y_coordinates, length, width, numberOfHits);
-        vx = 100/(4*Controller.ticksPerSecond);
+        vx = 1;
         name = "Firm";
     }
     @Override
@@ -18,16 +18,21 @@ public class FirmObstacle extends Obstacle{
         if(moving){
             boolean canMoveRight = true;
             boolean canMoveLeft = true;
+            //Compares with every obstacle.
             for (Obstacle obstacle : Statistics.obstacleList){
-                canMoveRight &= obstacle.compareCoordinates(this.x + this.vx, this.y, this.length, this.width);
-                canMoveLeft &= obstacle.compareCoordinates(this.x - this.vx, this.y, this.length, this.width);
+                if(!(obstacle.getCoordinates()[0] == x && obstacle.getCoordinates()[1] == y)){
+                    canMoveRight &= !(obstacle.compareCoordinates(this.x + this.vx, this.y, this.length, this.width));
+                    canMoveLeft &= !(obstacle.compareCoordinates(this.x - this.vx, this.y, this.length, this.width));
+                }
             }
+            //Compares with every frame border.
             if(!Controller.getInstance().hitFrame(this.x + this.vx, this.y, this.length, this.width).equals("None")){
                 canMoveRight = false;
             }
             if(!Controller.getInstance().hitFrame(this.x - this.vx, this.y, this.length, this.width).equals("None")){
                 canMoveLeft = false;
             }
+            // It moves right if it can, if not left.
             if(canMoveRight){
                 this.x += this.vx;
             } else if(canMoveLeft){
