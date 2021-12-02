@@ -152,7 +152,7 @@ public class GameScreen extends JPanel {
         NoblePhantasm noblePhantasm = controller.getPlayer().getNoblePhantasm();
         Image noblePhantasmImage = new ImageIcon("src/utilities/NoblePhantasm.png").getImage();
         Image enchantedSphereImage = new ImageIcon("src/utilities/EnchantedSphere.png").getImage();
-        Image obstacleImage = new ImageIcon("src/utilities/EnchantedSphere.png").getImage();
+        Image obstacleImage = new ImageIcon("src/utilities/simpleObs.png").getImage();
         //locations.put(enchantedSphereImage, new Point(enchantedSphere.getCoordinates()[0], enchantedSphere.getCoordinates()[1]));
         //locations.put(noblePhantasmImage, new Point(noblePhantasm.getCoordinates()[0], noblePhantasm.getCoordinates()[1]));
         images.put("noblePhantasm", noblePhantasmImage);
