@@ -57,4 +57,12 @@ public class NoblePhantasm extends Body {
     public void doubleNP(){
         
     }
+
+    public double getNormalAngle() {
+        return normalAngle;
+    }
+
+    public void setNormalAngle(double normalAngle) {
+        this.normalAngle = normalAngle;
+    }
 }

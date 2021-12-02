@@ -123,27 +123,27 @@ public class GameScreen extends JPanel {
     void drawNoblePhantasm(Graphics g) {
         NoblePhantasm noblePhantasm = controller.getPlayer().getNoblePhantasm();
         Graphics2D g2d = (Graphics2D) g;
-        AffineTransform at = new AffineTransform();
-        AffineTransform old = g2d.getTransform();
-        at.translate(noblePhantasm.getCoordinates()[0], noblePhantasm.getCoordinates()[1]);
-        g2d.drawImage(images.get("noblePhantasm"), at , null);
-        g2d.setTransform(old);
+        AffineTransform rotateTransform  = AffineTransform.getRotateInstance(Math.toRadians(noblePhantasm.getNormalAngle()-90),(noblePhantasm.getCoordinates()[0]), (noblePhantasm.getCoordinates()[1]));
+        //AffineTransform old = g2d.getTransform();
+        rotateTransform.translate(noblePhantasm.getCoordinates()[0], noblePhantasm.getCoordinates()[1]);
+        g2d.drawImage(images.get("noblePhantasm"), rotateTransform , null);
+        //g2d.setTransform(old);
     }
 
     void drawEnchantedSphere(Graphics g) {
         EnchantedSphere enchantedSphere = controller.getPlayer().getEnchantedSphere();
         Graphics2D g2d = (Graphics2D) g;
         AffineTransform at = new AffineTransform();
-        AffineTransform old = g2d.getTransform();
+        // AffineTransform old = g2d.getTransform();
         at.translate(enchantedSphere.getCoordinates()[0], enchantedSphere.getCoordinates()[1]);
         g2d.drawImage(images.get("enchantedSphere"), at , null);
-        g2d.setTransform(old);
+        //g2d.setTransform(old);
     }
 
     void drawObstacles(Graphics g, Obstacle o) {
         Graphics2D g2d = (Graphics2D) g;
         AffineTransform at = new AffineTransform();
-        AffineTransform old = g2d.getTransform();
+        // AffineTransform old = g2d.getTransform();
         at.translate(o.getCoordinates()[0], o.getCoordinates()[1]);
         Image imageToDraw;
         if (o instanceof SimpleObstacle) {
@@ -155,8 +155,8 @@ public class GameScreen extends JPanel {
         } else {
             imageToDraw = images.get("giftObstacle");
         }
-        locations.put(new Point(o.getCoordinates()[0], o.getCoordinates()[1]),imageToDraw);
-        g2d.drawImage(imageToDraw, at , null);
+        locations.put(new Point(o.getCoordinates()[0], o.getCoordinates()[1]), imageToDraw);
+        g2d.drawImage(imageToDraw, at, null);
         //g2d.setTransform(old);
     }
 
