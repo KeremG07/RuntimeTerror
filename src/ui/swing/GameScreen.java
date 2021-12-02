@@ -123,9 +123,14 @@ public class GameScreen extends JPanel {
     void drawNoblePhantasm(Graphics g) {
         NoblePhantasm noblePhantasm = controller.getPlayer().getNoblePhantasm();
         Graphics2D g2d = (Graphics2D) g;
-        AffineTransform rotateTransform  = AffineTransform.getRotateInstance(Math.toRadians(noblePhantasm.getNormalAngle()-90),(noblePhantasm.getCoordinates()[0]), (noblePhantasm.getCoordinates()[1]));
+        AffineTransform rotateTransform  = AffineTransform.getRotateInstance(Math.toRadians(noblePhantasm.getNormalAngle()),
+                (noblePhantasm.getCoordinates()[0] + 50 - Math.sqrt(Math.pow(50,2) + Math.pow(4,2)) * Math.cos(Math.atan(0.08) + Math.toRadians(noblePhantasm.getNormalAngle()))),
+                (noblePhantasm.getCoordinates()[1] + 4 - Math.sqrt(Math.pow(50,2) + Math.pow(4,2)) * Math.sin(Math.toRadians(noblePhantasm.getNormalAngle()))));
+        System.out.println(noblePhantasm.getCoordinates()[0] + 50.0 - Math.sqrt(Math.pow(50,2) + Math.pow(4,2)) * Math.cos(Math.atan(0.08) + Math.toRadians(noblePhantasm.getNormalAngle())));
+        System.out.println(noblePhantasm.getCoordinates()[1] - 4.0 - Math.sqrt(Math.pow(50,2) + Math.pow(4,2)) * Math.sin(Math.atan(0.08) + Math.toRadians(noblePhantasm.getNormalAngle())));
         //AffineTransform old = g2d.getTransform();
-        rotateTransform.translate(noblePhantasm.getCoordinates()[0], noblePhantasm.getCoordinates()[1]);
+        rotateTransform.translate(noblePhantasm.getCoordinates()[0] + 50.0 - Math.sqrt(Math.pow(50,2) + Math.pow(4,2)) * Math.cos(Math.atan(0.08) + Math.toRadians(noblePhantasm.getNormalAngle())),
+                noblePhantasm.getCoordinates()[1] + 4.0 - Math.sqrt(Math.pow(50,2) + Math.pow(4,2)) * Math.sin(Math.atan(0.08) + Math.toRadians(noblePhantasm.getNormalAngle())));
         g2d.drawImage(images.get("noblePhantasm"), rotateTransform , null);
         //g2d.setTransform(old);
     }

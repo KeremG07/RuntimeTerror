@@ -12,7 +12,7 @@ public class NoblePhantasm extends Body {
                          int width,
                          int height){
         super(x_coordinates, y_coordinates, width, height);
-        normalAngle=90;
+        normalAngle=0;
         hasMagicalHex =false;
     }
 
@@ -41,13 +41,13 @@ public class NoblePhantasm extends Body {
     }
 
     public void rotateRight() {
-        normalAngle -= 5;
-        if(normalAngle < 45) normalAngle = 45;
+        normalAngle -= 60.0 / Controller.ticksPerSecond;
+        if(normalAngle < -45) normalAngle = -45;
     }
 
     public void rotateLeft() {
-        normalAngle += 5;
-        if(normalAngle > 135) normalAngle = 135;
+        normalAngle += 60.0 / Controller.ticksPerSecond;
+        if(normalAngle > 45) normalAngle = 45;
     }
     
     public void activateMagicalHex(){
