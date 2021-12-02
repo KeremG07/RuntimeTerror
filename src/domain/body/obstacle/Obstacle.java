@@ -14,10 +14,10 @@ public abstract class Obstacle extends Body {
 
     public Obstacle(int x_coordinates,
                     int y_coordinates,
-                    int length,
                     int width,
+                    int height,
                     int numberOfHits){
-        super(x_coordinates,y_coordinates, length, width);
+        super(x_coordinates,y_coordinates, width, height);
         movingProbability = randi.nextInt(10);
         moving = movingProbability > 7;
         this.numberOfHits=numberOfHits;

@@ -5,16 +5,16 @@ public class ExplosiveObstacle extends Obstacle {
     private int vy;
     //The coordinates and the radius of the circle that the obstacle will move around.
     private final int circleRadius = 3*25/2;
-    private final int circleCenterX = this.x + height /2;
-    private final int circleCenterY = this.y + width + circleRadius;
+    private final int circleCenterX = this.x + width/2;
+    private final int circleCenterY = this.y + height + circleRadius;
     //The degree between the circle's center and the obstacle.
     private double degree = 90;
     public ExplosiveObstacle(int x_coordinates,
                              int y_coordinates,
-                             int length,
                              int width,
+                             int height,
                              int numberOfHits) {
-        super(x_coordinates, y_coordinates, length, width, numberOfHits);
+        super(x_coordinates, y_coordinates, width, height, numberOfHits);
         name = "Explosive";
         vx = 100/(4*Controller.ticksPerSecond);
     }

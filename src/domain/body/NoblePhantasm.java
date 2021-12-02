@@ -9,9 +9,9 @@ public class NoblePhantasm extends Body {
 
     public NoblePhantasm(int x_coordinates,
                          int y_coordinates,
-                         int length,
-                         int width){
-        super(x_coordinates, y_coordinates, length, width);
+                         int width,
+                         int height){
+        super(x_coordinates, y_coordinates, width, height);
         normalAngle=90;
         hasMagicalHex =false;
     }

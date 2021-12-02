@@ -4,10 +4,10 @@ import domain.needForSpear.*;
 public class SimpleObstacle extends Obstacle {
     public SimpleObstacle(int x_coordinates,
                           int y_coordinates,
-                          int length,
                           int width,
+                          int height,
                           int numberOfHits) {
-        super(x_coordinates, y_coordinates, length, width, numberOfHits);
+        super(x_coordinates, y_coordinates, width, height, numberOfHits);
         vx = 1;
         name = "Simple";
     }

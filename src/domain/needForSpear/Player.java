@@ -12,7 +12,7 @@ public class Player {
     public static final double screenHeight = Controller.getInstance().getFrameBorders()[1];
     public Player() {
         inventory = new Inventory();
-        noblePhantasm = new NoblePhantasm(450, 570, (int) screenWidth/10, (int) 8);
+        noblePhantasm = new NoblePhantasm(450, 570, (int) screenWidth/10,  8);
         enchantedSphere = new EnchantedSphere(494, 558, 12, 12, noblePhantasm);
     }
 

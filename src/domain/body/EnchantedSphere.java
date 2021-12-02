@@ -11,10 +11,10 @@ public class EnchantedSphere extends Body {
     private boolean notShot = true;
     public EnchantedSphere(int x_coordinates,
                            int y_coordinates,
-                           int length,
                            int width,
+                           int height,
                            NoblePhantasm np) {
-        super(x_coordinates, y_coordinates, length, width);
+        super(x_coordinates, y_coordinates, width, height);
         unstoppable=false;
         this.np = np;
     }
@@ -22,7 +22,7 @@ public class EnchantedSphere extends Body {
     public void updateWithNP() {
         if(notShot){
             x = np.x + 44;
-            y = np.y - width;
+            y = np.y - height;
         }
     }
     public void move() {

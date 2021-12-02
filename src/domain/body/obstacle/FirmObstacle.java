@@ -6,10 +6,10 @@ import domain.needForSpear.Statistics;
 public class FirmObstacle extends Obstacle{
     public FirmObstacle(int x_coordinates,
                         int y_coordinates,
-                        int length,
                         int width,
+                        int height,
                         int numberOfHits) {
-        super(x_coordinates, y_coordinates, length, width, numberOfHits);
+        super(x_coordinates, y_coordinates, width, height, numberOfHits);
         vx = 1;
         name = "Firm";
     }
