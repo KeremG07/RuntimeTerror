@@ -4,8 +4,6 @@ import domain.needForSpear.Controller;
 import domain.needForSpear.Statistics;
 
 public class FirmObstacle extends Obstacle{
-    private int vx;
-    private String name;
     public FirmObstacle(int x_coordinates,
                         int y_coordinates,
                         int length,

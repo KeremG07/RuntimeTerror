@@ -2,6 +2,7 @@ package domain.needForSpear;
 
 import domain.body.obstacle.*;
 
+
 import java.util.Random;
 
 
@@ -33,7 +34,7 @@ public class BuildGame {
     }
 
 
-    public Obstacle addObstacle(String typeOfObstacle, int x, int y) {
+    public Obstacle createObstacle(String typeOfObstacle, int x, int y) {
         Obstacle createdObstacle;
         if(typeOfObstacle.equals("Simple")){
             createdObstacle = new SimpleObstacle(x, y, 20, 20, 1);
@@ -47,7 +48,6 @@ public class BuildGame {
         else {
             createdObstacle = new GiftObstacle(x, y, 20, 20, 1, "chance");
         }
-        Statistics.addObstacle(createdObstacle);
         return createdObstacle;
     }
     //Finding an empty cell and creating the obstacle there.
@@ -62,7 +62,8 @@ public class BuildGame {
         }
         int x = column*25;
         int y = row*25;
-        addObstacle(typeOfObstacle, x, y);
+        Obstacle newCreatedObstacle = createObstacle(typeOfObstacle, x, y);
+        Statistics.addObstacle(newCreatedObstacle);
         locationCells[row][column] = true;
 
     }
@@ -78,19 +79,19 @@ public class BuildGame {
             firmObstacle = Math.max(Integer.parseInt(numOfObstaclesReq[1]), firmObstacleReq);
         }
         catch(NumberFormatException exception) {
-            firmObstacle = simpleObstacleReq;
+            firmObstacle = firmObstacleReq;
         }
         try {
             explosiveObstacle = Math.max(Integer.parseInt(numOfObstaclesReq[2]), explosiveObstacleReq);
         }
         catch(NumberFormatException exception) {
-            explosiveObstacle = simpleObstacleReq;
+            explosiveObstacle = explosiveObstacleReq;
         }
         try {
             giftObstacle = Math.max(Integer.parseInt(numOfObstaclesReq[3]), giftObstacleReq);
         }
         catch(NumberFormatException exception) {
-            giftObstacle = simpleObstacleReq;
+            giftObstacle = giftObstacleReq;
         }
     }
 }

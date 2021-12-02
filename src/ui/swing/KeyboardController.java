@@ -10,7 +10,7 @@ public class KeyboardController implements KeyListener {
     Controller controller = Controller.getInstance();
     Scanner scanner = new Scanner(System.in);
 
-    public KeyboardController() { this.controller = Controller.getInstance(); }
+    public KeyboardController() { this.controller = controller; }
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -18,8 +18,8 @@ public class KeyboardController implements KeyListener {
 
         }
 
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT) controller.updateMovementNP("slideRight");
-        if(e.getKeyCode() == KeyEvent.VK_LEFT) controller.updateMovementNP("slideLeft");
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT) controller.updateMovementNP("HeldRight");
+        if(e.getKeyCode() == KeyEvent.VK_LEFT) controller.updateMovementNP("HeldLeft");
 
     }
 
@@ -30,7 +30,7 @@ public class KeyboardController implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT) controller.updateMovementNP("moveRight");
-        if(e.getKeyCode() == KeyEvent.VK_LEFT) controller.updateMovementNP("moveLeft");
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT) controller.updateMovementNP("PressedRight");
+        if(e.getKeyCode() == KeyEvent.VK_LEFT) controller.updateMovementNP("PressedLeft");
     }
 }

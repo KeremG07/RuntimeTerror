@@ -11,15 +11,14 @@ public class Controller {
     KeyHandler handler = new KeyHandler();
     Player player;
     Statistics statistics;
-    //The next three lines will be in the method called startNewGame, here for test purposes.
-    StartGame newGame = new StartGame();
-    String[] numOfObstaclesReq = {"3", "34", "2", "6"};
-    BuildGame buildGame = newGame.buildNewGame(numOfObstaclesReq);
+    StartGame newGame;
+    BuildGame buildGame;
     //To check whether we shot the enchanted sphere or not:
     boolean playing = false;
     boolean isPaused = false;
     boolean isOver = false;
     public int timeLeft;
+    public final int gameScreenWidth = 1000, gameScreenHeight = 600;
 
     private Controller() {
         player = new Player();
@@ -33,8 +32,8 @@ public class Controller {
     }
     //Commented out for test purposes.
     public void startNewGame(String[] numOfObstaclesReq) {
-        //StartGame newGame = new StartGame();
-        //BuildGame buildGame = newGame.buildNewGame(numOfObstaclesReq);
+        newGame = new StartGame();
+        buildGame = newGame.buildNewGame(numOfObstaclesReq);
     }
     public void startTimer(){
 
@@ -42,18 +41,20 @@ public class Controller {
     public void startPlaying(){
         playing = true;
     }
-    public void updateEverything(int action){
-        handler.doAction(action);
+    public void updateEverything(){
+        //handler.doAction(action);
         updateObstacleConditions();
         if(playing){
             updateMovementAfterShoot();
         }
     }
-    //This method will be called the handler.
+    //This method will be called by  the handler.
     public void updateMovementNP(String npAction){
         player.moveNoblePhantasm(npAction);
         player.updateEnchantedSphere();
     }
+
+
     //This method will be called the handler.
     public void rotateNoblePhantasm(String npAction){
         player.rotateNoblePhantasm(npAction);
@@ -89,8 +90,8 @@ public class Controller {
 
     public double[] getFrameBorders() {
         double[] borders = new double[2];
-        borders[0] = buildGame.gameScreenWidth;
-        borders[1] = buildGame.gameScreenHeight;
+        borders[0] = gameScreenWidth;
+        borders[1] = gameScreenHeight;
         return borders;
     }
     public String hitFrame(double x, double y, double length, double width ){

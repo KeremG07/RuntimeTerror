@@ -18,7 +18,7 @@ public class PlayModeFrame extends JFrame {
     private PlayModeFrame() {
         super("Need For Spear by Runtime Terror");
         controller = Controller.getInstance();
-        clockMs = Controller.ticksPerSecond*1000;
+        clockMs = Controller.ticksPerSecond*1;
 
         GameScreen gameScreen = GameScreen.getInstance();
 
@@ -26,20 +26,30 @@ public class PlayModeFrame extends JFrame {
 
         // Panels Start Here
         JPanel mainPanel = initializeMainPanel();
+
+        // GBC
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        // Score Panel
         JPanel scorePanel = new JPanel(new GridBagLayout());
-        JPanel buttonPanel = new JPanel(new GridBagLayout());
         scorePanel.setBounds(0,0,1000,50);
         scorePanel.setBackground(BACKGROUND_COLOR);
+
+        // Game Screen Panel
+        gameScreen.setBounds(0,0,1000,600);
+
+        // Button Panel
+        JPanel buttonPanel = new JPanel(new GridBagLayout());
         buttonPanel.setBounds(0,0,1000,50);
         buttonPanel.setBackground(BACKGROUND_COLOR);
-        gameScreen.setBounds(0,0,1000,600);
+
         mainPanel.add(scorePanel);
         mainPanel.add(gameScreen);
         mainPanel.add(buttonPanel);
+
         initializeButton(gbc, buttonPanel);
         //initializeScores(gbc, scorePanel);
         // ...
@@ -53,11 +63,15 @@ public class PlayModeFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Calls to controller are called here
+                gameScreen.repaint();
+                controller.updateEverything();
             }
         };
 
         Timer timer = new Timer(clockMs, tickListener);
         timer.start();
+
+        addKeyListener(new KeyboardController());
     }
 
     public static PlayModeFrame getInstance() {
