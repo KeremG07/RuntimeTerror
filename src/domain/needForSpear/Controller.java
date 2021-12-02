@@ -60,6 +60,11 @@ public class Controller {
         if(playing){
             shootEnchantedSphere();
             moveEnchantedSphere();
+            //If enchanted sphere falls down set up so that it will be shot again by the player.
+            if(player.getEnchantedSphere().getCoordinates()[1] + player.getEnchantedSphere().height>=gameScreenHeight){
+                playing = false;
+                player.updateEnchantedSphere();
+            }
         }
         updateObstacleConditions();
     }

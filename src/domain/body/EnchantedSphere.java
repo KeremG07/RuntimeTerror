@@ -36,8 +36,8 @@ public class EnchantedSphere extends Body {
     public void shootEnchantedSphere(){
         if(notShot){
             double normalAngle = np.normalAngle;
-            vx = (int) (2*np.width *Math.cos(Math.toRadians(normalAngle)));
-            vy = (int) (2*np.width *Math.sin(Math.toRadians(normalAngle)));
+            vx = -(int) (2*np.width *Math.cos(Math.toRadians(normalAngle+90)));
+            vy = (int) (2*np.width *Math.sin(Math.toRadians(normalAngle+90)));
             notShot = false;
         }
     }
@@ -59,6 +59,8 @@ public class EnchantedSphere extends Body {
             Controller.getInstance().getPlayer().loseChance();
             notShot = true;
             updateWithNP();
+            vx = 0;
+            vy = 0;
         }
         //np reflect (movement and corner cases are ignored for now)
         else if(this.compareCoordinates(np.x, np.y, np.width, np.height)){
