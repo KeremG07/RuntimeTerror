@@ -23,7 +23,7 @@ public class ExplosiveObstacle extends Obstacle {
     @Override
     public void move() {
         if(moving){
-            double rads = Math.toRadians(degree + 1 - 90); // 0 becomes the top
+            double rads = Math.toRadians(degree + 1 + 90); // 0 becomes the top
             int newX = Math.round((float) (circleCenterX + Math.cos(rads) * circleRadius));
             int newY = Math.round((float) (circleCenterY + Math.sin(rads) * circleRadius));
             /*boolean canMove = true;

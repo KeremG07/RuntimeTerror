@@ -57,12 +57,11 @@ public class Controller {
     }
 
     public void updateEverything(){
-        //handler.doAction(action);
-        updateObstacleConditions();
         if(playing){
             shootEnchantedSphere();
             moveEnchantedSphere();
         }
+        updateObstacleConditions();
     }
     //This method will be called by  the handler.
     public void updateMovementNP(String npAction){
