@@ -14,13 +14,14 @@ public class KeyboardController implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {  // ESC KEY
+        if(!controller.isPaused()) {
+            if(e.getKeyCode() == KeyEvent.VK_RIGHT) controller.updateMovementNP("HeldRight");
+            if(e.getKeyCode() == KeyEvent.VK_LEFT) controller.updateMovementNP("HeldLeft");
+
+            if(e.getKeyCode() == KeyEvent.VK_A) controller.rotateNoblePhantasm("rotateLeft");
+            if(e.getKeyCode() == KeyEvent.VK_A) controller.rotateNoblePhantasm("rotateLeft");
 
         }
-
-        if(e.getKeyCode() == 39) controller.updateMovementNP("HeldRight");
-        if(e.getKeyCode() == 37) controller.updateMovementNP("HeldLeft");
-
     }
 
     @Override
@@ -30,7 +31,10 @@ public class KeyboardController implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if(e.getKeyCode() == 39) controller.updateMovementNP("PressedRight");
-        if(e.getKeyCode() == 37) controller.updateMovementNP("PressedLeft");
+        if(!controller.isPaused()){
+            if(e.getKeyCode() == KeyEvent.VK_RIGHT) controller.updateMovementNP("PressedRight");
+            if(e.getKeyCode() == KeyEvent.VK_LEFT) controller.updateMovementNP("PressedLeft");
+
+        }
     }
 }

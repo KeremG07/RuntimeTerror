@@ -11,6 +11,9 @@ public class PlayModeFrame extends JFrame {
     Controller controller;
     private static final Color BACKGROUND_COLOR = new Color(140, 140, 140);
     JButton pauseGame = new JButton("Pause Game");
+    JButton resumeGame = new JButton("Resume Game");
+    JButton saveGame = new JButton("Save Game");
+    JButton quitGame = new JButton("Quit Game");
     public int clockMs;
 
     private static PlayModeFrame instance;
@@ -65,9 +68,44 @@ public class PlayModeFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Calls to controller are called here
                 gameScreen.repaint();
-                controller.updateEverything();
+                if(!controller.isPaused()) {
+                    controller.updateEverything();
+                }
+
             }
         };
+
+        pauseGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.setPaused(true);
+
+                pauseGame.setEnabled(false);
+                resumeGame.setEnabled(true);
+                saveGame.setEnabled(true);
+                quitGame.setEnabled(true);
+            }
+        });
+
+        resumeGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.setPaused(false);
+
+                pauseGame.setEnabled(true);
+                resumeGame.setEnabled(false);
+                saveGame.setEnabled(false);
+                quitGame.setEnabled(false);
+            }
+        });
+
+        quitGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.endGame();
+                dispose();
+            }
+        });
 
         Timer timer = new Timer(clockMs, tickListener);
         timer.start();
@@ -95,7 +133,16 @@ public class PlayModeFrame extends JFrame {
         gbc.weighty = 0.5;
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.CENTER;
-        buttonPanel.add(pauseGame,gbc);
+        buttonPanel.add(pauseGame, gbc);
+        gbc.gridx=1;
+        buttonPanel.add(resumeGame, gbc);
+        resumeGame.setEnabled(false);
+        gbc.gridx=2;
+        buttonPanel.add(saveGame, gbc);
+        saveGame.setEnabled(false);
+        gbc.gridx=3;
+        buttonPanel.add(quitGame, gbc);
+        quitGame.setEnabled(false);
     }
 
     private void initializeScores(GridBagConstraints gbc, JPanel scorePanel) {

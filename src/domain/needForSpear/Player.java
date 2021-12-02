@@ -66,9 +66,10 @@ public class Player {
         }
 
     }
-    //will be implemented later
-    public void rotateNoblePhantasm(String action){
 
+    public void rotateNoblePhantasm(String action){
+        if(action.equals("rotateLeft")) noblePhantasm.rotateLeft();
+        if(action.equals("rotateRight")) noblePhantasm.rotateRight();
     }
     public void fireMagicalHex(){
 

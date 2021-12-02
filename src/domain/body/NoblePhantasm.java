@@ -41,12 +41,12 @@ public class NoblePhantasm extends Body {
     }
 
     public void rotateRight() {
-        normalAngle -= 0.1;
+        normalAngle -= (20/ Controller.ticksPerSecond);
         if(normalAngle < 45) normalAngle = 45;
     }
 
     public void rotateLeft() {
-        normalAngle += 0.1;
+        normalAngle += (20/ Controller.ticksPerSecond);
         if(normalAngle > 135) normalAngle = 135;
     }
     

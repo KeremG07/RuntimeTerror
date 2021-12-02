@@ -38,9 +38,19 @@ public class Controller {
     public void startTimer(){
 
     }
+
+    public boolean isPaused() {
+        return isPaused;
+    }
+
+    public void setPaused(boolean paused) {
+        isPaused = paused;
+    }
+
     public void startPlaying(){
         playing = true;
     }
+
     public void updateEverything(){
         //handler.doAction(action);
         updateObstacleConditions();
