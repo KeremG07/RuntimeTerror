@@ -18,7 +18,8 @@ public class EnchantedSphere extends Body {
         unstoppable=false;
         this.np = np;
     }
-    //In the beginning of the game Enchanted Sphere moves with Noble Phantasm.
+    //In the beginning of the game Enchanted Sphere moves with Noble Phantasm, until it is shot.
+    //Or when the player loses a chance and Enchanted Sphere starts on Noble Phantasm again.
     public void updateWithNP() {
         if(notShot){
             x = np.x + 44;
@@ -29,6 +30,16 @@ public class EnchantedSphere extends Body {
         reflect();
         x += vx/Controller.ticksPerSecond;
         y += vy/Controller.ticksPerSecond;
+    }
+    //Initializes the speed of the Enchanted sphere according to Noble Phantasm's angle after the player shoots the
+    // enchanted sphere, only if it isn't shot yet.
+    public void shootEnchantedSphere(){
+        if(notShot){
+            double normalAngle = np.normalAngle;
+            vx = (int) (2*np.width *Math.cos(Math.toRadians(normalAngle)));
+            vy = (int) (2*np.width *Math.sin(Math.toRadians(normalAngle)));
+            notShot = false;
+        }
     }
     //Handles reflection of Enchanted Sphere, it will be called every time before it executes its movement.
     public void reflect() {
@@ -46,9 +57,10 @@ public class EnchantedSphere extends Body {
         }
         else if(!wall.equals("None")){
             Controller.getInstance().getPlayer().loseChance();
+            notShot = true;
             updateWithNP();
         }
-        //np reflect (movement and corner cases are ignored)
+        //np reflect (movement and corner cases are ignored for now)
         else if(this.compareCoordinates(np.x, np.y, np.width, np.height)){
             vy = -vy;
         }
@@ -102,15 +114,6 @@ public class EnchantedSphere extends Body {
                     break;
                 }
             }
-        }
-    }
-    //Initializes the speed of the Enchanted sphere according to Noble Phantasm's angle.
-    public void shootEnchantedSphere(){
-        if(notShot){
-            double normalAngle = np.normalAngle;
-            vx = (int) (2*np.height *Math.cos(Math.toRadians(normalAngle)));
-            vy = (int) (2*np.height *Math.sin(Math.toRadians(normalAngle)));
-            notShot = false;
         }
     }
     

@@ -4,6 +4,8 @@ import domain.body.obstacle.*;
 import ui.swing.GameScreen;
 import ui.swing.PlayModeFrame;
 
+import java.util.ArrayList;
+
 public class Controller {
     private static Controller instance;
     //How often the movements on the screen is updated.
@@ -13,6 +15,8 @@ public class Controller {
     Statistics statistics;
     StartGame newGame;
     BuildGame buildGame;
+    //To keep the track of the obstacles that should be removed from the screen.
+    ArrayList<Obstacle> toRemove = new ArrayList<>();
     //To check whether we shot the enchanted sphere or not:
     boolean playing = false;
     boolean isPaused = false;
@@ -47,6 +51,7 @@ public class Controller {
         isPaused = paused;
     }
 
+    //This needs to be called when the player shoots the enchanted sphere
     public void startPlaying(){
         playing = true;
     }
@@ -56,6 +61,7 @@ public class Controller {
         updateObstacleConditions();
         if(playing){
             shootEnchantedSphere();
+            moveEnchantedSphere();
         }
     }
     //This method will be called by  the handler.
@@ -63,11 +69,13 @@ public class Controller {
         player.moveNoblePhantasm(npAction);
         player.updateEnchantedSphere();
     }
-
-
     //This method will be called the handler.
     public void rotateNoblePhantasm(String npAction){
         player.rotateNoblePhantasm(npAction);
+    }
+    //This method will be called the handler.
+    public void moveEnchantedSphere(){
+        player.moveEnchantedSphere();
     }
     //This method will be called ticksPerSecond per second and only after player starts playing the game by shooting
     //the enchanted sphere.
@@ -76,11 +84,14 @@ public class Controller {
     }
     ////This method will be called ticksPerSecond per second.
     public void updateObstacleConditions(){
-        for(Obstacle obstacle : Statistics.obstacleList){
+        //Remove the obstacles that Enchanted Sphere destroyed.
+        for(Obstacle obstacle : Statistics.getObstacleList()){
             if(obstacle.getNumberOfHits() <= 0){
-                destroyObstacle(obstacle);
+                toRemove.add(obstacle);
             }
         }
+        Statistics.getObstacleList().removeAll(toRemove);
+        toRemove.removeAll(toRemove);
         for(Obstacle obstacle : Statistics.obstacleList){
             obstacle.move();
         }

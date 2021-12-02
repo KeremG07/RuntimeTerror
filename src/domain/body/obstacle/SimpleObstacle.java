@@ -8,6 +8,7 @@ public class SimpleObstacle extends Obstacle {
                           int height,
                           int numberOfHits) {
         super(x_coordinates, y_coordinates, width, height, numberOfHits);
+        //Speed is initialized as this because otherwise it is smaller than 1 and doesn't have an effect.
         vx = 1;
         name = "Simple";
     }
