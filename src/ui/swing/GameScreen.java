@@ -32,7 +32,7 @@ public class GameScreen extends JPanel {
 
     Controller controller;
 
-    private Map<Image, Point> locations = new HashMap<Image, Point>();
+    private Map<Point, Image> locations = new HashMap<Point, Image>();
     private HashMap<String, Image> images = new HashMap<String, Image>();
     private ArrayList<Obstacle> obstacleList;
 
@@ -52,9 +52,9 @@ public class GameScreen extends JPanel {
                 if(!enabled) {
                     return;
                 }
-                for (Map.Entry<Image, Point> entry : locations.entrySet()) {
-                    Image image = entry.getKey();
-                    Point point = entry.getValue();
+                for (Map.Entry<Point, Image> entry : locations.entrySet()) {
+                    Image image = entry.getValue();
+                    Point point = entry.getKey();
                     Rectangle bounds1 = new Rectangle(
                             point.x, point.y,
                             image.getWidth(GameScreen.this), image.getHeight(GameScreen.this));
@@ -87,7 +87,7 @@ public class GameScreen extends JPanel {
                     Point dragPoint = new Point(e.getPoint());
                     dragPoint.x += clickOffset.x;
                     dragPoint.y += clickOffset.y;
-                    locations.put(dragImage, dragPoint);
+                    locations.put(dragPoint, dragImage);
                     for(Obstacle o: obstacleList) {
                         if(o.equals(obstacleDragged)) {
                             o.setCoordinates(dragPoint.x, dragPoint.y);
@@ -97,24 +97,23 @@ public class GameScreen extends JPanel {
                 }
             }
         };
-
         addMouseListener(ma);
         addMouseMotionListener(ma);
     }
 
     @Override
     public void paint(Graphics g) {
+        if (!initObstacles) {
+            return;
+        }
         super.paint(g);
-        drawNoblePhantasm(g);
         drawEnchantedSphere(g);
-        if(initObstacles) {
-            drawObstacles();
+        drawNoblePhantasm(g);
+        for (Obstacle o: obstacleList) {
+            System.out.printf(String.valueOf(o.getCoordinates()[0]) + "," + String.valueOf(o.getCoordinates()[1]) + "\n");
+            drawObstacles(g, o);
         }
         Graphics2D g2d = (Graphics2D) g.create();
-        for (Map.Entry<Image, Point> entry : locations.entrySet()) {
-            Point point = entry.getValue();
-            g2d.drawImage(entry.getKey(), point.x, point.y, this);
-        }
         g2d.dispose();
     }
 
@@ -138,11 +137,14 @@ public class GameScreen extends JPanel {
         g2d.setTransform(old);
     }
 
-    public void drawObstacles() {
-        locations.clear();
-        for(Obstacle o: obstacleList) {
-            locations.put(images.get("obstacle"), new Point(o.getCoordinates()[0], o.getCoordinates()[1]));
-        }
+    void drawObstacles(Graphics g, Obstacle o) {
+        locations.put(new Point(o.getCoordinates()[0], o.getCoordinates()[1]),images.get("obstacle"));
+        Graphics2D g2d = (Graphics2D) g;
+        AffineTransform at = new AffineTransform();
+        AffineTransform old = g2d.getTransform();
+        at.translate(o.getCoordinates()[0], o.getCoordinates()[1]);
+        g2d.drawImage(images.get("obstacle"), at , null);
+        //g2d.setTransform(old);
     }
 
     private void setImages() {
