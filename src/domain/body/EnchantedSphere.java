@@ -22,7 +22,7 @@ public class EnchantedSphere extends Body {
     public void updateWithNP() {
         if(notShot){
             x = np.x + 44;
-            y = np.y - length;
+            y = np.y - width;
         }
     }
     public void move() {
@@ -32,7 +32,7 @@ public class EnchantedSphere extends Body {
     }
     //Handles reflection of Enchanted Sphere, it will be called every time before it executes its movement.
     public void reflect() {
-        String wall = Controller.getInstance().hitFrame(x,y,length,width);
+        String wall = Controller.getInstance().hitFrame(x,y, width, height);
         boolean hitObstacle;
         if(wall.equals("UpperLeft") || wall.equals("UpperRight")){
             vx = -vx;
@@ -49,34 +49,34 @@ public class EnchantedSphere extends Body {
             updateWithNP();
         }
         //np reflect (movement and corner cases are ignored)
-        else if(this.compareCoordinates(np.x, np.y, np.length, np.width)){
+        else if(this.compareCoordinates(np.x, np.y, np.width, np.height)){
             vy = -vy;
         }
         else {
             Obstacle crashingObstacle;
             for(Obstacle obstacle : Statistics.obstacleList){
-                hitObstacle = this.compareCoordinates(obstacle.x, obstacle.y, obstacle.length, obstacle.width);
+                hitObstacle = this.compareCoordinates(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
                 if(hitObstacle){
                     crashingObstacle = obstacle;
                     crashingObstacle.setNumberOfHits(crashingObstacle.getNumberOfHits()-1);
                     //non-moving obstacle hit reflect
                     if(!crashingObstacle.isMoving()){
                         //hit from top or bottom
-                        if((x + length/2) >= crashingObstacle.x
-                                && (x + length/2) <= crashingObstacle.x + crashingObstacle.length){
+                        if((x + width /2) >= crashingObstacle.x
+                                && (x + width /2) <= crashingObstacle.x + crashingObstacle.width){
                             vy = -vy;
                         }
                         //hit from left or right
-                        else if((y + width/2) >= crashingObstacle.y
-                                && (x + width/2) <= crashingObstacle.y + crashingObstacle.width){
+                        else if((y + height /2) >= crashingObstacle.y
+                                && (x + height /2) <= crashingObstacle.y + crashingObstacle.height){
                             vx = -vx;
                         }
                     }
                     //moving obstacle hit reflect
                     else{
                         //hit from top or bottom
-                        if((x + length/2) >= crashingObstacle.x
-                                && (x + length/2) <= crashingObstacle.x + crashingObstacle.length){
+                        if((x + width /2) >= crashingObstacle.x
+                                && (x + width /2) <= crashingObstacle.x + crashingObstacle.width){
                             vy = -vy;
                             if(vx * crashingObstacle.getVx() > 0){
                                 //vx should be increased
@@ -94,8 +94,8 @@ public class EnchantedSphere extends Body {
                             }
                         }
                         //hit from right or left (same with non-moving for now)
-                        else if((y + width/2) >= crashingObstacle.y
-                                && (x + width/2) <= crashingObstacle.y + crashingObstacle.width){
+                        else if((y + height /2) >= crashingObstacle.y
+                                && (x + height /2) <= crashingObstacle.y + crashingObstacle.height){
                             vx = -vx;
                         }
                     }
@@ -108,8 +108,8 @@ public class EnchantedSphere extends Body {
     public void shootEnchantedSphere(){
         if(notShot){
             double normalAngle = np.normalAngle;
-            vx = (int) (2*np.width*Math.cos(Math.toRadians(normalAngle)));
-            vy = (int) (2*np.width*Math.sin(Math.toRadians(normalAngle)));
+            vx = (int) (2*np.height *Math.cos(Math.toRadians(normalAngle)));
+            vy = (int) (2*np.height *Math.sin(Math.toRadians(normalAngle)));
             notShot = false;
         }
     }

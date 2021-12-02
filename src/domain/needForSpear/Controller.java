@@ -93,25 +93,25 @@ public class Controller {
         borders[1] = gameScreenHeight;
         return borders;
     }
-    public String hitFrame(double x, double y, double length, double width ){
+    public String hitFrame(int x, int y, int width, int height ){
         double screenWidth = getFrameBorders()[0];
         double screenHeight = getFrameBorders()[1];
         if(y <= 0 && x + width >= screenWidth){
             return "UpperRight";
         }
-        if(y + length >= screenHeight && x + width >= screenWidth){
+        if(y + height >= screenHeight && x + width >= screenWidth){
             return "DownRight";
         }
         if(y <= 0 && x <= 0){
             return "UpperLeft";
         }
-        if(y + length >= screenHeight && x <= 0){
+        if(y + height >= screenHeight && x <= 0){
             return "DownLeft";
         }
         if(x + width >= screenWidth){
             return "Right";
         }
-        if(y + length >= screenHeight){
+        if(y + height >= screenHeight){
             return "Down";
         }
         if(x <= 0){

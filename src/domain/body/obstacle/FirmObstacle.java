@@ -20,16 +20,17 @@ public class FirmObstacle extends Obstacle{
             boolean canMoveLeft = true;
             //Compares with every obstacle.
             for (Obstacle obstacle : Statistics.obstacleList){
+                //Doesn't check whether it crashes with itself.
                 if(!(obstacle.getCoordinates()[0] == x && obstacle.getCoordinates()[1] == y)){
-                    canMoveRight &= !(obstacle.compareCoordinates(this.x + this.vx, this.y, this.length, this.width));
-                    canMoveLeft &= !(obstacle.compareCoordinates(this.x - this.vx, this.y, this.length, this.width));
+                    canMoveRight &= !(obstacle.compareCoordinates(this.x + this.vx, this.y, this.width, this.height));
+                    canMoveLeft &= !(obstacle.compareCoordinates(this.x - this.vx, this.y, this.width, this.height));
                 }
             }
             //Compares with every frame border.
-            if(!Controller.getInstance().hitFrame(this.x + this.vx, this.y, this.length, this.width).equals("None")){
+            if(!Controller.getInstance().hitFrame(this.x + this.vx, this.y, this.width, this.height).equals("None")){
                 canMoveRight = false;
             }
-            if(!Controller.getInstance().hitFrame(this.x - this.vx, this.y, this.length, this.width).equals("None")){
+            if(!Controller.getInstance().hitFrame(this.x - this.vx, this.y, this.width, this.height).equals("None")){
                 canMoveLeft = false;
             }
             // It moves right if it can, if not left.

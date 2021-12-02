@@ -17,7 +17,8 @@ public class NoblePhantasm extends Body {
     }
 
     public void updateX(int x) {
-        if(Controller.getInstance().hitFrame(x, this.y, this.length, this.width).equals("None")){
+        String frame = Controller.getInstance().hitFrame(x, this.y, this.width, this.height);
+        if(frame.equals("None")){
             this.x = x;
         }
     }
@@ -32,11 +33,11 @@ public class NoblePhantasm extends Body {
     }
 
     public void slideRight() {
-        updateX(x + (2*width / Controller.ticksPerSecond));
+        updateX(x + (2* width / Controller.ticksPerSecond));
     }
 
     public void slideLeft() {
-        updateX(x - (2*width / Controller.ticksPerSecond));
+        updateX(x - (2* width / Controller.ticksPerSecond));
     }
 
     public void rotateRight() {

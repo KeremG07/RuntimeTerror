@@ -3,17 +3,17 @@ package domain.body;
 public class Body {
     protected int x;
     protected int y;
-    public int length;
     public int width;
+    public int height;
 
     public Body(int x_coordinates,
                 int y_coordinates,
-                int length,
-                int width) {
+                int width,
+                int height) {
         x = x_coordinates;
         y = y_coordinates;
-        this.length = length;
         this.width = width;
+        this.height = height;
     }
     
     public int[] getCoordinates(){
@@ -23,25 +23,25 @@ public class Body {
         this.x = x;
         this.y = y;
     }
-    public boolean compareCoordinates(int x, int y, int length, int width) {
+    public boolean compareCoordinates(int x, int y, int width, int height) {
         boolean crashingCoordinates = false;
         int x1 = this.x;
         int y1 = this.y;
 
+        int height1 = this.height;
         int width1 = this.width;
-        int length1 = this.length;
 
         if (Math.abs(x-x1) <= Math.max(width1,width)){
             if (y >= y1){
-                if((y-y1) <= length) {
+                if((y-y1) <= height) {
                     crashingCoordinates = true;
                 }
             } else {
-                if((y1-y) <= length1) {
+                if((y1-y) <= height1) {
                     crashingCoordinates = true;
                 }
             }
-        } else if (Math.abs(y-y1) <= Math.max(length1,length)){
+        } else if (Math.abs(y-y1) <= Math.max(height1,height)){
             if (x >= x1){
                 if((x-x1) <= width) {
                     crashingCoordinates = true;

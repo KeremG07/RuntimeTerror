@@ -16,18 +16,22 @@ public class SimpleObstacle extends Obstacle {
         if(moving){
             boolean canMoveRight = true;
             boolean canMoveLeft = true;
+            //Compares with every obstacle.
             for (Obstacle obstacle : Statistics.obstacleList){
+                //Doesn't check whether it crashes with itself.
                 if(!(obstacle.getCoordinates()[0] == this.x && obstacle.getCoordinates()[1] == this.y)){
-                    canMoveRight &= !(obstacle.compareCoordinates(this.x + this.vx, this.y, this.length, this.width));
-                    canMoveLeft &= !(obstacle.compareCoordinates(this.x - this.vx, this.y, this.length, this.width));
+                    canMoveRight &= !(obstacle.compareCoordinates(this.x + this.vx, this.y, this.width, this.height));
+                    canMoveLeft &= !(obstacle.compareCoordinates(this.x - this.vx, this.y, this.width, this.height));
                 }
             }
-            if(!Controller.getInstance().hitFrame(this.x + this.vx, this.y, this.length, this.width).equals("None")){
+            //Compares with every frame border.
+            if(!Controller.getInstance().hitFrame(this.x + this.vx, this.y, this.width, this.height).equals("None")){
                 canMoveRight = false;
             }
-            if(!Controller.getInstance().hitFrame(this.x - this.vx, this.y, this.length, this.width).equals("None")){
+            if(!Controller.getInstance().hitFrame(this.x - this.vx, this.y, this.width, this.height).equals("None")){
                 canMoveLeft = false;
             }
+            // It moves right if it can, if not left.
             if(canMoveRight){
                 this.x += this.vx;
             } else if(canMoveLeft){

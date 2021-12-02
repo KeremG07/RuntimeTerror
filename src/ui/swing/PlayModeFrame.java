@@ -58,6 +58,7 @@ public class PlayModeFrame extends JFrame {
         gameScreen.setBorder(BorderFactory.createLineBorder(Color.red));
 
         setVisible(true);
+        setFocusable(true);
 
         ActionListener tickListener = new ActionListener() {
             @Override

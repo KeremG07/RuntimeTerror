@@ -18,8 +18,8 @@ public class KeyboardController implements KeyListener {
 
         }
 
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT) controller.updateMovementNP("HeldRight");
-        if(e.getKeyCode() == KeyEvent.VK_LEFT) controller.updateMovementNP("HeldLeft");
+        if(e.getKeyCode() == 39) controller.updateMovementNP("HeldRight");
+        if(e.getKeyCode() == 37) controller.updateMovementNP("HeldLeft");
 
     }
 
@@ -30,7 +30,7 @@ public class KeyboardController implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT) controller.updateMovementNP("PressedRight");
-        if(e.getKeyCode() == KeyEvent.VK_LEFT) controller.updateMovementNP("PressedLeft");
+        if(e.getKeyCode() == 39) controller.updateMovementNP("PressedRight");
+        if(e.getKeyCode() == 37) controller.updateMovementNP("PressedLeft");
     }
 }

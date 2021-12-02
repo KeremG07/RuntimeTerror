@@ -38,16 +38,16 @@ public class BuildGame {
     public Obstacle createObstacle(String typeOfObstacle, int x, int y) {
         Obstacle createdObstacle;
         if(typeOfObstacle.equals("Simple")){
-            createdObstacle = new SimpleObstacle(x, y, 8, 80, 1);
+            createdObstacle = new SimpleObstacle(x, y, 80, 8, 1);
         }
         else if(typeOfObstacle.equals("Firm")){
-            createdObstacle = new FirmObstacle(x, y, 8, 80, 3);
+            createdObstacle = new FirmObstacle(x, y, 80, 8, 3);
         }
         else if(typeOfObstacle.equals("Explosive")){
             createdObstacle = new ExplosiveObstacle(x, y, 32, 32, 1);
         }
         else {
-            createdObstacle = new GiftObstacle(x, y, 8, 80, 1, "chance");
+            createdObstacle = new GiftObstacle(x, y, 80, 8, 1, "chance");
         }
         return createdObstacle;
     }
