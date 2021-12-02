@@ -11,13 +11,14 @@ public class BuildGame {
     public int simpleObstacle, firmObstacle, explosiveObstacle, giftObstacle;
     public final int gameScreenWidth = 1000, gameScreenHeight = 600;
     public Random randi = new Random();
+    private boolean screenFull = true;
 
     //Creates however many obstacles were asked to be created.
     public BuildGame(String[] numOfObstaclesReq){
         setObstacles(numOfObstaclesReq);
-        //The GameScreen is divided into cells (size: 25x25) where objects can be put. The objects are put into the
+        //The GameScreen is divided into cells (size: 20x10) where objects can be put. The objects are put into the
         // empty cells chosen randomly.
-        boolean locationCells[][] = new boolean[(gameScreenHeight-100)/25][gameScreenWidth/25];
+        boolean[][] locationCells = new boolean[(gameScreenHeight-200)/20][gameScreenWidth/100];
         for(int i=0; i<simpleObstacle; i++){
             putObstacleInCell(locationCells, "Simple");
         }
@@ -37,16 +38,16 @@ public class BuildGame {
     public Obstacle createObstacle(String typeOfObstacle, int x, int y) {
         Obstacle createdObstacle;
         if(typeOfObstacle.equals("Simple")){
-            createdObstacle = new SimpleObstacle(x, y, 20, 20, 1);
+            createdObstacle = new SimpleObstacle(x, y, 8, 80, 1);
         }
         else if(typeOfObstacle.equals("Firm")){
-            createdObstacle = new FirmObstacle(x, y, 20, 20, 3);
+            createdObstacle = new FirmObstacle(x, y, 8, 80, 3);
         }
         else if(typeOfObstacle.equals("Explosive")){
             createdObstacle = new ExplosiveObstacle(x, y, 15, 15, 1);
         }
         else {
-            createdObstacle = new GiftObstacle(x, y, 20, 20, 1, "chance");
+            createdObstacle = new GiftObstacle(x, y, 8, 80, 1, "chance");
         }
         return createdObstacle;
     }
@@ -54,14 +55,14 @@ public class BuildGame {
     public void putObstacleInCell(boolean [][]locationCells, String typeOfObstacle){
         int column;
         int row;
-        column = randi.nextInt(40);
+        column = randi.nextInt(10);
         row = randi.nextInt(20);
         while(locationCells[row][column]){
-            column = randi.nextInt(40);
+            column = randi.nextInt(10);
             row = randi.nextInt(20);
         }
-        int x = column*25;
-        int y = row*25;
+        int x = column*100;
+        int y = row*20;
         Obstacle newCreatedObstacle = createObstacle(typeOfObstacle, x, y);
         Statistics.addObstacle(newCreatedObstacle);
         locationCells[row][column] = true;
@@ -92,6 +93,18 @@ public class BuildGame {
         }
         catch(NumberFormatException exception) {
             giftObstacle = giftObstacleReq;
+        }
+        if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle >= 200){
+            giftObstacle = giftObstacleReq;
+            if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle >= 200) {
+                explosiveObstacle = explosiveObstacleReq;
+                if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle >= 200){
+                    firmObstacle = firmObstacleReq;
+                    if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle >= 200){
+                        simpleObstacle = simpleObstacleReq;
+                    }
+                }
+            }
         }
     }
 }
