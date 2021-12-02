@@ -23,10 +23,27 @@ public class ExplosiveObstacle extends Obstacle {
     @Override
     public void move() {
         if(moving){
-            degree += 1;
-            double rads = Math.toRadians(degree - 90); // 0 becomes the top
-            this.x = Math.round((float) (circleCenterX + Math.cos(rads) * circleRadius));
-            this.y = Math.round((float) (circleCenterY + Math.sin(rads) * circleRadius));
+
+            double rads = Math.toRadians(degree + 1 - 90); // 0 becomes the top
+            int newX = Math.round((float) (circleCenterX + Math.cos(rads) * circleRadius));
+            int newY = Math.round((float) (circleCenterY + Math.sin(rads) * circleRadius));
+            /*boolean canMove = true;
+            //Compares with every obstacle.
+            for (Obstacle obstacle : Statistics.obstacleList){
+                //Doesn't check whether it crashes with itself.
+                if(!(obstacle.getCoordinates()[0] == this.x && obstacle.getCoordinates()[1] == this.y)){
+                    canMove &= !(obstacle.compareCoordinates(newX, newY, this.width, this.height));
+                }
+            }
+            //Compares with every frame border.
+            if(!Controller.getInstance().hitFrame(newX, newY, this.width, this.height).equals("None")){
+                canMove = false;
+            }
+            if(canMove) {*/
+                this.x = newX;
+                this.y = newY;
+                degree += 1;
+            //}
         }
     }
 

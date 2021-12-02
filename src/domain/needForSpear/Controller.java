@@ -89,12 +89,9 @@ public class Controller {
         return player;
     }
     public Statistics getStatistics() { return statistics; }
-    public BuildGame getBuildGame() {
-        return buildGame;
-    }
 
     public void endGame() {
-
+        System.exit(0);
     }
 
     public double[] getFrameBorders() {

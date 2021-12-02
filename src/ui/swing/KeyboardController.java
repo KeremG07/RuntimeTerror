@@ -19,7 +19,7 @@ public class KeyboardController implements KeyListener {
             if(e.getKeyCode() == KeyEvent.VK_LEFT) controller.updateMovementNP("HeldLeft");
 
             if(e.getKeyCode() == KeyEvent.VK_A) controller.rotateNoblePhantasm("rotateLeft");
-            if(e.getKeyCode() == KeyEvent.VK_A) controller.rotateNoblePhantasm("rotateLeft");
+            if(e.getKeyCode() == KeyEvent.VK_D) controller.rotateNoblePhantasm("rotateRight");
 
         }
     }
