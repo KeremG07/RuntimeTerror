@@ -21,7 +21,7 @@ public class PlayModeFrame extends JFrame {
     private PlayModeFrame() {
         super("Need For Spear by Runtime Terror");
         controller = Controller.getInstance();
-        clockMs = Controller.ticksPerSecond*1;
+        clockMs = Controller.ticksPerSecond;
 
         GameScreen gameScreen = GameScreen.getInstance();
 
@@ -96,6 +96,14 @@ public class PlayModeFrame extends JFrame {
                 resumeGame.setEnabled(false);
                 saveGame.setEnabled(false);
                 quitGame.setEnabled(false);
+            }
+        });
+
+        saveGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.saveGame();
+                saveGame.setEnabled(false);
             }
         });
 

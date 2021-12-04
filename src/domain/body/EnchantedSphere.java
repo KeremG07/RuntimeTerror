@@ -122,4 +122,28 @@ public class EnchantedSphere extends Body {
     public void setUnstoppableES(boolean bool){
         unstoppable = bool;
     }
+
+    public void setNotShot(boolean notShot) {
+        this.notShot = notShot;
+    }
+
+    public boolean isNotShot() {
+        return notShot;
+    }
+    public int getVx() {
+        return vx;
+    }
+
+    public void setVx(int vx) {
+        this.vx = vx;
+    }
+
+    public int getVy() {
+        return vy;
+    }
+
+    public void setVy(int vy) {
+        this.vy = vy;
+    }
 }
+

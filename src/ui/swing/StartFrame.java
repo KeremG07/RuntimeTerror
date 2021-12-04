@@ -1,5 +1,7 @@
 package ui.swing;
 
+import domain.needForSpear.Controller;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,16 +29,16 @@ public class StartFrame extends JFrame implements ActionListener {
         JButton newGameButton = new JButton("New Game");
         newGameButton.setActionCommand("new game");
         newGameButton.addActionListener(sf);
-        JButton loadGameButton = new JButton("Load Game");
-        loadGameButton.setActionCommand("load game");
-        loadGameButton.addActionListener(sf);
+        //JButton loadGameButton = new JButton("Load Game");
+        //loadGameButton.setActionCommand("load game");
+        //loadGameButton.addActionListener(sf);
         JButton quitGameButton = new JButton("Quit");
         quitGameButton.setActionCommand("quit");
         quitGameButton.addActionListener(sf);
 
 
         panel.add(newGameButton);
-        panel.add(loadGameButton);
+        //panel.add(loadGameButton);
         panel.add(quitGameButton);
 
 
@@ -56,9 +58,11 @@ public class StartFrame extends JFrame implements ActionListener {
             dispose();
         }
 
-        if(e.getActionCommand().equals("load game")) {
+        /*if(e.getActionCommand().equals("load game")) {
+            Controller controller = Controller.getInstance();
+            controller.loadGame();
 
-        }
+        }*/
 
         if(e.getActionCommand().equals("quit")) {
             dispose();

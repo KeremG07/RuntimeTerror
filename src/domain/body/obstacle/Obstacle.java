@@ -26,6 +26,11 @@ public abstract class Obstacle extends Body {
     public int getVx(){
         return vx;
     }
+
+    public void setVx(int vx) {
+        this.vx = vx;
+    }
+
     public String getName(){
         return name;
     }
