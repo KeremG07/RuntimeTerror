@@ -42,6 +42,13 @@ public class Controller {
     public void startTimer(){
 
     }
+    public void saveGame(){
+        player.saveGame(getStatistics().username);
+    }
+
+    public boolean loadGame(){
+       return player.loadGame(getStatistics().username);
+    }
 
     public boolean isPaused() {
         return isPaused;

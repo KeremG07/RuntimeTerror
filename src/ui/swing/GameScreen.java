@@ -88,8 +88,6 @@ public class GameScreen extends JPanel {
                     dragPoint.x += clickOffset.x;
                     dragPoint.y += clickOffset.y;
                     locations.put(dragPoint, dragImage);
-                    //System.out.println(dragPoint);
-                    //System.out.println(clickOffset);
                     for(Obstacle o: obstacleList) {
                         if(o.equals(obstacleDragged)) {
                             o.setCoordinates(dragPoint.x, dragPoint.y);

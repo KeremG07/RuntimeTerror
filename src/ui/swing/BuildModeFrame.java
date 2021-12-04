@@ -20,6 +20,8 @@ public class BuildModeFrame extends JFrame {
     JTextField firmObstacle = new JTextField(5);
     JTextField explosiveObstacle = new JTextField(5);
     JTextField giftObstacle = new JTextField(5);
+    JTextField usernameBox= new JTextField("Enter your username here");
+    JButton loadGame = new JButton("Load Game");
     JButton startGame = new JButton("Start Game");
     JButton initObstacles = new JButton("Initialize obstacles");
     static String savePlace;
@@ -72,14 +74,32 @@ public class BuildModeFrame extends JFrame {
                 String[] obstaclesCount = new String[]{simpleObstacle.getText(), firmObstacle.getText(), explosiveObstacle.getText(), giftObstacle.getText()};
                 controller.startNewGame(obstaclesCount);
                 gameScreen.repaint(50L);
+                initObstacles.setEnabled(false);
             }
         });
 
         startGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                controller.getStatistics().setUsername(usernameBox.getText());
                 PlayModeFrame.getInstance();
                 dispose();
+            }
+        });
+
+        loadGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gameScreen.initObstacles = true;
+                controller.getStatistics().setUsername(usernameBox.getText());
+                boolean usernameExists=controller.loadGame();
+                if(usernameExists){
+                    gameScreen.repaint(50L);
+                    PlayModeFrame.getInstance();
+                    controller.startPlaying();
+                    dispose();
+                }
+
             }
         });
     }
@@ -115,6 +135,10 @@ public class BuildModeFrame extends JFrame {
         gbc.weighty = 0.5;
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.CENTER;
+        buttonPanel.add(usernameBox,gbc);
+        gbc.gridx=1;
+        buttonPanel.add(loadGame,gbc);
+        gbc.gridx=2;
         buttonPanel.add(startGame,gbc);
     }
 
