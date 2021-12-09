@@ -69,7 +69,10 @@ public class DatabaseLoadAndSave implements ILoadAndSaveAdapter{
         MongoCollection<Document> collection =database.getCollection("needforspear");
         Document document = collection.find(eq("name", username)).first();
 
-        if(document==null) System.out.println("No saved file found for "+ username+" in runtimeterror database.");
+        if(document==null) {
+            return loadList;
+        }
+
         loadList.add(document.get("time").toString());
         loadList.add(document.get("chance").toString());
         loadList.add(document.get("score").toString());

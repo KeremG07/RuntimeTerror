@@ -38,15 +38,15 @@ public class PlayModeFrame extends JFrame {
 
         // Score Panel
         JPanel scorePanel = new JPanel(new GridBagLayout());
-        scorePanel.setBounds(0,0,1000,50);
+        scorePanel.setBounds(0,0,this.getWidth(),this.getHeight()*50/800);
         scorePanel.setBackground(BACKGROUND_COLOR);
 
         // Game Screen Panel
-        gameScreen.setBounds(0,0,1000,600);
+        gameScreen.setBounds(0,0,this.getWidth(),this.getHeight()*600/800);
 
         // Button Panel
         JPanel buttonPanel = new JPanel(new GridBagLayout());
-        buttonPanel.setBounds(0,0,1000,50);
+        buttonPanel.setBounds(0,0,this.getWidth(),this.getHeight()*50/800);
         buttonPanel.setBackground(BACKGROUND_COLOR);
 
         mainPanel.add(scorePanel);
@@ -59,7 +59,7 @@ public class PlayModeFrame extends JFrame {
         // Panels End Here
 
         gameScreen.setBorder(BorderFactory.createLineBorder(Color.red));
-
+        this.setLocationRelativeTo(null);
         setVisible(true);
         setFocusable(true);
 
@@ -159,7 +159,7 @@ public class PlayModeFrame extends JFrame {
 
     private void initializeFrame() {
         setBounds(0, 0, 1000, 800);
-        setResizable(false);
+        setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
