@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -20,9 +22,6 @@ public class BuildModeFrame extends JFrame {
     JTextField firmObstacle = new JTextField(5);
     JTextField explosiveObstacle = new JTextField(5);
     JTextField giftObstacle = new JTextField(5);
-    JTextField usernameBox= new JTextField("Enter your username here");
-    JTextField saveBox= new JTextField("Enter 'db' or 'local'");
-    JButton loadGame = new JButton("Load Game");
     JButton startGame = new JButton("Start Game");
     JButton initObstacles = new JButton("Initialize obstacles");
     static String savePlace;
@@ -41,7 +40,7 @@ public class BuildModeFrame extends JFrame {
         obstacleList = controller.getStatistics().getObstacleList();
         this.savePlace=savePlace;
         setBounds(0, 0, 1000, 800);
-        setResizable(false);
+        setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel mainPanel = initializeMainPanel();
@@ -52,20 +51,18 @@ public class BuildModeFrame extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         JPanel numberPanel = new JPanel(new GridBagLayout());
         JPanel buttonPanel = new JPanel(new GridBagLayout());
-        numberPanel.setBounds(0,0,1000,50);
+        numberPanel.setBounds(0,0,this.getWidth(),this.getHeight()*50/800);
         numberPanel.setBackground(BACKGROUND_COLOR);
-        buttonPanel.setBounds(0,0,1000,50);
+        buttonPanel.setBounds(0,0,this.getWidth(),this.getHeight()*50/800);
         buttonPanel.setBackground(BACKGROUND_COLOR);
-        gameScreen.setBounds(0,0,1000,600);
+        gameScreen.setBounds(0,0,this.getWidth(),this.getHeight()*600/800);
         mainPanel.add(numberPanel);
         mainPanel.add(gameScreen);
         mainPanel.add(buttonPanel);
         initializeObstacleNumbers(gbc, numberPanel);
         gameScreen.setBorder(BorderFactory.createLineBorder(Color.red));
-        /*System.out.println(numberPanel.getBounds());
-        System.out.println(buttonPanel.getBounds());
-        System.out.println(gameScreen.getBounds());*/
         initializeButton(gbc, buttonPanel);
+        this.setLocationRelativeTo(null);
         setVisible(true);
 
         initObstacles.addActionListener(new ActionListener() {
@@ -82,27 +79,8 @@ public class BuildModeFrame extends JFrame {
         startGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.getStatistics().setUsername(usernameBox.getText());
-                controller.getPlayer().save=saveBox.getText();
                 PlayModeFrame.getInstance();
                 dispose();
-            }
-        });
-
-        loadGame.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gameScreen.initObstacles = true;
-                controller.getPlayer().save=saveBox.getText();
-                controller.getStatistics().setUsername(usernameBox.getText());
-                boolean usernameExists=controller.loadGame();
-                if(usernameExists){
-                    gameScreen.repaint(50L);
-                    PlayModeFrame.getInstance();
-                    controller.startPlaying();
-                    dispose();
-                }
-
             }
         });
     }
@@ -133,17 +111,10 @@ public class BuildModeFrame extends JFrame {
     }
 
     private void initializeButton(GridBagConstraints gbc, JPanel buttonPanel) {
-        gbc.gridx=0;
         gbc.gridy=1;
         gbc.weighty = 0.5;
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.CENTER;
-        buttonPanel.add(usernameBox,gbc);
-        gbc.gridx=1;
-        buttonPanel.add(saveBox);
-        gbc.gridx=2;
-        buttonPanel.add(loadGame,gbc);
-        gbc.gridx=3;
         buttonPanel.add(startGame,gbc);
     }
 

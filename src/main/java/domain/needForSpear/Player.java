@@ -48,9 +48,9 @@ public class Player {
     }
 
     public void saveGame(String username) {
-        if(save.equals("db")){
+        if(save.equals("Database")){
             iLoadAndSaveAdapter= new DatabaseLoadAndSave();
-        }else if(save.equals("local")){
+        }else if(save.equals("Local")){
             iLoadAndSaveAdapter= new LocalLoadAndSave();
         }
         HashMap<String, Integer> obstacleNameMap = new HashMap<>();
@@ -82,7 +82,11 @@ public class Player {
             String obsType = obs.getName();
             if (obsType.equals("Explosive")) {
                 saveList.add("" + obstacleNameMap.get(obs.getName()) + "/" + obs.getCoordinates()[0] + "/" + obs.getCoordinates()[1] + "/" + ((ExplosiveObstacle) obs).getDegree());
-            } else {
+            }
+            else if (obsType.equals("Firm")) {
+                saveList.add("" + obstacleNameMap.get(obs.getName()) + "/" + obs.getCoordinates()[0] + "/" + obs.getCoordinates()[1] + "/" + obs.getNumberOfHits()+ "/" + obs.getVx());
+            }
+            else {
                 saveList.add("" + obstacleNameMap.get(obs.getName()) + "/" + obs.getCoordinates()[0] + "/" + obs.getCoordinates()[1] + "/" + obs.getVx());
             }
         }
@@ -96,9 +100,9 @@ public class Player {
     }
 
     public boolean loadGame(String username) {
-        if(save.equals("db")){
+        if(save.equals("Database")){
             iLoadAndSaveAdapter= new DatabaseLoadAndSave();
-        }else if(save.equals("local")){
+        }else if(save.equals("Local")){
             iLoadAndSaveAdapter= new LocalLoadAndSave();
         }
         HashMap<Integer, String> obstacleNameMap = new HashMap<>();
@@ -110,7 +114,8 @@ public class Player {
         try {
             loadList = iLoadAndSaveAdapter.loadGame(username);
             if (loadList.size() == 0) {
-                System.out.println("There is no saved game for the given username.");
+                System.out.println("No saved file found for "+ username+" in runtimeterror database.");
+                return false;
 
             } else {
                 statistics.timeElapsed = Double.parseDouble(loadList.get(0));
@@ -155,7 +160,8 @@ public class Player {
                         statistics.addObstacle(obstacle);
                     }
                     if (obsType == 1) {
-                        Obstacle obstacle = new FirmObstacle(coordX, coordY, 80, 8, 3);
+                        int chances = Integer.parseInt(st.nextToken());
+                        Obstacle obstacle = new FirmObstacle(coordX, coordY, 80, 8, chances);
                         int vx = Integer.parseInt(st.nextToken());
                         obstacle.setVx(vx);
                         statistics.addObstacle(obstacle);

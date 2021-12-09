@@ -1,7 +1,12 @@
 package domain.body.obstacle;
+
 import domain.needForSpear.*;
 
+import java.util.Random;
+
 public class SimpleObstacle extends Obstacle {
+    public boolean movesRight;
+
     public SimpleObstacle(int x_coordinates,
                           int y_coordinates,
                           int width,
@@ -11,32 +16,45 @@ public class SimpleObstacle extends Obstacle {
         //Speed is initialized as this because otherwise it is smaller than 1 and doesn't have an effect.
         vx = 1;
         name = "Simple";
+        Random rand = new Random();
+        movesRight = rand.nextBoolean();
     }
+
     @Override
     public void move() {
-        if(moving){
+        if (moving) {
             boolean canMoveRight = true;
             boolean canMoveLeft = true;
             //Compares with every obstacle.
-            for (Obstacle obstacle : Statistics.obstacleList){
+            for (Obstacle obstacle : Statistics.obstacleList) {
                 //Doesn't check whether it crashes with itself.
-                if(!(obstacle.getCoordinates()[0] == this.x && obstacle.getCoordinates()[1] == this.y)){
+                if (!(obstacle.getCoordinates()[0] == this.x && obstacle.getCoordinates()[1] == this.y)) {
                     canMoveRight &= !(obstacle.compareCoordinates(this.x + this.vx, this.y, this.width, this.height));
                     canMoveLeft &= !(obstacle.compareCoordinates(this.x - this.vx, this.y, this.width, this.height));
                 }
             }
             //Compares with every frame border.
-            if(!Controller.getInstance().hitFrame(this.x + this.vx, this.y, this.width, this.height).equals("None")){
+            if (!Controller.getInstance().hitFrame(this.x + this.vx, this.y, this.width, this.height).equals("None")) {
                 canMoveRight = false;
             }
-            if(!Controller.getInstance().hitFrame(this.x - this.vx, this.y, this.width, this.height).equals("None")){
+            if (!Controller.getInstance().hitFrame(this.x - this.vx, this.y, this.width, this.height).equals("None")) {
                 canMoveLeft = false;
             }
             // It moves right if it can, if not left.
-            if(canMoveRight){
-                this.x += this.vx;
-            } else if(canMoveLeft){
-                this.x -= this.vx;
+            if (movesRight) {
+                if (canMoveRight) {
+                    this.x += this.vx;
+                } else if (canMoveLeft) {
+                    this.x -= this.vx;
+                    movesRight = false;
+                }
+            } else {
+                if (canMoveLeft) {
+                    this.x -= this.vx;
+                } else if (canMoveRight) {
+                    this.x += this.vx;
+                    movesRight = true;
+                }
             }
         }
     }
