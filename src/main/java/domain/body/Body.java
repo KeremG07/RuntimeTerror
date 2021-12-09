@@ -31,7 +31,17 @@ public class Body {
         int height1 = this.height;
         int width1 = this.width;
 
-        if (Math.abs(x-x1) <= Math.max(width1,width)){
+        if(x >= x1 && x-x1 <= width1 && y >= y1 && y-y1 <= height1){
+            crashingCoordinates = true;
+        }else if(x >= x1 && x-x1 <= width1 && y < y1 && y1-y <= height){
+            crashingCoordinates = true;
+        }else if(x < x1 && x1-x <= width && y < y1 && y1-y <= height){
+            crashingCoordinates = true;
+        }else if(x < x1 && x1-x <= width && y >= y1 && y-y1 <= height1){
+            crashingCoordinates = true;
+        }
+
+        /*if (Math.abs(x-x1) <= Math.max(width1,width)){
             if (y >= y1){
                 if((y-y1) <= height) {
                     crashingCoordinates = true;
@@ -51,7 +61,7 @@ public class Body {
                     crashingCoordinates = true;
                 }
             }
-        }
+        }*/
         return crashingCoordinates;
     }
 

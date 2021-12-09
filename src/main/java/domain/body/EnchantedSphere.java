@@ -77,24 +77,24 @@ public class EnchantedSphere extends Body {
                     //non-moving obstacle hit reflect
                     if (!crashingObstacle.isMoving()) {
                         //hit from top or bottom
-                        if ((x + width / 2) >= crashingObstacle.x
-                                && (x + width / 2) <= crashingObstacle.x + crashingObstacle.width) {
+                        if ((x + width) >= crashingObstacle.x
+                                && x <= crashingObstacle.x + crashingObstacle.width) {
                             vy = -vy;
                         }
                         //hit from left or right
-                        else if ((y + height / 2) >= crashingObstacle.y
-                                && (x + height / 2) <= crashingObstacle.y + crashingObstacle.height) {
+                        else if ((y + height) >= crashingObstacle.y
+                                && y <= crashingObstacle.y + crashingObstacle.height) {
                             vx = -vx;
                         }
                     }
                     //moving obstacle hit reflect
                     else {
                         //hit from top or bottom
-                        if ((x + width / 2) >= crashingObstacle.x
-                                && (x + width / 2) <= crashingObstacle.x + crashingObstacle.width) {
+                        if ((x + width) >= crashingObstacle.x
+                                && x <= crashingObstacle.x + crashingObstacle.width) {
                             vy = -vy;
                             if (vx * crashingObstacle.getVx() > 0) {
-                                //vx should be increased
+                                vx += 5;
                             } else if (vx * crashingObstacle.getVx() < 0) {
                                 vx = -vx;
                             } else {
@@ -106,8 +106,8 @@ public class EnchantedSphere extends Body {
                             }
                         }
                         //hit from right or left (same with non-moving for now)
-                        else if ((y + height / 2) >= crashingObstacle.y
-                                && (x + height / 2) <= crashingObstacle.y + crashingObstacle.height) {
+                        else if ((y + height) >= crashingObstacle.y
+                                && y <= crashingObstacle.y + crashingObstacle.height) {
                             vx = -vx;
                         }
                     }
