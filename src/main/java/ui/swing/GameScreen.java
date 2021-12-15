@@ -3,6 +3,8 @@ package ui.swing;
 import com.sun.corba.se.impl.orbutil.graph.Graph;
 import domain.body.EnchantedSphere;
 import domain.body.NoblePhantasm;
+import domain.body.fallingBody.FallingBody;
+import domain.body.fallingBody.Gift;
 import domain.body.obstacle.*;
 import domain.needForSpear.Controller;
 
@@ -37,10 +39,12 @@ public class GameScreen extends JPanel {
     private Map<Point, Image> locations = new HashMap<Point, Image>();
     private HashMap<String, Image> images = new HashMap<String, Image>();
     private ArrayList<Obstacle> obstacleList;
+    private ArrayList<FallingBody> fallingBodyList;
 
     private GameScreen() {
         this.controller = Controller.getInstance();
         obstacleList = controller.getStatistics().getObstacleList();
+        fallingBodyList = controller.getStatistics().getFallingBodyList();
         setImages();
         setPreferredSize(new Dimension(controller.gameScreenWidth, controller.gameScreenHeight));
         MouseAdapter ma = new MouseAdapter() {
@@ -114,6 +118,9 @@ public class GameScreen extends JPanel {
             //System.out.printf(String.valueOf(o.getCoordinates()[0]) + "," + String.valueOf(o.getCoordinates()[1]) + "\n");
             drawObstacles(g, o);
         }
+        for (FallingBody fb: fallingBodyList) {
+            drawFallingBodies(g, fb);
+        }
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.dispose();
     }
@@ -163,22 +170,37 @@ public class GameScreen extends JPanel {
         //g2d.setTransform(old);
     }
 
+    void drawFallingBodies(Graphics g, FallingBody fb) {
+        Graphics2D g2d = (Graphics2D) g;
+        AffineTransform at = new AffineTransform();
+        // AffineTransform old = g2d.getTransform();
+        at.translate(fb.getCoordinates()[0], fb.getCoordinates()[1]);
+        Image imageToDraw;
+        if (fb instanceof Gift) {
+            imageToDraw = images.get("gift");
+        } else {
+            imageToDraw = images.get("remains");
+        }
+        locations.put(new Point(fb.getCoordinates()[0], fb.getCoordinates()[1]), imageToDraw);
+        g2d.drawImage(imageToDraw, at, null);
+    }
+
     private void setImages() {
-        EnchantedSphere enchantedSphere = controller.getPlayer().getEnchantedSphere();
-        NoblePhantasm noblePhantasm = controller.getPlayer().getNoblePhantasm();
         Image noblePhantasmImage = new ImageIcon("src/main/java/utilities/NoblePhantasm.png").getImage();
         Image enchantedSphereImage = new ImageIcon("src/main/java/utilities/EnchantedSphere.png").getImage();
         Image simpleObstacleImage = new ImageIcon("src/main/java/utilities/simpleObs.png").getImage();
         Image firmObstacleImage = new ImageIcon("src/main/java/utilities/firmObs.png").getImage();
         Image explosiveObstacleImage = new ImageIcon("src/main/java/utilities/explosiveObs.png").getImage();
         Image giftObstacleImage = new ImageIcon("src/main/java/utilities/giftObs.png").getImage();
-        //locations.put(enchantedSphereImage, new Point(enchantedSphere.getCoordinates()[0], enchantedSphere.getCoordinates()[1]));
-        //locations.put(noblePhantasmImage, new Point(noblePhantasm.getCoordinates()[0], noblePhantasm.getCoordinates()[1]));
+        Image remainsImage = new ImageIcon("src/main/java/utilities/remains.png").getImage();
+        Image giftImage = new ImageIcon("src/main/java/utilities/gift.png").getImage();
         images.put("noblePhantasm", noblePhantasmImage);
         images.put("enchantedSphere", enchantedSphereImage);
         images.put("simpleObstacle", simpleObstacleImage);
         images.put("firmObstacle", firmObstacleImage);
         images.put("explosiveObstacle", explosiveObstacleImage);
         images.put("giftObstacle", giftObstacleImage);
+        images.put("remains", remainsImage);
+        images.put("gift", giftImage);
     }
 }

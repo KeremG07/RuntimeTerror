@@ -4,6 +4,7 @@ import domain.body.Body;
 
 public abstract class FallingBody extends Body {
 
+    public int vy = 1;
 
     public FallingBody(int x_coordinates,
                        int y_coordinates,
@@ -11,6 +12,8 @@ public abstract class FallingBody extends Body {
                        int width) {
         super(x_coordinates, y_coordinates, length, width);
     }
-    public abstract void fall();
+    public void fall() {
+        this.y += vy;
+    }
 
 }

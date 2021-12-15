@@ -1,5 +1,8 @@
 package domain.needForSpear;
 
+import domain.body.fallingBody.FallingBody;
+import domain.body.fallingBody.Gift;
+import domain.body.fallingBody.Remains;
 import domain.body.obstacle.Obstacle;
 
 import java.util.ArrayList;
@@ -12,6 +15,8 @@ public class Statistics {
     public static double timeElapsed;
 
     public static ArrayList<Obstacle> obstacleList = new ArrayList<Obstacle>();
+    public static ArrayList<FallingBody> fallingBodyList = new ArrayList<FallingBody>();
+
     public HashMap<String, Integer> obstacleNumberbyType; // String "type" --> integer "obstacle number
 
 
@@ -38,7 +43,6 @@ public class Statistics {
         return obstacleNumberbyType;
     }
 
-
     public String getUsername() {
         return username;
     }
@@ -51,16 +55,13 @@ public class Statistics {
         return score;
     }
 
-
     public static int getChances() {
         return chances;
     }
 
-
     public static double getTimeElapsed() {
         return timeElapsed;
     }
-
 
     public static void setObstacleList(ArrayList<Obstacle> obstacleList) {
         Statistics.obstacleList = obstacleList;
@@ -70,10 +71,22 @@ public class Statistics {
         return obstacleList;
     }
 
+    public static ArrayList<FallingBody> getFallingBodyList() {
+        return fallingBodyList;
+    }
+
+    public static void setFallingBodyList(ArrayList<FallingBody> fallingBodyList) {
+        Statistics.fallingBodyList = fallingBodyList;
+    }
+
+    public static void addGift(Gift gift) {fallingBodyList.add(gift);};
+    public static void removeGift(Gift gift) {fallingBodyList.remove(gift);};
+    public static void addRemains(Remains remains) {fallingBodyList.add(remains);};
+    public static void removeRemains(Remains remains) {fallingBodyList.remove(remains);};
+
     public static void addObstacle(Obstacle obs) {
         obstacleList.add(obs);
     }
-
     public static void removeObstacle(Obstacle obs) {
         obstacleList.remove(obs);
     }

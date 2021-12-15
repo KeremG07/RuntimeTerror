@@ -1,4 +1,5 @@
 package domain.body.obstacle;
+import domain.body.fallingBody.Remains;
 import domain.needForSpear.*;
 public class ExplosiveObstacle extends Obstacle {
 
@@ -56,5 +57,9 @@ public class ExplosiveObstacle extends Obstacle {
 
     public void setDegree(double degree) {
         this.degree = degree;
+    }
+
+    public void explode() {
+        Statistics.addRemains(new Remains(this.getCoordinates()[0]+16, this.getCoordinates()[1]+16, 32, 32, 1));
     }
 }

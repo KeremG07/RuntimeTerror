@@ -12,12 +12,4 @@ public class Remains extends FallingBody {
         super(x_coordinates, y_coordinates, length, width);
         this.remainNumber=remainNumber;
     }
-
-    @Override
-    public void fall() {
-
-    }
-    public void loseChance(){
-
-    }
 }

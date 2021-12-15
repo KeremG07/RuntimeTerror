@@ -1,5 +1,10 @@
 package domain.needForSpear;
 
+import domain.body.EnchantedSphere;
+import domain.body.NoblePhantasm;
+import domain.body.fallingBody.FallingBody;
+import domain.body.fallingBody.Gift;
+import domain.body.fallingBody.Remains;
 import domain.body.obstacle.*;
 import ui.swing.GameScreen;
 import ui.swing.PlayModeFrame;
@@ -16,7 +21,8 @@ public class Controller {
     StartGame newGame;
     BuildGame buildGame;
     //To keep the track of the obstacles that should be removed from the screen.
-    ArrayList<Obstacle> toRemove = new ArrayList<>();
+    ArrayList<Obstacle> toRemoveObs = new ArrayList<>();
+    ArrayList<FallingBody> toRemoveFBody = new ArrayList<>();
     //To check whether we shot the enchanted sphere or not:
     boolean playing = false;
     boolean isPaused = false;
@@ -74,6 +80,7 @@ public class Controller {
             }
         }
         updateObstacleConditions();
+        updateFallingBodyConditions();
     }
     //This method will be called by  the handler.
     public void updateMovementNP(String npAction){
@@ -98,18 +105,49 @@ public class Controller {
         //Remove the obstacles that Enchanted Sphere destroyed.
         for(Obstacle obstacle : Statistics.getObstacleList()){
             if(obstacle.getNumberOfHits() <= 0){
-                toRemove.add(obstacle);
+                toRemoveObs.add(obstacle);
+                if (obstacle.getName() == "Explosive") {
+                    //adds a remain if explosive obstacle is destroyed
+                    ((ExplosiveObstacle) obstacle).explode();
+                } else if (obstacle.getName() == "Gift") {
+                    //adds a gift if gift obstacle is destroyed
+                    ((GiftObstacle) obstacle).createGift();
+                }
             }
         }
-        Statistics.getObstacleList().removeAll(toRemove);
-        toRemove.removeAll(toRemove);
+        Statistics.getObstacleList().removeAll(toRemoveObs);
+        toRemoveObs.removeAll(toRemoveObs);
         for(Obstacle obstacle : Statistics.obstacleList){
             obstacle.move();
         }
     }
+
+    public void updateFallingBodyConditions() {
+        for (FallingBody fbody: Statistics.getFallingBodyList()) {
+            if (fbody instanceof Gift) {
+                if(fbody.compareCoordinates(player.getNoblePhantasm().getCoordinates()[0],player.getNoblePhantasm().getCoordinates()[1], player.getNoblePhantasm().width, player.getNoblePhantasm().height)) {
+                    toRemoveFBody.add(fbody);
+                    // buraya ability eklemesi de gelecek
+                } else {
+                    fbody.fall();
+                }
+            } else {
+                if (fbody.compareCoordinates(player.getNoblePhantasm().getCoordinates()[0], player.getNoblePhantasm().getCoordinates()[1], player.getNoblePhantasm().width, player.getNoblePhantasm().height)) {
+                    toRemoveFBody.add(fbody);
+                    player.loseChance();
+                } else {
+                    fbody.fall();
+                }
+            }
+        }
+        Statistics.getFallingBodyList().removeAll(toRemoveFBody);
+        toRemoveFBody.removeAll(toRemoveFBody);
+    }
+
     public Player getPlayer() {
         return player;
     }
+
     public Statistics getStatistics() { return statistics; }
 
     public void endGame() {

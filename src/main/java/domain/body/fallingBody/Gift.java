@@ -14,9 +14,4 @@ public class Gift extends FallingBody{
         this.giftName=giftName;
         this.duration=duration;
     }
-
-    @Override
-    public void fall() {
-
-    }
 }
