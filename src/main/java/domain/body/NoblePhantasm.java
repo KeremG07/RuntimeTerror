@@ -25,19 +25,19 @@ public class NoblePhantasm extends Body {
 
     //This is called ticksPerSecond times per second.
     public void moveRight() {
-        updateX(x + (width / Controller.ticksPerSecond));
+        updateX(x + (2*width / Controller.ticksPerSecond));
     }
 
     public void moveLeft() {
-        updateX(x - (width / Controller.ticksPerSecond));
+        updateX(x - (2*width / Controller.ticksPerSecond));
     }
 
     public void slideRight() {
-        updateX(x + (2* width / Controller.ticksPerSecond));
+        updateX(x + (4* width / Controller.ticksPerSecond));
     }
 
     public void slideLeft() {
-        updateX(x - (2* width / Controller.ticksPerSecond));
+        updateX(x - (4* width / Controller.ticksPerSecond));
     }
 
     public void rotateRight() {

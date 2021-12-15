@@ -1,12 +1,13 @@
 package domain.needForSpear;
 
 import java.util.ArrayList;
-import domain.body.fallingBody.*;
+
+import domain.ability.*;
 
 public class Inventory {
-    public ArrayList<Gift> giftList;
+    public ArrayList<Ability> abilityList;
 
-    public void addGifts(){
+    public void addAbility() {
 
     }
     public void updateInventory(String abilityType){
