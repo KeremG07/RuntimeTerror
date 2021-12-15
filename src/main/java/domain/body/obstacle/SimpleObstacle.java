@@ -58,4 +58,9 @@ public class SimpleObstacle extends Obstacle {
             }
         }
     }
+
+    @Override
+    public void doWhenDestroyed() {
+        //NewScore = OldScore + 300/(CurrentTime-GameStartingTime)
+    }
 }

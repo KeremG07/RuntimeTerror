@@ -22,6 +22,8 @@ public class Statistics {
 
     public Statistics() {
         obstacleNumberbyType = createObstacleNumberbyTypeMap(obstacleList);
+        chances = 3;
+        timeElapsed = 0;
     }
 
     public HashMap<String, Integer> createObstacleNumberbyTypeMap(ArrayList<Obstacle> obstacleList) {
@@ -53,6 +55,10 @@ public class Statistics {
 
     public static double getScore() {
         return score;
+    }
+
+    public static void setChances(int chances) {
+        Statistics.chances = chances;
     }
 
     public static int getChances() {

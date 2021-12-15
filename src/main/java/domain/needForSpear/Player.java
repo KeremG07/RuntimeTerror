@@ -14,7 +14,6 @@ import java.util.StringTokenizer;
 
 public class Player {
 
-    Controller controller;
     Statistics statistics;
     ILoadAndSaveAdapter iLoadAndSaveAdapter;
     LocalLoadAndSave localLoadAndSave;
@@ -68,8 +67,8 @@ public class Player {
          obstacles on the screen (type location speed)
         */
         saveList.add(Double.toString(statistics.timeElapsed));
-        saveList.add(Integer.toString(statistics.getChances()));
-        saveList.add(Double.toString(statistics.getScore()));
+        saveList.add(Integer.toString(statistics.chances));
+        saveList.add(Double.toString(statistics.score));
         //saveList.add(statistics.obstacleTypeList());
         //saveList.add(statistics.giftList())
 
@@ -241,10 +240,10 @@ public class Player {
     }
 
     public void increaseChance() {
-        statistics.chances += 1;
+        statistics.setChances(statistics.chances + 1);
     }
 
     public void loseChance() {
-        statistics.chances -= 1;
+        statistics.setChances(statistics.chances - 1);
     }
 }

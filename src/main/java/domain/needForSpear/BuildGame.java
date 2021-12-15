@@ -11,7 +11,6 @@ public class BuildGame {
     public int simpleObstacle, firmObstacle, explosiveObstacle, giftObstacle;
     public final int gameScreenWidth = 1000, gameScreenHeight = 600;
     public Random randi = new Random();
-    private boolean screenFull = true;
 
     //Creates however many obstacles were asked to be created.
     public BuildGame(String[] numOfObstaclesReq){
@@ -31,7 +30,6 @@ public class BuildGame {
         for(int i=0; i<giftObstacle; i++){
             putObstacleInCell(locationCells, "Gift");
         }
-
     }
 
 

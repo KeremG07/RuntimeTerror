@@ -23,6 +23,12 @@ public class GiftObstacle extends Obstacle{
 
     }
 
+    @Override
+    public void doWhenDestroyed() {
+        createGift();
+        //NewScore = OldScore + 300/(CurrentTime-GameStartingTime)
+    }
+
     public void createGift(){
         Statistics.addGift(new Gift(this.getCoordinates()[0]+40, this.getCoordinates()[1]+4, 32, 32, this.giftType, 30));
     }

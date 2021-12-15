@@ -3,7 +3,6 @@ import domain.body.fallingBody.Remains;
 import domain.needForSpear.*;
 public class ExplosiveObstacle extends Obstacle {
 
-    private int vy;
     //The coordinates and the radius of the circle that the obstacle will move around.
     private final int circleRadius = 3*25/2;
     private final int circleCenterX = this.x + width/2;
@@ -20,6 +19,13 @@ public class ExplosiveObstacle extends Obstacle {
         vx = 100/(4*Controller.ticksPerSecond);
     }
 
+    public double getDegree() {
+        return degree;
+    }
+
+    public void setDegree(double degree) {
+        this.degree = degree;
+    }
     //Doesn't move with the correct speed yet. Needs testing.
     @Override
     public void move() {
@@ -47,16 +53,10 @@ public class ExplosiveObstacle extends Obstacle {
         }
     }
 
-    public int getVy() {
-        return vy;
-    }
-
-    public double getDegree() {
-        return degree;
-    }
-
-    public void setDegree(double degree) {
-        this.degree = degree;
+    @Override
+    public void doWhenDestroyed() {
+        explode();
+        //NewScore = OldScore + 300/(CurrentTime-GameStartingTime)
     }
 
     public void explode() {

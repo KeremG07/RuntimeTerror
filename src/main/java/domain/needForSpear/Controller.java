@@ -32,7 +32,7 @@ public class Controller {
 
     private Controller() {
         player = new Player();
-        statistics = new Statistics();
+        statistics = player.statistics;
     }
 
     public static Controller getInstance() {
@@ -49,11 +49,11 @@ public class Controller {
 
     }
     public void saveGame(){
-        player.saveGame(getStatistics().username);
+        player.saveGame(statistics.username);
     }
 
     public boolean loadGame(){
-       return player.loadGame(getStatistics().username);
+       return player.loadGame(statistics.username);
     }
 
     public boolean isPaused() {
@@ -87,11 +87,10 @@ public class Controller {
         player.moveNoblePhantasm(npAction);
         player.updateEnchantedSphere();
     }
-    //This method will be called the handler.
+
     public void rotateNoblePhantasm(String npAction){
         player.rotateNoblePhantasm(npAction);
     }
-    //This method will be called the handler.
     public void moveEnchantedSphere(){
         player.moveEnchantedSphere();
     }
@@ -100,30 +99,24 @@ public class Controller {
     public void shootEnchantedSphere(){
         player.shootEnchantedSphere();
     }
-    ////This method will be called ticksPerSecond per second.
+    //This method will be called ticksPerSecond per second.
     public void updateObstacleConditions(){
         //Remove the obstacles that Enchanted Sphere destroyed.
-        for(Obstacle obstacle : Statistics.getObstacleList()){
+        for(Obstacle obstacle : statistics.getObstacleList()){
             if(obstacle.getNumberOfHits() <= 0){
                 toRemoveObs.add(obstacle);
-                if (obstacle.getName() == "Explosive") {
-                    //adds a remain if explosive obstacle is destroyed
-                    ((ExplosiveObstacle) obstacle).explode();
-                } else if (obstacle.getName() == "Gift") {
-                    //adds a gift if gift obstacle is destroyed
-                    ((GiftObstacle) obstacle).createGift();
-                }
+                obstacle.doWhenDestroyed();
             }
         }
-        Statistics.getObstacleList().removeAll(toRemoveObs);
+        statistics.getObstacleList().removeAll(toRemoveObs);
         toRemoveObs.removeAll(toRemoveObs);
-        for(Obstacle obstacle : Statistics.obstacleList){
+        for(Obstacle obstacle : statistics.getObstacleList()){
             obstacle.move();
         }
     }
 
     public void updateFallingBodyConditions() {
-        for (FallingBody fbody: Statistics.getFallingBodyList()) {
+        for (FallingBody fbody: statistics.getFallingBodyList()) {
             if (fbody instanceof Gift) {
                 if(fbody.compareCoordinates(player.getNoblePhantasm().getCoordinates()[0],player.getNoblePhantasm().getCoordinates()[1], player.getNoblePhantasm().width, player.getNoblePhantasm().height)) {
                     toRemoveFBody.add(fbody);
@@ -140,7 +133,7 @@ public class Controller {
                 }
             }
         }
-        Statistics.getFallingBodyList().removeAll(toRemoveFBody);
+        statistics.getFallingBodyList().removeAll(toRemoveFBody);
         toRemoveFBody.removeAll(toRemoveFBody);
     }
 
@@ -190,9 +183,5 @@ public class Controller {
         else{
             return "None";
         }
-    }
-
-    public void destroyObstacle(Obstacle obstacle) {
-        Statistics.removeObstacle(obstacle);
     }
 }

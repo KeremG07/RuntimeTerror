@@ -26,7 +26,6 @@ public abstract class Obstacle extends Body {
     public int getVx(){
         return vx;
     }
-
     public void setVx(int vx) {
         this.vx = vx;
     }
@@ -34,13 +33,17 @@ public abstract class Obstacle extends Body {
     public String getName(){
         return name;
     }
+
     public int getNumberOfHits(){
         return numberOfHits;
     }
     public void setNumberOfHits(int x){
         numberOfHits = Math.max(x, 0);
     }
+
     public boolean isMoving() {
         return moving;
     }
+
+    public abstract void doWhenDestroyed();
 }
