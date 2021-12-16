@@ -15,7 +15,6 @@ public class Controller {
     private static Controller instance;
     //How often the movements on the screen is updated.
     public final static int ticksPerSecond = 30;
-    KeyHandler handler = new KeyHandler();
     Player player;
     Statistics statistics;
     StartGame newGame;
@@ -28,7 +27,7 @@ public class Controller {
     boolean isPaused = false;
     boolean isOver = false;
     public int timeLeft;
-    public final int gameScreenWidth = 1000, gameScreenHeight = 600;
+    private final int gameScreenWidth = 1000, gameScreenHeight = 600;
 
     private Controller() {
         player = new Player();
@@ -147,8 +146,8 @@ public class Controller {
         System.exit(0);
     }
 
-    public double[] getFrameBorders() {
-        double[] borders = new double[2];
+    public int[] getFrameBorders() {
+        int[] borders = new int[2];
         borders[0] = gameScreenWidth;
         borders[1] = gameScreenHeight;
         return borders;

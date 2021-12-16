@@ -1,16 +1,16 @@
 package domain.ability;
 import domain.body.obstacle.*;
+import domain.body.*;
 import domain.needForSpear.Controller;
 import domain.needForSpear.Statistics;
 
 import java.util.Random;
 
 public class HollowPurple extends Ability {
-    public final int gameScreenWidth = Controller.getInstance().gameScreenWidth,
-            gameScreenHeight = Controller.getInstance().gameScreenHeight,
+    public final int gameScreenWidth = Controller.getInstance().getFrameBorders()[0],
+            gameScreenHeight = Controller.getInstance().getFrameBorders()[1],
             hollowPurpleNum = 8;
     public Random randi = new Random();
-
     private static HollowPurple instance;
 
     private HollowPurple() {
@@ -42,8 +42,7 @@ public class HollowPurple extends Ability {
         }
         int x = column*100;
         int y = row*40 + 20;
-        HollowPurpleObs newHP = new HollowPurpleObs(x, y, 80, 8, 1);
-        Statistics.addObstacle(newHP);
+        Statistics.addObstacle(BodyFactory.createObstacle("Hollow",x,y));
         locationCells[row][column] = true;
     }
 }

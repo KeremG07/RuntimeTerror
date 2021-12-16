@@ -1,5 +1,6 @@
 package domain.needForSpear;
 
+import domain.body.BodyFactory;
 import domain.body.EnchantedSphere;
 import domain.body.NoblePhantasm;
 import domain.body.obstacle.*;
@@ -20,16 +21,14 @@ public class Player {
     public Inventory inventory;
     private NoblePhantasm noblePhantasm;
     private EnchantedSphere enchantedSphere;
-    public static final double screenWidth = Controller.getInstance().getFrameBorders()[0];
-    public static final double screenHeight = Controller.getInstance().getFrameBorders()[1];
     public String save;
 
     public Player() {
         statistics = new Statistics();
         localLoadAndSave = new LocalLoadAndSave();
         inventory = new Inventory();
-        noblePhantasm = new NoblePhantasm(450, 570, (int) screenWidth / 10, 8);
-        enchantedSphere = new EnchantedSphere(494, 558, 12, 12, noblePhantasm);
+        noblePhantasm = BodyFactory.createNP();
+        enchantedSphere = BodyFactory.createES(noblePhantasm);
     }
 
     public Inventory getInventory() {
@@ -130,7 +129,7 @@ public class Player {
                 boolean ESisNotShot = Boolean.parseBoolean(stES.nextToken());
                 enchantedSphere.setNotShot(ESisNotShot);
                 if (ESisNotShot) {
-                    enchantedSphere.setCoordinates(noblePhantasm.getCoordinates()[0] + 44, noblePhantasm.getCoordinates()[1] - noblePhantasm.height);
+                    enchantedSphere.setCoordinates(noblePhantasm.getCoordinates()[0] + 34, noblePhantasm.getCoordinates()[1] - noblePhantasm.height);
                 } else {
                     enchantedSphere.setCoordinates(Integer.parseInt(stES.nextToken()), Integer.parseInt(stES.nextToken()));
                 }

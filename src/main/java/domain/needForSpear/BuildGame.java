@@ -1,5 +1,6 @@
 package domain.needForSpear;
 
+import domain.body.BodyFactory;
 import domain.body.obstacle.*;
 
 
@@ -9,8 +10,8 @@ import java.util.Random;
 public class BuildGame {
     public final int simpleObstacleReq = 75, firmObstacleReq = 10, explosiveObstacleReq = 5, giftObstacleReq = 10;
     public int simpleObstacle, firmObstacle, explosiveObstacle, giftObstacle;
-    public final int gameScreenWidth = Controller.getInstance().gameScreenWidth,
-            gameScreenHeight = Controller.getInstance().gameScreenHeight;
+    public final int gameScreenWidth = Controller.getInstance().getFrameBorders()[0],
+            gameScreenHeight = Controller.getInstance().getFrameBorders()[1];
     public Random randi = new Random();
 
     //Creates however many obstacles were asked to be created.
@@ -34,22 +35,6 @@ public class BuildGame {
     }
 
 
-    public Obstacle createObstacle(String typeOfObstacle, int x, int y) {
-        Obstacle createdObstacle;
-        if(typeOfObstacle.equals("Simple")){
-            createdObstacle = new SimpleObstacle(x, y, 80, 8, 1);
-        }
-        else if(typeOfObstacle.equals("Firm")){
-            createdObstacle = new FirmObstacle(x, y, 80, 8, 3);
-        }
-        else if(typeOfObstacle.equals("Explosive")){
-            createdObstacle = new ExplosiveObstacle(x, y, 32, 32, 1);
-        }
-        else {
-            createdObstacle = new GiftObstacle(x, y, 80, 8, 1, "chance");
-        }
-        return createdObstacle;
-    }
     //Finding an empty cell and creating the obstacle there.
     public void putObstacleInCell(boolean [][]locationCells, String typeOfObstacle){
         int column;
@@ -62,7 +47,7 @@ public class BuildGame {
         }
         int x = column*100;
         int y = row*40;
-        Obstacle newCreatedObstacle = createObstacle(typeOfObstacle, x, y);
+        Obstacle newCreatedObstacle = BodyFactory.createObstacle(typeOfObstacle, x, y);
         Statistics.addObstacle(newCreatedObstacle);
         locationCells[row][column] = true;
 
