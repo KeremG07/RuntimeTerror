@@ -6,6 +6,7 @@ public class NoblePhantasm extends Body {
 
     public double normalAngle;
     public boolean hasMagicalHex;
+    public int speedMultiplier;
 
     public NoblePhantasm(int x_coordinates,
                          int y_coordinates,
@@ -14,6 +15,7 @@ public class NoblePhantasm extends Body {
         super(x_coordinates, y_coordinates, width, height);
         normalAngle=0;
         hasMagicalHex =false;
+        speedMultiplier = 2;
     }
 
     public void updateX(int x) {
@@ -24,28 +26,24 @@ public class NoblePhantasm extends Body {
     }
 
     //This is called ticksPerSecond times per second.
-    public void moveRight() {
-        updateX(x + (2*width / Controller.ticksPerSecond));
-    }
+    public void moveRight() { updateX(x + (speedMultiplier*width / Controller.ticksPerSecond)); }
 
     public void moveLeft() {
-        updateX(x - (2*width / Controller.ticksPerSecond));
+        updateX(x - (speedMultiplier*width / Controller.ticksPerSecond));
     }
 
-    public void slideRight() {
-        updateX(x + (4* width / Controller.ticksPerSecond));
-    }
+    public void slideRight() { updateX(x + (2*speedMultiplier*width / Controller.ticksPerSecond)); }
 
     public void slideLeft() {
-        updateX(x - (4* width / Controller.ticksPerSecond));
+        updateX(x - (2*speedMultiplier*width / Controller.ticksPerSecond));
     }
 
-    public void rotateRight() {
+    public void rotateLeft() {
         normalAngle -= 60.0 / Controller.ticksPerSecond;
         if(normalAngle < -45) normalAngle = -45;
     }
 
-    public void rotateLeft() {
+    public void rotateRight() {
         normalAngle += 60.0 / Controller.ticksPerSecond;
         if(normalAngle > 45) normalAngle = 45;
     }
@@ -65,4 +63,10 @@ public class NoblePhantasm extends Body {
     public void setNormalAngle(double normalAngle) {
         this.normalAngle = normalAngle;
     }
+
+    public void doubleSpeed() {
+        speedMultiplier = speedMultiplier*2;
+    }
+
+    public void halveSpeed() { speedMultiplier = speedMultiplier/2; }
 }

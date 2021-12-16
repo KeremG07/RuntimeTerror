@@ -9,7 +9,8 @@ import java.util.Random;
 public class BuildGame {
     public final int simpleObstacleReq = 75, firmObstacleReq = 10, explosiveObstacleReq = 5, giftObstacleReq = 10;
     public int simpleObstacle, firmObstacle, explosiveObstacle, giftObstacle;
-    public final int gameScreenWidth = 1000, gameScreenHeight = 600;
+    public final int gameScreenWidth = Controller.getInstance().gameScreenWidth,
+            gameScreenHeight = Controller.getInstance().gameScreenHeight;
     public Random randi = new Random();
 
     //Creates however many obstacles were asked to be created.

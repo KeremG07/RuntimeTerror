@@ -1,13 +1,19 @@
 package domain.ability;
 import domain.body.obstacle.*;
+import domain.needForSpear.Controller;
 import domain.needForSpear.Statistics;
 
 import java.util.Random;
 
 public class HollowPurple extends Ability {
-    public final int gameScreenWidth = 1000, gameScreenHeight = 600, hollowPurpleNum = 8;
+    public final int gameScreenWidth = Controller.getInstance().gameScreenWidth,
+            gameScreenHeight = Controller.getInstance().gameScreenHeight,
+            hollowPurpleNum = 8;
     public Random randi = new Random();
-    public HollowPurple() {
+
+    private static HollowPurple instance;
+
+    private HollowPurple() {
         super();
         //The GameScreen is divided into cells (size: 10x10) where hollow purple obstacles can be put. The objects are
         // put into the empty cells chosen randomly in a way that they won't clash with already existing obstacles.
@@ -15,6 +21,13 @@ public class HollowPurple extends Ability {
         for(int i=0; i<hollowPurpleNum; i++){
             putHPInCell(locationCells);
         }
+    }
+
+    public static HollowPurple getInstance() {
+        if(instance == null) {
+            instance = new HollowPurple();
+        }
+        return instance;
     }
 
     //Finding an empty cell and creating the obstacle there.
