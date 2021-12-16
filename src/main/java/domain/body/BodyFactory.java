@@ -15,29 +15,28 @@ public class BodyFactory {
             expWidth = 32,
             expHeight = 32;
 
-
     public static NoblePhantasm createNP(){
         return new NoblePhantasm((gameScreenWidth-nPhantasmWidth)/2, 570, nPhantasmWidth, nPhantasmHeight);
     }
     public static EnchantedSphere createES(NoblePhantasm np){
         return new EnchantedSphere(np.x+((nPhantasmWidth-eSphereWidth)/2), np.y-eSphereHeight, eSphereWidth, eSphereHeight, np);
     }
-    public static Obstacle createObstacle(String typeOfObstacle, int x, int y){
+    public static Obstacle createObstacle(String typeOfObstacle, int x, int y, int hitNum){
         Obstacle newCreatedObs;
         if(typeOfObstacle.equals("Simple")){
-            newCreatedObs = new SimpleObstacle(x, y, obsWidth, obsHeight, 1);
+            newCreatedObs = new SimpleObstacle(x, y, obsWidth, obsHeight, hitNum);
         }
         else if(typeOfObstacle.equals("Firm")){
-            newCreatedObs = new FirmObstacle(x, y, obsWidth, obsHeight, 3);
+            newCreatedObs = new FirmObstacle(x, y, obsWidth, obsHeight, hitNum);
         }
         else if(typeOfObstacle.equals("Explosive")){
-            newCreatedObs = new ExplosiveObstacle(x, y, expWidth, expHeight, 1);
+            newCreatedObs = new ExplosiveObstacle(x, y, expWidth, expHeight, hitNum);
         }
         else if(typeOfObstacle.equals("Gift")){
-            newCreatedObs = new GiftObstacle(x, y, obsWidth, obsHeight, 1, "chance");
+            newCreatedObs = new GiftObstacle(x, y, obsWidth, obsHeight, hitNum, "chance");
         }
         else {
-            newCreatedObs = new HollowPurpleObs(x, y, obsWidth, obsHeight, 1);
+            newCreatedObs = new HollowPurpleObs(x, y, obsWidth, obsHeight, hitNum);
         }
         return newCreatedObs;
     }

@@ -1,5 +1,4 @@
 package domain.ability;
-import domain.body.obstacle.*;
 import domain.body.*;
 import domain.needForSpear.Controller;
 import domain.needForSpear.Statistics;
@@ -42,7 +41,7 @@ public class HollowPurple extends Ability {
         }
         int x = column*100;
         int y = row*40 + 20;
-        Statistics.addObstacle(BodyFactory.createObstacle("Hollow",x,y));
+        Statistics.addObstacle(BodyFactory.createObstacle("Hollow",x,y,1));
         locationCells[row][column] = true;
     }
 }

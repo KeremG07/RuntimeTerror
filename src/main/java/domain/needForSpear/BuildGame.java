@@ -47,7 +47,13 @@ public class BuildGame {
         }
         int x = column*100;
         int y = row*40;
-        Obstacle newCreatedObstacle = BodyFactory.createObstacle(typeOfObstacle, x, y);
+        Obstacle newCreatedObstacle;
+        if(typeOfObstacle.equals("Firm")){
+            int hitNum = randi.nextInt(3) + 3;
+            newCreatedObstacle = BodyFactory.createObstacle(typeOfObstacle, x, y, hitNum);
+        } else {
+            newCreatedObstacle = BodyFactory.createObstacle(typeOfObstacle, x, y, 1);
+        }
         Statistics.addObstacle(newCreatedObstacle);
         locationCells[row][column] = true;
 
