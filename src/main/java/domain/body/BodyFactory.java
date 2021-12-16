@@ -3,6 +3,8 @@ package domain.body;
 import domain.body.obstacle.*;
 import domain.needForSpear.Controller;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class BodyFactory {
     public static final int gameScreenWidth = Controller.getInstance().getFrameBorders()[0],
             gameScreenHeight = Controller.getInstance().getFrameBorders()[1],
@@ -28,7 +30,8 @@ public class BodyFactory {
             newCreatedObs = new SimpleObstacle(x, y, obsWidth, obsHeight, 1);
         }
         else if(typeOfObstacle.equals("Firm")){
-            newCreatedObs = new FirmObstacle(x, y, obsWidth, obsHeight, 3);
+            int numberOfHits = ThreadLocalRandom.current().nextInt(1, 11);
+            newCreatedObs = new FirmObstacle(x, y, obsWidth, obsHeight, numberOfHits);
         }
         else if(typeOfObstacle.equals("Explosive")){
             newCreatedObs = new ExplosiveObstacle(x, y, expWidth, expHeight, 1);

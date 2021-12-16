@@ -152,6 +152,8 @@ public class GameScreen extends JPanel {
 
     void drawObstacles(Graphics g, Obstacle o) {
         Graphics2D g2d = (Graphics2D) g;
+        g2d.setFont(new Font("default", Font.BOLD, 8));
+        g2d.setColor(Color.BLACK);
         AffineTransform at = new AffineTransform();
         // AffineTransform old = g2d.getTransform();
         at.translate(o.getCoordinates()[0], o.getCoordinates()[1]);
@@ -167,6 +169,11 @@ public class GameScreen extends JPanel {
         }
         locations.put(new Point(o.getCoordinates()[0], o.getCoordinates()[1]), imageToDraw);
         g2d.drawImage(imageToDraw, at, null);
+        if(o instanceof FirmObstacle) {
+            g2d.drawString(Integer.toString(o.getNumberOfHits()),
+                    o.getCoordinates()[0] + 11*(o.width)/24,
+                    o.getCoordinates()[1] + o.height - 2);
+        }
         //g2d.setTransform(old);
     }
 

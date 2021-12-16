@@ -6,6 +6,7 @@ import domain.needForSpear.Statistics;
 import java.util.Random;
 
 public class FirmObstacle extends Obstacle {
+
     public boolean movesRight;
 
     public FirmObstacle(int x_coordinates,
@@ -71,4 +72,5 @@ public class FirmObstacle extends Obstacle {
     public void doWhenDestroyed() {
         //NewScore = OldScore + 300/(CurrentTime-GameStartingTime)
     }
+
 }
