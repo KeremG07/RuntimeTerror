@@ -40,7 +40,7 @@ public class HollowPurple extends Ability {
             row = randi.nextInt(10);
         }
         int x = column*100;
-        int y = row*40 + 20;
+        int y = row*40 + 60;
         Statistics.addObstacle(BodyFactory.createObstacle("Hollow",x,y,1));
         locationCells[row][column] = true;
     }

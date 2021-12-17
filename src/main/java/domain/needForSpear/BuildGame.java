@@ -46,7 +46,7 @@ public class BuildGame {
             row = randi.nextInt(10);
         }
         int x = column*100;
-        int y = row*40;
+        int y = row*40 + 40;
         Obstacle newCreatedObstacle;
         if(typeOfObstacle.equals("Firm")){
             int hitNum = randi.nextInt(3) + 3;

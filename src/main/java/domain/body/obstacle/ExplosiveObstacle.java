@@ -1,6 +1,9 @@
 package domain.body.obstacle;
 import domain.body.fallingBody.Remains;
 import domain.needForSpear.*;
+
+import java.util.Random;
+
 public class ExplosiveObstacle extends Obstacle {
 
     //The coordinates and the radius of the circle that the obstacle will move around.
@@ -9,6 +12,8 @@ public class ExplosiveObstacle extends Obstacle {
     private final int circleCenterY = this.y - height/2;
     //The degree between the circle's center and the obstacle.
     private double degree = 90;
+    public boolean movesRight;
+
     public ExplosiveObstacle(int x_coordinates,
                              int y_coordinates,
                              int width,
@@ -17,6 +22,9 @@ public class ExplosiveObstacle extends Obstacle {
         super(x_coordinates, y_coordinates, width, height, numberOfHits);
         name = "Explosive";
         vx = 100/(4*Controller.ticksPerSecond);
+        Random rand = new Random();
+        movesRight = rand.nextBoolean();
+        moving = true;
     }
 
     public double getDegree() {
@@ -30,26 +38,56 @@ public class ExplosiveObstacle extends Obstacle {
     @Override
     public void move() {
         if(moving){
-            double rads = Math.toRadians(degree + 1 + 90); // 0 becomes the top
-            int newX = Math.round((float) (circleCenterX + Math.cos(rads) * circleRadius));
-            int newY = Math.round((float) (circleCenterY + Math.sin(rads) * circleRadius));
-            /*boolean canMove = true;
+            double radsR = Math.toRadians(degree + 2 + 90); // 0 becomes the top
+            int newXR = Math.round((float) (circleCenterX + Math.cos(radsR) * circleRadius));
+            int newYR = Math.round((float) (circleCenterY + Math.sin(radsR) * circleRadius));
+
+            double radsL = Math.toRadians(degree - 2 + 90);// 0 becomes the top
+            int newXL = Math.round((float) (circleCenterX + Math.cos(radsL) * circleRadius));
+            int newYL = Math.round((float) (circleCenterY + Math.sin(radsL) * circleRadius));
+
+            boolean canMoveRight = true;
+            boolean canMoveLeft = true;
             //Compares with every obstacle.
-            for (Obstacle obstacle : Statistics.obstacleList){
+            for (Obstacle obstacle : Statistics.obstacleList) {
                 //Doesn't check whether it crashes with itself.
-                if(!(obstacle.getCoordinates()[0] == this.x && obstacle.getCoordinates()[1] == this.y)){
-                    canMove &= !(obstacle.compareCoordinates(newX, newY, this.width, this.height));
+                if (!(obstacle.getCoordinates()[0] == this.x && obstacle.getCoordinates()[1] == this.y)) {
+                    canMoveRight &= !(obstacle.compareCoordinates(newXR, newYR, this.width, this.height));
+                    canMoveLeft &= !(obstacle.compareCoordinates(newXL, newYL, this.width, this.height));
                 }
             }
             //Compares with every frame border.
-            if(!Controller.getInstance().hitFrame(newX, newY, this.width, this.height).equals("None")){
-                canMove = false;
+            if (!Controller.getInstance().hitFrame(newXR, newYR, this.width, this.height).equals("None")) {
+                canMoveRight = false;
             }
-            if(canMove) {*/
-                this.x = newX;
-                this.y = newY;
-                degree += 1;
-            //}
+            if (!Controller.getInstance().hitFrame(newXL, newYL, this.width, this.height).equals("None")) {
+                canMoveLeft = false;
+            }
+            // It moves right if it can, if not left.
+            if (movesRight) {
+                if (canMoveRight) {
+                    this.x = newXR;
+                    this.y = newYR;
+                    degree += 2;
+                } else if (canMoveLeft) {
+                    this.x = newXL;
+                    this.y = newYL;
+                    degree -= 2;
+                    movesRight = false;
+                }
+            } else {
+                if (canMoveLeft) {
+                    this.x = newXL;
+                    this.y = newYL;
+                    degree -= 2;
+                } else if (canMoveRight) {
+                    this.x = newXR;
+                    this.y = newYR;
+                    degree += 2;
+                    movesRight = true;
+                }
+            }
+
         }
     }
 
