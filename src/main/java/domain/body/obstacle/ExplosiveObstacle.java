@@ -4,9 +4,9 @@ import domain.needForSpear.*;
 public class ExplosiveObstacle extends Obstacle {
 
     //The coordinates and the radius of the circle that the obstacle will move around.
-    private final int circleRadius = 3*25/2;
-    private final int circleCenterX = this.x + width/2;
-    private final int circleCenterY = this.y + height + circleRadius;
+    private final int circleRadius = height/2;
+    private final int circleCenterX = this.x + 4*width/5;
+    private final int circleCenterY = this.y - height/2;
     //The degree between the circle's center and the obstacle.
     private double degree = 90;
     public ExplosiveObstacle(int x_coordinates,
@@ -62,4 +62,9 @@ public class ExplosiveObstacle extends Obstacle {
     public void explode() {
         Statistics.addRemains(new Remains(this.getCoordinates()[0]+16, this.getCoordinates()[1]+16, 32, 32, 1));
     }
+
+    /*@Override
+    public int[] getCoordinates() {
+        return new int[] {circleCenterX, circleCenterY};
+    }*/
 }
