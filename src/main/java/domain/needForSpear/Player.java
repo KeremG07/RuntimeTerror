@@ -151,7 +151,6 @@ public class Player {
                     // we need to have different and consistent create obstacle methods for each obstacle type
                     if (obsType == 0) {
                         Obstacle obstacle = BodyFactory.createObstacle("Simple", coordX, coordY, 1);
-                        //Obstacle obstacle = new SimpleObstacle(coordX, coordY, 80, 8, 1);
                         int vx = Integer.parseInt(st.nextToken());
                         obstacle.setVx(vx);
                         statistics.addObstacle(obstacle);
@@ -159,21 +158,18 @@ public class Player {
                     if (obsType == 1) {
                         int chances = Integer.parseInt(st.nextToken());
                         Obstacle obstacle = BodyFactory.createObstacle("Firm", coordX, coordY, chances);
-                        //Obstacle obstacle = new FirmObstacle(coordX, coordY, 80, 8, chances);
                         int vx = Integer.parseInt(st.nextToken());
                         obstacle.setVx(vx);
                         statistics.addObstacle(obstacle);
                     }
                     if (obsType == 2) {
                         Obstacle obstacle = BodyFactory.createObstacle("Explosive", coordX, coordY, 1);
-                        //Obstacle obstacle = new ExplosiveObstacle(coordX, coordY, 32, 32, 1);
                         double degree = Double.parseDouble(st.nextToken());
                         ((ExplosiveObstacle) obstacle).setDegree(degree);
                         statistics.addObstacle(obstacle);
                     }
                     if (obsType == 3) {
                         Obstacle obstacle = BodyFactory.createObstacle("Gift", coordX, coordY, 1);
-                        //Obstacle obstacle = new GiftObstacle(coordX, coordY, 80, 8, 1, "chance");
                         int vx = Integer.parseInt(st.nextToken());
                         obstacle.setVx(vx);
                         statistics.addObstacle(obstacle);
