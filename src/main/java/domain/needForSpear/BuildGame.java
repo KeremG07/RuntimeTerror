@@ -53,6 +53,9 @@ public class BuildGame {
             newCreatedObstacle = BodyFactory.createObstacle(typeOfObstacle, x, y, hitNum);
         } else {
             newCreatedObstacle = BodyFactory.createObstacle(typeOfObstacle, x, y, 1);
+            if(typeOfObstacle.equals("Explosive")) {
+                newCreatedObstacle.setCoordinates(x + 25, y - 10);
+            }
         }
         Statistics.addObstacle(newCreatedObstacle);
         locationCells[row][column] = true;
