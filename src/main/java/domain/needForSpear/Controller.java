@@ -81,7 +81,7 @@ public class Controller {
         updateObstacleConditions();
         updateFallingBodyConditions();
     }
-    //This method will be called by  the handler.
+    //This method is called by the KeyboardController.
     public void updateMovementNP(String npAction){
         player.moveNoblePhantasm(npAction);
         player.updateEnchantedSphere();

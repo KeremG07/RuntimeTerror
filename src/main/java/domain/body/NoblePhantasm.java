@@ -14,8 +14,8 @@ public class NoblePhantasm extends Body {
                          int height){
         super(x_coordinates, y_coordinates, width, height);
         normalAngle=0;
-        hasMagicalHex =false;
-        speedMultiplier = 2;
+        hasMagicalHex = false;
+        speedMultiplier = 6;
     }
 
     public void updateX(int x) {
@@ -28,9 +28,7 @@ public class NoblePhantasm extends Body {
     //This is called ticksPerSecond times per second.
     public void moveRight() { updateX(x + (speedMultiplier*width / Controller.ticksPerSecond)); }
 
-    public void moveLeft() {
-        updateX(x - (speedMultiplier*width / Controller.ticksPerSecond));
-    }
+    public void moveLeft() { updateX(x - (speedMultiplier*width / Controller.ticksPerSecond)); }
 
     public void slideRight() { updateX(x + (2*speedMultiplier*width / Controller.ticksPerSecond)); }
 
