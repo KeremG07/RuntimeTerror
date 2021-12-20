@@ -15,7 +15,7 @@ public class NoblePhantasm extends Body {
         super(x_coordinates, y_coordinates, width, height);
         normalAngle=0;
         hasMagicalHex = false;
-        speedMultiplier = 6;
+        speedMultiplier = 3;
     }
 
     public void updateX(int x) {

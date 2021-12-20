@@ -42,8 +42,59 @@ public class EnchantedSphere extends Body {
             double normalAngle = np.normalAngle;
             vx = -(int) (2 * np.width * Math.cos(Math.toRadians(normalAngle + 90)));
             vy = (int) (2 * np.width * Math.sin(Math.toRadians(normalAngle + 90)));
+            if(vy > 0){
+                vy = -vy;
+            }
             notShot = false;
         }
+    }
+
+    //checks if es crashes with np considering rotated np coordinates
+    public boolean compareCoordinatesWithNP(){
+        int xPos, yPos;
+        double slope;
+        boolean crashing = false;
+        if(np.normalAngle == 0 || Math.abs(np.normalAngle) == 1){
+            return this.compareCoordinates(np.x,np.y,np.width,np.height);
+        }
+        else if(np.normalAngle > 0){
+            //calculates rotated x,y coords of np (top left corner)
+            xPos = (int) (np.x + np.width / 2 - np.width / 2 * Math.cos(Math.toRadians(np.normalAngle)));
+            yPos = (int) (np.y - np.width / 2 * Math.sin(Math.toRadians(np.normalAngle)));
+
+            //checks if ES crashes
+            if(x > xPos && x < xPos + np.width * Math.cos(Math.toRadians(np.normalAngle))
+                && y + height > yPos && y + height < yPos + np.width * Math.sin(Math.toRadians(np.normalAngle))){
+                slope = (double)(y + height - yPos) / (double)(x - xPos);
+                //since there is loss, checks the slope in an interval
+                if(slope == Math.tan(Math.toRadians(np.normalAngle)) ||
+                   (slope <= Math.tan(Math.toRadians(np.normalAngle+3.5)) && slope >= Math.tan(Math.toRadians(np.normalAngle-3.5)))){
+                    crashing = true;
+                }
+            //corner (not sure if this works)
+            }else if(x <= xPos && xPos - x < np.height && y + height > yPos && y+height-yPos < np.height){
+                crashing = true;
+            }
+        //same with previous, different calculations
+        }else{
+            xPos = (int) (np.x + np.width / 2 - np.width / 2 * Math.cos(Math.toRadians(np.normalAngle)));
+            yPos = (int) (np.y - np.width / 2 * Math.sin(Math.toRadians(np.normalAngle)));
+
+            if(x + width > xPos && x + width < xPos + np.width * Math.cos(Math.toRadians(np.normalAngle))
+                    && y + height < yPos && y + height > yPos + np.width * Math.sin(Math.toRadians(np.normalAngle))){
+                slope = (double)(y + height - yPos) / (double)(x + width - xPos);
+                if(slope == Math.tan(Math.toRadians(np.normalAngle)) ||
+                   (slope >= Math.tan(Math.toRadians(np.normalAngle-3.5)) && slope <= Math.tan(Math.toRadians(np.normalAngle+3.5)))){
+                    crashing = true;
+                }
+            }else if(x >= xPos + np.width * Math.cos(Math.toRadians(np.normalAngle))
+                    && x <= xPos + np.width * Math.cos(Math.toRadians(np.normalAngle)) + np.height &&
+                    y + height >= yPos + np.width * Math.sin(Math.toRadians(np.normalAngle))
+                    && y + height < yPos + np.width * Math.sin(Math.toRadians(np.normalAngle)) + np.height){
+                crashing = true;
+            }
+        }
+        return crashing;
     }
 
     //Handles reflection of Enchanted Sphere, it will be called every time before it executes its movement.
@@ -64,9 +115,46 @@ public class EnchantedSphere extends Body {
             vx = 0;
             vy = 0;
         }
-        //np reflect (movement and corner cases are ignored for now)
-        else if (this.compareCoordinates(np.x, np.y, np.width, np.height)) {
-            vy = -vy;
+        //np reflect (still has issues)
+        else if (compareCoordinatesWithNP()) {
+            double speed = Math.sqrt(vx*vx + vy*vy);
+            double angle = Math.toDegrees(Math.atan((double) vx/vy));
+            double reflectAngle = angle + 2 * np.normalAngle;
+            if(np.normalAngle == -45 && vx == 0 && vy > 0){
+                vx = -vy;
+                vy = 0;
+            }else if(np.normalAngle == 45 && vx == 0 && vy > 0){
+                vx = vy;
+                vy = 0;
+            }/*else if(np.normalAngle == -45 && vy == 0 && vx != 0){
+                vy = -vx;
+                vx = 0;
+            }else if(np.normalAngle == 45 && vy == 0 && vx != 0){
+                vy = vx;
+                vx = 0;
+            }else if((np.normalAngle == 45 || np.normalAngle == -45) && Math.abs(vx) == vy){
+                vx = -vx;
+                vy = -vy;
+            }*/
+            //these do not happen frequently, but still added.
+            else if(vy == 0 && np.normalAngle > 0){
+                reflectAngle = 90 - 2 * np.normalAngle;
+                vy = (int) (-speed * Math.cos(Math.toRadians(reflectAngle)));
+                vx = (int) (-speed * Math.sin(Math.toRadians(reflectAngle)));
+            }else if(vy == 0 && np.normalAngle < 0){
+                reflectAngle = 90 + 2 * np.normalAngle;
+                vy = (int) (-speed * Math.cos(Math.toRadians(reflectAngle)));
+                vx = (int) (speed * Math.sin(Math.toRadians(reflectAngle)));
+            //main reflection case
+            }else if(reflectAngle <= 90 || reflectAngle >= -90){
+                if(vy > 0) {
+                    vy = (int) (-speed * Math.cos(Math.toRadians(reflectAngle)));
+                    vx = (int) (speed * Math.sin(Math.toRadians(reflectAngle)));
+                }
+            }else{
+                vy = 10;
+            }
+
         } else {
             Obstacle crashingObstacle;
             for (Obstacle obstacle : Statistics.obstacleList) {
