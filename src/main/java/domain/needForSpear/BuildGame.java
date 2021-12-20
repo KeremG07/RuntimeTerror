@@ -10,7 +10,7 @@ import java.util.Random;
 public class BuildGame {
     public final int simpleObstacleReq = 75, firmObstacleReq = 10, explosiveObstacleReq = 5, giftObstacleReq = 10;
     public int simpleObstacle, firmObstacle, explosiveObstacle, giftObstacle;
-    public final int gameScreenWidth = Controller.getInstance().getFrameBorders()[0],
+    public final double gameScreenWidth = Controller.getInstance().getFrameBorders()[0],
             gameScreenHeight = Controller.getInstance().getFrameBorders()[1];
     public Random randi = new Random();
 
@@ -19,7 +19,7 @@ public class BuildGame {
         setNumObstacles(numOfObstaclesReq);
         //The GameScreen is divided into cells (size: 10x10) where objects can be put. The objects are put into the
         // empty cells chosen randomly.
-        boolean[][] locationCells = new boolean[(gameScreenHeight-200)/40][gameScreenWidth/100];
+        boolean[][] locationCells = new boolean[(int)(gameScreenHeight-200)/40][(int) gameScreenWidth/100];
         for(int i=0; i<simpleObstacle; i++){
             putObstacleInCell(locationCells, "Simple");
         }

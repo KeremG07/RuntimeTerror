@@ -8,17 +8,17 @@ public class NoblePhantasm extends Body {
     public boolean hasMagicalHex;
     public int speedMultiplier;
 
-    public NoblePhantasm(int x_coordinates,
-                         int y_coordinates,
-                         int width,
-                         int height){
+    public NoblePhantasm(double x_coordinates,
+                         double y_coordinates,
+                         double width,
+                         double height){
         super(x_coordinates, y_coordinates, width, height);
         normalAngle=0;
         hasMagicalHex = false;
         speedMultiplier = 3;
     }
 
-    public void updateX(int x) {
+    public void updateX(double x) {
         String frame = Controller.getInstance().hitFrame(x, this.y, this.width, this.height);
         if(frame.equals("None")){
             this.x = x;
@@ -37,13 +37,21 @@ public class NoblePhantasm extends Body {
     }
 
     public void rotateLeft() {
+        double middleX = x + (width / 2) * Math.cos(Math.toRadians(normalAngle));
+        double middleY = y + (width / 2) * Math.sin(Math.toRadians(normalAngle));
         normalAngle -= 60.0 / Controller.ticksPerSecond;
         if(normalAngle < -45) normalAngle = -45;
+        x = middleX - (width/2) * Math.cos(Math.toRadians(normalAngle));
+        y = middleY - (width/2) * Math.sin(Math.toRadians(normalAngle));
     }
 
     public void rotateRight() {
+        double middleX = x + (width / 2) * Math.cos(Math.toRadians(normalAngle));
+        double middleY = y + (width / 2) * Math.sin(Math.toRadians(normalAngle));
         normalAngle += 60.0 / Controller.ticksPerSecond;
         if(normalAngle > 45) normalAngle = 45;
+        x = middleX - (width/2) * Math.cos(Math.toRadians(normalAngle));
+        y = middleY - (width/2) * Math.sin(Math.toRadians(normalAngle));
     }
     
     public void activateMagicalHex(){

@@ -3,17 +3,21 @@ package domain.body;
 import domain.body.obstacle.*;
 import domain.needForSpear.*;
 
+import java.awt.*;
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
+
 public class EnchantedSphere extends Body {
     private boolean unstoppable;
     private NoblePhantasm np;
-    private int vx;
-    private int vy;
+    private double vx;
+    private double  vy;
     private boolean notShot = true;
 
-    public EnchantedSphere(int x_coordinates,
-                           int y_coordinates,
-                           int width,
-                           int height,
+    public EnchantedSphere(double  x_coordinates,
+                           double  y_coordinates,
+                           double  width,
+                           double  height,
                            NoblePhantasm np) {
         super(x_coordinates, y_coordinates, width, height);
         unstoppable = false;
@@ -40,8 +44,8 @@ public class EnchantedSphere extends Body {
     public void shootEnchantedSphere() {
         if (notShot) {
             double normalAngle = np.normalAngle;
-            vx = -(int) (2 * np.width * Math.cos(Math.toRadians(normalAngle + 90)));
-            vy = (int) (2 * np.width * Math.sin(Math.toRadians(normalAngle + 90)));
+            vx = -(2 * np.width * Math.cos(Math.toRadians(normalAngle + 90)));
+            vy = (2 * np.width * Math.sin(Math.toRadians(normalAngle + 90)));
             if(vy > 0){
                 vy = -vy;
             }
@@ -51,32 +55,29 @@ public class EnchantedSphere extends Body {
 
     //checks if es crashes with np considering rotated np coordinates
     public boolean compareCoordinatesWithNP(){
-        int xPos, yPos;
-        double slope;
-        boolean crashing = false;
-        if(np.normalAngle == 0 || Math.abs(np.normalAngle) == 1){
+        double xPosRight, yPosRight;
+        ArrayList<Point2D.Double> positions = new ArrayList<Point2D.Double>();
+        ArrayList<Double> distances = new ArrayList<Double>();
+        if(np.normalAngle <= 1.5 && np.normalAngle >= -1.5){
             return this.compareCoordinates(np.x,np.y,np.width,np.height);
         }
-        else if(np.normalAngle > 0){
-            //calculates rotated x,y coords of np (top left corner)
-            xPos = (int) (np.x + np.width / 2 - np.width / 2 * Math.cos(Math.toRadians(np.normalAngle)));
-            yPos = (int) (np.y - np.width / 2 * Math.sin(Math.toRadians(np.normalAngle)));
-
-            //checks if ES crashes
-            if(x > xPos && x < xPos + np.width * Math.cos(Math.toRadians(np.normalAngle))
-                && y + height > yPos && y + height < yPos + np.width * Math.sin(Math.toRadians(np.normalAngle))){
-                slope = (double)(y + height - yPos) / (double)(x - xPos);
-                //since there is loss, checks the slope in an interval
-                if(slope == Math.tan(Math.toRadians(np.normalAngle)) ||
-                   (slope <= Math.tan(Math.toRadians(np.normalAngle+3.5)) && slope >= Math.tan(Math.toRadians(np.normalAngle-3.5)))){
-                    crashing = true;
+        else {
+            xPosRight = (np.x + np.width * Math.cos(Math.toRadians(np.normalAngle)));
+            yPosRight = (np.y + np.width * Math.sin(Math.toRadians(np.normalAngle)));;
+            for(int i = 0; i<100000; i++) {
+                positions.add(new Point2D.Double(np.x + i * (xPosRight-np.x) / 100000,np.y + i * (yPosRight-np.y) / 100000));
+                distances.add(positions.get(i).distance(new Point2D.Double(x+width/2, y+height/2)));
+            }
+            for(int i=0; i<distances.size(); i++) {
+                double dist = distances.get(i);
+                if (i+1<positions.size() && distances.get(i+1) >= dist && dist<8) {
+                    return true;
+                } else {
+                    continue;
                 }
-            //corner (not sure if this works)
-            }else if(x <= xPos && xPos - x < np.height && y + height > yPos && y+height-yPos < np.height){
-                crashing = true;
             }
         //same with previous, different calculations
-        }else{
+        }/*else{
             xPos = (int) (np.x + np.width / 2 - np.width / 2 * Math.cos(Math.toRadians(np.normalAngle)));
             yPos = (int) (np.y - np.width / 2 * Math.sin(Math.toRadians(np.normalAngle)));
 
@@ -92,9 +93,8 @@ public class EnchantedSphere extends Body {
                     y + height >= yPos + np.width * Math.sin(Math.toRadians(np.normalAngle))
                     && y + height < yPos + np.width * Math.sin(Math.toRadians(np.normalAngle)) + np.height){
                 crashing = true;
-            }
-        }
-        return crashing;
+            }*/
+        return false;
     }
 
     //Handles reflection of Enchanted Sphere, it will be called every time before it executes its movement.
@@ -118,7 +118,7 @@ public class EnchantedSphere extends Body {
         //np reflect (still has issues)
         else if (compareCoordinatesWithNP()) {
             double speed = Math.sqrt(vx*vx + vy*vy);
-            double angle = Math.toDegrees(Math.atan((double) vx/vy));
+            double angle = Math.toDegrees(Math.atan(vx/vy));
             double reflectAngle = angle + 2 * np.normalAngle;
             if(np.normalAngle == -45 && vx == 0 && vy > 0){
                 vx = -vy;
@@ -139,17 +139,17 @@ public class EnchantedSphere extends Body {
             //these do not happen frequently, but still added.
             else if(vy == 0 && np.normalAngle > 0){
                 reflectAngle = 90 - 2 * np.normalAngle;
-                vy = (int) (-speed * Math.cos(Math.toRadians(reflectAngle)));
-                vx = (int) (-speed * Math.sin(Math.toRadians(reflectAngle)));
+                vy = (-speed * Math.cos(Math.toRadians(reflectAngle)));
+                vx = (-speed * Math.sin(Math.toRadians(reflectAngle)));
             }else if(vy == 0 && np.normalAngle < 0){
                 reflectAngle = 90 + 2 * np.normalAngle;
-                vy = (int) (-speed * Math.cos(Math.toRadians(reflectAngle)));
-                vx = (int) (speed * Math.sin(Math.toRadians(reflectAngle)));
+                vy = (-speed * Math.cos(Math.toRadians(reflectAngle)));
+                vx = (speed * Math.sin(Math.toRadians(reflectAngle)));
             //main reflection case
             }else if(reflectAngle <= 90 || reflectAngle >= -90){
                 if(vy > 0) {
-                    vy = (int) (-speed * Math.cos(Math.toRadians(reflectAngle)));
-                    vx = (int) (speed * Math.sin(Math.toRadians(reflectAngle)));
+                    vy = (-speed * Math.cos(Math.toRadians(reflectAngle)));
+                    vx = (speed * Math.sin(Math.toRadians(reflectAngle)));
                 }
             }else{
                 vy = 10;
@@ -217,7 +217,7 @@ public class EnchantedSphere extends Body {
         return notShot;
     }
 
-    public int getVx() {
+    public double getVx() {
         return vx;
     }
 
@@ -225,7 +225,7 @@ public class EnchantedSphere extends Body {
         this.vx = vx;
     }
 
-    public int getVy() {
+    public double getVy() {
         return vy;
     }
 

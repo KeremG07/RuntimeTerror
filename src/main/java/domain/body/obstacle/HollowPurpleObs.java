@@ -2,10 +2,10 @@ package domain.body.obstacle;
 
 
 public class HollowPurpleObs extends Obstacle{
-    public HollowPurpleObs(int x_coordinates,
-                           int y_coordinates,
-                           int width,
-                           int height,
+    public HollowPurpleObs(double x_coordinates,
+                           double y_coordinates,
+                           double width,
+                           double height,
                            int numberOfHits) {
         super(x_coordinates, y_coordinates, width, height, numberOfHits);
         vx = 0;

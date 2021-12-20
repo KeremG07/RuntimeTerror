@@ -7,17 +7,17 @@ import java.util.Random;
 public class ExplosiveObstacle extends Obstacle {
 
     //The coordinates and the radius of the circle that the obstacle will move around.
-    private final int circleRadius = height/2;
-    private final int circleCenterX = this.x + 4*width/5;
-    private final int circleCenterY = this.y - height/2;
+    private final double circleRadius = height/2;
+    private final double circleCenterX = this.x + 4*width/5;
+    private final double circleCenterY = this.y - height/2;
     //The degree between the circle's center and the obstacle.
     private double degree = 90;
     public boolean movesRight;
 
-    public ExplosiveObstacle(int x_coordinates,
-                             int y_coordinates,
-                             int width,
-                             int height,
+    public ExplosiveObstacle(double x_coordinates,
+                             double y_coordinates,
+                             double width,
+                             double height,
                              int numberOfHits) {
         super(x_coordinates, y_coordinates, width, height, numberOfHits);
         name = "Explosive";

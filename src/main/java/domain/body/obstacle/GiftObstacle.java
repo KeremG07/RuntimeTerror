@@ -6,10 +6,10 @@ import domain.needForSpear.Statistics;
 
 public class GiftObstacle extends Obstacle{
     public String giftType;
-    public GiftObstacle(int x_coordinates,
-                        int y_coordinates,
-                        int width,
-                        int height,
+    public GiftObstacle(double x_coordinates,
+                        double y_coordinates,
+                        double width,
+                        double height,
                         int numberOfHits,
                         String giftType) {
         super(x_coordinates, y_coordinates, width, height, numberOfHits);

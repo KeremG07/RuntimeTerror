@@ -14,6 +14,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +38,7 @@ public class GameScreen extends JPanel {
 
     Controller controller;
 
-    private Map<Point, Image> locations = new HashMap<Point, Image>();
+    private Map<Point2D.Double, Image> locations = new HashMap<Point2D.Double, Image>();
     private HashMap<String, Image> images = new HashMap<String, Image>();
     private ArrayList<Obstacle> obstacleList;
     private ArrayList<FallingBody> fallingBodyList;
@@ -46,11 +48,11 @@ public class GameScreen extends JPanel {
         obstacleList = controller.getStatistics().getObstacleList();
         fallingBodyList = controller.getStatistics().getFallingBodyList();
         setImages();
-        setPreferredSize(new Dimension(controller.getFrameBorders()[0], controller.getFrameBorders()[1]));
+        setPreferredSize(new Dimension((int)controller.getFrameBorders()[0], (int)controller.getFrameBorders()[1]));
         MouseAdapter ma = new MouseAdapter() {
 
             private Image dragImage;
-            private Point clickOffset;
+            private Point2D.Double clickOffset;
             private Obstacle obstacleDragged;
 
             @Override
@@ -59,10 +61,10 @@ public class GameScreen extends JPanel {
                     return;
                 }
 
-                for (Map.Entry<Point, Image> entry : locations.entrySet()) {
+                for (Map.Entry<Point2D.Double, Image> entry : locations.entrySet()) {
                     Image image = entry.getValue();
-                    Point point = entry.getKey();
-                    Rectangle bounds1 = new Rectangle(
+                    Point2D.Double point = entry.getKey();
+                    Rectangle2D.Double bounds1 = new Rectangle2D.Double(
                             point.x, point.y,
                             image.getWidth(GameScreen.this), image.getHeight(GameScreen.this));
                     if (bounds1.contains(e.getPoint())) {
@@ -73,7 +75,7 @@ public class GameScreen extends JPanel {
                             }
                         }
                         dragImage = image;
-                        clickOffset = new Point(point.x - e.getPoint().x, point.y - e.getPoint().y);
+                        clickOffset = new Point2D.Double(point.x - e.getPoint().x, point.y - e.getPoint().y);
                         break;
                     }
                 }
@@ -88,7 +90,7 @@ public class GameScreen extends JPanel {
             @Override
             public void mouseDragged(MouseEvent e) {
                 if (dragImage != null) {
-                    Point dragPoint = new Point(e.getPoint());
+                    Point2D.Double dragPoint = new Point2D.Double(e.getX(), e.getY());
                     dragPoint.x += clickOffset.x;
                     dragPoint.y += clickOffset.y;
                     locations.put(dragPoint, dragImage);
@@ -129,13 +131,13 @@ public class GameScreen extends JPanel {
         NoblePhantasm noblePhantasm = controller.getPlayer().getNoblePhantasm();
         Graphics2D g2d = (Graphics2D) g;
         AffineTransform rotateTransform  = AffineTransform.getRotateInstance(Math.toRadians(noblePhantasm.getNormalAngle()),
-                (noblePhantasm.getCoordinates()[0] + 50 - Math.sqrt(Math.pow(50,2) + Math.pow(4,2)) * Math.cos(Math.atan(0.08) + Math.toRadians(noblePhantasm.getNormalAngle()))),
-                (noblePhantasm.getCoordinates()[1] + 4 - Math.sqrt(Math.pow(50,2) + Math.pow(4,2)) * Math.sin(Math.toRadians(noblePhantasm.getNormalAngle()))));
+                noblePhantasm.getCoordinates()[0],
+                noblePhantasm.getCoordinates()[1]);
         //System.out.println(noblePhantasm.getCoordinates()[0] + 50.0 - Math.sqrt(Math.pow(50,2) + Math.pow(4,2)) * Math.cos(Math.atan(0.08) + Math.toRadians(noblePhantasm.getNormalAngle())));
         //System.out.println(noblePhantasm.getCoordinates()[1] - 4.0 - Math.sqrt(Math.pow(50,2) + Math.pow(4,2)) * Math.sin(Math.atan(0.08) + Math.toRadians(noblePhantasm.getNormalAngle())));
         //AffineTransform old = g2d.getTransform();
-        rotateTransform.translate(noblePhantasm.getCoordinates()[0] + 50.0 - Math.sqrt(Math.pow(50,2) + Math.pow(4,2)) * Math.cos(Math.atan(0.08) + Math.toRadians(noblePhantasm.getNormalAngle())),
-                noblePhantasm.getCoordinates()[1] + 4.0 - Math.sqrt(Math.pow(50,2) + Math.pow(4,2)) * Math.sin(Math.atan(0.08) + Math.toRadians(noblePhantasm.getNormalAngle())));
+        rotateTransform.translate(noblePhantasm.getCoordinates()[0],
+                noblePhantasm.getCoordinates()[1]);
         g2d.drawImage(images.get("noblePhantasm"), rotateTransform , null);
         //g2d.setTransform(old);
     }
@@ -167,12 +169,12 @@ public class GameScreen extends JPanel {
         } else {
             imageToDraw = images.get("giftObstacle");
         }
-        locations.put(new Point(o.getCoordinates()[0], o.getCoordinates()[1]), imageToDraw);
+        locations.put(new Point2D.Double(o.getCoordinates()[0], o.getCoordinates()[1]), imageToDraw);
         g2d.drawImage(imageToDraw, at, null);
         if(o instanceof FirmObstacle) {
-            g2d.drawString(Integer.toString(o.getNumberOfHits()),
-                    o.getCoordinates()[0] + 11*(o.width)/24,
-                    o.getCoordinates()[1] + o.height - 2);
+            g2d.drawString(Double.toString(o.getNumberOfHits()),
+                    (int) (o.getCoordinates()[0] + 11*(o.width)/24),
+                    (int) (o.getCoordinates()[1] + o.height - 2));
         }
         //g2d.setTransform(old);
     }
@@ -188,7 +190,7 @@ public class GameScreen extends JPanel {
         } else {
             imageToDraw = images.get("remains");
         }
-        locations.put(new Point(fb.getCoordinates()[0], fb.getCoordinates()[1]), imageToDraw);
+        locations.put(new Point2D.Double(fb.getCoordinates()[0], fb.getCoordinates()[1]), imageToDraw);
         g2d.drawImage(imageToDraw, at, null);
     }
 

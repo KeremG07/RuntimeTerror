@@ -6,10 +6,10 @@ public abstract class FallingBody extends Body {
 
     public int vy = 1;
 
-    public FallingBody(int x_coordinates,
-                       int y_coordinates,
-                       int length,
-                       int width) {
+    public FallingBody(double x_coordinates,
+                       double y_coordinates,
+                       double length,
+                       double width) {
         super(x_coordinates, y_coordinates, length, width);
     }
     public void fall() {

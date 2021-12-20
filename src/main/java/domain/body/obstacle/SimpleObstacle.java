@@ -7,10 +7,10 @@ import java.util.Random;
 public class SimpleObstacle extends Obstacle {
     public boolean movesRight;
 
-    public SimpleObstacle(int x_coordinates,
-                          int y_coordinates,
-                          int width,
-                          int height,
+    public SimpleObstacle(double x_coordinates,
+                          double y_coordinates,
+                          double width,
+                          double height,
                           int numberOfHits) {
         super(x_coordinates, y_coordinates, width, height, numberOfHits);
         //Speed is initialized as this because otherwise it is smaller than 1 and doesn't have an effect.

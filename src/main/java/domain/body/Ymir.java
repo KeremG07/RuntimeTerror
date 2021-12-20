@@ -18,10 +18,10 @@ public class Ymir extends Body {
     public HollowPurple hollowPurple = HollowPurple.getInstance();
     public InfiniteVoid infiniteVoid = InfiniteVoid.getInstance();
 
-    public Ymir(int x_coordinates,
-                int y_coordinates,
-                int width,
-                int height) {
+    public Ymir(double x_coordinates,
+                double y_coordinates,
+                double width,
+                double height) {
         super(x_coordinates, y_coordinates, width, height);
         state = "passive";
         currentAbility = null;

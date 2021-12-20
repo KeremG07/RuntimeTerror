@@ -12,10 +12,10 @@ public abstract class Obstacle extends Body {
     protected String name;
     public Random randi = new Random();
 
-    public Obstacle(int x_coordinates,
-                    int y_coordinates,
-                    int width,
-                    int height,
+    public Obstacle(double x_coordinates,
+                    double y_coordinates,
+                    double width,
+                    double height,
                     int numberOfHits){
         super(x_coordinates,y_coordinates, width, height);
         movingProbability = randi.nextInt(10);

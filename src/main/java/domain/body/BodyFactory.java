@@ -4,7 +4,7 @@ import domain.body.obstacle.*;
 import domain.needForSpear.Controller;
 
 public class BodyFactory {
-    public static final int gameScreenWidth = Controller.getInstance().getFrameBorders()[0],
+    public static final double gameScreenWidth = Controller.getInstance().getFrameBorders()[0],
             gameScreenHeight = Controller.getInstance().getFrameBorders()[1],
             nPhantasmWidth = gameScreenWidth/10,
             nPhantasmHeight = 8,
@@ -21,7 +21,7 @@ public class BodyFactory {
     public static EnchantedSphere createES(NoblePhantasm np){
         return new EnchantedSphere(np.x+((nPhantasmWidth-eSphereWidth)/2), np.y-eSphereHeight, eSphereWidth, eSphereHeight, np);
     }
-    public static Obstacle createObstacle(String typeOfObstacle, int x, int y, int hitNum){
+    public static Obstacle createObstacle(String typeOfObstacle, double x, double y, int hitNum){
         //Used for all obstacle creations.
         Obstacle newCreatedObs;
         if(typeOfObstacle.equals("Simple")){

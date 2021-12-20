@@ -4,10 +4,10 @@ import domain.needForSpear.Controller;
 
 public class MagicalHex extends Body {
 
-    public MagicalHex(int x_coordinates,
-                      int y_coordinates,
-                      int length,
-                      int width) {
+    public MagicalHex(double x_coordinates,
+                      double y_coordinates,
+                      double length,
+                      double width) {
         super(x_coordinates, y_coordinates, length, width);
     }
 

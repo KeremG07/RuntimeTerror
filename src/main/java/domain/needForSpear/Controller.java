@@ -146,13 +146,13 @@ public class Controller {
         System.exit(0);
     }
 
-    public int[] getFrameBorders() {
-        int[] borders = new int[2];
+    public double[] getFrameBorders() {
+        double[] borders = new double[2];
         borders[0] = gameScreenWidth;
         borders[1] = gameScreenHeight;
         return borders;
     }
-    public String hitFrame(int x, int y, int width, int height ){
+    public String hitFrame(double x, double y, double width, double height ){
         double screenWidth = getFrameBorders()[0];
         double screenHeight = getFrameBorders()[1];
         if(y <= 0 && x + width >= screenWidth){
