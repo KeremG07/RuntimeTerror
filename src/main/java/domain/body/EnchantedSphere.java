@@ -11,7 +11,7 @@ public class EnchantedSphere extends Body {
     private boolean unstoppable;
     private NoblePhantasm np;
     private double vx;
-    private double  vy;
+    private double vy;
     private boolean notShot = true;
 
     public EnchantedSphere(double  x_coordinates,
@@ -64,13 +64,13 @@ public class EnchantedSphere extends Body {
         else {
             xPosRight = (np.x + np.width * Math.cos(Math.toRadians(np.normalAngle)));
             yPosRight = (np.y + np.width * Math.sin(Math.toRadians(np.normalAngle)));;
-            for(int i = 0; i<100000; i++) {
-                positions.add(new Point2D.Double(np.x + i * (xPosRight-np.x) / 100000,np.y + i * (yPosRight-np.y) / 100000));
+            for(int i = 0; i<10000; i++) {
+                positions.add(new Point2D.Double(np.x + i * (xPosRight-np.x) / 10000,np.y + i * (yPosRight-np.y) / 10000));
                 distances.add(positions.get(i).distance(new Point2D.Double(x+width/2, y+height/2)));
             }
             for(int i=0; i<distances.size(); i++) {
                 double dist = distances.get(i);
-                if (i+1<positions.size() && distances.get(i+1) >= dist && dist<8) {
+                if (dist>5.9 && dist<6.1) {
                     return true;
                 } else {
                     continue;
