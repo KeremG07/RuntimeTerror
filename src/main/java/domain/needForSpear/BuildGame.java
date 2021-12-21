@@ -9,16 +9,19 @@ import java.util.Random;
 
 public class BuildGame {
     public final int simpleObstacleReq = 75, firmObstacleReq = 10, explosiveObstacleReq = 5, giftObstacleReq = 10;
-    public int simpleObstacle, firmObstacle, explosiveObstacle, giftObstacle;
+    private int simpleObstacle, firmObstacle, explosiveObstacle, giftObstacle;
     public final double gameScreenWidth = Controller.getInstance().getFrameBorders()[0],
             gameScreenHeight = Controller.getInstance().getFrameBorders()[1];
     public Random randi = new Random();
 
     //Creates however many obstacles were asked to be created.
     public BuildGame(String[] numOfObstaclesReq){
+        //REQUIRES: A string array of length 4.
+        //MODIFIES: obstacleList, an ArrayList that contains all the obstacles created in Statistics.java.
+        //EFFECTS: Initializes simpleObstacle, firmObstacle, explosiveObstacle and giftObstacle according to user input,
+        //creates correct number of obstacles and puts them on the screen randomly and in a way that they do not collide.
         setNumObstacles(numOfObstaclesReq);
-        //The GameScreen is divided into cells (size: 10x10) where objects can be put. The objects are put into the
-        // empty cells chosen randomly.
+        //The GameScreen is divided into cells (size: 10x10) where objects can be put.
         boolean[][] locationCells = new boolean[(int)(gameScreenHeight-200)/40][(int) gameScreenWidth/100];
         for(int i=0; i<simpleObstacle; i++){
             putObstacleInCell(locationCells, "Simple");
@@ -99,5 +102,20 @@ public class BuildGame {
                 }
             }
         }
+    }
+    public int getSimpleObstacleNum() {
+        return simpleObstacle;
+    }
+
+    public int getFirmObstacleNum() {
+        return firmObstacle;
+    }
+
+    public int getExplosiveObstacleNum() {
+        return explosiveObstacle;
+    }
+
+    public int getGiftObstacleNum() {
+        return giftObstacle;
     }
 }
