@@ -8,8 +8,8 @@ public class ExplosiveObstacle extends Obstacle {
 
     //The coordinates and the radius of the circle that the obstacle will move around.
     private final double circleRadius = height/2;
-    private final double circleCenterX = this.x + 4*width/5;
-    private final double circleCenterY = this.y - height/2;
+    private double circleCenterX = this.x + 4*width/5;
+    private double circleCenterY = this.y - height/2;
     //The degree between the circle's center and the obstacle.
     private double degree = 90;
     public boolean movesRight;
@@ -24,7 +24,6 @@ public class ExplosiveObstacle extends Obstacle {
         vx = 100/(4*Controller.ticksPerSecond);
         Random rand = new Random();
         movesRight = rand.nextBoolean();
-        moving = true;
     }
 
     public double getDegree() {
@@ -101,8 +100,13 @@ public class ExplosiveObstacle extends Obstacle {
         Statistics.addRemains(new Remains(this.getCoordinates()[0]+16, this.getCoordinates()[1]+16, 32, 32, 1));
     }
 
-    /*@Override
-    public int[] getCoordinates() {
-        return new int[] {circleCenterX, circleCenterY};
-    }*/
+    @Override
+    public void setCoordinates(double x, double y) {
+        double offsetx = this.x - circleCenterX;
+        double offsety = this.y - circleCenterY;
+        this.x = x;
+        this.y = y;
+        circleCenterX = this.x - offsetx;
+        circleCenterY = this.y - offsety;
+    }
 }
