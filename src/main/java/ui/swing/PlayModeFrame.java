@@ -57,8 +57,7 @@ public class PlayModeFrame extends JFrame {
         //initializeScores(gbc, scorePanel);
         // ...
         // Panels End Here
-
-        gameScreen.setBorder(BorderFactory.createLineBorder(Color.red));
+        
         this.setLocationRelativeTo(null);
         setVisible(true);
         setFocusable(true);

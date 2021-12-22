@@ -60,7 +60,6 @@ public class BuildModeFrame extends JFrame {
         mainPanel.add(gameScreen);
         mainPanel.add(buttonPanel);
         initializeObstacleNumbers(gbc, numberPanel);
-        gameScreen.setBorder(BorderFactory.createLineBorder(Color.red));
         initializeButton(gbc, buttonPanel);
         this.setLocationRelativeTo(null);
         setVisible(true);
