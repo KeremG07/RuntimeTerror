@@ -45,10 +45,12 @@ public class EnchantedSphere extends Body {
         if (notShot) {
             double normalAngle = np.normalAngle;
             vx = -(2 * np.width * Math.cos(Math.toRadians(normalAngle + 90)));
+            if(normalAngle==0) vx = 0;
             vy = (2 * np.width * Math.sin(Math.toRadians(normalAngle + 90)));
             if(vy > 0){
                 vy = -vy;
             }
+
             notShot = false;
         }
     }
@@ -58,12 +60,12 @@ public class EnchantedSphere extends Body {
         double xPosRight, yPosRight;
         ArrayList<Point2D.Double> positions = new ArrayList<Point2D.Double>();
         ArrayList<Double> distances = new ArrayList<Double>();
-        if(np.normalAngle <= 1.5 && np.normalAngle >= -1.5){
+        if(np.normalAngle <= 2 && np.normalAngle >= -2){
             return this.compareCoordinates(np.x,np.y,np.width,np.height);
         }
         else {
             xPosRight = (np.x + np.width * Math.cos(Math.toRadians(np.normalAngle)));
-            yPosRight = (np.y + np.width * Math.sin(Math.toRadians(np.normalAngle)));;
+            yPosRight = (np.y + np.width * Math.sin(Math.toRadians(np.normalAngle)));
             for(int i = 0; i<10000; i++) {
                 positions.add(new Point2D.Double(np.x + i * (xPosRight-np.x) / 10000,np.y + i * (yPosRight-np.y) / 10000));
                 distances.add(positions.get(i).distance(new Point2D.Double(x+width/2, y+height/2)));
@@ -99,6 +101,9 @@ public class EnchantedSphere extends Body {
 
     //Handles reflection of Enchanted Sphere, it will be called every time before it executes its movement.
     public void reflect() {
+        //REQUIRES:
+        //MODIFIES: vx and vy components of enchanted sphere
+        //EFFECTS: If enchanted sphere hits a body/wall, changes vx and vy based on the body/wall it hits.
         String wall = Controller.getInstance().hitFrame(x, y, width, height);
         boolean hitObstacle;
         if (wall.equals("UpperLeft") || wall.equals("UpperRight")) {
