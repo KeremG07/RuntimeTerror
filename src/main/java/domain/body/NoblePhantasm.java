@@ -19,12 +19,12 @@ public class NoblePhantasm extends Body {
     }
 
     public void updateX(double x) {
-        String frame = Controller.getInstance().hitFrame(x, this.y, this.width, this.height);
-        if(frame.equals("None")){
+        String frame = Controller.getInstance().hitFrame(x, this.y, this.width * Math.cos(Math.toRadians(this.normalAngle)), this.height * Math.sin(Math.toRadians(this.normalAngle)));
+        if(frame.equals("None") || frame.equals("Down") || frame.equals("DownLeft") || frame.equals("DownRight")){
             this.x = x;
         } else if (frame.equals("Right")){
-            this.x = Controller.getInstance().getFrameBorders()[0] - this.width;
-        } else {
+            this.x = Controller.getInstance().getFrameBorders()[0] - this.width * Math.cos(Math.toRadians(this.normalAngle));
+        } else if (frame.equals("Left")){
             this.x = 0;
         }
     }

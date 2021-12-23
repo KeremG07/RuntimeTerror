@@ -157,7 +157,7 @@ public class PlayModeFrame extends JFrame {
     }
 
     private void initializeFrame() {
-        setBounds(0, 0, 1016, 800);
+        setBounds(0, 0, 1000, 800);
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

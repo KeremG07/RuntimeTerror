@@ -39,7 +39,7 @@ public class BuildModeFrame extends JFrame {
         controller = Controller.getInstance();
         obstacleList = controller.getStatistics().getObstacleList();
         this.savePlace=savePlace;
-        setBounds(0, 0, 1016, 800);
+        setBounds(0, 0, 1000, 800);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
