@@ -12,7 +12,7 @@ public class BuildGame {
     private int simpleObstacle, firmObstacle, explosiveObstacle, giftObstacle;
     public final double gameScreenWidth = Controller.getInstance().getFrameBorders()[0],
             gameScreenHeight = Controller.getInstance().getFrameBorders()[1];
-    public Random randi = new Random();
+    private Random randi = new Random();
 
     //Creates however many obstacles were asked to be created.
     public BuildGame(String[] numOfObstaclesReq){

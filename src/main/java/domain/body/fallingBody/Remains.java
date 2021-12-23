@@ -2,7 +2,7 @@ package domain.body.fallingBody;
 
 public class Remains extends FallingBody {
 
-    int remainNumber;
+    private int remainNumber;
 
     public Remains(double x_coordinates,
                    double y_coordinates,

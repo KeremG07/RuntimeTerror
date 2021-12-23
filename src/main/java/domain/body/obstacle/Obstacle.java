@@ -8,9 +8,9 @@ public abstract class Obstacle extends Body {
     protected boolean moving;
     private int movingProbability;
     private int numberOfHits;
-    protected int vx;
+    protected double vx;
     protected String name;
-    public Random randi = new Random();
+    private Random randi = new Random();
 
     public Obstacle(double x_coordinates,
                     double y_coordinates,
@@ -23,10 +23,10 @@ public abstract class Obstacle extends Body {
         this.numberOfHits=numberOfHits;
     }
     public abstract void move();
-    public int getVx(){
+    public double getVx(){
         return vx;
     }
-    public void setVx(int vx) {
+    public void setVx(double vx) {
         this.vx = vx;
     }
 

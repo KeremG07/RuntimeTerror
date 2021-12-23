@@ -173,8 +173,8 @@ public class GameScreen extends JPanel {
         g2d.drawImage(imageToDraw, at, null);
         if(o instanceof FirmObstacle) {
             g2d.drawString(Integer.toString(o.getNumberOfHits()),
-                    (int) (o.getCoordinates()[0] + 11*(o.width)/24),
-                    (int) (o.getCoordinates()[1] + o.height - 2));
+                    (int) (o.getCoordinates()[0] + 11*(o.getWidth())/24),
+                    (int) (o.getCoordinates()[1] + o.getHeight() - 2));
         }
         //g2d.setTransform(old);
     }

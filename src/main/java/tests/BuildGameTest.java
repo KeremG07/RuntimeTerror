@@ -58,7 +58,7 @@ public class BuildGameTest {
             for(Obstacle obstacle2 : Statistics.getObstacleList()){
                 if(!obstacle1.equals(obstacle2)){
                     assertFalse(obstacle1.compareCoordinates(obstacle2.getCoordinates()[0], obstacle2.getCoordinates()[1],
-                            obstacle2.width, obstacle2.height));
+                            obstacle2.getWidth(), obstacle2.getHeight()));
                 }
             }
         }

@@ -3,8 +3,8 @@ package domain.body;
 public class Body {
     protected double x;
     protected double y;
-    public double  width;
-    public double  height;
+    protected double width;
+    protected double height;
 
     public Body(double x_coordinates,
                 double y_coordinates,
@@ -63,6 +63,22 @@ public class Body {
             }
         }*/
         return crashingCoordinates;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
     }
 
 }

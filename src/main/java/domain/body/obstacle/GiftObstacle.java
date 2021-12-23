@@ -5,7 +5,7 @@ import domain.body.fallingBody.Remains;
 import domain.needForSpear.Statistics;
 
 public class GiftObstacle extends Obstacle{
-    public String giftType;
+    private String giftType;
     public GiftObstacle(double x_coordinates,
                         double y_coordinates,
                         double width,

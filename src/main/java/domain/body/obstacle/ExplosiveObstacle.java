@@ -12,7 +12,7 @@ public class ExplosiveObstacle extends Obstacle {
     private double circleCenterY = this.y - height/2;
     //The degree between the circle's center and the obstacle.
     private double degree = 90;
-    public boolean movesRight;
+    private boolean movesRight;
 
     public ExplosiveObstacle(double x_coordinates,
                              double y_coordinates,
@@ -48,7 +48,7 @@ public class ExplosiveObstacle extends Obstacle {
             boolean canMoveRight = true;
             boolean canMoveLeft = true;
             //Compares with every obstacle.
-            for (Obstacle obstacle : Statistics.obstacleList) {
+            for (Obstacle obstacle : Statistics.getObstacleList()) {
                 //Doesn't check whether it crashes with itself.
                 if (!(obstacle.getCoordinates()[0] == this.x && obstacle.getCoordinates()[1] == this.y)) {
                     canMoveRight &= !(obstacle.compareCoordinates(newXR, newYR, this.width, this.height));

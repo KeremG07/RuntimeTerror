@@ -9,15 +9,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Statistics {
-    public String username;
-    public static double score;
-    public static int chances;
-    public static double timeElapsed;
+    private String username;
+    private static double score;
+    private static int chances;
+    private static double timeElapsed;
 
-    public static ArrayList<Obstacle> obstacleList = new ArrayList<Obstacle>();
-    public static ArrayList<FallingBody> fallingBodyList = new ArrayList<FallingBody>();
+    private static ArrayList<Obstacle> obstacleList = new ArrayList<Obstacle>();
+    private static ArrayList<FallingBody> fallingBodyList = new ArrayList<FallingBody>();
 
-    public HashMap<String, Integer> obstacleNumberbyType; // String "type" --> integer "obstacle number
+    private HashMap<String, Integer> obstacleNumberbyType; // String "type" --> integer "obstacle number
 
 
     public Statistics() {
@@ -57,6 +57,9 @@ public class Statistics {
         return score;
     }
 
+    public static void setScore(double score) {
+        Statistics.score = score;
+    }
     public static void setChances(int chances) {
         Statistics.chances = chances;
     }
@@ -67,6 +70,10 @@ public class Statistics {
 
     public static double getTimeElapsed() {
         return timeElapsed;
+    }
+
+    public static void setTimeElapsed(double timeElapsed) {
+        Statistics.timeElapsed = timeElapsed;
     }
 
     public static void setObstacleList(ArrayList<Obstacle> obstacleList) {

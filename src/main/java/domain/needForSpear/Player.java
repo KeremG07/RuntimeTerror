@@ -18,10 +18,11 @@ public class Player {
     Statistics statistics;
     ILoadAndSaveAdapter iLoadAndSaveAdapter;
     LocalLoadAndSave localLoadAndSave;
-    public Inventory inventory;
+    private Inventory inventory;
     private NoblePhantasm noblePhantasm;
     private EnchantedSphere enchantedSphere;
-    public String save;
+
+    private String save;
 
     public Player() {
         statistics = new Statistics();
@@ -29,18 +30,6 @@ public class Player {
         inventory = new Inventory();
         noblePhantasm = BodyFactory.createNP();
         enchantedSphere = BodyFactory.createES(noblePhantasm);
-    }
-
-    public Inventory getInventory() {
-        return inventory;
-    }
-
-    public NoblePhantasm getNoblePhantasm() {
-        return noblePhantasm;
-    }
-
-    public EnchantedSphere getEnchantedSphere() {
-        return enchantedSphere;
     }
 
     public void saveGame(String username) {
@@ -65,16 +54,16 @@ public class Player {
          enchanted sphere isshot coordinates and speed
          obstacles on the screen (type location speed)
         */
-        saveList.add(Double.toString(statistics.timeElapsed));
-        saveList.add(Integer.toString(statistics.chances));
-        saveList.add(Double.toString(statistics.score));
+        saveList.add(Double.toString(statistics.getTimeElapsed()));
+        saveList.add(Integer.toString(statistics.getChances()));
+        saveList.add(Double.toString(statistics.getScore()));
         //saveList.add(statistics.obstacleTypeList());
         //saveList.add(statistics.giftList())
 
-        saveList.add("" + noblePhantasm.getCoordinates()[0] + "/" + noblePhantasm.normalAngle);
+        saveList.add("" + noblePhantasm.getCoordinates()[0] + "/" + noblePhantasm.getNormalAngle());
         saveList.add("" + enchantedSphere.isNotShot() + "/" + enchantedSphere.getCoordinates()[0]
                 + "/" + enchantedSphere.getCoordinates()[1] + "/" + enchantedSphere.getVx() + "/" + enchantedSphere.getVy());
-        for (Obstacle obs : statistics.obstacleList) {
+        for (Obstacle obs : statistics.getObstacleList()) {
             String obsType = obs.getName();
             if (obsType.equals("Explosive")) {
                 saveList.add("" + obstacleNameMap.get(obs.getName()) + "/" + obs.getCoordinates()[0] + "/" + obs.getCoordinates()[1] + "/" + ((ExplosiveObstacle) obs).getDegree());
@@ -114,14 +103,16 @@ public class Player {
                 return false;
 
             } else {
-                statistics.timeElapsed = Double.parseDouble(loadList.get(0));
-                statistics.chances = Integer.parseInt(loadList.get(1));
-                statistics.score = Double.parseDouble(loadList.get(2));
+                //
+                statistics.setTimeElapsed(Double.parseDouble(loadList.get(0)));
+                statistics.setChances(Integer.parseInt(loadList.get(1)));
+                statistics.setScore(Double.parseDouble(loadList.get(2)));
 
                 String noblePhantasmInfo = loadList.get(3);
                 StringTokenizer stNP = new StringTokenizer(noblePhantasmInfo, "/");
-                noblePhantasm.updateX(Integer.parseInt(stNP.nextToken()));
-                noblePhantasm.normalAngle = Double.parseDouble(stNP.nextToken());
+                noblePhantasm.updateX(Double.parseDouble(stNP.nextToken()));
+                //
+                noblePhantasm.setNormalAngle(Double.parseDouble(stNP.nextToken()));
 
                 String enchantedSphereInfo = loadList.get(4);
                 StringTokenizer stES = new StringTokenizer(enchantedSphereInfo, "/");
@@ -129,36 +120,36 @@ public class Player {
                 boolean ESisNotShot = Boolean.parseBoolean(stES.nextToken());
                 enchantedSphere.setNotShot(ESisNotShot);
                 if (ESisNotShot) {
-                    enchantedSphere.setCoordinates(noblePhantasm.getCoordinates()[0] + 34, noblePhantasm.getCoordinates()[1] - noblePhantasm.height);
+                    enchantedSphere.setCoordinates(noblePhantasm.getCoordinates()[0] + 34, noblePhantasm.getCoordinates()[1] - noblePhantasm.getHeight());
                 } else {
-                    enchantedSphere.setCoordinates(Integer.parseInt(stES.nextToken()), Integer.parseInt(stES.nextToken()));
+                    enchantedSphere.setCoordinates(Double.parseDouble(stES.nextToken()), Double.parseDouble(stES.nextToken()));
                 }
 
-                enchantedSphere.setVx(Integer.parseInt(stES.nextToken()));
-                enchantedSphere.setVy(Integer.parseInt(stES.nextToken()));
+                enchantedSphere.setVx(Double.parseDouble(stES.nextToken()));
+                enchantedSphere.setVy(Double.parseDouble(stES.nextToken()));
 
-                statistics.obstacleList.clear();
+                statistics.getObstacleList().clear();
                 for (int i = 5; i < loadList.size(); i++) {
                     StringTokenizer st = new StringTokenizer(loadList.get(i), "/");
                     //saveList.add("" + obstacleNameMap.get(obs.getName()) + "/" +
                     // obs.getCoordinates()[0] + "/" + obs.getCoordinates()[1] + "/" + obs.getVx());
 
                     int obsType = Integer.parseInt(st.nextToken());
-                    int coordX = Integer.parseInt(st.nextToken());
-                    int coordY = Integer.parseInt(st.nextToken());
+                    double coordX = Double.parseDouble(st.nextToken());
+                    double coordY = Double.parseDouble(st.nextToken());
 
 
                     // we need to have different and consistent create obstacle methods for each obstacle type
                     if (obsType == 0) {
                         Obstacle obstacle = BodyFactory.createObstacle("Simple", coordX, coordY, 1);
-                        int vx = Integer.parseInt(st.nextToken());
+                        double vx = Double.parseDouble(st.nextToken());
                         obstacle.setVx(vx);
                         statistics.addObstacle(obstacle);
                     }
                     if (obsType == 1) {
                         int chances = Integer.parseInt(st.nextToken());
                         Obstacle obstacle = BodyFactory.createObstacle("Firm", coordX, coordY, chances);
-                        int vx = Integer.parseInt(st.nextToken());
+                        double vx = Double.parseDouble(st.nextToken());
                         obstacle.setVx(vx);
                         statistics.addObstacle(obstacle);
                     }
@@ -170,7 +161,7 @@ public class Player {
                     }
                     if (obsType == 3) {
                         Obstacle obstacle = BodyFactory.createObstacle("Gift", coordX, coordY, 1);
-                        int vx = Integer.parseInt(st.nextToken());
+                        double vx = Double.parseDouble(st.nextToken());
                         obstacle.setVx(vx);
                         statistics.addObstacle(obstacle);
                     }
@@ -239,10 +230,31 @@ public class Player {
     }
 
     public void increaseChance() {
-        statistics.setChances(statistics.chances + 1);
+        statistics.setChances(statistics.getChances() + 1);
     }
 
     public void loseChance() {
-        statistics.setChances(statistics.chances - 1);
+        statistics.setChances(statistics.getChances() - 1);
     }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public NoblePhantasm getNoblePhantasm() {
+        return noblePhantasm;
+    }
+
+    public EnchantedSphere getEnchantedSphere() {
+        return enchantedSphere;
+    }
+
+    public String getSave() {
+        return save;
+    }
+
+    public void setSave(String save) {
+        this.save = save;
+    }
+
 }

@@ -23,10 +23,10 @@ public class Controller {
     ArrayList<Obstacle> toRemoveObs = new ArrayList<>();
     ArrayList<FallingBody> toRemoveFBody = new ArrayList<>();
     //To check whether we shot the enchanted sphere or not:
-    boolean playing = false;
-    boolean isPaused = false;
-    boolean isOver = false;
-    public int timeLeft;
+    private boolean playing = false;
+    private boolean isPaused = false;
+    private boolean isOver = false;
+    private int timeLeft;
     private final int gameScreenWidth = 1000, gameScreenHeight = 600;
 
     private Controller() {
@@ -48,11 +48,11 @@ public class Controller {
 
     }
     public void saveGame(){
-        player.saveGame(statistics.username);
+        player.saveGame(statistics.getUsername());
     }
 
     public boolean loadGame(){
-       return player.loadGame(statistics.username);
+       return player.loadGame(statistics.getUsername());
     }
 
     public boolean isPaused() {
@@ -73,7 +73,7 @@ public class Controller {
             shootEnchantedSphere();
             moveEnchantedSphere();
             //If enchanted sphere falls down set up so that it will be shot again by the player.
-            if(player.getEnchantedSphere().getCoordinates()[1] + player.getEnchantedSphere().height>=gameScreenHeight){
+            if(player.getEnchantedSphere().getCoordinates()[1] + player.getEnchantedSphere().getHeight()>=gameScreenHeight){
                 playing = false;
                 player.updateEnchantedSphere();
             }
@@ -117,14 +117,16 @@ public class Controller {
     public void updateFallingBodyConditions() {
         for (FallingBody fbody: statistics.getFallingBodyList()) {
             if (fbody instanceof Gift) {
-                if(fbody.compareCoordinates(player.getNoblePhantasm().getCoordinates()[0],player.getNoblePhantasm().getCoordinates()[1], player.getNoblePhantasm().width, player.getNoblePhantasm().height)) {
+                if(fbody.compareCoordinates(player.getNoblePhantasm().getCoordinates()[0],player.getNoblePhantasm().getCoordinates()[1],
+                        player.getNoblePhantasm().getWidth(), player.getNoblePhantasm().getHeight())) {
                     toRemoveFBody.add(fbody);
                     // buraya ability eklemesi de gelecek
                 } else {
                     fbody.fall();
                 }
             } else {
-                if (fbody.compareCoordinates(player.getNoblePhantasm().getCoordinates()[0], player.getNoblePhantasm().getCoordinates()[1], player.getNoblePhantasm().width, player.getNoblePhantasm().height)) {
+                if (fbody.compareCoordinates(player.getNoblePhantasm().getCoordinates()[0], player.getNoblePhantasm().getCoordinates()[1],
+                        player.getNoblePhantasm().getWidth(), player.getNoblePhantasm().getHeight())) {
                     toRemoveFBody.add(fbody);
                     player.loseChance();
                 } else {
