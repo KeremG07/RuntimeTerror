@@ -34,6 +34,19 @@ public class ExplosiveObstacle extends Obstacle {
         this.degree = degree;
     }
     //Doesn't move with the correct speed yet. Needs testing.
+
+    public double getCircleRadius() {
+        return circleRadius;
+    }
+
+    public double getCircleCenterX() {
+        return circleCenterX;
+    }
+
+    public double getCircleCenterY() {
+        return circleCenterY;
+    }
+
     @Override
     public void move() {
         if(moving){
@@ -102,6 +115,10 @@ public class ExplosiveObstacle extends Obstacle {
 
     @Override
     public void setCoordinates(double x, double y) {
+        //REQUIRES: x,y >=0
+        //MODIFIES: circleCenterX, circleCenterY
+        //EFFECTS: Whenever the explosive obstacle is moved (in build mode), its center which the obstacle
+        //does circular motion around is moved accordingly.
         double offsetx = this.x - circleCenterX;
         double offsety = this.y - circleCenterY;
         this.x = x;
