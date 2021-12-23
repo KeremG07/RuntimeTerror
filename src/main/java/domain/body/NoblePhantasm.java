@@ -22,6 +22,10 @@ public class NoblePhantasm extends Body {
         String frame = Controller.getInstance().hitFrame(x, this.y, this.width, this.height);
         if(frame.equals("None")){
             this.x = x;
+        } else if (frame.equals("Right")){
+            this.x = Controller.getInstance().getFrameBorders()[0] - this.width;
+        } else {
+            this.x = 0;
         }
     }
 

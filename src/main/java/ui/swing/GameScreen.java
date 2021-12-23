@@ -133,8 +133,6 @@ public class GameScreen extends JPanel {
         AffineTransform rotateTransform  = AffineTransform.getRotateInstance(Math.toRadians(noblePhantasm.getNormalAngle()),
                 noblePhantasm.getCoordinates()[0],
                 noblePhantasm.getCoordinates()[1]);
-        //System.out.println(noblePhantasm.getCoordinates()[0] + 50.0 - Math.sqrt(Math.pow(50,2) + Math.pow(4,2)) * Math.cos(Math.atan(0.08) + Math.toRadians(noblePhantasm.getNormalAngle())));
-        //System.out.println(noblePhantasm.getCoordinates()[1] - 4.0 - Math.sqrt(Math.pow(50,2) + Math.pow(4,2)) * Math.sin(Math.atan(0.08) + Math.toRadians(noblePhantasm.getNormalAngle())));
         //AffineTransform old = g2d.getTransform();
         rotateTransform.translate(noblePhantasm.getCoordinates()[0],
                 noblePhantasm.getCoordinates()[1]);
