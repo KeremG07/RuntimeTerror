@@ -47,8 +47,20 @@ public class ExplosiveObstacle extends Obstacle {
         return circleCenterY;
     }
 
+    public void setMovesRight(boolean bool) {
+        movesRight = bool;
+    }
+
+    public boolean getMovesRight() {
+        return movesRight;
+    }
+
     @Override
     public void move() {
+        //REQUIRES: moving == true
+        //MODIFIES: x, y, degree, movesRight
+        //EFFECTS: If the obstacle is a moving obstacle, updates its attributes to reflect its rotating
+        //displacement based on whether it's blocked or not from its left and right
         if(moving){
             double radsR = Math.toRadians(degree + 2 + 90); // 0 becomes the top.
             int newXR = Math.round((float) (circleCenterX + Math.cos(radsR) * circleRadius));

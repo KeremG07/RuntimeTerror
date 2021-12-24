@@ -24,5 +24,16 @@ public class ExplosiveObstacleTest {
         assertTrue((firstCircleY-firstY)==(postCircleY-postY));
     }
 
+    @Test
+    public void checkRotateRightDegree() {
+        ExplosiveObstacle EO = (ExplosiveObstacle)BodyFactory.createObstacle("Explosive",
+                100, 100, 1);
+        EO.setMoving(true);
+        EO.setMovesRight(true);
+        EO.setDegree(90);
+        EO.move();
+
+        assertEquals(EO.getDegree(), 92);
+    }
 }
 
