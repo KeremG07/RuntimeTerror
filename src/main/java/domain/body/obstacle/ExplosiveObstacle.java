@@ -13,7 +13,14 @@ public class ExplosiveObstacle extends Obstacle {
     //The degree between the circle's center and the obstacle.
     private double degree = 90;
     public boolean movesRight;
-
+    // Abstraction function:
+    // represents an explosive obstacle at (x,y) with corresponding size values
+    // Rep invariant:
+    // x>=0,
+    // y>=0,
+    // width==16,
+    // height==16,
+    // name=="Explosive"
     public ExplosiveObstacle(double x_coordinates,
                              double y_coordinates,
                              double width,
@@ -137,5 +144,14 @@ public class ExplosiveObstacle extends Obstacle {
         this.y = y;
         circleCenterX = this.x - offsetx;
         circleCenterY = this.y - offsety;
+    }
+
+    public boolean repOk() {
+        if (x < 0) return false;
+        if (y < 0) return false;
+        if (width != 16) return false;
+        if (height != 16) return false;
+        if (name != "Explosive") return false;
+        return true;
     }
 }
