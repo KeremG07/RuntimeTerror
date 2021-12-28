@@ -16,16 +16,14 @@ import java.util.Random;
 public class BuildModeFrame extends JFrame {
     private Controller controller;
     private ArrayList<Obstacle> obstacleList;
-
     private static final Color BACKGROUND_COLOR = new Color(140, 140, 140);
-    JTextField simpleObstacle = new JTextField(5);
-    JTextField firmObstacle = new JTextField(5);
-    JTextField explosiveObstacle = new JTextField(5);
-    JTextField giftObstacle = new JTextField(5);
-    JButton startGame = new JButton("Start Game");
-    JButton initObstacles = new JButton("Initialize obstacles");
-    static String savePlace;
-
+    private JTextField simpleObstacle = new JTextField(5);
+    private JTextField firmObstacle = new JTextField(5);
+    private JTextField explosiveObstacle = new JTextField(5);
+    private JTextField giftObstacle = new JTextField(5);
+    private JButton startGame = new JButton("Start Game");
+    private JButton initObstacles = new JButton("Initialize obstacles");
+    private static String savePlace;
     private static BuildModeFrame instance;
 
     public static BuildModeFrame getInstance(String savePlace) {
