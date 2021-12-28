@@ -152,34 +152,38 @@ public class Controller {
         borders[1] = gameScreenHeight;
         return borders;
     }
-    public String hitFrame(double x, double y, double width, double height){
+    public String hitFrame(double x, double y, double width, double height ){
+        //REQUIRES: x,y coordinates and width, height values of the Body object.
+        //MODIFIES: None.
+        //EFFECTS: Returns the side of the frame where the Body object exceeds its boundaries.
         double screenWidth = getFrameBorders()[0];
         double screenHeight = getFrameBorders()[1];
-
-        if (x <= 0) {
-            if (y <= 0) {
-              return "UpperLeft";
-            } else if (y + height < screenHeight) {
-                return "Left";
-            } else {
-                return "DownLeft";
-            }
-        } else if (x + width < screenWidth) {
-            if (y <= 0) {
-                return "Upper";
-            } else if (y + height < screenHeight) {
-                return "None";
-            } else {
-                return "Down";
-            }
-        } else {
-            if (y <= 0) {
-                return "UpperRight";
-            } else if (y + height < screenHeight) {
-                return "Right";
-            } else {
-                return "DownRight";
-            }
+        if(y <= 0 && x + width >= screenWidth){
+            return "UpperRight";
+        }
+        if(y + height >= screenHeight && x + width >= screenWidth){
+            return "DownRight";
+        }
+        if(y <= 0 && x <= 0){
+            return "UpperLeft";
+        }
+        if(y + height >= screenHeight && x <= 0){
+            return "DownLeft";
+        }
+        if(x + width >= screenWidth){
+            return "Right";
+        }
+        if(y + height >= screenHeight){
+            return "Down";
+        }
+        if(x <= 0){
+            return "Left";
+        }
+        if(y <= 0){
+            return "Upper";
+        }
+        else{
+            return "None";
         }
     }
 }
