@@ -11,8 +11,8 @@ import java.io.IOException;
 import javax.swing.*;
 
 public class StartFrame extends JFrame implements ActionListener {
-    static JComboBox<String> jComboBox;
-    static JTextField usernameBox;
+    private static JComboBox<String> jComboBox;
+    private static JTextField usernameBox;
 
     public StartFrame() throws HeadlessException {
         super("Need For Spear");
@@ -87,7 +87,7 @@ public class StartFrame extends JFrame implements ActionListener {
         if (e.getActionCommand().equals("load game")) {
             Controller controller = Controller.getInstance();
             GameScreen gameScreen = GameScreen.getInstance();
-            gameScreen.initObstacles = true;
+            gameScreen.setInitObstacles(true);
             controller.getPlayer().setSave(jComboBox.getSelectedItem().toString());
             controller.getStatistics().setUsername(usernameBox.getText());
             boolean usernameExists = controller.loadGame();

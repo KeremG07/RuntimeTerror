@@ -2,9 +2,9 @@ package domain.ability;
 
 public class Ability {
 
-    public boolean activated;
-    public int duration;
-    public int timeLeft;
+    private boolean activated;
+    protected int duration;
+    protected int timeLeft;
 
     public Ability() {
         activated = false;

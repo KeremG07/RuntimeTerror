@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class BuildModeFrame extends JFrame {
-    Controller controller;
+    private Controller controller;
     private ArrayList<Obstacle> obstacleList;
 
     private static final Color BACKGROUND_COLOR = new Color(140, 140, 140);
@@ -67,7 +67,7 @@ public class BuildModeFrame extends JFrame {
         initObstacles.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gameScreen.initObstacles = true;
+                gameScreen.setInitObstacles(true);
                 String[] obstaclesCount = new String[]{simpleObstacle.getText(), firmObstacle.getText(), explosiveObstacle.getText(), giftObstacle.getText()};
                 controller.startNewGame(obstaclesCount);
                 gameScreen.repaint(50L);

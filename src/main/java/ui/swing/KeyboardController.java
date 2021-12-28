@@ -7,8 +7,8 @@ import java.awt.event.KeyListener;
 import java.util.Scanner;
 
 public class KeyboardController implements KeyListener {
-    Controller controller = Controller.getInstance();
-    Scanner scanner = new Scanner(System.in);
+    private Controller controller = Controller.getInstance();
+    private Scanner scanner = new Scanner(System.in);
 
     public KeyboardController() { this.controller = controller; }
 

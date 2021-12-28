@@ -8,13 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PlayModeFrame extends JFrame {
-    Controller controller;
+    private Controller controller;
     private static final Color BACKGROUND_COLOR = new Color(140, 140, 140);
-    JButton pauseGame = new JButton("Pause Game");
-    JButton resumeGame = new JButton("Resume Game");
-    JButton saveGame = new JButton("Save Game");
-    JButton quitGame = new JButton("Quit Game");
-    public int clockMs;
+    private JButton pauseGame = new JButton("Pause Game");
+    private JButton resumeGame = new JButton("Resume Game");
+    private JButton saveGame = new JButton("Save Game");
+    private JButton quitGame = new JButton("Quit Game");
+    private int clockMs;
 
     private static PlayModeFrame instance;
     

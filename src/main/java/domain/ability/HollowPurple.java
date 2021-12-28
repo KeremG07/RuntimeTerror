@@ -9,7 +9,7 @@ public class HollowPurple extends Ability {
     public final double gameScreenWidth = Controller.getInstance().getFrameBorders()[0],
             gameScreenHeight = Controller.getInstance().getFrameBorders()[1],
             hollowPurpleNum = 8;
-    public Random randi = new Random();
+    private Random randi = new Random();
     private static HollowPurple instance;
 
     private HollowPurple() {

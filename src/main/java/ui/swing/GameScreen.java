@@ -24,8 +24,13 @@ public class GameScreen extends JPanel {
 
     private static GameScreen instance;
     private static int count = 0;
-    public static boolean initObstacles = false;
-    public static boolean enabled;
+    private static boolean initObstacles = false;
+    private static boolean enabled;
+    private Controller controller;
+    private Map<Point2D.Double, Image> locations = new HashMap<Point2D.Double, Image>();
+    private HashMap<String, Image> images = new HashMap<String, Image>();
+    private ArrayList<Obstacle> obstacleList;
+    private ArrayList<FallingBody> fallingBodyList;
 
     public static GameScreen getInstance() {
         if (instance == null)
@@ -35,14 +40,6 @@ public class GameScreen extends JPanel {
         enabled = count != 2;
         return instance;
     }
-
-    Controller controller;
-
-    private Map<Point2D.Double, Image> locations = new HashMap<Point2D.Double, Image>();
-    private HashMap<String, Image> images = new HashMap<String, Image>();
-    private ArrayList<Obstacle> obstacleList;
-    private ArrayList<FallingBody> fallingBodyList;
-
     private GameScreen() {
         this.controller = Controller.getInstance();
         obstacleList = controller.getStatistics().getObstacleList();
@@ -209,5 +206,13 @@ public class GameScreen extends JPanel {
         images.put("giftObstacle", giftObstacleImage);
         images.put("remains", remainsImage);
         images.put("gift", giftImage);
+    }
+
+    public static boolean isInitObstacles() {
+        return initObstacles;
+    }
+
+    public static void setInitObstacles(boolean initObstacles) {
+        GameScreen.initObstacles = initObstacles;
     }
 }
