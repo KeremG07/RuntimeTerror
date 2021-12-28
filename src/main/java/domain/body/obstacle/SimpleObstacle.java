@@ -5,7 +5,7 @@ import domain.needForSpear.*;
 import java.util.Random;
 
 public class SimpleObstacle extends Obstacle {
-    public boolean movesRight;
+    private boolean movesRight;
 
     public SimpleObstacle(double x_coordinates,
                           double y_coordinates,
@@ -26,7 +26,7 @@ public class SimpleObstacle extends Obstacle {
             boolean canMoveRight = true;
             boolean canMoveLeft = true;
             //Compares with every obstacle.
-            for (Obstacle obstacle : Statistics.obstacleList) {
+            for (Obstacle obstacle : Statistics.getObstacleList()) {
                 //Doesn't check whether it crashes with itself.
                 if (!(obstacle.getCoordinates()[0] == this.x && obstacle.getCoordinates()[1] == this.y)) {
                     canMoveRight &= !(obstacle.compareCoordinates(this.x + this.vx, this.y, this.width, this.height));

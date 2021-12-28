@@ -43,14 +43,12 @@ public class EnchantedSphere extends Body {
     // enchanted sphere, only if it isn't shot yet.
     public void shootEnchantedSphere() {
         if (notShot) {
-            double normalAngle = np.normalAngle;
+            double normalAngle = np.getNormalAngle();
             vx = -(2 * np.width * Math.cos(Math.toRadians(normalAngle + 90)));
-            if(normalAngle==0) vx = 0;
             vy = (2 * np.width * Math.sin(Math.toRadians(normalAngle + 90)));
             if(vy > 0){
                 vy = -vy;
             }
-
             notShot = false;
         }
     }
@@ -60,12 +58,12 @@ public class EnchantedSphere extends Body {
         double xPosRight, yPosRight;
         ArrayList<Point2D.Double> positions = new ArrayList<Point2D.Double>();
         ArrayList<Double> distances = new ArrayList<Double>();
-        if(np.normalAngle <= 2 && np.normalAngle >= -2){
+        if(np.getNormalAngle() <= 1.5 && np.getNormalAngle() >= -1.5){
             return this.compareCoordinates(np.x,np.y,np.width,np.height);
         }
         else {
-            xPosRight = (np.x + np.width * Math.cos(Math.toRadians(np.normalAngle)));
-            yPosRight = (np.y + np.width * Math.sin(Math.toRadians(np.normalAngle)));
+            xPosRight = (np.x + np.width * Math.cos(Math.toRadians(np.getNormalAngle())));
+            yPosRight = (np.y + np.width * Math.sin(Math.toRadians(np.getNormalAngle())));
             for(int i = 0; i<10000; i++) {
                 positions.add(new Point2D.Double(np.x + i * (xPosRight-np.x) / 10000,np.y + i * (yPosRight-np.y) / 10000));
                 distances.add(positions.get(i).distance(new Point2D.Double(x+width/2, y+height/2)));
@@ -101,9 +99,6 @@ public class EnchantedSphere extends Body {
 
     //Handles reflection of Enchanted Sphere, it will be called every time before it executes its movement.
     public void reflect() {
-        //REQUIRES:
-        //MODIFIES: vx and vy components of enchanted sphere
-        //EFFECTS: If enchanted sphere hits a body/wall, changes vx and vy based on the body/wall it hits.
         String wall = Controller.getInstance().hitFrame(x, y, width, height);
         boolean hitObstacle;
         if (wall.equals("UpperLeft") || wall.equals("UpperRight")) {
@@ -124,11 +119,11 @@ public class EnchantedSphere extends Body {
         else if (compareCoordinatesWithNP()) {
             double speed = Math.sqrt(vx*vx + vy*vy);
             double angle = Math.toDegrees(Math.atan(vx/vy));
-            double reflectAngle = angle + 2 * np.normalAngle;
-            if(np.normalAngle == -45 && vx == 0 && vy > 0){
+            double reflectAngle = angle + 2 * np.getNormalAngle();
+            if(np.getNormalAngle() == -45 && vx == 0 && vy > 0){
                 vx = -vy;
                 vy = 0;
-            }else if(np.normalAngle == 45 && vx == 0 && vy > 0){
+            }else if(np.getNormalAngle() == 45 && vx == 0 && vy > 0){
                 vx = vy;
                 vy = 0;
             }/*else if(np.normalAngle == -45 && vy == 0 && vx != 0){
@@ -142,12 +137,12 @@ public class EnchantedSphere extends Body {
                 vy = -vy;
             }*/
             //these do not happen frequently, but still added.
-            else if(vy == 0 && np.normalAngle > 0){
-                reflectAngle = 90 - 2 * np.normalAngle;
+            else if(vy == 0 && np.getNormalAngle() > 0){
+                reflectAngle = 90 - 2 * np.getNormalAngle();
                 vy = (-speed * Math.cos(Math.toRadians(reflectAngle)));
                 vx = (-speed * Math.sin(Math.toRadians(reflectAngle)));
-            }else if(vy == 0 && np.normalAngle < 0){
-                reflectAngle = 90 + 2 * np.normalAngle;
+            }else if(vy == 0 && np.getNormalAngle() < 0){
+                reflectAngle = 90 + 2 * np.getNormalAngle();
                 vy = (-speed * Math.cos(Math.toRadians(reflectAngle)));
                 vx = (speed * Math.sin(Math.toRadians(reflectAngle)));
             //main reflection case
@@ -162,7 +157,7 @@ public class EnchantedSphere extends Body {
 
         } else {
             Obstacle crashingObstacle;
-            for (Obstacle obstacle : Statistics.obstacleList) {
+            for (Obstacle obstacle : Statistics.getObstacleList()) {
                 hitObstacle = this.compareCoordinates(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
                 if (hitObstacle) {
                     crashingObstacle = obstacle;
@@ -226,7 +221,7 @@ public class EnchantedSphere extends Body {
         return vx;
     }
 
-    public void setVx(int vx) {
+    public void setVx(double vx) {
         this.vx = vx;
     }
 
@@ -234,7 +229,7 @@ public class EnchantedSphere extends Body {
         return vy;
     }
 
-    public void setVy(int vy) {
+    public void setVy(double vy) {
         this.vy = vy;
     }
 }

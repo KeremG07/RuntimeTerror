@@ -4,7 +4,7 @@ import domain.body.Body;
 
 public abstract class FallingBody extends Body {
 
-    public int vy = 1;
+    private int vy = 1;
 
     public FallingBody(double x_coordinates,
                        double y_coordinates,

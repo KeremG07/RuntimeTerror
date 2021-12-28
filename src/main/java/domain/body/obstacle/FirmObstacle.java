@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class FirmObstacle extends Obstacle {
 
-    public boolean movesRight;
+    private boolean movesRight;
 
     public FirmObstacle(double x_coordinates,
                         double y_coordinates,
@@ -28,7 +28,7 @@ public class FirmObstacle extends Obstacle {
             boolean canMoveRight = true;
             boolean canMoveLeft = true;
             //Compares with every obstacle.
-            for (Obstacle obstacle : Statistics.obstacleList) {
+            for (Obstacle obstacle : Statistics.getObstacleList()) {
                 //Doesn't check whether it crashes with itself.
                 if (!(obstacle.getCoordinates()[0] == x && obstacle.getCoordinates()[1] == y)) {
                     canMoveRight &= !(obstacle.compareCoordinates(this.x + this.vx, this.y, this.width, this.height));

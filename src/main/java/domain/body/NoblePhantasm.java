@@ -4,9 +4,9 @@ import domain.needForSpear.*;
 
 public class NoblePhantasm extends Body {
 
-    public double normalAngle;
-    public boolean hasMagicalHex;
-    public int speedMultiplier;
+    private double normalAngle;
+    private boolean hasMagicalHex;
+    private int speedMultiplier;
 
     public NoblePhantasm(double x_coordinates,
                          double y_coordinates,

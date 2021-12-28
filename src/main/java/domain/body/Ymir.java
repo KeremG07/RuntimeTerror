@@ -9,14 +9,14 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Ymir extends Body {
 
-    public String state;    // active, passive
-    public int cooldown;    // cooldown of 30 sec. before another coin toss
-    public Ability currentAbility;  // InfiniteVoid, DoubleAccel, HollowPurple
+    private String state;    // active, passive
+    private int cooldown;    // cooldown of 30 sec. before another coin toss
+    private Ability currentAbility;  // InfiniteVoid, DoubleAccel, HollowPurple
 
     // Get Instances
-    public DoubleAccel doubleAccel = DoubleAccel.getInstance();
-    public HollowPurple hollowPurple = HollowPurple.getInstance();
-    public InfiniteVoid infiniteVoid = InfiniteVoid.getInstance();
+    private DoubleAccel doubleAccel = DoubleAccel.getInstance();
+    private HollowPurple hollowPurple = HollowPurple.getInstance();
+    private InfiniteVoid infiniteVoid = InfiniteVoid.getInstance();
 
     public Ymir(double x_coordinates,
                 double y_coordinates,

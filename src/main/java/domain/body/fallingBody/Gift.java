@@ -1,8 +1,8 @@
 package domain.body.fallingBody;
 
 public class Gift extends FallingBody{
-    public String giftName;
-    public int duration;
+    private String giftName;
+    private int duration;
 
     public Gift(double x_coordinates,
                 double y_coordinates,

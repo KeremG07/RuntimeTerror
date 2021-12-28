@@ -79,7 +79,7 @@ public class StartFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("new game")) {
             Controller controller = Controller.getInstance();
-            controller.getPlayer().save = jComboBox.getSelectedItem().toString();
+            controller.getPlayer().setSave(jComboBox.getSelectedItem().toString());
             controller.getStatistics().setUsername(usernameBox.getText());
             BuildModeFrame.getInstance("");
             dispose();
@@ -88,7 +88,7 @@ public class StartFrame extends JFrame implements ActionListener {
             Controller controller = Controller.getInstance();
             GameScreen gameScreen = GameScreen.getInstance();
             gameScreen.initObstacles = true;
-            controller.getPlayer().save = jComboBox.getSelectedItem().toString();
+            controller.getPlayer().setSave(jComboBox.getSelectedItem().toString());
             controller.getStatistics().setUsername(usernameBox.getText());
             boolean usernameExists = controller.loadGame();
             if (usernameExists) {
