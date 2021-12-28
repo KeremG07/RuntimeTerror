@@ -8,8 +8,8 @@ public class ExplosiveObstacle extends Obstacle {
 
     //The coordinates and the radius of the circle that the obstacle will move around.
     private final double circleRadius = height/2;
-    private double circleCenterX = this.x + 4*width/5;
-    private double circleCenterY = this.y - height/2;
+    private double circleCenterX = this.x;
+    private double circleCenterY = this.y;
     //The degree between the circle's center and the obstacle.
     private double degree = 90;
     private boolean movesRight;
