@@ -60,6 +60,25 @@ public class ExplosiveObstacleTest {
 
         assertEquals(EO.getDegree(), 88);
     }
+    
+    @Test
+    // checks if the x coordinate of the obstacle is updated correctly.
+    public void  checkXCoordinate(){
+        double initialX = 100;
+        double initialY = 100;
+        ExplosiveObstacle explosiveObstacle = (ExplosiveObstacle) BodyFactory.createObstacle("Explosive",initialX,initialY,1);
+        assertTrue(explosiveObstacle.repOk());
+        int degree = 90;
+        explosiveObstacle.setDegree(degree);
+        explosiveObstacle.setMoving(true);
+        assertTrue(explosiveObstacle.repOk());
+        explosiveObstacle.setMovesRight(true);
+        assertTrue(explosiveObstacle.repOk());
+        explosiveObstacle.move();
+        assertTrue(explosiveObstacle.repOk());
+
+        assertEquals(explosiveObstacle.getCoordinates()[0], 110);
+    }
 
 }
 
