@@ -18,8 +18,8 @@ public class ExplosiveObstacle extends Obstacle {
     // Rep invariant:
     // x>=0,
     // y>=0,
-    // width==16,
-    // height==16,
+    // width==32,
+    // height==32,
     // name=="Explosive"
     public ExplosiveObstacle(double x_coordinates,
                              double y_coordinates,
@@ -149,9 +149,9 @@ public class ExplosiveObstacle extends Obstacle {
     public boolean repOk() {
         if (x < 0) return false;
         if (y < 0) return false;
-        if (width != 16) return false;
-        if (height != 16) return false;
-        if (name != "Explosive") return false;
+        if (width != 32) return false;
+        if (height != 32) return false;
+        if (!name.equals("Explosive")) return false;
         return true;
     }
 }

@@ -13,11 +13,13 @@ public class ExplosiveObstacleTest {
         double firstX = 50;
         double firstY = 50;
         ExplosiveObstacle EO = (ExplosiveObstacle)BodyFactory.createObstacle("Explosive",firstX,firstY,1);
+        assertTrue(EO.repOk());
         double firstCircleX = EO.getCircleCenterX();
         double firstCircleY = EO.getCircleCenterY();
         double postX = 100;
         double postY = 100;
         EO.setCoordinates(postX,postY);
+        assertTrue(EO.repOk());
         double postCircleX = EO.getCircleCenterX();
         double postCircleY = EO.getCircleCenterY();
         assertTrue((firstCircleX-firstX)==(postCircleX-postX));
@@ -28,12 +30,36 @@ public class ExplosiveObstacleTest {
     public void checkRotateRightDegree() {
         ExplosiveObstacle EO = (ExplosiveObstacle)BodyFactory.createObstacle("Explosive",
                 100, 100, 1);
+        assertTrue(EO.repOk());
         EO.setMoving(true);
+        assertTrue(EO.repOk());
         EO.setMovesRight(true);
+        assertTrue(EO.repOk());
         EO.setDegree(90);
+        assertTrue(EO.repOk());
         EO.move();
+        assertTrue(EO.repOk());
 
         assertEquals(EO.getDegree(), 92);
     }
+
+    @Test
+    //checks if rotating left updates degree correctly.
+    public void checkRotateLeftDegree() {
+        ExplosiveObstacle EO = (ExplosiveObstacle)BodyFactory.createObstacle("Explosive",
+                100, 100, 1);
+        assertTrue(EO.repOk());
+        EO.setMoving(true);
+        assertTrue(EO.repOk());
+        EO.setMovesRight(false);
+        assertTrue(EO.repOk());
+        EO.setDegree(90);
+        assertTrue(EO.repOk());
+        EO.move();
+        assertTrue(EO.repOk());
+
+        assertEquals(EO.getDegree(), 88);
+    }
+
 }
 
