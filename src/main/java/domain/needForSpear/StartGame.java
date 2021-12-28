@@ -1,7 +1,7 @@
 package domain.needForSpear;
 
 public class StartGame {
-    BuildGame buildGame;
+    private BuildGame buildGame;
     public StartGame() {
         //Controller.getInstance().player = new Player();
         //Controller.getInstance().timeLeft= 600*1000;

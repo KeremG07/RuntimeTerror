@@ -14,10 +14,9 @@ import java.util.HashMap;
 import java.util.StringTokenizer;
 
 public class Player {
-
-    Statistics statistics;
-    ILoadAndSaveAdapter iLoadAndSaveAdapter;
-    LocalLoadAndSave localLoadAndSave;
+    private Statistics statistics;
+    private ILoadAndSaveAdapter iLoadAndSaveAdapter;
+    private LocalLoadAndSave localLoadAndSave;
     private Inventory inventory;
     private NoblePhantasm noblePhantasm;
     private EnchantedSphere enchantedSphere;
@@ -239,6 +238,10 @@ public class Player {
 
     public Inventory getInventory() {
         return inventory;
+    }
+
+    public Statistics getStatistics() {
+        return statistics;
     }
 
     public NoblePhantasm getNoblePhantasm() {

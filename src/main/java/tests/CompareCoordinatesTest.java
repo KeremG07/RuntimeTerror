@@ -14,8 +14,8 @@ public class CompareCoordinatesTest {
 
         assertTrue(body1.compareCoordinates(body2.getCoordinates()[0],
                 body2.getCoordinates()[1],
-                body2.width,
-                body2.height));
+                body2.getWidth(),
+                body2.getHeight()));
     }
 
     @Test
@@ -26,8 +26,8 @@ public class CompareCoordinatesTest {
 
         assertTrue(body1.compareCoordinates(body2.getCoordinates()[0],
                 body2.getCoordinates()[1],
-                body2.width,
-                body2.height));
+                body2.getWidth(),
+                body2.getHeight()));
     }
 
     @Test
@@ -38,8 +38,8 @@ public class CompareCoordinatesTest {
 
         assertTrue(body1.compareCoordinates(body2.getCoordinates()[0],
                 body2.getCoordinates()[1],
-                body2.width,
-                body2.height));
+                body2.getWidth(),
+                body2.getHeight()));
     }
 
     @Test
@@ -50,8 +50,8 @@ public class CompareCoordinatesTest {
 
         assertTrue(body1.compareCoordinates(body2.getCoordinates()[0],
                 body2.getCoordinates()[1],
-                body2.width,
-                body2.height));
+                body2.getWidth(),
+                body2.getHeight()));
     }
 
     @Test
@@ -62,7 +62,7 @@ public class CompareCoordinatesTest {
 
         assertTrue(body1.compareCoordinates(body2.getCoordinates()[0],
                 body2.getCoordinates()[1],
-                body2.width,
-                body2.height));
+                body2.getWidth(),
+                body2.getHeight()));
     }
 }

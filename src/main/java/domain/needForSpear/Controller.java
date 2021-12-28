@@ -15,13 +15,13 @@ public class Controller {
     private static Controller instance;
     //How often the movements on the screen is updated.
     public final static int ticksPerSecond = 30;
-    Player player;
-    Statistics statistics;
-    StartGame newGame;
-    BuildGame buildGame;
+    private Player player;
+    private Statistics statistics;
+    private StartGame newGame;
+    private BuildGame buildGame;
     //To keep the track of the obstacles that should be removed from the screen.
-    ArrayList<Obstacle> toRemoveObs = new ArrayList<>();
-    ArrayList<FallingBody> toRemoveFBody = new ArrayList<>();
+    private ArrayList<Obstacle> toRemoveObs = new ArrayList<>();
+    private ArrayList<FallingBody> toRemoveFBody = new ArrayList<>();
     //To check whether we shot the enchanted sphere or not:
     private boolean playing = false;
     private boolean isPaused = false;
@@ -31,7 +31,7 @@ public class Controller {
 
     private Controller() {
         player = new Player();
-        statistics = player.statistics;
+        statistics = player.getStatistics();
     }
 
     public static Controller getInstance() {

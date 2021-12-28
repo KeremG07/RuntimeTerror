@@ -12,34 +12,34 @@ public class HitFrameTest {
     public void checkRightWall() {
         EnchantedSphere es = new EnchantedSphere(988,200,12,12,
                 new NoblePhantasm(450,570,100,8));
-        assertSame(Controller.getInstance().hitFrame(es.getCoordinates()[0], es.getCoordinates()[1], es.width, es.height), "Right");
+        assertSame(Controller.getInstance().hitFrame(es.getCoordinates()[0], es.getCoordinates()[1], es.getWidth(), es.getHeight()), "Right");
     }
 
     @Test
     public void checkLeftWall() {
         EnchantedSphere es = new EnchantedSphere(0,200,12,12,
                 new NoblePhantasm(450,570,100,8));
-        assertSame(Controller.getInstance().hitFrame(es.getCoordinates()[0], es.getCoordinates()[1], es.width, es.height), "Left");
+        assertSame(Controller.getInstance().hitFrame(es.getCoordinates()[0], es.getCoordinates()[1], es.getWidth(), es.getHeight()), "Left");
     }
 
     @Test
     public void checkUpperRightWall() {
         EnchantedSphere es = new EnchantedSphere(988,0,12,12,
                 new NoblePhantasm(450,570,100,8));
-        assertSame(Controller.getInstance().hitFrame(es.getCoordinates()[0], es.getCoordinates()[1], es.width, es.height), "UpperRight");
+        assertSame(Controller.getInstance().hitFrame(es.getCoordinates()[0], es.getCoordinates()[1], es.getWidth(), es.getHeight()), "UpperRight");
     }
 
     @Test
     public void checkUpperLeftWall() {
         EnchantedSphere es = new EnchantedSphere(0,0,12,12,
                 new NoblePhantasm(450,570,100,8));
-        assertSame(Controller.getInstance().hitFrame(es.getCoordinates()[0], es.getCoordinates()[1], es.width, es.height), "UpperLeft");
+        assertSame(Controller.getInstance().hitFrame(es.getCoordinates()[0], es.getCoordinates()[1], es.getWidth(), es.getHeight()), "UpperLeft");
     }
 
     @Test
     public void checkFall() {
         EnchantedSphere es = new EnchantedSphere(100,588,12,12,
                 new NoblePhantasm(450,570,100,8));
-        assertSame(Controller.getInstance().hitFrame(es.getCoordinates()[0], es.getCoordinates()[1], es.width, es.height), "Down");
+        assertSame(Controller.getInstance().hitFrame(es.getCoordinates()[0], es.getCoordinates()[1], es.getWidth(), es.getHeight()), "Down");
     }
 }
