@@ -23,7 +23,11 @@ public class Body {
         this.x = x;
         this.y = y;
     }
+
     public boolean compareCoordinates(double x, double y, double width, double height) {
+        //REQUIRES: x-y coordinates, width, and height of the body to compare with
+        //MODIFIES: none
+        //EFFECTS:  returns true if objects collide, false if objects do not collide.
         boolean crashingCoordinates = false;
         double x1 = this.x;
         double y1 = this.y;
