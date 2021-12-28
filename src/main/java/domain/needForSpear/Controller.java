@@ -153,6 +153,9 @@ public class Controller {
         return borders;
     }
     public String hitFrame(double x, double y, double width, double height ){
+        //REQUIRES: x,y coordinates and width, height values of the Body object.
+        //MODIFIES: None.
+        //EFFECTS: Returns the side of the frame where the Body object exceeds its boundaries.
         double screenWidth = getFrameBorders()[0];
         double screenHeight = getFrameBorders()[1];
         if(y <= 0 && x + width >= screenWidth){
