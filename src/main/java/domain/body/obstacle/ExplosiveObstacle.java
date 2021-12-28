@@ -5,7 +5,7 @@ import domain.needForSpear.*;
 import java.util.Random;
 
 public class ExplosiveObstacle extends Obstacle {
-
+// OVERVIEW: ExplosiveObstacles are circular obstacles that move in circular orbits and explode when hit.
     //The coordinates and the radius of the circle that the obstacle will move around.
     private final double circleRadius = height/2;
     private double circleCenterX = this.x + 4*width/5;
