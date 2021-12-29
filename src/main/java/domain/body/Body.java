@@ -44,28 +44,6 @@ public class Body {
         }else if(x < x1 && x1-x <= width && y >= y1 && y-y1 <= height1){
             crashingCoordinates = true;
         }
-
-        /*if (Math.abs(x-x1) <= Math.max(width1,width)){
-            if (y >= y1){
-                if((y-y1) <= height) {
-                    crashingCoordinates = true;
-                }
-            } else {
-                if((y1-y) <= height1) {
-                    crashingCoordinates = true;
-                }
-            }
-        } else if (Math.abs(y-y1) <= Math.max(height1,height)){
-            if (x >= x1){
-                if((x-x1) <= width) {
-                    crashingCoordinates = true;
-                }
-            } else {
-                if((x1-x) <= width1) {
-                    crashingCoordinates = true;
-                }
-            }
-        }*/
         return crashingCoordinates;
     }
 

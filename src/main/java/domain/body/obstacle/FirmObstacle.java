@@ -27,21 +27,22 @@ public class FirmObstacle extends Obstacle {
         if (moving) {
             boolean canMoveRight = true;
             boolean canMoveLeft = true;
+            double speed = Math.abs(this.vx);
             //Compares with every obstacle.
             for (Obstacle obstacle : Statistics.getObstacleList()) {
                 //Doesn't check whether it crashes with itself.
                 if (!(obstacle.getCoordinates()[0] == x && obstacle.getCoordinates()[1] == y)) {
-                    canMoveRight &= !(obstacle.compareCoordinates(this.x + this.vx, this.y, this.width, this.height));
-                    canMoveLeft &= !(obstacle.compareCoordinates(this.x - this.vx, this.y, this.width, this.height));
+                    canMoveRight &= !(obstacle.compareCoordinates(this.x + speed, this.y, this.width, this.height));
+                    canMoveLeft &= !(obstacle.compareCoordinates(this.x - speed, this.y, this.width, this.height));
                 }
             }
 
             //Compares with every frame border.
-            if (!Controller.getInstance().hitFrame(this.x + this.vx, this.y, this.width, this.height).equals("None")) {
+            if (!Controller.getInstance().hitFrame(this.x + speed, this.y, this.width, this.height).equals("None")) {
                 canMoveRight = false;
 
             }
-            if (!Controller.getInstance().hitFrame(this.x - this.vx, this.y, this.width, this.height).equals("None")) {
+            if (!Controller.getInstance().hitFrame(this.x - speed, this.y, this.width, this.height).equals("None")) {
                 canMoveLeft = false;
 
             }
@@ -49,15 +50,19 @@ public class FirmObstacle extends Obstacle {
 
             if (movesRight) {
                 if (canMoveRight) {
+                    if(this.vx < 0) this.vx = -this.vx;
                     this.x += this.vx;
                 } else if (canMoveLeft) {
-                    this.x -= this.vx;
+                    if(this.vx > 0) this.vx = -this.vx;
+                    this.x += this.vx;
                     movesRight = false;
                 }
             } else {
                 if (canMoveLeft) {
-                    this.x -= this.vx;
+                    if(this.vx > 0) this.vx = -this.vx;
+                    this.x += this.vx;
                 } else if (canMoveRight) {
+                    if(this.vx < 0) this.vx = -this.vx;
                     this.x += this.vx;
                     movesRight = true;
 

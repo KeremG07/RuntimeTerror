@@ -45,6 +45,7 @@ public class EnchantedSphere extends Body {
         if (notShot) {
             double normalAngle = np.getNormalAngle();
             vx = -(2 * np.width * Math.cos(Math.toRadians(normalAngle + 90)));
+            if(normalAngle == 0) vx = 0;
             vy = (2 * np.width * Math.sin(Math.toRadians(normalAngle + 90)));
             if(vy > 0){
                 vy = -vy;
@@ -182,7 +183,11 @@ public class EnchantedSphere extends Body {
                                 && x <= crashingObstacle.x + crashingObstacle.width) {
                             vy = -vy;
                             if (vx * crashingObstacle.getVx() > 0) {
-                                vx += 5;
+                                if(vx > 0){
+                                    vx += 20;
+                                }else{
+                                    vx -= 20;
+                                }
                             } else if (vx * crashingObstacle.getVx() < 0) {
                                 vx = -vx;
                             } else {
