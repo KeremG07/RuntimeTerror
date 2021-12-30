@@ -5,7 +5,7 @@ import domain.needForSpear.*;
 import java.util.Random;
 
 public class ExplosiveObstacle extends Obstacle {
-
+// OVERVIEW: ExplosiveObstacles are circular obstacles that move in circular orbits and explode when hit.
     //The coordinates and the radius of the circle that the obstacle will move around.
     private final double circleRadius = height/2;
     private double circleCenterX = this.x;
@@ -13,7 +13,14 @@ public class ExplosiveObstacle extends Obstacle {
     //The degree between the circle's center and the obstacle.
     private double degree = 90;
     private boolean movesRight;
-
+    // Abstraction function:
+    // represents an explosive obstacle at (x,y) with corresponding size values
+    // Rep invariant:
+    // x>=0,
+    // y>=0,
+    // width==32,
+    // height==32,
+    // name=="Explosive"
     public ExplosiveObstacle(double x_coordinates,
                              double y_coordinates,
                              double width,
@@ -34,8 +41,33 @@ public class ExplosiveObstacle extends Obstacle {
         this.degree = degree;
     }
     //Doesn't move with the correct speed yet. Needs testing.
+
+    public double getCircleRadius() {
+        return circleRadius;
+    }
+
+    public double getCircleCenterX() {
+        return circleCenterX;
+    }
+
+    public double getCircleCenterY() {
+        return circleCenterY;
+    }
+
+    public void setMovesRight(boolean bool) {
+        movesRight = bool;
+    }
+
+    public boolean getMovesRight() {
+        return movesRight;
+    }
+
     @Override
     public void move() {
+        //REQUIRES: moving == true
+        //MODIFIES: x, y, degree, movesRight
+        //EFFECTS: If the obstacle is a moving obstacle, updates its attributes to reflect its rotating
+        //displacement based on whether it's blocked or not from its left and right
         if(moving){
             double radsR = Math.toRadians(degree + 2 + 90); // 0 becomes the top.
             int newXR = Math.round((float) (circleCenterX + Math.cos(radsR) * circleRadius));
@@ -102,11 +134,24 @@ public class ExplosiveObstacle extends Obstacle {
 
     @Override
     public void setCoordinates(double x, double y) {
+        //REQUIRES: x,y >=0
+        //MODIFIES: circleCenterX, circleCenterY
+        //EFFECTS: Whenever the explosive obstacle is moved (in build mode), its center which the obstacle
+        //does circular motion around is moved accordingly.
         double offsetx = this.x - circleCenterX;
         double offsety = this.y - circleCenterY;
         this.x = x;
         this.y = y;
         circleCenterX = this.x - offsetx;
         circleCenterY = this.y - offsety;
+    }
+
+    public boolean repOk() {
+        if (x < 0) return false;
+        if (y < 0) return false;
+        if (width != 32) return false;
+        if (height != 32) return false;
+        if (!name.equals("Explosive")) return false;
+        return true;
     }
 }

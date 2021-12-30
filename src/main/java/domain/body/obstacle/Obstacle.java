@@ -45,5 +45,9 @@ public abstract class Obstacle extends Body {
         return moving;
     }
 
+    public void setMoving(boolean bool) {
+        moving = bool;
+    }
+
     public abstract void doWhenDestroyed();
 }
