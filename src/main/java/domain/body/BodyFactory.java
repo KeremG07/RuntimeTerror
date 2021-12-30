@@ -22,6 +22,10 @@ public class BodyFactory {
         return new EnchantedSphere(np.x+((nPhantasmWidth-eSphereWidth)/2), np.y-eSphereHeight, eSphereWidth, eSphereHeight, np);
     }
     public static Obstacle createObstacle(String typeOfObstacle, double x, double y, int hitNum){
+        //@REQUIRES: a string to specify the obstacle type, 2 doubles for the coordinates of the obstacle
+        //and an integer to specify the number of hits required to destroy obstacle
+        //@MODIFIES: no modifications
+        //@EFFECTS:creates obstacles that will be put into the game screen.
         //Used for all obstacle creations.
         Obstacle newCreatedObs;
         if(typeOfObstacle.equals("Simple")){
