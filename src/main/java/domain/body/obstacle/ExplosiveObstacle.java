@@ -40,8 +40,6 @@ public class ExplosiveObstacle extends Obstacle {
     public void setDegree(double degree) {
         this.degree = degree;
     }
-    //Doesn't move with the correct speed yet. Needs testing.
-
     public double getCircleRadius() {
         return circleRadius;
     }
