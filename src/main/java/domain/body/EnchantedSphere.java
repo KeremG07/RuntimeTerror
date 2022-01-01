@@ -101,82 +101,25 @@ public class EnchantedSphere extends Body {
         }
         //np reflect (still has issues)
         else if (compareCoordinatesWithNoblePhantasm()) {
-            double speed = Math.sqrt(vx*vx + vy*vy);
-            double angle = Math.toDegrees(Math.atan(vx/vy));
-            double reflectAngle = angle + 2 * np.getNormalAngle();
-            if(np.getNormalAngle() == -45 && vx == 0 && vy > 0){
-                vx = -vy;
-                vy = 0;
-            }else if(np.getNormalAngle() == 45 && vx == 0 && vy > 0){
-                vx = vy;
-                vy = 0;
-            }
-            //these do not happen frequently, but still added.
-            else if(vy == 0 && np.getNormalAngle() > 0){
-                reflectAngle = 90 - 2 * np.getNormalAngle();
-                vy = (-speed * Math.cos(Math.toRadians(reflectAngle)));
-                vx = (-speed * Math.sin(Math.toRadians(reflectAngle)));
-            }else if(vy == 0 && np.getNormalAngle() < 0){
-                reflectAngle = 90 + 2 * np.getNormalAngle();
-                vy = (-speed * Math.cos(Math.toRadians(reflectAngle)));
-                vx = (speed * Math.sin(Math.toRadians(reflectAngle)));
-            //main reflection case
-            }else if(reflectAngle <= 90 || reflectAngle >= -90){
-                if(vy > 0) {
-                    vy = (-speed * Math.cos(Math.toRadians(reflectAngle)));
-                    vx = (speed * Math.sin(Math.toRadians(reflectAngle)));
-                }
-            }else{
-                vy = 10;
-            }
-
+            noblePhantasmReflect();
         } else {
             Obstacle crashingObstacle;
             for (Obstacle obstacle : Statistics.getObstacleList()) {
                 hitObstacle = this.compareCoordinates(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
                 if (hitObstacle) {
                     crashingObstacle = obstacle;
-                    crashingObstacle.setNumberOfHits(crashingObstacle.getNumberOfHits() - 1);
-                    //non-moving obstacle hit reflect
-                    if (!crashingObstacle.isMoving()) {
-                        //hit from top or bottom
-                        if ((x + width) >= crashingObstacle.x
-                                && x <= crashingObstacle.x + crashingObstacle.width) {
-                            vy = -vy;
+                    if(this.unstoppable){
+                        if(!crashingObstacle.isFrozen()){
+                            crashingObstacle.setNumberOfHits(0);
+                        } else {
+                            crashingObstacle.setNumberOfHits(crashingObstacle.getNumberOfHits() - 1);
+                            obstacleReflect(crashingObstacle);
                         }
-                        //hit from left or right
-                        else if ((y + height) >= crashingObstacle.y
-                                && y <= crashingObstacle.y + crashingObstacle.height) {
-                            vx = -vx;
+                    } else {
+                        if(!crashingObstacle.isFrozen()){
+                            crashingObstacle.setNumberOfHits(crashingObstacle.getNumberOfHits() - 1);
                         }
-                    }
-                    //moving obstacle hit reflect
-                    else {
-                        //hit from top or bottom
-                        if ((x + width) >= crashingObstacle.x
-                                && x <= crashingObstacle.x + crashingObstacle.width) {
-                            vy = -vy;
-                            if (vx * crashingObstacle.getVx() > 0) {
-                                if(vx > 0){
-                                    vx += 20;
-                                }else{
-                                    vx -= 20;
-                                }
-                            } else if (vx * crashingObstacle.getVx() < 0) {
-                                vx = -vx;
-                            } else {
-                                if (crashingObstacle.getVx() > 0) {
-                                    vx += Math.abs(vy);
-                                } else {
-                                    vx -= Math.abs(vy);
-                                }
-                            }
-                        }
-                        //hit from right or left (same with non-moving for now)
-                        else if ((y + height) >= crashingObstacle.y
-                                && y <= crashingObstacle.y + crashingObstacle.height) {
-                            vx = -vx;
-                        }
+                        obstacleReflect(crashingObstacle);
                     }
                     break;
                 }
@@ -184,6 +127,80 @@ public class EnchantedSphere extends Body {
         }
     }
 
+    public void noblePhantasmReflect(){
+        double speed = Math.sqrt(vx*vx + vy*vy);
+        double angle = Math.toDegrees(Math.atan(vx/vy));
+        double reflectAngle = angle + 2 * np.getNormalAngle();
+        if(np.getNormalAngle() == -45 && vx == 0 && vy > 0){
+            vx = -vy;
+            vy = 0;
+        }else if(np.getNormalAngle() == 45 && vx == 0 && vy > 0){
+            vx = vy;
+            vy = 0;
+        }
+        //these do not happen frequently, but still added.
+        else if(vy == 0 && np.getNormalAngle() > 0){
+            reflectAngle = 90 - 2 * np.getNormalAngle();
+            vy = (-speed * Math.cos(Math.toRadians(reflectAngle)));
+            vx = (-speed * Math.sin(Math.toRadians(reflectAngle)));
+        }else if(vy == 0 && np.getNormalAngle() < 0){
+            reflectAngle = 90 + 2 * np.getNormalAngle();
+            vy = (-speed * Math.cos(Math.toRadians(reflectAngle)));
+            vx = (speed * Math.sin(Math.toRadians(reflectAngle)));
+            //main reflection case
+        }else if(reflectAngle <= 90 || reflectAngle >= -90){
+            if(vy > 0) {
+                vy = (-speed * Math.cos(Math.toRadians(reflectAngle)));
+                vx = (speed * Math.sin(Math.toRadians(reflectAngle)));
+            }
+        }else{
+            vy = 10;
+        }
+    }
+
+    public void obstacleReflect(Obstacle crashingObstacle){
+        //non-moving obstacle hit reflect
+        if (!crashingObstacle.isMoving()) {
+            //hit from top or bottom
+            if ((x + width) >= crashingObstacle.x
+                    && x <= crashingObstacle.x + crashingObstacle.width) {
+                vy = -vy;
+            }
+            //hit from left or right
+            else if ((y + height) >= crashingObstacle.y
+                    && y <= crashingObstacle.y + crashingObstacle.height) {
+                vx = -vx;
+            }
+        }
+        //moving obstacle hit reflect
+        else {
+            //hit from top or bottom
+            if ((x + width) >= crashingObstacle.x
+                    && x <= crashingObstacle.x + crashingObstacle.width) {
+                vy = -vy;
+                if (vx * crashingObstacle.getVx() > 0) {
+                    if(vx > 0){
+                        vx += 20;
+                    }else{
+                        vx -= 20;
+                    }
+                } else if (vx * crashingObstacle.getVx() < 0) {
+                    vx = -vx;
+                } else {
+                    if (crashingObstacle.getVx() > 0) {
+                        vx += Math.abs(vy);
+                    } else {
+                        vx -= Math.abs(vy);
+                    }
+                }
+            }
+            //hit from right or left (same with non-moving for now)
+            else if ((y + height) >= crashingObstacle.y
+                    && y <= crashingObstacle.y + crashingObstacle.height) {
+                vx = -vx;
+            }
+        }
+    }
     public void setUnstoppableES(boolean bool) {
         unstoppable = bool;
     }
