@@ -69,7 +69,11 @@ public class PlayModeFrame extends JFrame {
                 if(!controller.isPaused()) {
                     controller.updateEverything();
                 }
-
+                if(Controller.getInstance().getStatistics().getChances() == 0
+                || Controller.getInstance().getStatistics().getObstacleList().size() == 0){
+                    EndFrame.getInstance();
+                    dispose();
+                }
             }
         };
 
