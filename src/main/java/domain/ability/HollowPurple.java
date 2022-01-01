@@ -10,23 +10,16 @@ public class HollowPurple extends Ability {
             gameScreenHeight = Controller.getInstance().getFrameBorders()[1],
             hollowPurpleNum = 8;
     private Random randi = new Random();
-    private static HollowPurple instance;
 
-    private HollowPurple() {
+    public HollowPurple() {
         super();
+        name = "Hollow Purple";
         //The GameScreen is divided into cells (size: 10x10) where hollow purple obstacles can be put. The objects are
         // put into the empty cells chosen randomly in a way that they won't clash with already existing obstacles.
         boolean[][] locationCells = new boolean[(int) (gameScreenHeight-200)/40][(int)gameScreenWidth/100];
         for(int i=0; i<hollowPurpleNum; i++){
             putHPInCell(locationCells);
         }
-    }
-
-    public static HollowPurple getInstance() {
-        if(instance == null) {
-            instance = new HollowPurple();
-        }
-        return instance;
     }
 
     //Finding an empty cell and creating the obstacle there.

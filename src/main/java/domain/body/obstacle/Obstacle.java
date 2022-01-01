@@ -1,13 +1,12 @@
 package domain.body.obstacle;
-import domain.needForSpear.Controller;
 import domain.body.Body;
-
 import java.util.Random;
 
 public abstract class Obstacle extends Body {
     protected boolean moving;
     private int movingProbability;
     private int numberOfHits;
+    private boolean frozen;
     protected double vx;
     protected String name;
     private Random randi = new Random();
@@ -21,6 +20,7 @@ public abstract class Obstacle extends Body {
         movingProbability = randi.nextInt(10);
         moving = movingProbability > 7;
         this.numberOfHits=numberOfHits;
+        frozen = false;
     }
     public abstract void move();
     public double getVx(){
@@ -39,6 +39,14 @@ public abstract class Obstacle extends Body {
     }
     public void setNumberOfHits(int x){
         numberOfHits = Math.max(x, 0);
+    }
+
+
+    public boolean isFrozen() {
+        return frozen;
+    }
+    public void setFrozen(boolean frozen) {
+        this.frozen = frozen;
     }
 
     public boolean isMoving() {

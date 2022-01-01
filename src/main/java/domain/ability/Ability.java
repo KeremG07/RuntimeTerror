@@ -5,18 +5,23 @@ public class Ability {
     private boolean activated;
     protected int duration;
     protected int timeLeft;
+    protected String name;
 
     public Ability() {
         activated = false;
+        duration = 15;  //in seconds
+        timeLeft = duration;    //in seconds
     }
 
     public boolean isActivated() { return activated; }
     public void setActivated(boolean activated) { this.activated = activated; }
 
     public int getDuration() { return duration; }
-    public void setDuration(int duration) { this.duration = duration; }
 
     public int getTimeLeft() { return timeLeft; }
-    public void setTimeLeft(int timeLeft) { this.timeLeft = timeLeft; }
+
+    public String getName() {
+        return name;
+    }
 
 }
