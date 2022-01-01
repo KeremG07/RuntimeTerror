@@ -104,7 +104,7 @@ public class EnchantedSphere extends Body {
             noblePhantasmReflect();
         } else {
             Obstacle crashingObstacle;
-            for (Obstacle obstacle : Statistics.getObstacleList()) {
+            for (Obstacle obstacle : Controller.getInstance().getStatistics().getObstacleList()) {
                 hitObstacle = this.compareCoordinates(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
                 if (hitObstacle) {
                     crashingObstacle = obstacle;

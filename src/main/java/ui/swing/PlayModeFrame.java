@@ -22,9 +22,8 @@ public class PlayModeFrame extends JFrame {
         super("Need For Spear by Runtime Terror");
         controller = Controller.getInstance();
         clockMs = Controller.ticksPerSecond;
-
         GameScreen gameScreen = GameScreen.getInstance();
-
+        Controller.getInstance().getStatistics().setStartTime(System.currentTimeMillis());
         initializeFrame();
 
         // Panels Start Here
@@ -116,7 +115,6 @@ public class PlayModeFrame extends JFrame {
 
         Timer timer = new Timer(clockMs, tickListener);
         timer.start();
-
         addKeyListener(new KeyboardController());
     }
 

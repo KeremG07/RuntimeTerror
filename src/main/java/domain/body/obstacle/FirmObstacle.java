@@ -29,7 +29,7 @@ public class FirmObstacle extends Obstacle {
             boolean canMoveLeft = true;
             double speed = Math.abs(this.vx);
             //Compares with every obstacle.
-            for (Obstacle obstacle : Statistics.getObstacleList()) {
+            for (Obstacle obstacle : Controller.getInstance().getStatistics().getObstacleList()) {
                 //Doesn't check whether it crashes with itself.
                 if (!(obstacle.getCoordinates()[0] == x && obstacle.getCoordinates()[1] == y)) {
                     canMoveRight &= !(obstacle.compareCoordinates(this.x + speed, this.y, this.width, this.height));
@@ -75,7 +75,9 @@ public class FirmObstacle extends Obstacle {
 
     @Override
     public void doWhenDestroyed() {
-        //NewScore = OldScore + 300/(CurrentTime-GameStartingTime)
+        double oldScore = Controller.getInstance().getStatistics().getScore();
+        long timeElapsed = Controller.getInstance().getStatistics().getTimeElapsed();
+        Controller.getInstance().getStatistics().setScore(oldScore + (300/timeElapsed));
     }
 
 }

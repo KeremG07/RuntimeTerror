@@ -34,7 +34,7 @@ public class HollowPurple extends Ability {
         }
         int x = column*100;
         int y = row*40 + 60;
-        Statistics.addObstacle(BodyFactory.createObstacle("Hollow",x,y,1));
+        Controller.getInstance().getStatistics().addObstacle(BodyFactory.createObstacle("Hollow",x,y,1));
         locationCells[row][column] = true;
     }
 }

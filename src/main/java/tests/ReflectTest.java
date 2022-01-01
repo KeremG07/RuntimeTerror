@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import domain.body.NoblePhantasm;
 import domain.body.obstacle.SimpleObstacle;
+import domain.needForSpear.Controller;
 import domain.needForSpear.Statistics;
 import org.junit.jupiter.api.Test;
 import domain.body.EnchantedSphere;
@@ -64,7 +65,7 @@ public class ReflectTest {
     public void reflectFromObstacle(){
         EnchantedSphere es = new EnchantedSphere(100,92,12,12,
                 new NoblePhantasm(450,570,100,8));
-        Statistics.addObstacle(new SimpleObstacle(100,100,80,8,1));
+        Controller.getInstance().getStatistics().addObstacle(new SimpleObstacle(100,100,80,8,1));
         es.setVx(-30);
         es.setVy(-30);
         double prevVy = es.getVy();

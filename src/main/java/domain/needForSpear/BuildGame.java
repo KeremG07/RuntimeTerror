@@ -60,7 +60,7 @@ public class BuildGame {
                 newCreatedObstacle.setCoordinates(x + 25, y - 10);
             }
         }
-        Statistics.addObstacle(newCreatedObstacle);
+        Controller.getInstance().getStatistics().addObstacle(newCreatedObstacle);
         locationCells[row][column] = true;
 
     }

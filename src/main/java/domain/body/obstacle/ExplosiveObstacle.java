@@ -78,7 +78,7 @@ public class ExplosiveObstacle extends Obstacle {
             boolean canMoveRight = true;
             boolean canMoveLeft = true;
             //Compares with every obstacle.
-            for (Obstacle obstacle : Statistics.getObstacleList()) {
+            for (Obstacle obstacle : Controller.getInstance().getStatistics().getObstacleList()) {
                 //Doesn't check whether it crashes with itself.
                 if (!(obstacle.getCoordinates()[0] == this.x && obstacle.getCoordinates()[1] == this.y)) {
                     canMoveRight &= !(obstacle.compareCoordinates(newXR, newYR, this.width, this.height));
@@ -122,12 +122,14 @@ public class ExplosiveObstacle extends Obstacle {
 
     @Override
     public void doWhenDestroyed() {
+        double oldScore = Controller.getInstance().getStatistics().getScore();
+        long timeElapsed = Controller.getInstance().getStatistics().getTimeElapsed();
+        Controller.getInstance().getStatistics().setScore(oldScore + (300/timeElapsed));
         explode();
-        //NewScore = OldScore + 300/(CurrentTime-GameStartingTime)
     }
 
     public void explode() {
-        Statistics.addRemains(new Remains(this.getCoordinates()[0]+16, this.getCoordinates()[1]+16, 32, 32, 1));
+        Controller.getInstance().getStatistics().addRemains(new Remains(this.getCoordinates()[0]+16, this.getCoordinates()[1]+16, 32, 32, 1));
     }
 
     @Override

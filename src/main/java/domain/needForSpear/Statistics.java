@@ -10,12 +10,12 @@ import java.util.HashMap;
 
 public class Statistics {
     private String username;
-    private static double score;
-    private static int chances;
-    private static double timeElapsed;
-
-    private static ArrayList<Obstacle> obstacleList = new ArrayList<Obstacle>();
-    private static ArrayList<FallingBody> fallingBodyList = new ArrayList<FallingBody>();
+    private double score;
+    private int chances;
+    private long timeElapsed;
+    private long startTime;
+    private ArrayList<Obstacle> obstacleList = new ArrayList<Obstacle>();
+    private ArrayList<FallingBody> fallingBodyList = new ArrayList<FallingBody>();
 
     private HashMap<String, Integer> obstacleNumberbyType; // String "type" --> integer "obstacle number
 
@@ -23,7 +23,7 @@ public class Statistics {
     public Statistics() {
         obstacleNumberbyType = createObstacleNumberbyTypeMap(obstacleList);
         chances = 3;
-        timeElapsed = 0;
+        score = 0;
     }
 
     public HashMap<String, Integer> createObstacleNumberbyTypeMap(ArrayList<Obstacle> obstacleList) {
@@ -48,62 +48,56 @@ public class Statistics {
     public String getUsername() {
         return username;
     }
-
     public void setUsername(String username) {
         this.username = username;
     }
 
-    public static double getScore() {
+    public double getScore() {
         return score;
     }
-
-    public static void setScore(double score) {
-        Statistics.score = score;
-    }
-    public static void setChances(int chances) {
-        Statistics.chances = chances;
+    public void setScore(double score) {
+        this.score = score;
     }
 
-    public static int getChances() {
+    public int getChances() {
         return chances;
     }
+    public void setChances(int chances) {
+        this.chances = chances;
+        if(this.chances > 3){
+            this.chances = 3;
+        }
+    }
 
-    public static double getTimeElapsed() {
+    public long getTimeElapsed() {
+        timeElapsed = System.currentTimeMillis() - startTime;
         return timeElapsed;
     }
-
-    public static void setTimeElapsed(double timeElapsed) {
-        Statistics.timeElapsed = timeElapsed;
+    public void setTimeElapsed(long timeElapsed) {
+        this.timeElapsed = timeElapsed;
     }
 
-    public static void setObstacleList(ArrayList<Obstacle> obstacleList) {
-        Statistics.obstacleList = obstacleList;
+    public long getStartTime() {
+        return startTime;
+    }
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
     }
 
-    public static ArrayList<Obstacle> getObstacleList() {
+
+    public ArrayList<Obstacle> getObstacleList() {
         return obstacleList;
     }
 
-    public static ArrayList<FallingBody> getFallingBodyList() {
+    public ArrayList<FallingBody> getFallingBodyList() {
         return fallingBodyList;
     }
 
-    public static void setFallingBodyList(ArrayList<FallingBody> fallingBodyList) {
-        Statistics.fallingBodyList = fallingBodyList;
-    }
-
-    public static void addGift(Gift gift) {fallingBodyList.add(gift);};
-    public static void removeGift(Gift gift) {fallingBodyList.remove(gift);};
-    public static void addRemains(Remains remains) {fallingBodyList.add(remains);};
-    public static void removeRemains(Remains remains) {fallingBodyList.remove(remains);};
-
-    public static void addObstacle(Obstacle obs) {
+    public void addGift(Gift gift) {fallingBodyList.add(gift);}
+    public void addRemains(Remains remains) {fallingBodyList.add(remains);}
+    public void addObstacle(Obstacle obs) {
         obstacleList.add(obs);
     }
-    public static void removeObstacle(Obstacle obs) {
-        obstacleList.remove(obs);
-    }
-
 
     public String obstacleTypeList() {
         return obstacleNumberbyType.get("Simple") + "/" + obstacleNumberbyType.get("Firm") + "/"

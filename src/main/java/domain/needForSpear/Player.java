@@ -103,7 +103,7 @@ public class Player {
 
             } else {
                 //
-                statistics.setTimeElapsed(Double.parseDouble(loadList.get(0)));
+                statistics.setTimeElapsed(Long.parseLong(loadList.get(0)));
                 statistics.setChances(Integer.parseInt(loadList.get(1)));
                 statistics.setScore(Double.parseDouble(loadList.get(2)));
 

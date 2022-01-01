@@ -34,13 +34,11 @@ public class Controller {
             instance = new Controller();
         return instance;
     }
-    //Commented out for test purposes.
     public void startNewGame(String[] numOfObstaclesReq) {
         newGame = new StartGame();
         buildGame = newGame.buildNewGame(numOfObstaclesReq);
     }
     public void startTimer(){
-
     }
     public void saveGame(){
         player.saveGame(statistics.getUsername());

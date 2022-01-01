@@ -32,7 +32,7 @@ public class BuildGameTest {
         String[] numOfObstacles = new String[]{"75", "10", "5", "10"};
         BuildGame bg = new BuildGame(numOfObstacles);
         int countSimple = 0, countFirm = 0, countExplosive = 0, countGift = 0;
-        for(Obstacle obstacle : Statistics.getObstacleList()){
+        for(Obstacle obstacle : Controller.getInstance().getStatistics().getObstacleList()){
             if(obstacle.getName().equals("Simple")){
                 countSimple++;
             } else if(obstacle.getName().equals("Firm")){
@@ -54,8 +54,8 @@ public class BuildGameTest {
     public void checkObstacleCollision(){
         String[] numOfObstacles = new String[]{"75", "10", "5", "10"};
         BuildGame bg = new BuildGame(numOfObstacles);
-        for(Obstacle obstacle1 : Statistics.getObstacleList()){
-            for(Obstacle obstacle2 : Statistics.getObstacleList()){
+        for(Obstacle obstacle1 : Controller.getInstance().getStatistics().getObstacleList()){
+            for(Obstacle obstacle2 : Controller.getInstance().getStatistics().getObstacleList()){
                 if(!obstacle1.equals(obstacle2)){
                     assertFalse(obstacle1.compareCoordinates(obstacle2.getCoordinates()[0], obstacle2.getCoordinates()[1],
                             obstacle2.getWidth(), obstacle2.getHeight()));
@@ -69,7 +69,7 @@ public class BuildGameTest {
     public void checkFirmObstacleHitNum(){
         String[] numOfObstacles = new String[]{"75", "10", "5", "10"};
         BuildGame bg = new BuildGame(numOfObstacles);
-        for(Obstacle obstacle : Statistics.getObstacleList()){
+        for(Obstacle obstacle : Controller.getInstance().getStatistics().getObstacleList()){
             if(obstacle.getName().equals("Firm")){
                 int hitNum = obstacle.getNumberOfHits();
                 assertTrue(3 <= hitNum && 5 >= hitNum);

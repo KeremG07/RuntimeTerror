@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class InfiniteVoid extends Ability {
-    ArrayList<Obstacle> obstacles = Statistics.getObstacleList();
+    ArrayList<Obstacle> obstacles = Controller.getInstance().getStatistics().getObstacleList();
     public InfiniteVoid() {
         super();
         name = "Infinite Void";
