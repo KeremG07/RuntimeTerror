@@ -190,7 +190,7 @@ public class Player {
     }
 
     public void updateEnchantedSphere() {
-        enchantedSphere.updateWithNP();
+        enchantedSphere.updateWithNoblePhantasm();
     }
 
     public void moveEnchantedSphere() {

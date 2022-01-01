@@ -1,13 +1,8 @@
 package domain.needForSpear;
 
-import domain.body.EnchantedSphere;
-import domain.body.NoblePhantasm;
 import domain.body.fallingBody.FallingBody;
 import domain.body.fallingBody.Gift;
-import domain.body.fallingBody.Remains;
 import domain.body.obstacle.*;
-import ui.swing.GameScreen;
-import ui.swing.PlayModeFrame;
 
 import java.util.ArrayList;
 

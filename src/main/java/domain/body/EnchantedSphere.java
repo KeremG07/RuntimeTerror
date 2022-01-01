@@ -3,7 +3,6 @@ package domain.body;
 import domain.body.obstacle.*;
 import domain.needForSpear.*;
 
-import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
@@ -26,7 +25,7 @@ public class EnchantedSphere extends Body {
 
     //In the beginning of the game Enchanted Sphere moves with Noble Phantasm, until it is shot.
     //Or when the player loses a chance and Enchanted Sphere starts on Noble Phantasm again.
-    public void updateWithNP() {
+    public void updateWithNoblePhantasm() {
         if (notShot) {
             x = np.x + 44;
             y = np.y - height;
@@ -55,7 +54,7 @@ public class EnchantedSphere extends Body {
     }
 
     //checks if es crashes with np considering rotated np coordinates
-    public boolean compareCoordinatesWithNP(){
+    public boolean compareCoordinatesWithNoblePhantasm(){
         double xPosRight, yPosRight;
         ArrayList<Point2D.Double> positions = new ArrayList<Point2D.Double>();
         ArrayList<Double> distances = new ArrayList<Double>();
@@ -78,23 +77,7 @@ public class EnchantedSphere extends Body {
                 }
             }
         //same with previous, different calculations
-        }/*else{
-            xPos = (int) (np.x + np.width / 2 - np.width / 2 * Math.cos(Math.toRadians(np.normalAngle)));
-            yPos = (int) (np.y - np.width / 2 * Math.sin(Math.toRadians(np.normalAngle)));
-
-            if(x + width > xPos && x + width < xPos + np.width * Math.cos(Math.toRadians(np.normalAngle))
-                    && y + height < yPos && y + height > yPos + np.width * Math.sin(Math.toRadians(np.normalAngle))){
-                slope = (double)(y + height - yPos) / (double)(x + width - xPos);
-                if(slope == Math.tan(Math.toRadians(np.normalAngle)) ||
-                   (slope >= Math.tan(Math.toRadians(np.normalAngle-3.5)) && slope <= Math.tan(Math.toRadians(np.normalAngle+3.5)))){
-                    crashing = true;
-                }
-            }else if(x >= xPos + np.width * Math.cos(Math.toRadians(np.normalAngle))
-                    && x <= xPos + np.width * Math.cos(Math.toRadians(np.normalAngle)) + np.height &&
-                    y + height >= yPos + np.width * Math.sin(Math.toRadians(np.normalAngle))
-                    && y + height < yPos + np.width * Math.sin(Math.toRadians(np.normalAngle)) + np.height){
-                crashing = true;
-            }*/
+        }
         return false;
     }
 
@@ -112,12 +95,12 @@ public class EnchantedSphere extends Body {
         } else if (!wall.equals("None")) {
             Controller.getInstance().getPlayer().loseChance();
             notShot = true;
-            updateWithNP();
+            updateWithNoblePhantasm();
             vx = 0;
             vy = 0;
         }
         //np reflect (still has issues)
-        else if (compareCoordinatesWithNP()) {
+        else if (compareCoordinatesWithNoblePhantasm()) {
             double speed = Math.sqrt(vx*vx + vy*vy);
             double angle = Math.toDegrees(Math.atan(vx/vy));
             double reflectAngle = angle + 2 * np.getNormalAngle();
@@ -127,16 +110,7 @@ public class EnchantedSphere extends Body {
             }else if(np.getNormalAngle() == 45 && vx == 0 && vy > 0){
                 vx = vy;
                 vy = 0;
-            }/*else if(np.normalAngle == -45 && vy == 0 && vx != 0){
-                vy = -vx;
-                vx = 0;
-            }else if(np.normalAngle == 45 && vy == 0 && vx != 0){
-                vy = vx;
-                vx = 0;
-            }else if((np.normalAngle == 45 || np.normalAngle == -45) && Math.abs(vx) == vy){
-                vx = -vx;
-                vy = -vy;
-            }*/
+            }
             //these do not happen frequently, but still added.
             else if(vy == 0 && np.getNormalAngle() > 0){
                 reflectAngle = 90 - 2 * np.getNormalAngle();
