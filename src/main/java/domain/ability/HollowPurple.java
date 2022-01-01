@@ -1,5 +1,7 @@
 package domain.ability;
 import domain.body.*;
+import domain.body.obstacle.HollowPurpleObs;
+import domain.body.obstacle.Obstacle;
 import domain.needForSpear.Controller;
 import domain.needForSpear.Statistics;
 
@@ -16,9 +18,8 @@ public class HollowPurple extends Ability {
         name = "Hollow Purple";
         //The GameScreen is divided into cells (size: 10x10) where hollow purple obstacles can be put. The objects are
         // put into the empty cells chosen randomly in a way that they won't clash with already existing obstacles.
-        boolean[][] locationCells = new boolean[(int) (gameScreenHeight-200)/40][(int)gameScreenWidth/100];
         for(int i=0; i<hollowPurpleNum; i++){
-            putHPInCell(locationCells);
+            addHollowPurpleObs();
         }
     }
 
@@ -36,5 +37,18 @@ public class HollowPurple extends Ability {
         int y = row*40 + 60;
         Controller.getInstance().getStatistics().addObstacle(BodyFactory.createObstacle("Hollow",x,y,1));
         locationCells[row][column] = true;
+    }
+
+    public void addHollowPurpleObs() {
+        int x;
+        int y;
+        x = randi.nextInt(900);
+        y = randi.nextInt(392);
+        for (Obstacle o: Controller.getInstance().getStatistics().getObstacleList()) {
+            if (o.compareCoordinates(x,y, 100, 8)) {
+                return;
+            }
+        }
+        Controller.getInstance().getStatistics().addObstacle(BodyFactory.createObstacle("Hollow",x,y,1));
     }
 }

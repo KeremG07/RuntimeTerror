@@ -87,16 +87,27 @@ public class GameScreen extends JPanel {
             @Override
             public void mouseDragged(MouseEvent e) {
                 if (dragImage != null) {
+                    boolean collides = false;
                     Point2D.Double dragPoint = new Point2D.Double(e.getX(), e.getY());
                     dragPoint.x += clickOffset.x;
                     dragPoint.y += clickOffset.y;
-                    locations.put(dragPoint, dragImage);
                     for(Obstacle o: obstacleList) {
-                        if(o.equals(obstacleDragged)) {
-                            o.setCoordinates(dragPoint.x, dragPoint.y);
+                        if(o.compareCoordinates(dragPoint.x, dragPoint.y, obstacleDragged.getWidth(), obstacleDragged.getHeight())) {
+                            collides = true;
+                            break;
                         }
                     }
-                    repaint();
+                    if (!collides && (dragPoint.y <= 400)) {
+                        locations.put(dragPoint, dragImage);
+                        for (Obstacle o : obstacleList) {
+                            if (o.equals(obstacleDragged)) {
+                                o.setCoordinates(dragPoint.x, dragPoint.y);
+                            }
+                        }
+                        repaint();
+                    } else {
+                        repaint();
+                    }
                 }
             }
         };
@@ -155,14 +166,24 @@ public class GameScreen extends JPanel {
         // AffineTransform old = g2d.getTransform();
         at.translate(o.getCoordinates()[0], o.getCoordinates()[1]);
         Image imageToDraw;
-        if (o instanceof SimpleObstacle) {
-            imageToDraw = images.get("simpleObstacle");
-        } else if (o instanceof FirmObstacle) {
-            imageToDraw = images.get("firmObstacle");
-        } else if (o instanceof ExplosiveObstacle) {
-            imageToDraw = images.get("explosiveObstacle");
+        if (o.isFrozen()) {
+            if (o instanceof ExplosiveObstacle) {
+                imageToDraw = images.get("explosiveObstacle");
+            } else {
+                imageToDraw = images.get("simpleObstacle");
+            }
         } else {
-            imageToDraw = images.get("giftObstacle");
+            if (o instanceof SimpleObstacle) {
+                imageToDraw = images.get("simpleObstacle");
+            } else if (o instanceof FirmObstacle) {
+                imageToDraw = images.get("firmObstacle");
+            } else if (o instanceof ExplosiveObstacle) {
+                imageToDraw = images.get("explosiveObstacle");
+            } else if (o instanceof  GiftObstacle) {
+                imageToDraw = images.get("giftObstacle");
+            } else {
+                imageToDraw = images.get("hollowPurpleObstacle");
+            }
         }
         locations.put(new Point2D.Double(o.getCoordinates()[0], o.getCoordinates()[1]), imageToDraw);
         g2d.drawImage(imageToDraw, at, null);
@@ -196,6 +217,7 @@ public class GameScreen extends JPanel {
         Image firmObstacleImage = new ImageIcon("src/main/java/utilities/firmObs.png").getImage();
         Image explosiveObstacleImage = new ImageIcon("src/main/java/utilities/explosiveObs.png").getImage();
         Image giftObstacleImage = new ImageIcon("src/main/java/utilities/giftObs.png").getImage();
+        Image hollowPurpleObstacleImage = new ImageIcon("src/main/java/utilities/giftObs.png").getImage();
         Image remainsImage = new ImageIcon("src/main/java/utilities/remains.png").getImage();
         Image giftImage = new ImageIcon("src/main/java/utilities/gift.png").getImage();
         images.put("noblePhantasm", noblePhantasmImage);
@@ -206,6 +228,7 @@ public class GameScreen extends JPanel {
         images.put("giftObstacle", giftObstacleImage);
         images.put("remains", remainsImage);
         images.put("gift", giftImage);
+        images.put("hollowPurpleObstacle", hollowPurpleObstacleImage);
     }
 
     public static boolean isInitObstacles() {

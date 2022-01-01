@@ -95,7 +95,10 @@ public class Controller {
     public void updateObstacleConditions(){
         //Remove the obstacles that Enchanted Sphere destroyed.
         for(Obstacle obstacle : statistics.getObstacleList()){
-            if(obstacle.getNumberOfHits() <= 0){
+            if (obstacle instanceof HollowPurpleObs) {
+                ((HollowPurpleObs) obstacle).setActivationTime(((HollowPurpleObs) obstacle).getActivationTime()-1);
+            }
+            if (obstacle.getNumberOfHits() <= 0 || ((obstacle instanceof HollowPurpleObs) && ((HollowPurpleObs)obstacle).getActivationTime() == 0)){
                 toRemoveObs.add(obstacle);
                 obstacle.doWhenDestroyed();
             }
