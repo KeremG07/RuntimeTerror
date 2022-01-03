@@ -18,15 +18,22 @@ public class HollowPurple extends YmirAbility {
     }
 
     public void addHollowPurpleObs() {
+        boolean notOverlaps = true;
         int x;
         int y;
-        x = randi.nextInt(900);
-        y = randi.nextInt(392);
-        for (Obstacle o: Controller.getInstance().getStatistics().getObstacleList()) {
-            if (o.compareCoordinates(x,y, 100, 8)) {
+        while (true) {
+            x = randi.nextInt(900);
+            y = randi.nextInt(392);
+            for (Obstacle o: Controller.getInstance().getStatistics().getObstacleList()) {
+                if (o.compareCoordinates(x,y, 100, 8)) {
+                    notOverlaps = false;
+                    break;
+                }
+            }
+            if (notOverlaps) {
+                Controller.getInstance().getStatistics().addObstacle(BodyFactory.createObstacle("Hollow",x,y,1));
                 return;
             }
         }
-        Controller.getInstance().getStatistics().addObstacle(BodyFactory.createObstacle("Hollow",x,y,1));
     }
 }

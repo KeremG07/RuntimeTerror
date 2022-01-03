@@ -43,17 +43,19 @@ public class BuildModeFrame extends JFrame {
 
         JPanel mainPanel = initializeMainPanel();
         GameScreen gameScreen = GameScreen.getInstance();
+        gameScreen.setBounds(0,0,this.getWidth(),this.getHeight()*600/800);
+        // gridbag constraint parameters
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        // panel settings
         JPanel numberPanel = new JPanel(new GridBagLayout());
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         numberPanel.setBounds(0,0,this.getWidth(),this.getHeight()*50/800);
         numberPanel.setBackground(BACKGROUND_COLOR);
         buttonPanel.setBounds(0,0,this.getWidth(),this.getHeight()*50/800);
         buttonPanel.setBackground(BACKGROUND_COLOR);
-        gameScreen.setBounds(0,0,this.getWidth(),this.getHeight()*600/800);
         mainPanel.add(numberPanel);
         mainPanel.add(gameScreen);
         mainPanel.add(buttonPanel);
@@ -61,6 +63,8 @@ public class BuildModeFrame extends JFrame {
         initializeButton(gbc, buttonPanel);
         this.setLocationRelativeTo(null);
         setVisible(true);
+
+        // listeners
 
         initObstacles.addActionListener(new ActionListener() {
             @Override

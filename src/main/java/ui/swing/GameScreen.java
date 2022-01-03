@@ -36,7 +36,7 @@ public class GameScreen extends JPanel {
         if (instance == null)
             instance = new GameScreen();
         count++;
-        enabled = count != 2;
+        enabled = count != 2; // to check GameScreen is at PlayModeFrame
         return instance;
     }
     private GameScreen() {
@@ -45,6 +45,8 @@ public class GameScreen extends JPanel {
         fallingBodyList = controller.getStatistics().getFallingBodyList();
         setImages();
         setPreferredSize(new Dimension((int)controller.getFrameBorders()[0], (int)controller.getFrameBorders()[1]));
+
+        // dragging part
         MouseAdapter ma = new MouseAdapter() {
 
             private Image dragImage;
@@ -53,7 +55,7 @@ public class GameScreen extends JPanel {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                if(!enabled) {
+                if(!enabled) { // drag only in BuildMode
                     return;
                 }
 
@@ -66,11 +68,11 @@ public class GameScreen extends JPanel {
                     if (bounds1.contains(e.getPoint())) {
                         for(Obstacle o: obstacleList) {
                             if (o.getCoordinates()[0] == point.x && o.getCoordinates()[1] == point.y) {
-                                obstacleDragged = o;
+                                obstacleDragged = o; // dragged obstacle
                                 break;
                             }
                         }
-                        dragImage = image;
+                        dragImage = image; // dragged image
                         clickOffset = new Point2D.Double(point.x - e.getPoint().x, point.y - e.getPoint().y);
                         break;
                     }
@@ -90,12 +92,14 @@ public class GameScreen extends JPanel {
                     Point2D.Double dragPoint = new Point2D.Double(e.getX(), e.getY());
                     dragPoint.x += clickOffset.x;
                     dragPoint.y += clickOffset.y;
+                    // to check dragged obstacle doesn't overlap with any other obstacle
                     for(Obstacle o: obstacleList) {
                         if(o.compareCoordinates(dragPoint.x, dragPoint.y, obstacleDragged.getWidth(), obstacleDragged.getHeight())) {
                             collides = true;
                             break;
                         }
                     }
+                    // new obstacle location
                     if (!collides && (dragPoint.y <= 400)) {
                         locations.put(dragPoint, dragImage);
                         for (Obstacle o : obstacleList) {
@@ -103,10 +107,8 @@ public class GameScreen extends JPanel {
                                 o.setCoordinates(dragPoint.x, dragPoint.y);
                             }
                         }
-                        repaint();
-                    } else {
-                        repaint();
                     }
+                    repaint();
                 }
             }
         };
@@ -124,7 +126,6 @@ public class GameScreen extends JPanel {
         drawNoblePhantasm(g);
         locations.clear();
         for (Obstacle o: obstacleList) {
-            //System.out.printf(String.valueOf(o.getCoordinates()[0]) + "," + String.valueOf(o.getCoordinates()[1]) + "\n");
             drawObstacles(g, o);
         }
         for (FallingBody fb: fallingBodyList) {
@@ -140,21 +141,17 @@ public class GameScreen extends JPanel {
         AffineTransform rotateTransform  = AffineTransform.getRotateInstance(Math.toRadians(noblePhantasm.getNormalAngle()),
                 noblePhantasm.getCoordinates()[0],
                 noblePhantasm.getCoordinates()[1]);
-        //AffineTransform old = g2d.getTransform();
         rotateTransform.translate(noblePhantasm.getCoordinates()[0],
                 noblePhantasm.getCoordinates()[1]);
         g2d.drawImage(images.get("noblePhantasm"), rotateTransform , null);
-        //g2d.setTransform(old);
     }
 
     void drawEnchantedSphere(Graphics g) {
         EnchantedSphere enchantedSphere = controller.getPlayer().getEnchantedSphere();
         Graphics2D g2d = (Graphics2D) g;
         AffineTransform at = new AffineTransform();
-        // AffineTransform old = g2d.getTransform();
         at.translate(enchantedSphere.getCoordinates()[0], enchantedSphere.getCoordinates()[1]);
         g2d.drawImage(images.get("enchantedSphere"), at , null);
-        //g2d.setTransform(old);
     }
 
     void drawObstacles(Graphics g, Obstacle o) {
@@ -162,9 +159,9 @@ public class GameScreen extends JPanel {
         g2d.setFont(new Font("default", Font.BOLD, 8));
         g2d.setColor(Color.BLACK);
         AffineTransform at = new AffineTransform();
-        // AffineTransform old = g2d.getTransform();
         at.translate(o.getCoordinates()[0], o.getCoordinates()[1]);
         Image imageToDraw;
+        // obstacle type and frozen
         if (o.isFrozen()) {
             if (o instanceof ExplosiveObstacle) {
                 imageToDraw = images.get("explosiveObstacle");
@@ -186,18 +183,17 @@ public class GameScreen extends JPanel {
         }
         locations.put(new Point2D.Double(o.getCoordinates()[0], o.getCoordinates()[1]), imageToDraw);
         g2d.drawImage(imageToDraw, at, null);
+        // firm obstacle hit count
         if(o instanceof FirmObstacle) {
             g2d.drawString(Integer.toString(o.getNumberOfHits()),
                     (int) (o.getCoordinates()[0] + 11*(o.getWidth())/24),
                     (int) (o.getCoordinates()[1] + o.getHeight() - 2));
         }
-        //g2d.setTransform(old);
     }
 
     void drawFallingBodies(Graphics g, FallingBody fb) {
         Graphics2D g2d = (Graphics2D) g;
         AffineTransform at = new AffineTransform();
-        // AffineTransform old = g2d.getTransform();
         at.translate(fb.getCoordinates()[0], fb.getCoordinates()[1]);
         Image imageToDraw;
         if (fb instanceof Gift) {
