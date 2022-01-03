@@ -21,7 +21,7 @@ public class KeyboardController implements KeyListener {
             if(e.getKeyCode() == KeyEvent.VK_A) controller.rotateNoblePhantasm("rotateLeft");
             if(e.getKeyCode() == KeyEvent.VK_D) controller.rotateNoblePhantasm("rotateRight");
 
-            if(e.getKeyCode() == KeyEvent.VK_SPACE) controller.startPlaying();
+            if(e.getKeyCode() == KeyEvent.VK_W) controller.startPlaying();
 
         }
     }

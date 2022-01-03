@@ -71,7 +71,7 @@ public class Statistics {
 
     public long getTimeElapsed() {
         timeElapsed = System.currentTimeMillis() - startTime;
-        return timeElapsed;
+        return timeElapsed/1000;
     }
     public void setTimeElapsed(long timeElapsed) {
         this.timeElapsed = timeElapsed;
