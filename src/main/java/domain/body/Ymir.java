@@ -1,9 +1,9 @@
 package domain.body;
 
-import domain.ability.Ability;
-import domain.ability.DoubleAccel;
-import domain.ability.HollowPurple;
-import domain.ability.InfiniteVoid;
+import domain.ymirAbility.YmirAbility;
+import domain.ymirAbility.DoubleAccel;
+import domain.ymirAbility.HollowPurple;
+import domain.ymirAbility.InfiniteVoid;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -11,7 +11,7 @@ public class Ymir extends Body {
 
     private boolean active;    // an ability is active or not
     private int cooldown;    // cooldown of 30 sec. before another coin toss
-    private Ability activeAbility; // InfiniteVoid, DoubleAccel, HollowPurple
+    private YmirAbility activeAbility; // InfiniteVoid, DoubleAccel, HollowPurple
 
     public Ymir(double x_coordinates,
                 double y_coordinates,
@@ -63,6 +63,6 @@ public class Ymir extends Body {
         this.active = active;
     }
 
-    public Ability getCurrentAbility() { return this.activeAbility; }
+    public YmirAbility getCurrentAbility() { return this.activeAbility; }
 
 }

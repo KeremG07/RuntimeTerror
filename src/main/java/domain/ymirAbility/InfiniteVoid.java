@@ -1,11 +1,11 @@
-package domain.ability;
+package domain.ymirAbility;
 import domain.body.obstacle.Obstacle;
 import domain.needForSpear.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class InfiniteVoid extends Ability {
+public class InfiniteVoid extends YmirAbility {
     ArrayList<Obstacle> obstacles = Controller.getInstance().getStatistics().getObstacleList();
     public InfiniteVoid() {
         super();

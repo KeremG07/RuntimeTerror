@@ -1,13 +1,11 @@
-package domain.ability;
+package domain.ymirAbility;
 import domain.body.*;
-import domain.body.obstacle.HollowPurpleObs;
 import domain.body.obstacle.Obstacle;
 import domain.needForSpear.Controller;
-import domain.needForSpear.Statistics;
 
 import java.util.Random;
 
-public class HollowPurple extends Ability {
+public class HollowPurple extends YmirAbility {
     public final double gameScreenWidth = Controller.getInstance().getFrameBorders()[0],
             gameScreenHeight = Controller.getInstance().getFrameBorders()[1],
             hollowPurpleNum = 8;

@@ -1,11 +1,16 @@
 package domain.needForSpear;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import domain.ability.*;
+import domain.ymirAbility.*;
 
 public class Inventory {
-    public ArrayList<Ability> abilityList;
+    private HashMap<String, Integer> abilityMap;
+
+    public Inventory(){
+        abilityMap = new HashMap<>();
+    }
 
     public void addAbility() {
 
@@ -13,4 +18,9 @@ public class Inventory {
     public void updateInventory(String abilityType){
         
     }
+
+    public HashMap<String, Integer> getAbilityMap() {
+        return abilityMap;
+    }
+
 }

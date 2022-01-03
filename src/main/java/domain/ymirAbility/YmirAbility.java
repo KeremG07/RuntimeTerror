@@ -1,13 +1,13 @@
-package domain.ability;
+package domain.ymirAbility;
 
-public class Ability {
+public class YmirAbility {
 
     private boolean activated;
     protected int duration;
     protected int timeLeft;
     protected String name;
 
-    public Ability() {
+    public YmirAbility() {
         activated = false;
         duration = 15;  //in seconds
         timeLeft = duration;    //in seconds

@@ -1,9 +1,9 @@
-package domain.ability;
+package domain.ymirAbility;
 
 import domain.body.EnchantedSphere;
 import domain.needForSpear.Controller;
 
-public class DoubleAccel extends Ability {
+public class DoubleAccel extends YmirAbility {
     private EnchantedSphere sphere = Controller.getInstance().getPlayer().getEnchantedSphere();
     public DoubleAccel() {
         super();
