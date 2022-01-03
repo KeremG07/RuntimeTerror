@@ -21,8 +21,6 @@ public class StartFrame extends JFrame implements ActionListener {
 
     public static void main(String args[]) {
         StartFrame sf = new StartFrame();
-        //LayoutManager layout = new GridBagLayout();
-        //GridBagConstraints c = new GridBagConstraints();
         JPanel panel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -71,8 +69,6 @@ public class StartFrame extends JFrame implements ActionListener {
         sf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         sf.setLocationRelativeTo(null);
         sf.setVisible(true);
-
-
     }
 
     @Override
@@ -97,14 +93,9 @@ public class StartFrame extends JFrame implements ActionListener {
                 controller.startPlaying();
                 dispose();
             }
-
-
         }
-
         if (e.getActionCommand().equals("quit")) {
             dispose();
         }
-
-
     }
 }

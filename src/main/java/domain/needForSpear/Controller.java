@@ -20,8 +20,6 @@ public class Controller {
     //To check whether we shot the enchanted sphere or not:
     private boolean playing = false;
     private boolean isPaused = false;
-    private boolean isOver = false;
-    private int timeLeft;
     private final int gameScreenWidth = 1000, gameScreenHeight = 600;
 
     private Controller() {
@@ -154,24 +152,22 @@ public class Controller {
         //REQUIRES: x,y coordinates and width, height values of the Body object.
         //MODIFIES: None.
         //EFFECTS: Returns the side of the frame where the Body object exceeds its boundaries.
-        double screenWidth = getFrameBorders()[0];
-        double screenHeight = getFrameBorders()[1];
-        if(y <= 0 && x + width >= screenWidth){
+        if(y <= 0 && x + width >= gameScreenWidth){
             return "UpperRight";
         }
-        if(y + height >= screenHeight && x + width >= screenWidth){
+        if(y + height >= gameScreenHeight && x + width >= gameScreenWidth){
             return "DownRight";
         }
         if(y <= 0 && x <= 0){
             return "UpperLeft";
         }
-        if(y + height >= screenHeight && x <= 0){
+        if(y + height >= gameScreenHeight && x <= 0){
             return "DownLeft";
         }
-        if(x + width >= screenWidth){
+        if(x + width >= gameScreenWidth){
             return "Right";
         }
-        if(y + height >= screenHeight){
+        if(y + height >= gameScreenHeight){
             return "Down";
         }
         if(x <= 0){

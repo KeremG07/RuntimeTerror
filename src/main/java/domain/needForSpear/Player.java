@@ -177,14 +177,6 @@ public class Player {
 
     }
 
-    public void pauseGame() {
-
-    }
-
-    public void resumeGame() {
-
-    }
-
     public void shootEnchantedSphere() {
         enchantedSphere.shootEnchantedSphere();
     }

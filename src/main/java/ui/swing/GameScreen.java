@@ -34,7 +34,6 @@ public class GameScreen extends JPanel {
 
     public static GameScreen getInstance() {
         if (instance == null)
-            //System.out.println(count);
             instance = new GameScreen();
         count++;
         enabled = count != 2;
