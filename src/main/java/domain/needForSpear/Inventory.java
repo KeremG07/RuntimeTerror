@@ -6,21 +6,19 @@ import java.util.HashMap;
 import domain.ymirAbility.*;
 
 public class Inventory {
-    private HashMap<String, Integer> abilityMap;
+    private ArrayList<String> abilityList;
 
     public Inventory(){
-        abilityMap = new HashMap<>();
+        abilityList = new ArrayList<String>();
     }
 
-    public void addAbility() {
-
-    }
-    public void updateInventory(String abilityType){
-        
-    }
-
-    public HashMap<String, Integer> getAbilityMap() {
-        return abilityMap;
+    public void addAbility(String ability) {
+        if(!abilityList.contains(ability)){
+            abilityList.add(ability);
+        }
     }
 
+    public ArrayList<String> getAbilityList() {
+        return abilityList;
+    }
 }
