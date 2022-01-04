@@ -34,6 +34,7 @@ public class StartFrame extends JFrame implements ActionListener {
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.CENTER;
 
         JButton newGameButton = new JButton("New Game");
         newGameButton.setActionCommand("new game");
@@ -56,14 +57,24 @@ public class StartFrame extends JFrame implements ActionListener {
         JButton quitGameButton = new JButton("Quit");
         quitGameButton.setActionCommand("quit");
         quitGameButton.addActionListener(sf);
+        gbc.gridx=0;
+        gbc.gridy=0;
         panel.add(label,gbc);
+        gbc.gridx=1;
         panel.add(usernameBox, gbc);
         String[] loadOptions = {"Local", "Database"};
         jComboBox = new JComboBox<>(loadOptions);
+        gbc.gridx=2;
         panel.add(jComboBox);
+        gbc.gridx=0;
+        gbc.gridy=1;
         panel.add(newGameButton, gbc);
+        gbc.gridx=1;
         panel.add(loadGameButton, gbc);
+        gbc.gridx=2;
         panel.add(helpFrameButton, gbc);
+        gbc.gridx=1;
+        gbc.gridy=2;
         panel.add(quitGameButton, gbc);
 
         sf.add(panel);
