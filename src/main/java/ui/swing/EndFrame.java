@@ -37,7 +37,7 @@ public class EndFrame extends JFrame {
         setVisible(true);
     }
     public void initializeFrame() {
-        setBounds(0, 0, 300, 200);
+        setBounds(0, 0, 600, 300);
         this.setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
