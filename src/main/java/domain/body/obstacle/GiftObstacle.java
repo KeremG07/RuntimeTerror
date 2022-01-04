@@ -33,6 +33,6 @@ public class GiftObstacle extends Obstacle{
     }
 
     public void createGift(){
-        Controller.getInstance().getStatistics().addGift(new Gift(this.getCoordinates()[0]+40, this.getCoordinates()[1]+4, 32, 32, this.giftType, 30));
+        Controller.getInstance().getStatistics().addGift(new Gift(this.getCoordinates()[0]+40, this.getCoordinates()[1]+4, 32, 32, Controller.getInstance().getPlayer().getNoblePhantasm(), this.giftType, 30));
     }
 }

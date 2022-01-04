@@ -129,7 +129,7 @@ public class ExplosiveObstacle extends Obstacle {
     }
 
     public void explode() {
-        Controller.getInstance().getStatistics().addRemains(new Remains(this.getCoordinates()[0]+16, this.getCoordinates()[1]+16, 32, 32, 1));
+        Controller.getInstance().getStatistics().addRemains(new Remains(this.getCoordinates()[0]+16, this.getCoordinates()[1]+16, 32, 32, Controller.getInstance().getPlayer().getNoblePhantasm(), 1));
     }
 
     @Override

@@ -111,16 +111,14 @@ public class Controller {
     public void updateFallingBodyConditions() {
         for (FallingBody fbody: statistics.getFallingBodyList()) {
             if (fbody instanceof Gift) {
-                if(fbody.compareCoordinates(player.getNoblePhantasm().getCoordinates()[0],player.getNoblePhantasm().getCoordinates()[1],
-                        player.getNoblePhantasm().getWidth(), player.getNoblePhantasm().getHeight())) {
+                if (fbody.compareCoordinatesWithNoblePhantasm())  {
                     toRemoveFBody.add(fbody);
                     // buraya ability eklemesi de gelecek
                 } else {
                     fbody.fall();
                 }
             } else {
-                if (fbody.compareCoordinates(player.getNoblePhantasm().getCoordinates()[0], player.getNoblePhantasm().getCoordinates()[1],
-                        player.getNoblePhantasm().getWidth(), player.getNoblePhantasm().getHeight())) {
+                if (fbody.compareCoordinatesWithNoblePhantasm()) {
                     toRemoveFBody.add(fbody);
                     player.loseChance();
                 } else {
