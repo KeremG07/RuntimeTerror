@@ -50,7 +50,9 @@ public class StartFrame extends JFrame implements ActionListener {
             }
         });
 
-
+        JButton helpFrameButton = new JButton("Help");
+        helpFrameButton.setActionCommand("help");
+        helpFrameButton.addActionListener(sf);
         JButton quitGameButton = new JButton("Quit");
         quitGameButton.setActionCommand("quit");
         quitGameButton.addActionListener(sf);
@@ -61,10 +63,11 @@ public class StartFrame extends JFrame implements ActionListener {
         panel.add(jComboBox);
         panel.add(newGameButton, gbc);
         panel.add(loadGameButton, gbc);
+        panel.add(helpFrameButton, gbc);
         panel.add(quitGameButton, gbc);
 
         sf.add(panel);
-        sf.setBounds(100, 100, 1500, 900);
+        sf.setBounds(100, 100, 1200, 800);
         sf.setResizable(true);
         sf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         sf.setLocationRelativeTo(null);
@@ -93,6 +96,9 @@ public class StartFrame extends JFrame implements ActionListener {
                 controller.startPlaying();
                 dispose();
             }
+        }
+        if (e.getActionCommand().equals("help")) {
+            new HelpFrame();
         }
         if (e.getActionCommand().equals("quit")) {
             dispose();
