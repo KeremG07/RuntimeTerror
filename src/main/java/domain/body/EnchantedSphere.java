@@ -27,8 +27,8 @@ public class EnchantedSphere extends Body {
     //Or when the player loses a chance and Enchanted Sphere starts on Noble Phantasm again.
     public void updateWithNoblePhantasm() {
         if (notShot) {
-            x = np.x + 44;
-            y = np.y - height;
+            x = np.getCoordinates()[0] + 0.5 * (np.getWidth() * Math.cos(Math.toRadians(np.getNormalAngle())) - width);
+            y = np.getCoordinates()[1] + 0.5 * np.getWidth() * Math.sin(Math.toRadians(np.getNormalAngle())) - height;
         }
     }
 
