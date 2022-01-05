@@ -31,7 +31,7 @@ public class EndFrame extends JFrame {
         }
         reason.setFont(new Font("Serif", Font.PLAIN, 21));
         endMessage.setFont(new Font("Serif", Font.PLAIN, 21));
-        score = new JLabel("Your score was: " + Controller.getInstance().getStatistics().getScore());
+        score = new JLabel("Your score was: " + String.format("%.2f",Controller.getInstance().getStatistics().getScore()));
         score.setFont(new Font("Serif", Font.PLAIN, 21));
         addComponentsToPane(this.getContentPane());
         setVisible(true);

@@ -23,7 +23,7 @@ public class HollowPurple extends YmirAbility {
         boolean notOverlaps = true;
         int x;
         int y;
-        while (true) {
+        while (notOverlaps) {
             x = randi.nextInt(900);
             y = randi.nextInt(392);
             for (Obstacle o: obstacles) {
@@ -35,6 +35,8 @@ public class HollowPurple extends YmirAbility {
             if (notOverlaps) {
                 Controller.getInstance().getStatistics().addObstacle(BodyFactory.createObstacle("Hollow",x,y,1));
                 return;
+            } else {
+                addHollowPurpleObs();
             }
         }
     }

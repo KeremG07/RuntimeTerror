@@ -242,7 +242,7 @@ public class PlayModeFrame extends JFrame {
         }
 
         // Update Score
-        scoreField.setText(Double.toString(controller.getStatistics().getScore()));
+        scoreField.setText(String.format("%.2f", controller.getStatistics().getScore()));
 
         // Update Ability Images
         // ...
