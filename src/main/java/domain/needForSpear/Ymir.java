@@ -17,6 +17,7 @@ public class Ymir {
 
     public void lifecycle() {
         if(cooldown == 0) {
+            setActive(false);
             tossCoinAndSetAbility();
             cooldown = 30*ticksPerSecond;
         } else {
@@ -32,7 +33,6 @@ public class Ymir {
     }
 
     public void tossCoinAndSetAbility() {
-        assert (!active);
         int result = ThreadLocalRandom.current().nextInt(0,2);
         if(result == 0) {
             setActive(true);
