@@ -248,6 +248,23 @@ public class PlayModeFrame extends JFrame {
         // ...
 
         // Update Ymir Image
-        // ...
+        if (controller.getYmir().isActive()) {
+            switch (controller.getYmir().getCurrentAbility().getName()) {
+                case "Double Accel":
+                    ymirContainer.setIcon(ymirDoubleAccel);
+                    break;
+                case "Hollow Purple":
+                    ymirContainer.setIcon(ymirHollowPurple);
+                    break;
+                case "Infinite Void":
+                    ymirContainer.setIcon(ymirInfinityVoid);
+                    break;
+                default:
+                    ymirContainer.setIcon(ymirDefault);
+                    break;
+            }
+        } else {
+            ymirContainer.setIcon(ymirDefault);
+        }
     }
 }
