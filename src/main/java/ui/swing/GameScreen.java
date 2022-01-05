@@ -31,6 +31,7 @@ public class GameScreen extends JPanel {
     private HashMap<String, Image> images = new HashMap<String, Image>();
     private ArrayList<Obstacle> obstacleList;
     private ArrayList<FallingBody> fallingBodyList;
+    private Image bgImage = new ImageIcon("src/main/java/utilities/background.png").getImage();
 
     public static GameScreen getInstance() {
         if (instance == null)
@@ -45,6 +46,7 @@ public class GameScreen extends JPanel {
         fallingBodyList = controller.getStatistics().getFallingBodyList();
         setImages();
         setPreferredSize(new Dimension((int)controller.getFrameBorders()[0], (int)controller.getFrameBorders()[1]));
+
 
         // dragging part
         MouseAdapter ma = new MouseAdapter() {
@@ -114,6 +116,13 @@ public class GameScreen extends JPanel {
         };
         addMouseListener(ma);
         addMouseMotionListener(ma);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+
+        super.paintComponent(g);
+        g.drawImage(bgImage, 0, 0, null);
     }
 
     @Override

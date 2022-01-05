@@ -17,10 +17,17 @@ public class BuildModeFrame extends JFrame {
     private Controller controller;
     private ArrayList<Obstacle> obstacleList;
     private static final Color BACKGROUND_COLOR = new Color(140, 140, 140);
+
     private JTextField simpleObstacle = new JTextField(5);
     private JTextField firmObstacle = new JTextField(5);
-    private JTextField explosiveObstacle = new JTextField(5);
     private JTextField giftObstacle = new JTextField(5);
+    private JTextField explosiveObstacle = new JTextField(5);
+
+    private JLabel simpleContainer = new JLabel(new ImageIcon("src/main/java/utilities/simpleObs.png"));
+    private JLabel firmContainer = new JLabel(new ImageIcon("src/main/java/utilities/firmObs.png"));
+    private JLabel giftContainer = new JLabel(new ImageIcon("src/main/java/utilities/giftObs.png"));
+    private JLabel explosiveContainer = new JLabel(new ImageIcon("src/main/java/utilities/explosiveObs.png"));
+
     private JButton startGame = new JButton("Start Game");
     private JButton initObstacles = new JButton("Initialize obstacles");
     private static String savePlace;
@@ -50,8 +57,22 @@ public class BuildModeFrame extends JFrame {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         // panel settings
-        JPanel numberPanel = new JPanel(new GridBagLayout());
-        JPanel buttonPanel = new JPanel(new GridBagLayout());
+        JPanel numberPanel = new JPanel(new GridBagLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                Image numberPanelImage = new ImageIcon("src/main/java/utilities/numberPanel.png").getImage();
+                super.paintComponent(g);
+                g.drawImage(numberPanelImage, 0, 0, null);
+            }
+        };
+        JPanel buttonPanel = new JPanel(new GridBagLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                Image buttonPanelImage = new ImageIcon("src/main/java/utilities/buttonPanel.png").getImage();
+                super.paintComponent(g);
+                g.drawImage(buttonPanelImage, 0, 0, null);
+            }
+        };
         numberPanel.setBounds(0,0,this.getWidth(),this.getHeight()*50/800);
         numberPanel.setBackground(BACKGROUND_COLOR);
         buttonPanel.setBounds(0,0,this.getWidth(),this.getHeight()*50/800);
@@ -94,19 +115,30 @@ public class BuildModeFrame extends JFrame {
 
     private void initializeObstacleNumbers(GridBagConstraints gbc, JPanel numberPanel) {
         JLabel obstacleNumberLabel = new JLabel("Obstacle Counts:");
+        obstacleNumberLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         gbc.gridx=0;
         gbc.gridy=0;
-        gbc.weightx=1;
+        gbc.weightx=0.5;
         numberPanel.add(obstacleNumberLabel,gbc);
+        simpleContainer.setHorizontalAlignment(SwingConstants.RIGHT);
+        gbc.ipadx=10;
         gbc.gridx=1;
-        numberPanel.add(simpleObstacle,gbc);
+        numberPanel.add(simpleContainer, gbc);
         gbc.gridx=2;
-        numberPanel.add(firmObstacle,gbc);
+        numberPanel.add(simpleObstacle,gbc);
         gbc.gridx=3;
-        numberPanel.add(explosiveObstacle,gbc);
+        numberPanel.add(firmContainer);
         gbc.gridx=4;
-        numberPanel.add(giftObstacle,gbc);
+        numberPanel.add(firmObstacle,gbc);
         gbc.gridx=5;
+        numberPanel.add(giftContainer);
+        gbc.gridx=6;
+        numberPanel.add(giftObstacle,gbc);
+        gbc.gridx=7;
+        numberPanel.add(explosiveContainer);
+        gbc.gridx=8;
+        numberPanel.add(explosiveObstacle,gbc);
+        gbc.gridx=9;
         gbc.anchor = GridBagConstraints.EAST;
         numberPanel.add(initObstacles, gbc);
     }

@@ -7,9 +7,18 @@ import java.awt.*;
 
 public class EndFrame extends JFrame {
     private static EndFrame instance;
-    private JLabel reason;
-    private JLabel endMessage;
-    private JLabel score;
+
+    private Image endFrameWonImage = new ImageIcon("src/main/java/utilities/endFrameWon.png").getImage();
+    private Image endFrameLostImage = new ImageIcon("src/main/java/utilities/endFrameLost.png").getImage();
+
+    private JPanel endFramePanel;
+
+    private double score;
+    private String scoreText;
+
+    private boolean gameWon = false;
+
+
     public static EndFrame getInstance() {
         if (instance == null)
             instance = new EndFrame();
@@ -19,21 +28,33 @@ public class EndFrame extends JFrame {
     private EndFrame() {
         super("Game Over");
         initializeFrame();
-        if(Controller.getInstance().getStatistics().getChances() == 0){
-            reason = new JLabel("You do not have any chances left.");
-            endMessage = new JLabel("You have lost the game :(");
 
+        if(Controller.getInstance().getStatistics().getChances() != 0) gameWon = true;
+        score = Math.round((Controller.getInstance().getStatistics().getScore() * 100) / 100.0);
+        scoreText = Double.toString(score);
+
+        if(gameWon) {
+            endFramePanel = new JPanel(new GridBagLayout()) {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    g.drawImage(endFrameWonImage, 0, 0, null);
+                    g.drawString(scoreText, getWidth()*19/40, getHeight()*8/10);
+                }
+            };
+        } else {
+            endFramePanel = new JPanel(new GridBagLayout()) {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    g.drawImage(endFrameLostImage, 0, 0, null);
+                    g.drawString(scoreText, getWidth()*19/40, getHeight()*8/10);
+                }
+            };
         }
-        //If all obstacles are destroyed:
-        else {
-            reason = new JLabel("You destroyed all the obstacles!");
-            endMessage = new JLabel("You have won the game!");
-        }
-        reason.setFont(new Font("Serif", Font.PLAIN, 21));
-        endMessage.setFont(new Font("Serif", Font.PLAIN, 21));
-        score = new JLabel("Your score was: " + String.format("%.2f",Controller.getInstance().getStatistics().getScore()));
-        score.setFont(new Font("Serif", Font.PLAIN, 21));
-        addComponentsToPane(this.getContentPane());
+
+        add(endFramePanel);
+
         setVisible(true);
     }
     public void initializeFrame() {
@@ -41,14 +62,5 @@ public class EndFrame extends JFrame {
         this.setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-    public void addComponentsToPane(Container pane) {
-        pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
-        reason.setAlignmentX(Component.CENTER_ALIGNMENT);
-        endMessage.setAlignmentX(Component.CENTER_ALIGNMENT);
-        score.setAlignmentX(Component.CENTER_ALIGNMENT);
-        pane.add(reason);
-        pane.add(endMessage);
-        pane.add(score);
     }
 }

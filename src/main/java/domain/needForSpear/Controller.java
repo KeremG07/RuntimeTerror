@@ -3,6 +3,7 @@ package domain.needForSpear;
 import domain.body.fallingBody.FallingBody;
 import domain.body.fallingBody.Gift;
 import domain.body.obstacle.*;
+import ui.swing.PlayModeFrame;
 
 import java.util.ArrayList;
 
