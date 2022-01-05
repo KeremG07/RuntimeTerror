@@ -1,5 +1,6 @@
 package domain.needForSpear;
 
+import domain.body.MagicalHex;
 import domain.body.fallingBody.FallingBody;
 import domain.body.fallingBody.Gift;
 import domain.body.obstacle.*;
@@ -72,6 +73,7 @@ public class Controller {
         if(playing){
             shootEnchantedSphere();
             moveEnchantedSphere();
+            moveMagicalHexes();
 
             //If enchanted sphere falls down set up so that it will be shot again by the player.
             if(player.getEnchantedSphere().getCoordinates()[1] + player.getEnchantedSphere().getHeight()>=gameScreenHeight){
@@ -80,6 +82,7 @@ public class Controller {
             }
 
             ymir.lifecycle();
+            player.playerAbilityLifeCycle();
         }
         updateObstacleConditions();
         updateFallingBodyConditions();
@@ -96,6 +99,14 @@ public class Controller {
 
     public void moveEnchantedSphere(){
         player.moveEnchantedSphere();
+    }
+
+    public void moveMagicalHexes(){
+        if(!statistics.getMagicalHexList().isEmpty()){
+            for(MagicalHex hex : statistics.getMagicalHexList()){
+                hex.move();
+            }
+        }
     }
 
     //This method will be called ticksPerSecond per second and only after player starts playing the game by shooting

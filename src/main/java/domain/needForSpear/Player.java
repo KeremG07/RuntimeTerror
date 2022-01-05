@@ -2,6 +2,7 @@ package domain.needForSpear;
 
 import domain.body.BodyFactory;
 import domain.body.EnchantedSphere;
+import domain.body.MagicalHex;
 import domain.body.NoblePhantasm;
 import domain.body.obstacle.*;
 import domain.loadAndSave.DatabaseLoadAndSave;
@@ -220,6 +221,7 @@ public class Player {
         if(abilityActivated) {
             if (abilityDuration == 0) {
                 abilityActivated = false;
+                abilityDuration = 30*ticksPerSecond;
                 switch (activeAbility){
                     case "DoubleNP":
                         noblePhantasm.setWidth(100);
@@ -232,13 +234,25 @@ public class Player {
                         break;
                 }
             }else{
+                if(activeAbility.equals("MagicalHex")){
+                    fireMagicalHex();
+                }
                 abilityDuration--;
             }
         }
     }
 
     public void fireMagicalHex() {
-
+        if(abilityDuration % 30 == 0){
+            double xCord = noblePhantasm.getCoordinates()[0];
+            double yCord = noblePhantasm.getCoordinates()[1];
+            double xCordRight = xCord + noblePhantasm.getWidth() * Math.cos(Math.toRadians(noblePhantasm.getNormalAngle()));
+            double yCordRight = yCord - noblePhantasm.getWidth() * Math.sin(Math.toRadians(noblePhantasm.getNormalAngle()));
+            MagicalHex leftHex = new MagicalHex(xCord, yCord, 4,12, noblePhantasm);
+            MagicalHex rightHex = new MagicalHex(xCordRight, yCordRight, 4,12, noblePhantasm);
+            statistics.addMagicalHex(leftHex);
+            statistics.addMagicalHex(rightHex);
+        }
     }
 
     public void useAbility(String abilityType) {
