@@ -26,7 +26,7 @@ public class EndFrame extends JFrame {
         }
         //If all obstacles are destroyed:
         else {
-            reason = new JLabel("You destroyed all the obstacles!.");
+            reason = new JLabel("You destroyed all the obstacles!");
             endMessage = new JLabel("You have won the game!");
         }
         reason.setFont(new Font("Serif", Font.PLAIN, 21));

@@ -17,4 +17,12 @@ public class DoubleAccel extends YmirAbility {
         sphere.setVx(newVx);
         sphere.setVy(newVy);
     }
+
+    @Override
+    public void endDuration(){
+        double newVx = sphere.getVx()*2;
+        double newVy = sphere.getVy()*2;
+        sphere.setVx(newVx);
+        sphere.setVy(newVy);
+    }
 }
