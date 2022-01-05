@@ -92,14 +92,17 @@ public class Controller {
     public void rotateNoblePhantasm(String npAction){
         player.rotateNoblePhantasm(npAction);
     }
+
     public void moveEnchantedSphere(){
         player.moveEnchantedSphere();
     }
+
     //This method will be called ticksPerSecond per second and only after player starts playing the game by shooting
     //the enchanted sphere.
     public void shootEnchantedSphere(){
         player.shootEnchantedSphere();
     }
+
     //This method will be called ticksPerSecond per second.
     public void updateObstacleConditions(){
         //Remove the obstacles that Enchanted Sphere destroyed.
