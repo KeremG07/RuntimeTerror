@@ -1,36 +1,29 @@
-package domain.body;
+package domain.needForSpear;
 
-import domain.ymirAbility.YmirAbility;
-import domain.ymirAbility.DoubleAccel;
-import domain.ymirAbility.HollowPurple;
-import domain.ymirAbility.InfiniteVoid;
-
+import domain.ymirAbility.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Ymir extends Body {
+public class Ymir {
 
     private boolean active;    // an ability is active or not
     private int cooldown;    // cooldown of 30 sec. before another coin toss
     private YmirAbility activeAbility; // InfiniteVoid, DoubleAccel, HollowPurple
+    private int ticksPerSecond = Controller.ticksPerSecond;
 
-    public Ymir(double x_coordinates,
-                double y_coordinates,
-                double width,
-                double height) {
-        super(x_coordinates, y_coordinates, width, height);
+    public Ymir() {
         active = false;
-        cooldown = 30;
+        cooldown = 30*ticksPerSecond;
     }
 
     public void lifecycle() {
         if(cooldown == 0) {
             tossCoinAndSetAbility();
-            cooldown = 30;
+            cooldown = 30*ticksPerSecond;
         } else {
             cooldown--;
-            if(cooldown == 15){
-                activeAbility = null;
+            if(cooldown == 15*ticksPerSecond){
                 setActive(false);
+                activeAbility = null;
             }
         }
     }
@@ -64,5 +57,4 @@ public class Ymir extends Body {
     }
 
     public YmirAbility getCurrentAbility() { return this.activeAbility; }
-
 }

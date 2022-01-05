@@ -8,23 +8,31 @@ import java.util.ArrayList;
 
 public class Controller {
     private static Controller instance;
+
     //How often the movements on the screen is updated.
     public final static int ticksPerSecond = 30;
+
     private Player player;
     private Statistics statistics;
+    private Ymir ymir;
+
     private StartGame newGame;
     private BuildGame buildGame;
+
     //To keep the track of the obstacles that should be removed from the screen.
     private ArrayList<Obstacle> toRemoveObs = new ArrayList<>();
     private ArrayList<FallingBody> toRemoveFBody = new ArrayList<>();
+
     //To check whether we shot the enchanted sphere or not:
     private boolean playing = false;
     private boolean isPaused = false;
+
     private final int gameScreenWidth = 1000, gameScreenHeight = 600;
 
     private Controller() {
         player = new Player();
         statistics = player.getStatistics();
+        ymir = new Ymir();
     }
 
     public static Controller getInstance() {
@@ -63,11 +71,14 @@ public class Controller {
         if(playing){
             shootEnchantedSphere();
             moveEnchantedSphere();
+
             //If enchanted sphere falls down set up so that it will be shot again by the player.
             if(player.getEnchantedSphere().getCoordinates()[1] + player.getEnchantedSphere().getHeight()>=gameScreenHeight){
                 playing = false;
                 player.updateEnchantedSphere();
             }
+
+            ymir.lifecycle();
         }
         updateObstacleConditions();
         updateFallingBodyConditions();
@@ -136,6 +147,8 @@ public class Controller {
 
     public Statistics getStatistics() { return statistics; }
 
+    public Ymir getYmir() { return ymir; }
+
     public void endGame() {
         System.exit(0);
     }
@@ -178,4 +191,5 @@ public class Controller {
             return "None";
         }
     }
+
 }
