@@ -5,6 +5,7 @@ import domain.body.fallingBody.Gift;
 import domain.body.obstacle.*;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Controller {
     private static Controller instance;
@@ -124,7 +125,12 @@ public class Controller {
             if (fbody instanceof Gift) {
                 if (fbody.compareCoordinatesWithNoblePhantasm())  {
                     toRemoveFBody.add(fbody);
-                    // buraya ability eklemesi de gelecek
+                    String ability = generateAbility();
+                    if(ability.equals("Chance")){
+                        player.increaseChance();
+                    }else {
+                        player.getInventory().addAbility(generateAbility());
+                    }
                 } else {
                     fbody.fall();
                 }
@@ -139,6 +145,18 @@ public class Controller {
         }
         statistics.getFallingBodyList().removeAll(toRemoveFBody);
         toRemoveFBody.removeAll(toRemoveFBody);
+    }
+
+    public String generateAbility(){
+        Random rand = new Random();
+        int num = rand.nextInt(4);
+        switch (num){
+            case 0: return "DoubleNP";
+            case 1: return "MagicalHex";
+            case 2: return "Unstoppable";
+            case 3: return "Chance";
+            default: return "";
+        }
     }
 
     public Player getPlayer() {

@@ -20,6 +20,10 @@ public class Player {
     private Inventory inventory;
     private NoblePhantasm noblePhantasm;
     private EnchantedSphere enchantedSphere;
+    private boolean abilityActivated = false;
+    private int ticksPerSecond = Controller.ticksPerSecond;
+    private int abilityDuration = 30*ticksPerSecond;
+    private String activeAbility;
 
     private String save;
 
@@ -212,12 +216,48 @@ public class Player {
         if (action.equals("rotateRight")) noblePhantasm.rotateRight();
     }
 
+    public void playerAbilityLifeCycle(){
+        if(abilityActivated) {
+            if (abilityDuration == 0) {
+                abilityActivated = false;
+                switch (activeAbility){
+                    case "DoubleNP":
+                        noblePhantasm.setWidth(100);
+                        break;
+                    case "Unstoppable":
+                        enchantedSphere.setUnstoppableES(false);
+                        break;
+                    case "MagicalHex":
+                        noblePhantasm.setHasMagicalHex(false);
+                        break;
+                }
+            }else{
+                abilityDuration--;
+            }
+        }
+    }
+
     public void fireMagicalHex() {
 
     }
 
     public void useAbility(String abilityType) {
-
+        if(inventory.getAbilityList().contains(abilityType) && !abilityActivated) {
+            switch (abilityType) {
+                case "DoubleNP":
+                    noblePhantasm.doubleNP();
+                    break;
+                case "Unstoppable":
+                    enchantedSphere.setUnstoppableES(true);
+                    break;
+                case "MagicalHex":
+                    noblePhantasm.setHasMagicalHex(true);
+                    break;
+            }
+            activeAbility = abilityType;
+            abilityActivated = true;
+            inventory.getAbilityList().remove(abilityType);
+        }
     }
 
     public void increaseChance() {

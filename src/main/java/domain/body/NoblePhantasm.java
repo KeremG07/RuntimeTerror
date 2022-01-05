@@ -61,10 +61,15 @@ public class NoblePhantasm extends Body {
     public void activateMagicalHex(){
         
     }
-    
+
     public void doubleNP(){
-        
+        this.width*=2;
+        String frame = Controller.getInstance().hitFrame(x, this.y, this.width * Math.cos(Math.toRadians(this.normalAngle)), this.height * Math.sin(Math.toRadians(this.normalAngle)));
+        if (frame.equals("Right")){
+            this.x = this.x-this.width/2 * Math.cos(Math.toRadians(this.normalAngle));
+        }
     }
+
 
     public double getNormalAngle() {
         return normalAngle;
@@ -79,4 +84,12 @@ public class NoblePhantasm extends Body {
     }
 
     public void halveSpeed() { speedMultiplier = speedMultiplier/2; }
+
+    public boolean isHasMagicalHex() {
+        return hasMagicalHex;
+    }
+
+    public void setHasMagicalHex(boolean hasMagicalHex) {
+        this.hasMagicalHex = hasMagicalHex;
+    }
 }
