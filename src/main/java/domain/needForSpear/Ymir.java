@@ -19,10 +19,10 @@ public class Ymir {
         if(cooldown == 0) {
             setActive(false);
             tossCoinAndSetAbility();
-            cooldown = 8*ticksPerSecond;
+            cooldown = 30*ticksPerSecond;
         } else {
             cooldown--;
-            if(cooldown == 4*ticksPerSecond){
+            if(cooldown == 15*ticksPerSecond){
                 setActive(false);
                 if(activeAbility != null){
                     activeAbility.endDuration();
