@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class PlayModeFrame extends JFrame {
     private Controller controller = Controller.getInstance();
-    private static final Color BACKGROUND_COLOR = new Color(140, 140, 140);
+    private static final Color BACKGROUND_COLOR = Color.DARK_GRAY;
 
     private JButton pauseGame = new JButton("Pause Game");
     private JButton resumeGame = new JButton("Resume Game");
@@ -69,7 +69,14 @@ public class PlayModeFrame extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         // Score Panel
-        JPanel topPanel = new JPanel(new GridBagLayout());
+        JPanel topPanel = new JPanel(new GridBagLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                Image playModeTopPanelImage = new ImageIcon("src/main/java/utilities/playModeTopPanel.png").getImage();
+                super.paintComponent(g);
+                g.drawImage(playModeTopPanelImage, 0, 0, null);
+            }
+        };
         topPanel.setBounds(0,0,this.getWidth(),this.getHeight()*50/800);
         topPanel.setBackground(BACKGROUND_COLOR);
 
@@ -77,7 +84,14 @@ public class PlayModeFrame extends JFrame {
         gameScreen.setBounds(0,0,this.getWidth(),this.getHeight()*600/800);
 
         // Button Panel
-        JPanel buttonPanel = new JPanel(new GridBagLayout());
+        JPanel buttonPanel = new JPanel(new GridBagLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                Image playModeButtonPanelImage = new ImageIcon("src/main/java/utilities/playModeButtonPanel.png").getImage();
+                super.paintComponent(g);
+                g.drawImage(playModeButtonPanelImage, 0, 0, null);
+            }
+        };
         buttonPanel.setBounds(0,0,this.getWidth(),this.getHeight()*50/800);
         buttonPanel.setBackground(BACKGROUND_COLOR);
 

@@ -25,8 +25,10 @@ public class StartFrame extends JFrame implements ActionListener {
             @Override
             protected void paintComponent(Graphics g) {
                 Image logoImage = new ImageIcon("src/main/java/utilities/startLogo.png").getImage();
+                Image bgImage = new ImageIcon("src/main/java/utilities/startFrame.png").getImage();
                 super.paintComponent(g);
-                g.drawImage(logoImage, sf.getWidth() / 5 * 2, sf.getHeight() * 250 / 900, null);
+                g.drawImage(bgImage, 0, 0, null);
+                g.drawImage(logoImage, sf.getWidth() / 12 * 4, sf.getHeight() * 250 / 900, null);
             }
 
         };
@@ -43,6 +45,7 @@ public class StartFrame extends JFrame implements ActionListener {
         loadGameButton.setActionCommand("load game");
         loadGameButton.addActionListener(sf);
         JLabel label= new JLabel("Enter your username:  ");
+        label.setForeground(Color.WHITE);
         usernameBox = new JTextField(10);
         usernameBox.addMouseListener(new MouseAdapter() {
             @Override
@@ -76,9 +79,10 @@ public class StartFrame extends JFrame implements ActionListener {
         gbc.gridx=1;
         gbc.gridy=2;
         panel.add(quitGameButton, gbc);
+        panel.setBackground(Color.DARK_GRAY);
 
         sf.add(panel);
-        sf.setBounds(100, 100, 1200, 800);
+        sf.setBounds(100, 100, 1000, 800);
         sf.setResizable(true);
         sf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         sf.setLocationRelativeTo(null);
