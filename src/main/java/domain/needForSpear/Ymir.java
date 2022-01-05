@@ -22,6 +22,9 @@ public class Ymir {
         } else {
             cooldown--;
             if(cooldown == 15*ticksPerSecond){
+                if(activeAbility != null){
+                    activeAbility.endDuration();
+                }
                 setActive(false);
                 activeAbility = null;
             }

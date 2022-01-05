@@ -26,4 +26,13 @@ public class InfiniteVoid extends YmirAbility {
             obstaclesLeft.get(i).setFrozen(true);
         }
     }
+
+    @Override
+    public void endDuration(){
+        for(Obstacle obstacle : obstacles){
+            if(obstacle.isFrozen()){
+                obstacle.setFrozen(false);
+            }
+        }
+    }
 }

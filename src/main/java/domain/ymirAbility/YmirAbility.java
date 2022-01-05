@@ -1,6 +1,6 @@
 package domain.ymirAbility;
 
-public class YmirAbility {
+public abstract class YmirAbility {
 
     private boolean activated;
     protected int duration;
@@ -15,13 +15,10 @@ public class YmirAbility {
 
     public boolean isActivated() { return activated; }
     public void setActivated(boolean activated) { this.activated = activated; }
-
     public int getDuration() { return duration; }
-
     public int getTimeLeft() { return timeLeft; }
-
     public String getName() {
         return name;
     }
-
+    public abstract void endDuration();
 }
