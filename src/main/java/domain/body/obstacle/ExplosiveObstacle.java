@@ -124,7 +124,7 @@ public class ExplosiveObstacle extends Obstacle {
     public void doWhenDestroyed() {
         double oldScore = Controller.getInstance().getStatistics().getScore();
         long timeElapsed = Controller.getInstance().getStatistics().getTimeElapsed();
-        Controller.getInstance().getStatistics().setScore(oldScore + (300/timeElapsed));
+        Controller.getInstance().getStatistics().setScore(oldScore + (300.0/timeElapsed));
         explode();
     }
 
