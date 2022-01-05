@@ -164,9 +164,9 @@ public class GameScreen extends JPanel {
         // obstacle type and frozen
         if (o.isFrozen()) {
             if (o instanceof ExplosiveObstacle) {
-                imageToDraw = images.get("explosiveObstacle");
+                imageToDraw = images.get("frozenRound");
             } else {
-                imageToDraw = images.get("simpleObstacle");
+                imageToDraw = images.get("frozenLong");
             }
         } else {
             if (o instanceof SimpleObstacle) {
@@ -212,9 +212,11 @@ public class GameScreen extends JPanel {
         Image firmObstacleImage = new ImageIcon("src/main/java/utilities/firmObs.png").getImage();
         Image explosiveObstacleImage = new ImageIcon("src/main/java/utilities/explosiveObs.png").getImage();
         Image giftObstacleImage = new ImageIcon("src/main/java/utilities/giftObs.png").getImage();
-        Image hollowPurpleObstacleImage = new ImageIcon("src/main/java/utilities/giftObs.png").getImage();
+        Image hollowPurpleObstacleImage = new ImageIcon("src/main/java/utilities/hollowPurpleObs.png").getImage();
         Image remainsImage = new ImageIcon("src/main/java/utilities/remains.png").getImage();
         Image giftImage = new ImageIcon("src/main/java/utilities/gift.png").getImage();
+        Image frozenRectangleImage = new ImageIcon("src/main/java/utilities/frozenLongObs.png").getImage();
+        Image frozenCircleImage = new ImageIcon("src/main/java/utilities/frozenRoundObs.png").getImage();
         images.put("noblePhantasm", noblePhantasmImage);
         images.put("enchantedSphere", enchantedSphereImage);
         images.put("simpleObstacle", simpleObstacleImage);
@@ -224,6 +226,9 @@ public class GameScreen extends JPanel {
         images.put("remains", remainsImage);
         images.put("gift", giftImage);
         images.put("hollowPurpleObstacle", hollowPurpleObstacleImage);
+        images.put("frozenLong", frozenRectangleImage);
+        images.put("frozenRound", frozenCircleImage);
+
     }
 
     public static boolean isInitObstacles() {
