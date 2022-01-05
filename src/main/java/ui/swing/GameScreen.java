@@ -216,7 +216,10 @@ public class GameScreen extends JPanel {
 
     private void setImages() {
         Image noblePhantasmImage = new ImageIcon("src/main/java/utilities/NoblePhantasm.png").getImage();
+        Image noblePhantasmExpandedImage = new ImageIcon("src/main/java/utilities/npExpanded.png").getImage();
+        Image noblePhantasmMagicalHexImage = new ImageIcon("src/main/java/utilities/npMagicalHex.png").getImage();
         Image enchantedSphereImage = new ImageIcon("src/main/java/utilities/EnchantedSphere.png").getImage();
+        Image unstoppableEnchantedSphereImage = new ImageIcon("src/main/java/utilities/esUnstoppable.png").getImage();
         Image simpleObstacleImage = new ImageIcon("src/main/java/utilities/simpleObs.png").getImage();
         Image firmObstacleImage = new ImageIcon("src/main/java/utilities/firmObs.png").getImage();
         Image explosiveObstacleImage = new ImageIcon("src/main/java/utilities/explosiveObs.png").getImage();
@@ -227,7 +230,10 @@ public class GameScreen extends JPanel {
         Image frozenRectangleImage = new ImageIcon("src/main/java/utilities/frozenLongObs.png").getImage();
         Image frozenCircleImage = new ImageIcon("src/main/java/utilities/frozenRoundObs.png").getImage();
         images.put("noblePhantasm", noblePhantasmImage);
+        images.put("noblePhantasmExpanded", noblePhantasmExpandedImage);
+        images.put("noblePhantasmMagicalHex", noblePhantasmMagicalHexImage);
         images.put("enchantedSphere", enchantedSphereImage);
+        images.put("unstoppableEnchantedSphere", unstoppableEnchantedSphereImage);
         images.put("simpleObstacle", simpleObstacleImage);
         images.put("firmObstacle", firmObstacleImage);
         images.put("explosiveObstacle", explosiveObstacleImage);

@@ -137,12 +137,7 @@ public class Controller {
             if (fbody instanceof Gift) {
                 if (fbody.compareCoordinatesWithNoblePhantasm())  {
                     toRemoveFBody.add(fbody);
-                    String ability = generateAbility();
-                    if(ability.equals("Chance")){
-                        player.increaseChance();
-                    }else {
-                        player.getInventory().addAbility(generateAbility());
-                    }
+                    player.getInventory().addAbility(generateAbility());
                 } else {
                     fbody.fall();
                 }

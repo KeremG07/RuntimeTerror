@@ -23,6 +23,11 @@ public class KeyboardController implements KeyListener {
 
             if(e.getKeyCode() == KeyEvent.VK_W) controller.startPlaying();
 
+            if(e.getKeyCode() == KeyEvent.VK_C) controller.getPlayer().useAbility("ChanceGiving");
+            if(e.getKeyCode() == KeyEvent.VK_E) controller.getPlayer().useAbility("DoubleNP");
+            if(e.getKeyCode() == KeyEvent.VK_M) controller.getPlayer().useAbility("MagicalHex");
+            if(e.getKeyCode() == KeyEvent.VK_U) controller.getPlayer().useAbility("Unstoppable");
+
         }
     }
 

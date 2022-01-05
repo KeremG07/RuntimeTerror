@@ -259,7 +259,27 @@ public class PlayModeFrame extends JFrame {
         scoreField.setText(String.format("%.2f", controller.getStatistics().getScore()));
 
         // Update Ability Images
-        // ...
+        if (controller.getPlayer().getInventory().getAbilityList().contains("ChanceGiving")) {
+            abilityChanceGivingContainer.setIcon(abilityChanceGiving);
+        } else {
+            abilityChanceGivingContainer.setIcon(abilityChanceGivingDisabled);
+        }
+        if (controller.getPlayer().getInventory().getAbilityList().contains("DoubleNP")) {
+            abilityExpansionContainer.setIcon(abilityExpansion);
+        } else {
+            abilityExpansionContainer.setIcon(abilityExpansionDisabled);
+        }
+        if (controller.getPlayer().getInventory().getAbilityList().contains("MagicalHex")) {
+            abilityMagicalHexContainer.setIcon(abilityMagicalHex);
+        } else {
+            abilityMagicalHexContainer.setIcon(abilityMagicalHexDisabled);
+        }
+        if (controller.getPlayer().getInventory().getAbilityList().contains("Unstoppable")) {
+            abilityUnstoppableESContainer.setIcon(abilityUnstoppableES);
+        } else {
+            abilityUnstoppableESContainer.setIcon(abilityUnstoppableESDisabled);
+        }
+
 
         // Update Ymir Image
         if (controller.getYmir().isActive()) {

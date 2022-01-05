@@ -233,7 +233,7 @@ public class Player {
                         noblePhantasm.setHasMagicalHex(false);
                         break;
                 }
-            }else{
+            } else {
                 if(activeAbility.equals("MagicalHex")){
                     fireMagicalHex();
                 }
@@ -266,6 +266,9 @@ public class Player {
                     break;
                 case "MagicalHex":
                     noblePhantasm.setHasMagicalHex(true);
+                    break;
+                case "ChanceGiving":
+                    increaseChance();
                     break;
             }
             activeAbility = abilityType;
