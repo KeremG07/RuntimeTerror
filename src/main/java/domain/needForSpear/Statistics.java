@@ -18,6 +18,7 @@ public class Statistics {
     private ArrayList<Obstacle> obstacleList = new ArrayList<Obstacle>();
     private ArrayList<FallingBody> fallingBodyList = new ArrayList<FallingBody>();
     private ArrayList<MagicalHex> magicalHexList = new ArrayList<MagicalHex>();
+    private ArrayList<MagicalHex> magicalHexToBeRemovedList = new ArrayList<MagicalHex>();
 
     private HashMap<String, Integer> obstacleNumberbyType; // String "type" --> integer "obstacle number
 
@@ -98,6 +99,8 @@ public class Statistics {
     public ArrayList<MagicalHex> getMagicalHexList() {
         return magicalHexList;
     }
+
+    public ArrayList<MagicalHex> getMagicalHexToBeRemovedList() { return magicalHexToBeRemovedList; }
 
     public void addGift(Gift gift) {fallingBodyList.add(gift);}
     public void addRemains(Remains remains) {fallingBodyList.add(remains);}

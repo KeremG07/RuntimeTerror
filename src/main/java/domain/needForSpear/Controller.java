@@ -4,7 +4,6 @@ import domain.body.MagicalHex;
 import domain.body.fallingBody.FallingBody;
 import domain.body.fallingBody.Gift;
 import domain.body.obstacle.*;
-import ui.swing.PlayModeFrame;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -104,10 +103,12 @@ public class Controller {
 
     public void moveMagicalHexes(){
         if(!statistics.getMagicalHexList().isEmpty()){
-            for(MagicalHex hex : statistics.getMagicalHexList()){
+            for(MagicalHex hex: statistics.getMagicalHexList()){
                 hex.move();
             }
         }
+        statistics.getMagicalHexList().removeAll(statistics.getMagicalHexToBeRemovedList());
+        statistics.getMagicalHexToBeRemovedList().clear();
     }
 
     //This method will be called ticksPerSecond per second and only after player starts playing the game by shooting

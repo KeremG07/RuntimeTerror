@@ -42,7 +42,7 @@ public class MagicalHex extends Body {
         String wall = Controller.getInstance().hitFrame(x, y, width, height);
         boolean hitObstacle;
         if(!wall.equals("None")){
-            Controller.getInstance().getStatistics().getMagicalHexList().remove(this);
+            Controller.getInstance().getStatistics().getMagicalHexToBeRemovedList().add(this);
         }else {
             Obstacle crashingObstacle;
             for (Obstacle obstacle : Controller.getInstance().getStatistics().getObstacleList()) {
@@ -52,7 +52,7 @@ public class MagicalHex extends Body {
                     if(!crashingObstacle.isFrozen()){
                         crashingObstacle.setNumberOfHits(crashingObstacle.getNumberOfHits() - 1);
                     }
-                    Controller.getInstance().getStatistics().getMagicalHexList().remove(this);
+                    Controller.getInstance().getStatistics().getMagicalHexToBeRemovedList().add(this);
                     break;
                 }
             }
