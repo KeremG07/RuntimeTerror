@@ -95,7 +95,7 @@ public class StartFrame extends JFrame implements ActionListener {
             Controller controller = Controller.getInstance();
             controller.getPlayer().setSave(jComboBox.getSelectedItem().toString());
             controller.getStatistics().setUsername(usernameBox.getText());
-            BuildModeFrame.getInstance("");
+            BuildModeFrame.getInstance();
             dispose();
         }
         if (e.getActionCommand().equals("load game")) {

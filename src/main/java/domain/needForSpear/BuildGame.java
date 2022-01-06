@@ -105,7 +105,7 @@ public class BuildGame {
             }
         }
     }
-    public void deleteGiftObstacle(boolean [][]locationCells, Obstacle obstacle) {
+    public void deleteGiftObstacle(boolean[][]locationCells, Obstacle obstacle) {
         String type = obstacle.getName();
         double x = obstacle.getCoordinates()[0];
         double y = obstacle.getCoordinates()[0];
@@ -209,4 +209,6 @@ public class BuildGame {
     public int getGiftObstacleNum() {
         return giftObstacle;
     }
+
+    public boolean[][] getLocationCells() { return locationCells; }
 }

@@ -281,4 +281,7 @@ public class GameScreen extends JPanel {
     public static void setInitObstacles(boolean initObstacles) {
         GameScreen.initObstacles = initObstacles;
     }
+
+
+    public Map<Point2D.Double, Image> getLocations() { return locations; }
 }
