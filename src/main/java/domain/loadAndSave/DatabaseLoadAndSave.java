@@ -52,6 +52,7 @@ public class DatabaseLoadAndSave implements ILoadAndSaveAdapter{
         MongoClient mongoClient = MongoClients.create(settings);
         MongoDatabase database = mongoClient.getDatabase("runtimeterror");
         MongoCollection<Document> collection =database.getCollection("needforspear");
+        collection.deleteOne(eq("name", username));
         collection.insertOne(document);
         System.out.println("Game is saved to needforspear collection in runtimeterror database");
     }

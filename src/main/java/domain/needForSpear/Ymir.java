@@ -1,6 +1,7 @@
 package domain.needForSpear;
 
 import domain.ymirAbility.*;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Ymir {
@@ -12,19 +13,19 @@ public class Ymir {
 
     public Ymir() {
         active = false;
-        cooldown = 30*ticksPerSecond;
+        cooldown = 30 * ticksPerSecond;
     }
 
     public void lifecycle() {
-        if(cooldown == 0) {
+        if (cooldown == 0) {
             setActive(false);
             tossCoinAndSetAbility();
-            cooldown = 30*ticksPerSecond;
+            cooldown = 30 * ticksPerSecond;
         } else {
             cooldown--;
-            if(cooldown == 15*ticksPerSecond){
+            if (cooldown == 15 * ticksPerSecond) {
                 setActive(false);
-                if(activeAbility != null){
+                if (activeAbility != null) {
                     activeAbility.endDuration();
                 }
                 activeAbility = null;
@@ -33,10 +34,10 @@ public class Ymir {
     }
 
     public void tossCoinAndSetAbility() {
-        int result = ThreadLocalRandom.current().nextInt(0,2);
-        if(result == 0) {
+        int result = ThreadLocalRandom.current().nextInt(0, 2);
+        if (result == 0) {
             setActive(true);
-            result = ThreadLocalRandom.current().nextInt(0,3);
+            result = ThreadLocalRandom.current().nextInt(0, 3);
             switch (result) {
                 case 0:
                     activeAbility = new DoubleAccel();
@@ -59,5 +60,19 @@ public class Ymir {
         this.active = active;
     }
 
-    public YmirAbility getCurrentAbility() { return this.activeAbility; }
+    public YmirAbility getCurrentAbility() {
+        return this.activeAbility;
+    }
+
+    public void setActiveAbility(YmirAbility activeAbility) {
+        this.activeAbility = activeAbility;
+    }
+
+    public int getCooldown() {
+        return cooldown;
+    }
+
+    public void setCooldown(int cooldown) {
+        this.cooldown = cooldown;
+    }
 }

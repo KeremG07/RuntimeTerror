@@ -141,6 +141,9 @@ public class Controller {
                     player.getInventory().addAbility(generateAbility());
                 } else {
                     fbody.fall();
+                    if(fbody.getCoordinates()[1]>gameScreenHeight){
+                        toRemoveFBody.add(fbody);
+                    }
                 }
             } else {
                 if (fbody.compareCoordinatesWithNoblePhantasm()) {
