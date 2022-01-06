@@ -14,6 +14,7 @@ public class Statistics {
     private double score;
     private int chances;
     private long timeElapsed;
+    private long loadedTimeElapsed;
     private long startTime;
     private ArrayList<Obstacle> obstacleList = new ArrayList<Obstacle>();
     private ArrayList<FallingBody> fallingBodyList = new ArrayList<FallingBody>();
@@ -74,12 +75,11 @@ public class Statistics {
 
     public long getTimeElapsed() {
         timeElapsed = System.currentTimeMillis() - startTime;
-        return timeElapsed/1000;
+        return timeElapsed/1000 + loadedTimeElapsed;
     }
-    public void setTimeElapsed(long timeElapsed) {
-        this.timeElapsed = timeElapsed;
+    public void setLoadedTimeElapsed(long timeElapsed) {
+        this.loadedTimeElapsed = timeElapsed;
     }
-
     public long getStartTime() {
         return startTime;
     }
