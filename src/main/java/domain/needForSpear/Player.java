@@ -24,7 +24,7 @@ public class Player {
     private boolean abilityActivated = false;
     private int ticksPerSecond = Controller.ticksPerSecond;
     private int abilityDuration = 30*ticksPerSecond;
-    private String activeAbility;
+    private String activeAbility = "none";
 
     private String save;
 
@@ -220,17 +220,22 @@ public class Player {
     public void playerAbilityLifeCycle(){
         if(abilityActivated) {
             if (abilityDuration == 0) {
+                // Ability is finished and its effects are reset.
                 abilityActivated = false;
                 abilityDuration = 30*ticksPerSecond;
                 switch (activeAbility){
                     case "DoubleNP":
                         noblePhantasm.setWidth(100);
+                        activeAbility = "none";
                         break;
                     case "Unstoppable":
                         enchantedSphere.setUnstoppableES(false);
+                        activeAbility = "none";
+
                         break;
                     case "MagicalHex":
                         noblePhantasm.setHasMagicalHex(false);
+                        activeAbility = "none";
                         break;
                 }
             } else {
@@ -307,6 +312,14 @@ public class Player {
 
     public void setSave(String save) {
         this.save = save;
+    }
+
+    public String getActiveAbility() {
+        if(abilityActivated) {
+            return activeAbility;
+        } else {
+            return "none";
+        }
     }
 
 }

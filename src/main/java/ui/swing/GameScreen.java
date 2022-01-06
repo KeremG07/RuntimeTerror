@@ -2,6 +2,7 @@ package ui.swing;
 
 import com.sun.corba.se.impl.orbutil.graph.Graph;
 import domain.body.EnchantedSphere;
+import domain.body.MagicalHex;
 import domain.body.NoblePhantasm;
 import domain.body.fallingBody.FallingBody;
 import domain.body.fallingBody.Gift;
@@ -31,6 +32,7 @@ public class GameScreen extends JPanel {
     private HashMap<String, Image> images = new HashMap<String, Image>();
     private ArrayList<Obstacle> obstacleList;
     private ArrayList<FallingBody> fallingBodyList;
+    private ArrayList<MagicalHex> magicalHexList;
     private Image bgImage = new ImageIcon("src/main/java/utilities/background.png").getImage();
 
     public static GameScreen getInstance() {
@@ -44,6 +46,7 @@ public class GameScreen extends JPanel {
         this.controller = Controller.getInstance();
         obstacleList = controller.getStatistics().getObstacleList();
         fallingBodyList = controller.getStatistics().getFallingBodyList();
+        magicalHexList = controller.getStatistics().getMagicalHexList();
         setImages();
         setPreferredSize(new Dimension((int)controller.getFrameBorders()[0], (int)controller.getFrameBorders()[1]));
 
@@ -140,6 +143,9 @@ public class GameScreen extends JPanel {
         for (FallingBody fb: fallingBodyList) {
             drawFallingBodies(g, fb);
         }
+        for (MagicalHex hex: magicalHexList) {
+            drawHexProjectiles(g, hex);
+        }
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.dispose();
     }
@@ -152,7 +158,13 @@ public class GameScreen extends JPanel {
                 noblePhantasm.getCoordinates()[1]);
         rotateTransform.translate(noblePhantasm.getCoordinates()[0],
                 noblePhantasm.getCoordinates()[1]);
-        g2d.drawImage(images.get("noblePhantasm"), rotateTransform , null);
+        if(controller.getPlayer().getActiveAbility().equals("DoubleNP")) {
+            g2d.drawImage(images.get("noblePhantasmExpanded"), rotateTransform , null);
+        } else if(controller.getPlayer().getActiveAbility().equals("MagicalHex")) {
+            g2d.drawImage(images.get("noblePhantasmMagicalHex"), rotateTransform , null);
+        } else {
+            g2d.drawImage(images.get("noblePhantasm"), rotateTransform , null);
+        }
     }
 
     void drawEnchantedSphere(Graphics g) {
@@ -160,7 +172,11 @@ public class GameScreen extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         AffineTransform at = new AffineTransform();
         at.translate(enchantedSphere.getCoordinates()[0], enchantedSphere.getCoordinates()[1]);
-        g2d.drawImage(images.get("enchantedSphere"), at , null);
+        if(controller.getPlayer().getActiveAbility().equals("Unstoppable")) {
+            g2d.drawImage(images.get("unstoppableEnchantedSphere"), at , null);
+        } else {
+            g2d.drawImage(images.get("enchantedSphere"), at , null);
+        }
     }
 
     void drawObstacles(Graphics g, Obstacle o) {
@@ -214,6 +230,16 @@ public class GameScreen extends JPanel {
         g2d.drawImage(imageToDraw, at, null);
     }
 
+    void drawHexProjectiles(Graphics g, MagicalHex hex) {
+        Graphics2D g2d = (Graphics2D) g;
+        AffineTransform at = new AffineTransform();
+        at.translate(hex.getCoordinates()[0], hex.getCoordinates()[1]);
+        Image imageToDraw;
+        imageToDraw = images.get("hexProjectile");
+        locations.put(new Point2D.Double(hex.getCoordinates()[0], hex.getCoordinates()[1]), imageToDraw);
+        g2d.drawImage(imageToDraw, at, null);
+    }
+
     private void setImages() {
         Image noblePhantasmImage = new ImageIcon("src/main/java/utilities/NoblePhantasm.png").getImage();
         Image noblePhantasmExpandedImage = new ImageIcon("src/main/java/utilities/npExpanded.png").getImage();
@@ -229,6 +255,7 @@ public class GameScreen extends JPanel {
         Image giftImage = new ImageIcon("src/main/java/utilities/gift.png").getImage();
         Image frozenRectangleImage = new ImageIcon("src/main/java/utilities/frozenLongObs.png").getImage();
         Image frozenCircleImage = new ImageIcon("src/main/java/utilities/frozenRoundObs.png").getImage();
+        Image hexProjectile = new ImageIcon("src/main/java/utilities/hexProjectile.png").getImage();
         images.put("noblePhantasm", noblePhantasmImage);
         images.put("noblePhantasmExpanded", noblePhantasmExpandedImage);
         images.put("noblePhantasmMagicalHex", noblePhantasmMagicalHexImage);
@@ -243,6 +270,7 @@ public class GameScreen extends JPanel {
         images.put("hollowPurpleObstacle", hollowPurpleObstacleImage);
         images.put("frozenLong", frozenRectangleImage);
         images.put("frozenRound", frozenCircleImage);
+        images.put("hexProjectile", hexProjectile);
 
     }
 
