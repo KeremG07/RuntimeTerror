@@ -52,13 +52,13 @@ public class BuildModeFrame extends JFrame {
         super("Building Window");
         controller = Controller.getInstance();
         obstacleList = controller.getStatistics().getObstacleList();
-        setBounds(0, 0, 1000, 900);
+        setBounds(0, 0, 1000, 800);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel mainPanel = initializeMainPanel();
         GameScreen gameScreen = GameScreen.getInstance();
-        gameScreen.setBounds(0,200,this.getWidth(),600);
+        gameScreen.setBounds(0,100,this.getWidth(),600);
         // gridbag constraint parameters
         GridBagConstraints gbc = new GridBagConstraints();
         // panel settings
@@ -98,11 +98,11 @@ public class BuildModeFrame extends JFrame {
                 g.drawImage(buttonPanelImage, 0, 0, null);
             }
         };
-        numberPanel.setBounds(0,0,this.getWidth(),100);
+        numberPanel.setBounds(0,0,this.getWidth(),50);
         numberPanel.setBackground(BACKGROUND_COLOR);
-        addDeletePanel.setBounds(0,100,this.getWidth(),100);
+        addDeletePanel.setBounds(0,50,this.getWidth(),50);
         addDeletePanel.setBackground(BACKGROUND_COLOR);
-        buttonPanel.setBounds(0,800,this.getWidth(),100);
+        buttonPanel.setBounds(0,750,this.getWidth(),50);
         buttonPanel.setBackground(BACKGROUND_COLOR);
         mainPanel.add(numberPanel);
         mainPanel.add(addDeletePanel);
