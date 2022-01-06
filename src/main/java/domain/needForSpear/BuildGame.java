@@ -62,8 +62,8 @@ public class BuildGame {
         }
         Controller.getInstance().getStatistics().addObstacle(newCreatedObstacle);
         locationCells[row][column] = true;
-
     }
+
     //Gets the number of obstacles entered as input from the user.
     public void setNumObstacles(String[] numOfObstaclesReq) {
         try {
