@@ -226,12 +226,16 @@ public class Player {
                 switch (activeAbility){
                     case "DoubleNP":
                         noblePhantasm.setWidth(100);
+                        activeAbility = "none";
                         break;
                     case "Unstoppable":
                         enchantedSphere.setUnstoppableES(false);
+                        activeAbility = "none";
+
                         break;
                     case "MagicalHex":
                         noblePhantasm.setHasMagicalHex(false);
+                        activeAbility = "none";
                         break;
                 }
             } else {
