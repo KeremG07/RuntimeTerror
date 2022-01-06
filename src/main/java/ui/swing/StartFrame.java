@@ -7,12 +7,32 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
+import java.io.File;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
+
+import javax.sound.sampled.AudioInputStream;
 
 public class StartFrame extends JFrame implements ActionListener {
     private static JComboBox<String> jComboBox;
     private static JTextField usernameBox;
+
+    private static JComboBox<String> jukeBox;
+    private static JLabel jamField;
+
+    private static final String witcherSongFile = "src/main/java/utilities/witcher.wav";
+    private static final String amogusSongFile = "src/main/java/utilities/amogus.wav";
+    private static final String sonicSongFile = "src/main/java/utilities/sonic.wav";
+
+    private static final String witcherSongName = "Epic";
+    private static final String amogusSongName = "Drip";
+    private static final String sonicSongName = "Nostalgic";
+
+    private String audioFile = "src/main/java/utilities/witcher.wav"; // Default Value
+
+    private Clip clip;
+    private AudioInputStream inputStream;
 
     public StartFrame() throws HeadlessException {
         super("Need For Spear");
@@ -60,6 +80,16 @@ public class StartFrame extends JFrame implements ActionListener {
         JButton quitGameButton = new JButton("Quit");
         quitGameButton.setActionCommand("quit");
         quitGameButton.addActionListener(sf);
+
+        jamField = new JLabel("JukeBox:");
+        jamField.setForeground(Color.WHITE);
+        String[] jukes = {witcherSongName, amogusSongName, sonicSongName};
+        jukeBox = new JComboBox<String>(jukes);
+        jukeBox.setSelectedItem(witcherSongName);
+        JButton selectBeatButton = new JButton("Select Beat");
+        selectBeatButton.setActionCommand("select beat");
+        selectBeatButton.addActionListener(sf);
+
         gbc.gridx=0;
         gbc.gridy=0;
         panel.add(label,gbc);
@@ -76,8 +106,15 @@ public class StartFrame extends JFrame implements ActionListener {
         panel.add(loadGameButton, gbc);
         gbc.gridx=2;
         panel.add(helpFrameButton, gbc);
-        gbc.gridx=1;
+        gbc.gridx=0;
         gbc.gridy=2;
+        panel.add(jamField, gbc);
+        gbc.gridx=1;
+        panel.add(jukeBox, gbc);
+        gbc.gridx=2;
+        panel.add(selectBeatButton, gbc);
+        gbc.gridx=1;
+        gbc.gridy=3;
         panel.add(quitGameButton, gbc);
         panel.setBackground(Color.DARK_GRAY);
 
@@ -96,6 +133,7 @@ public class StartFrame extends JFrame implements ActionListener {
             controller.getPlayer().setSave(jComboBox.getSelectedItem().toString());
             controller.getStatistics().setUsername(usernameBox.getText());
             BuildModeFrame.getInstance();
+            playSong();
             dispose();
         }
         if (e.getActionCommand().equals("load game")) {
@@ -115,8 +153,26 @@ public class StartFrame extends JFrame implements ActionListener {
         if (e.getActionCommand().equals("help")) {
             new HelpFrame();
         }
+        if(e.getActionCommand().equals("select beat")) {
+            if(jukeBox.getSelectedItem().equals(witcherSongName)) audioFile = witcherSongFile;
+            else if(jukeBox.getSelectedItem().equals(amogusSongName)) audioFile = amogusSongFile;
+            else if(jukeBox.getSelectedItem().equals(sonicSongName)) audioFile = sonicSongFile;
+            else audioFile = witcherSongFile;
+        }
         if (e.getActionCommand().equals("quit")) {
             dispose();
+        }
+    }
+
+    private void playSong() {
+        try {
+            inputStream = AudioSystem.getAudioInputStream(new File(audioFile));
+            clip = AudioSystem.getClip();
+            clip.open(inputStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 }
