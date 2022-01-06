@@ -14,6 +14,8 @@ public class BuildGame {
             gameScreenHeight = Controller.getInstance().getFrameBorders()[1];
     private Random randi = new Random();
     private Statistics statistics;
+    //The GameScreen is divided into cells (size: 11x10) where objects can be put.
+    private boolean[][] locationCells = new boolean[(int)(gameScreenHeight-160)/40][(int) gameScreenWidth/100];
     //Creates however many obstacles were asked to be created.
     public BuildGame(String[] numOfObstaclesReq){
         //REQUIRES: A string array of length 4.
@@ -22,57 +24,122 @@ public class BuildGame {
         //creates correct number of obstacles and puts them on the screen randomly and in a way that they do not collide.
         statistics = Controller.getInstance().getStatistics();
         setNumObstacles(numOfObstaclesReq);
-        //The GameScreen is divided into cells (size: 10x10) where objects can be put.
-        boolean[][] locationCells = new boolean[(int)(gameScreenHeight-200)/40][(int) gameScreenWidth/100];
         for(int i=0; i<simpleObstacle; i++){
-            addObstacle("Simple", 1);
+            putObstacleInCell(locationCells, "Simple");
         }
         for(int i=0; i<firmObstacle; i++){
-            int hitNum = randi.nextInt(3) + 3;
-            addObstacle("Firm", hitNum);
+            putObstacleInCell(locationCells, "Firm");
         }
         for(int i=0; i<giftObstacle; i++){
-            addObstacle("Gift", 1);
+            putObstacleInCell(locationCells, "Gift");
         }
         for(int i=0; i<explosiveObstacle; i++){
-            addObstacle("Explosive", 1);
+            putObstacleInCell(locationCells, "Explosive");
         }
     }
 
-    public void addObstacle(String type, int hitCount) {
-        boolean notOverlaps = true;
-        int x;
-        int y;
-        while (notOverlaps) {
-            x = randi.nextInt(900);
-            y = randi.nextInt(392);
-            for (Obstacle o: statistics.getObstacleList()) {
-                if (o.compareCoordinates(x,y, 100, 8)) {
-                    notOverlaps = false;
-                    break;
+    public void deleteSimpleObstacle(boolean [][]locationCells, Obstacle obstacle) {
+        String type = obstacle.getName();
+        double x = obstacle.getCoordinates()[0];
+        double y = obstacle.getCoordinates()[0];
+        int currentSimpleObs = 0;
+        for(Obstacle iterObs : statistics.getObstacleList()){
+            if(iterObs.getName().equals("Simple")){
+                currentSimpleObs++;
+            }
+        }
+        if(type.equals("Simple")){
+            if(currentSimpleObs > simpleObstacleReq){
+                locationCells[(int)(x-10)/100][(int)(y-20)/40] = false;
+                for(Obstacle iterObs : statistics.getObstacleList()){
+                    if(iterObs.equals(obstacle)){
+                        statistics.getObstacleList().remove(iterObs);
+                        return;
+                    }
                 }
             }
-            if (notOverlaps) {
-                Controller.getInstance().getStatistics().addObstacle(BodyFactory.createObstacle(type, x,y,hitCount));
-                return;
-            } else {
-                addObstacle(type, hitCount);
+        }
+
+    }
+    public void deleteFirmObstacle(boolean [][]locationCells, Obstacle obstacle) {
+        String type = obstacle.getName();
+        double x = obstacle.getCoordinates()[0];
+        double y = obstacle.getCoordinates()[0];
+        int currentFirmObs = 0;
+        for(Obstacle iterObs : statistics.getObstacleList()){
+            if(iterObs.getName().equals("Firm")){
+                currentFirmObs++;
+            }
+        }
+        if(type.equals("Firm")){
+            if(currentFirmObs > firmObstacleReq){
+                locationCells[(int)(x-10)/100][(int)(y-20)/40] = false;
+                for(Obstacle iterObs : statistics.getObstacleList()){
+                    if(iterObs.equals(obstacle)){
+                        statistics.getObstacleList().remove(iterObs);
+                        return;
+                    }
+                }
             }
         }
     }
+    public void deleteExplosiveObstacle(boolean [][]locationCells, Obstacle obstacle) {
+        String type = obstacle.getName();
+        double x = obstacle.getCoordinates()[0];
+        double y = obstacle.getCoordinates()[0];
+        int currentExplosiveObs = 0;
+        for(Obstacle iterObs : statistics.getObstacleList()){
+            if(iterObs.getName().equals("Explosive")){
+                currentExplosiveObs++;
+            }
+        }
+        if(type.equals("Explosive")){
+            if(currentExplosiveObs > explosiveObstacleReq){
+                locationCells[(int)(x-35)/100][(int)(y-10)/40] = false;
+                for(Obstacle iterObs : statistics.getObstacleList()) {
+                    if (iterObs.equals(obstacle)) {
+                        statistics.getObstacleList().remove(iterObs);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+    public void deleteGiftObstacle(boolean [][]locationCells, Obstacle obstacle) {
+        String type = obstacle.getName();
+        double x = obstacle.getCoordinates()[0];
+        double y = obstacle.getCoordinates()[0];
+        int currentGiftObs = 0;
+        for(Obstacle iterObs : statistics.getObstacleList()){
+            if(iterObs.getName().equals("Gift")){
+                currentGiftObs++;
+            }
+        }
+        if(type.equals("Gift")){
+            if(currentGiftObs > giftObstacleReq){
+                locationCells[(int)(x-10)/100][(int)(y-20)/40] = false;
+                for(Obstacle iterObs : statistics.getObstacleList()){
+                    if(iterObs.equals(obstacle)){
+                        statistics.getObstacleList().remove(iterObs);
+                        return;
+                    }
+                }
+            }
+        }
 
+    }
     //Finding an empty cell and creating the obstacle there.
-    /*public void putObstacleInCell(boolean [][]locationCells, String typeOfObstacle){
+    public void putObstacleInCell(boolean [][]locationCells, String typeOfObstacle){
         int column;
         int row;
         column = randi.nextInt(10);
-        row = randi.nextInt(10);
+        row = randi.nextInt(11);
         while(locationCells[row][column]){
             column = randi.nextInt(10);
-            row = randi.nextInt(10);
+            row = randi.nextInt(11);
         }
         int x = 10 + column*100;
-        int y = row*40 + 40;
+        int y = 20 + row*40;
         Obstacle newCreatedObstacle;
         if(typeOfObstacle.equals("Firm")){
             int hitNum = randi.nextInt(3) + 3;
@@ -83,11 +150,12 @@ public class BuildGame {
                 newCreatedObstacle.setCoordinates(x + 25, y - 10);
             }
         }
-        Controller.getInstance().getStatistics().addObstacle(newCreatedObstacle);
+        statistics.addObstacle(newCreatedObstacle);
         locationCells[row][column] = true;
-    }*/
+    }
 
     //Gets the number of obstacles entered as input from the user.
+    // THIS METHOD WILL BE EDITED AFTER THE CHANGES IN UI.
     public void setNumObstacles(String[] numOfObstaclesReq) {
         try {
             simpleObstacle = Math.max(Integer.parseInt(numOfObstaclesReq[0]), simpleObstacleReq);
@@ -113,13 +181,13 @@ public class BuildGame {
         catch(NumberFormatException exception) {
             giftObstacle = giftObstacleReq;
         }
-        if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle >= 200){
+        if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle > 110){
             giftObstacle = giftObstacleReq;
-            if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle >= 200) {
+            if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle > 110) {
                 explosiveObstacle = explosiveObstacleReq;
-                if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle >= 200){
+                if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle > 110){
                     firmObstacle = firmObstacleReq;
-                    if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle >= 200){
+                    if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle > 110){
                         simpleObstacle = simpleObstacleReq;
                     }
                 }
