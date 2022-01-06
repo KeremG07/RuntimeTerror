@@ -59,6 +59,8 @@ public class BuildGame {
         }
     }
     public void deleteSimpleObstacle(Obstacle obstacle) {
+        double x = obstacle.getCoordinates()[0];
+        double y = obstacle.getCoordinates()[1];
         String type = obstacle.getName();
         int currentSimpleObs = 0;
         for(Obstacle iterObs : statistics.getObstacleList()){
@@ -102,6 +104,8 @@ public class BuildGame {
         }
     }
     public void deleteFirmObstacle(Obstacle obstacle) {
+        double x = obstacle.getCoordinates()[0];
+        double y = obstacle.getCoordinates()[1];
         String type = obstacle.getName();
         int currentFirmObs = 0;
         for(Obstacle iterObs : statistics.getObstacleList()){
@@ -143,6 +147,8 @@ public class BuildGame {
         }
     }
     public void deleteExplosiveObstacle(Obstacle obstacle) {
+        double x = obstacle.getCoordinates()[0];
+        double y = obstacle.getCoordinates()[1];
         String type = obstacle.getName();
         int currentExplosiveObs = 0;
         for(Obstacle iterObs : statistics.getObstacleList()){
