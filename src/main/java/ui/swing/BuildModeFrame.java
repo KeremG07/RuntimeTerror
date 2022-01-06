@@ -95,6 +95,7 @@ public class BuildModeFrame extends JFrame {
                 controller.startNewGame(obstaclesCount);
                 gameScreen.repaint(50L);
                 initObstacles.setEnabled(false);
+                startGame.setEnabled(true);
             }
         });
 
@@ -149,6 +150,7 @@ public class BuildModeFrame extends JFrame {
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.CENTER;
         buttonPanel.add(startGame,gbc);
+        startGame.setEnabled(false);
     }
 
 }
