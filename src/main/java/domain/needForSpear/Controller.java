@@ -151,6 +151,9 @@ public class Controller {
                     player.loseChance();
                 } else {
                     fbody.fall();
+                    if(fbody.getCoordinates()[1]>gameScreenHeight){
+                        toRemoveFBody.add(fbody);
+                    }
                 }
             }
         }
