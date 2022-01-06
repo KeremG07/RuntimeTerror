@@ -112,11 +112,15 @@ public class Player {
         saveList.add("" + activeAbility);
         //ymir abilities
         ymir=Controller.getInstance().getYmir();
-        if (Objects.isNull(ymir)) {
-            saveList.add("" + ymir.isActive());
-            saveList.add("" + ymir.getCooldown());
-            saveList.add(ymir.getCurrentAbility().getName());
+        saveList.add("" + ymir.isActive());
+        saveList.add("" + ymir.getCooldown());
+        YmirAbility ymirAbility= ymir.getCurrentAbility();
+        if(ymirAbility!=null){
+            saveList.add(ymirAbility.getName());
+        }else{
+            saveList.add(""+ null);
         }
+
 
         try {
             iLoadAndSaveAdapter.saveGame(saveList, username);
