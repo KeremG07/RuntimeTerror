@@ -253,6 +253,14 @@ public class Player {
                 abilityActivated = Boolean.parseBoolean(loadList.get(loadListTracker++));
                 abilityDuration = Integer.parseInt(loadList.get(loadListTracker++));
                 activeAbility = loadList.get(loadListTracker++);
+                switch (activeAbility) {
+                    case "DoubleNP":
+                        noblePhantasm.doubleNP();
+                        break;
+                    case "Unstoppable":
+                        enchantedSphere.setUnstoppableES(true);
+                        break;
+                }
 
 
                 if (loadList.size() != loadListTracker) {
