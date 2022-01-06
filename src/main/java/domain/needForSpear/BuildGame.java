@@ -21,8 +21,8 @@ public class BuildGame {
         //EFFECTS: Initializes simpleObstacle, firmObstacle, explosiveObstacle and giftObstacle according to user input,
         //creates correct number of obstacles and puts them on the screen randomly and in a way that they do not collide.
         setNumObstacles(numOfObstaclesReq);
-        //The GameScreen is divided into cells (size: 10x10) where objects can be put.
-        boolean[][] locationCells = new boolean[(int)(gameScreenHeight-200)/40][(int) gameScreenWidth/100];
+        //The GameScreen is divided into cells (size: 11x10) where objects can be put.
+        boolean[][] locationCells = new boolean[(int)(gameScreenHeight-160)/40][(int) gameScreenWidth/100];
         for(int i=0; i<simpleObstacle; i++){
             putObstacleInCell(locationCells, "Simple");
         }
@@ -43,10 +43,10 @@ public class BuildGame {
         int column;
         int row;
         column = randi.nextInt(10);
-        row = randi.nextInt(10);
+        row = randi.nextInt(11);
         while(locationCells[row][column]){
             column = randi.nextInt(10);
-            row = randi.nextInt(10);
+            row = randi.nextInt(11);
         }
         int x = 10 + column*100;
         int y = row*40 + 40;
@@ -90,13 +90,13 @@ public class BuildGame {
         catch(NumberFormatException exception) {
             giftObstacle = giftObstacleReq;
         }
-        if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle >= 100){
+        if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle > 110){
             giftObstacle = giftObstacleReq;
-            if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle >= 100) {
+            if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle > 110) {
                 explosiveObstacle = explosiveObstacleReq;
-                if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle >= 100){
+                if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle > 110){
                     firmObstacle = firmObstacleReq;
-                    if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle >= 100){
+                    if(simpleObstacle + firmObstacle + explosiveObstacle + giftObstacle > 110){
                         simpleObstacle = simpleObstacleReq;
                     }
                 }
