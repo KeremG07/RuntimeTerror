@@ -128,7 +128,20 @@ public class BuildModeFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(!activeObstacle.equals("None") && Controller.getInstance().getStatistics().getObstacleList().size() < 110) {
-                    Controller.getInstance().getBuildGame().putObstacleInCell(Controller.getInstance().getBuildGame().getLocationCells(), activeObstacle);
+                    switch(activeObstacle) {
+                        case("Simple"):
+                            Controller.getInstance().getBuildGame().addSimpleObstacle();
+                            break;
+                        case("Firm"):
+                            Controller.getInstance().getBuildGame().addFirmObstacle();
+                            break;
+                        case("Gift"):
+                            Controller.getInstance().getBuildGame().addGiftObstacle();
+                            break;
+                        case("Explosive"):
+                            Controller.getInstance().getBuildGame().addExplosiveObstacle();
+                            break;
+                    }
                     gameScreen.repaint();
                 }
                 activeObstacle = "None";
