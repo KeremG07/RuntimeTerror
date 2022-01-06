@@ -131,6 +131,7 @@ public class BuildModeFrame extends JFrame {
                     Controller.getInstance().getBuildGame().putObstacleInCell(Controller.getInstance().getBuildGame().getLocationCells(), activeObstacle);
                     gameScreen.repaint();
                 }
+                activeObstacle = "None";
             }
         });
 
