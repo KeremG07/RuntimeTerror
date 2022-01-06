@@ -13,32 +13,206 @@ public class BuildGame {
     public final double gameScreenWidth = Controller.getInstance().getFrameBorders()[0],
             gameScreenHeight = Controller.getInstance().getFrameBorders()[1];
     private Random randi = new Random();
-
+    private Statistics statistics;
+    //The GameScreen is divided into cells (size: 11x10) where objects can be put.
+    private boolean[][] locationCells = new boolean[(int)(gameScreenHeight-160)/40][(int) gameScreenWidth/100];
     //Creates however many obstacles were asked to be created.
     public BuildGame(String[] numOfObstaclesReq){
         //REQUIRES: A string array of length 4.
         //MODIFIES: obstacleList, an ArrayList that contains all the obstacles created in Statistics.java.
         //EFFECTS: Initializes simpleObstacle, firmObstacle, explosiveObstacle and giftObstacle according to user input,
         //creates correct number of obstacles and puts them on the screen randomly and in a way that they do not collide.
+        statistics = Controller.getInstance().getStatistics();
         setNumObstacles(numOfObstaclesReq);
-        //The GameScreen is divided into cells (size: 11x10) where objects can be put.
-        boolean[][] locationCells = new boolean[(int)(gameScreenHeight-160)/40][(int) gameScreenWidth/100];
         for(int i=0; i<simpleObstacle; i++){
             putObstacleInCell(locationCells, "Simple");
         }
         for(int i=0; i<firmObstacle; i++){
             putObstacleInCell(locationCells, "Firm");
         }
-        for(int i=0; i<explosiveObstacle; i++){
-            putObstacleInCell(locationCells, "Explosive");
-        }
         for(int i=0; i<giftObstacle; i++){
             putObstacleInCell(locationCells, "Gift");
         }
+        for(int i=0; i<explosiveObstacle; i++){
+            putObstacleInCell(locationCells, "Explosive");
+        }
     }
+    public void addSimpleObstacle() {
+        boolean notOverlaps = true;
+        int x;
+        int y;
+        while (notOverlaps) {
+            x = randi.nextInt(900);
+            y = randi.nextInt(392);
+            for (Obstacle o: statistics.getObstacleList()) {
+                if (o.compareCoordinates(x,y, 100, 8)) {
+                    notOverlaps = false;
+                    break;
+                }
+            }
+            if (notOverlaps) {
+                statistics.addObstacle(BodyFactory.createObstacle("Simple",x,y,1));
+                return;
+            } else {
+                addSimpleObstacle();
+            }
+        }
+    }
+    public void deleteSimpleObstacle(boolean [][]locationCells, Obstacle obstacle) {
+        String type = obstacle.getName();
+        double x = obstacle.getCoordinates()[0];
+        double y = obstacle.getCoordinates()[1];
+        int currentSimpleObs = 0;
+        for(Obstacle iterObs : statistics.getObstacleList()){
+            if(iterObs.getName().equals("Simple")){
+                currentSimpleObs++;
+            }
+        }
+        if(type.equals("Simple")){
+            if(currentSimpleObs > simpleObstacleReq){
+                locationCells[(int)(x-10)/100][(int)(y-20)/40] = false;
+                for(Obstacle iterObs : statistics.getObstacleList()){
+                    if(iterObs.equals(obstacle)){
+                        statistics.getObstacleList().remove(iterObs);
+                        return;
+                    }
+                }
+            }
+        }
 
+    }
+    public void addFirmObstacle() {
+        boolean notOverlaps = true;
+        int x;
+        int y;
+        while (notOverlaps) {
+            x = randi.nextInt(900);
+            y = randi.nextInt(392);
+            for (Obstacle o: statistics.getObstacleList()) {
+                if (o.compareCoordinates(x,y, 100, 8)) {
+                    notOverlaps = false;
+                    break;
+                }
+            }
+            if (notOverlaps) {
+                int hitNum = randi.nextInt(3) + 3;
+                statistics.addObstacle(BodyFactory.createObstacle("Firm",x,y,hitNum));
+                return;
+            } else {
+                addFirmObstacle();
+            }
+        }
+    }
+    public void deleteFirmObstacle(boolean [][]locationCells, Obstacle obstacle) {
+        String type = obstacle.getName();
+        double x = obstacle.getCoordinates()[0];
+        double y = obstacle.getCoordinates()[1];
+        int currentFirmObs = 0;
+        for(Obstacle iterObs : statistics.getObstacleList()){
+            if(iterObs.getName().equals("Firm")){
+                currentFirmObs++;
+            }
+        }
+        if(type.equals("Firm")){
+            if(currentFirmObs > firmObstacleReq){
+                locationCells[(int)(x-10)/100][(int)(y-20)/40] = false;
+                for(Obstacle iterObs : statistics.getObstacleList()){
+                    if(iterObs.equals(obstacle)){
+                        statistics.getObstacleList().remove(iterObs);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+    public void addExplosiveObstacle() {
+        boolean notOverlaps = true;
+        int x;
+        int y;
+        while (notOverlaps) {
+            x = randi.nextInt(968);
+            y = randi.nextInt(368);
+            for (Obstacle o: statistics.getObstacleList()) {
+                if (o.compareCoordinates(x,y, 32, 32)) {
+                    notOverlaps = false;
+                    break;
+                }
+            }
+            if (notOverlaps) {
+                statistics.addObstacle(BodyFactory.createObstacle("Explosive",x,y,1));
+                return;
+            } else {
+                addExplosiveObstacle();
+            }
+        }
+    }
+    public void deleteExplosiveObstacle(boolean [][]locationCells, Obstacle obstacle) {
+        String type = obstacle.getName();
+        double x = obstacle.getCoordinates()[0];
+        double y = obstacle.getCoordinates()[1];
+        int currentExplosiveObs = 0;
+        for(Obstacle iterObs : statistics.getObstacleList()){
+            if(iterObs.getName().equals("Explosive")){
+                currentExplosiveObs++;
+            }
+        }
+        if(type.equals("Explosive")){
+            if(currentExplosiveObs > explosiveObstacleReq){
+                locationCells[(int)(x-35)/100][(int)(y-10)/40] = false;
+                for(Obstacle iterObs : statistics.getObstacleList()) {
+                    if (iterObs.equals(obstacle)) {
+                        statistics.getObstacleList().remove(iterObs);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+    public void addGiftObstacle() {
+        boolean notOverlaps = true;
+        int x;
+        int y;
+        while (notOverlaps) {
+            x = randi.nextInt(900);
+            y = randi.nextInt(392);
+            for (Obstacle o: statistics.getObstacleList()) {
+                if (o.compareCoordinates(x,y, 100, 8)) {
+                    notOverlaps = false;
+                    break;
+                }
+            }
+            if (notOverlaps) {
+                statistics.addObstacle(BodyFactory.createObstacle("Gift",x,y,1));
+                return;
+            } else {
+                addGiftObstacle();
+            }
+        }
+    }
+    public void deleteGiftObstacle(boolean[][]locationCells, Obstacle obstacle) {
+        String type = obstacle.getName();
+        double x = obstacle.getCoordinates()[0];
+        double y = obstacle.getCoordinates()[1];
+        int currentGiftObs = 0;
+        for(Obstacle iterObs : statistics.getObstacleList()){
+            if(iterObs.getName().equals("Gift")){
+                currentGiftObs++;
+            }
+        }
+        if(type.equals("Gift")){
+            if(currentGiftObs > giftObstacleReq){
+                locationCells[(int)(x-10)/100][(int)(y-20)/40] = false;
+                for(Obstacle iterObs : statistics.getObstacleList()){
+                    if(iterObs.equals(obstacle)){
+                        statistics.getObstacleList().remove(iterObs);
+                        return;
+                    }
+                }
+            }
+        }
 
-    //Finding an empty cell and creating the obstacle there.
+    }
+    //Finding an empty cell and creating the obstacle there. This is used for initializing obstacles.
     public void putObstacleInCell(boolean [][]locationCells, String typeOfObstacle){
         int column;
         int row;
@@ -49,7 +223,7 @@ public class BuildGame {
             row = randi.nextInt(11);
         }
         int x = 10 + column*100;
-        int y = row*40 + 40;
+        int y = 20 + row*40;
         Obstacle newCreatedObstacle;
         if(typeOfObstacle.equals("Firm")){
             int hitNum = randi.nextInt(3) + 3;
@@ -60,10 +234,11 @@ public class BuildGame {
                 newCreatedObstacle.setCoordinates(x + 25, y - 10);
             }
         }
-        Controller.getInstance().getStatistics().addObstacle(newCreatedObstacle);
+        statistics.addObstacle(newCreatedObstacle);
         locationCells[row][column] = true;
 
     }
+
     //Gets the number of obstacles entered as input from the user.
     public void setNumObstacles(String[] numOfObstaclesReq) {
         try {
@@ -118,4 +293,6 @@ public class BuildGame {
     public int getGiftObstacleNum() {
         return giftObstacle;
     }
+
+    public boolean[][] getLocationCells() { return locationCells; }
 }

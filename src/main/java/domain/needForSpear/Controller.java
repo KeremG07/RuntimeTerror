@@ -221,4 +221,6 @@ public class Controller {
         }
     }
 
+    public BuildGame getBuildGame() { return buildGame; }
+
 }
