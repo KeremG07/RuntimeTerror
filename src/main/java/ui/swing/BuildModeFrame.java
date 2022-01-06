@@ -110,6 +110,8 @@ public class BuildModeFrame extends JFrame {
         mainPanel.add(buttonPanel);
         initializeObstacleNumbers(gbc, numberPanel);
         addDeleteObstacles(gbc, addDeletePanel);
+        addObstacle.setEnabled(false);
+        deleteObstacle.setEnabled(false);
         initializeButton(gbc, buttonPanel);
         this.setLocationRelativeTo(null);
         setVisible(true);
@@ -240,6 +242,8 @@ public class BuildModeFrame extends JFrame {
                 gameScreen.repaint(50L);
                 initObstacles.setEnabled(false);
                 startGame.setEnabled(true);
+                addObstacle.setEnabled(true);
+                deleteObstacle.setEnabled(true);
             }
         });
 
