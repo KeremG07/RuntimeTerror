@@ -212,7 +212,7 @@ public class BuildGame {
         }
 
     }
-    //Finding an empty cell and creating the obstacle there.
+    //Finding an empty cell and creating the obstacle there. This is used for initializing obstacles.
     public void putObstacleInCell(boolean [][]locationCells, String typeOfObstacle){
         int column;
         int row;
