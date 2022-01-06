@@ -37,7 +37,27 @@ public class BuildGame {
             putObstacleInCell(locationCells, "Explosive");
         }
     }
-
+    public void addSimpleObstacle() {
+        boolean notOverlaps = true;
+        int x;
+        int y;
+        while (notOverlaps) {
+            x = randi.nextInt(900);
+            y = randi.nextInt(392);
+            for (Obstacle o: statistics.getObstacleList()) {
+                if (o.compareCoordinates(x,y, 100, 8)) {
+                    notOverlaps = false;
+                    break;
+                }
+            }
+            if (notOverlaps) {
+                statistics.addObstacle(BodyFactory.createObstacle("Simple",x,y,1));
+                return;
+            } else {
+                addSimpleObstacle();
+            }
+        }
+    }
     public void deleteSimpleObstacle(boolean [][]locationCells, Obstacle obstacle) {
         String type = obstacle.getName();
         double x = obstacle.getCoordinates()[0];
@@ -61,6 +81,28 @@ public class BuildGame {
         }
 
     }
+    public void addFirmObstacle() {
+        boolean notOverlaps = true;
+        int x;
+        int y;
+        while (notOverlaps) {
+            x = randi.nextInt(900);
+            y = randi.nextInt(392);
+            for (Obstacle o: statistics.getObstacleList()) {
+                if (o.compareCoordinates(x,y, 100, 8)) {
+                    notOverlaps = false;
+                    break;
+                }
+            }
+            if (notOverlaps) {
+                int hitNum = randi.nextInt(3) + 3;
+                statistics.addObstacle(BodyFactory.createObstacle("Firm",x,y,hitNum));
+                return;
+            } else {
+                addFirmObstacle();
+            }
+        }
+    }
     public void deleteFirmObstacle(boolean [][]locationCells, Obstacle obstacle) {
         String type = obstacle.getName();
         double x = obstacle.getCoordinates()[0];
@@ -83,6 +125,27 @@ public class BuildGame {
             }
         }
     }
+    public void addExplosiveObstacle() {
+        boolean notOverlaps = true;
+        int x;
+        int y;
+        while (notOverlaps) {
+            x = randi.nextInt(968);
+            y = randi.nextInt(368);
+            for (Obstacle o: statistics.getObstacleList()) {
+                if (o.compareCoordinates(x,y, 32, 32)) {
+                    notOverlaps = false;
+                    break;
+                }
+            }
+            if (notOverlaps) {
+                statistics.addObstacle(BodyFactory.createObstacle("Explosive",x,y,1));
+                return;
+            } else {
+                addExplosiveObstacle();
+            }
+        }
+    }
     public void deleteExplosiveObstacle(boolean [][]locationCells, Obstacle obstacle) {
         String type = obstacle.getName();
         double x = obstacle.getCoordinates()[0];
@@ -102,6 +165,27 @@ public class BuildGame {
                         return;
                     }
                 }
+            }
+        }
+    }
+    public void addGiftObstacle() {
+        boolean notOverlaps = true;
+        int x;
+        int y;
+        while (notOverlaps) {
+            x = randi.nextInt(900);
+            y = randi.nextInt(392);
+            for (Obstacle o: statistics.getObstacleList()) {
+                if (o.compareCoordinates(x,y, 100, 8)) {
+                    notOverlaps = false;
+                    break;
+                }
+            }
+            if (notOverlaps) {
+                statistics.addObstacle(BodyFactory.createObstacle("Gift",x,y,1));
+                return;
+            } else {
+                addGiftObstacle();
             }
         }
     }
