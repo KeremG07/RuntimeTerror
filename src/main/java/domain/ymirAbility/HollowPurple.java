@@ -14,9 +14,6 @@ public class HollowPurple extends YmirAbility {
     public HollowPurple() {
         super();
         name = "Hollow Purple";
-        for(int i=0; i<hollowPurpleNum; i++){
-            addHollowPurpleObs();
-        }
     }
 
     public void addHollowPurpleObs() {
@@ -50,4 +47,6 @@ public class HollowPurple extends YmirAbility {
         obstacles.removeAll(toRemoveObs);
         toRemoveObs.removeAll(toRemoveObs);
     }
+
+    public double getHollowPurpleNum() { return hollowPurpleNum; }
 }

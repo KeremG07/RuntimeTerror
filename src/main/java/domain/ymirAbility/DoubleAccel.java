@@ -8,7 +8,6 @@ public class DoubleAccel extends YmirAbility {
     public DoubleAccel() {
         super();
         name = "Double Accel";
-        slowDownEnchantedSphere();
     }
 
     public void slowDownEnchantedSphere(){

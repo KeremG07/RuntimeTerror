@@ -41,12 +41,18 @@ public class Ymir {
             switch (result) {
                 case 0:
                     activeAbility = new DoubleAccel();
+                    ((DoubleAccel)activeAbility).slowDownEnchantedSphere();
                     break;
                 case 1:
                     activeAbility = new HollowPurple();
+                    for(int i=0; i<((HollowPurple)activeAbility).getHollowPurpleNum(); i++){
+                        ((HollowPurple)activeAbility).addHollowPurpleObs();
+                    }
+
                     break;
                 case 2:
                     activeAbility = new InfiniteVoid();
+                    ((InfiniteVoid)activeAbility).freeze();
                     break;
             }
         }

@@ -65,7 +65,7 @@ public class BuildModeFrame extends JFrame {
         JPanel numberPanel = new JPanel(new GridBagLayout()) {
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(this.getWidth(), 100);
+                return new Dimension(this.getWidth(), 50);
             }
             @Override
             protected void paintComponent(Graphics g) {
@@ -77,7 +77,7 @@ public class BuildModeFrame extends JFrame {
         JPanel addDeletePanel = new JPanel(new GridBagLayout()) {
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(this.getWidth(), 100);
+                return new Dimension(this.getWidth(), 50);
             }
             @Override
             protected void paintComponent(Graphics g) {
@@ -89,7 +89,7 @@ public class BuildModeFrame extends JFrame {
         JPanel buttonPanel = new JPanel(new GridBagLayout()) {
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(this.getWidth(), 100);
+                return new Dimension(this.getWidth(), 50);
             }
             @Override
             protected void paintComponent(Graphics g) {

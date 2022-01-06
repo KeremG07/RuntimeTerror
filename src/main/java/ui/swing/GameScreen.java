@@ -50,7 +50,6 @@ public class GameScreen extends JPanel {
         setImages();
         setPreferredSize(new Dimension((int)controller.getFrameBorders()[0], (int)controller.getFrameBorders()[1]));
 
-
         // dragging part
         MouseAdapter ma = new MouseAdapter() {
 

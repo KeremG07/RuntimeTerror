@@ -10,7 +10,6 @@ public class InfiniteVoid extends YmirAbility {
     public InfiniteVoid() {
         super();
         name = "Infinite Void";
-        freeze();
     }
 
     public void freeze(){
