@@ -43,7 +43,7 @@ public class BuildGame {
         int y;
         while (notOverlaps) {
             x = randi.nextInt(900);
-            y = randi.nextInt(392);
+            y = randi.nextInt(432);
             for (Obstacle o: statistics.getObstacleList()) {
                 if (o.compareCoordinates(x,y, 100, 8)) {
                     notOverlaps = false;
@@ -58,10 +58,8 @@ public class BuildGame {
             }
         }
     }
-    public void deleteSimpleObstacle(boolean [][]locationCells, Obstacle obstacle) {
+    public void deleteSimpleObstacle(Obstacle obstacle) {
         String type = obstacle.getName();
-        double x = obstacle.getCoordinates()[0];
-        double y = obstacle.getCoordinates()[1];
         int currentSimpleObs = 0;
         for(Obstacle iterObs : statistics.getObstacleList()){
             if(iterObs.getName().equals("Simple")){
@@ -87,7 +85,7 @@ public class BuildGame {
         int y;
         while (notOverlaps) {
             x = randi.nextInt(900);
-            y = randi.nextInt(392);
+            y = randi.nextInt(432);
             for (Obstacle o: statistics.getObstacleList()) {
                 if (o.compareCoordinates(x,y, 100, 8)) {
                     notOverlaps = false;
@@ -103,10 +101,8 @@ public class BuildGame {
             }
         }
     }
-    public void deleteFirmObstacle(boolean [][]locationCells, Obstacle obstacle) {
+    public void deleteFirmObstacle(Obstacle obstacle) {
         String type = obstacle.getName();
-        double x = obstacle.getCoordinates()[0];
-        double y = obstacle.getCoordinates()[1];
         int currentFirmObs = 0;
         for(Obstacle iterObs : statistics.getObstacleList()){
             if(iterObs.getName().equals("Firm")){
@@ -131,7 +127,7 @@ public class BuildGame {
         int y;
         while (notOverlaps) {
             x = randi.nextInt(968);
-            y = randi.nextInt(368);
+            y = randi.nextInt(408);
             for (Obstacle o: statistics.getObstacleList()) {
                 if (o.compareCoordinates(x,y, 32, 32)) {
                     notOverlaps = false;
@@ -146,10 +142,8 @@ public class BuildGame {
             }
         }
     }
-    public void deleteExplosiveObstacle(boolean [][]locationCells, Obstacle obstacle) {
+    public void deleteExplosiveObstacle(Obstacle obstacle) {
         String type = obstacle.getName();
-        double x = obstacle.getCoordinates()[0];
-        double y = obstacle.getCoordinates()[1];
         int currentExplosiveObs = 0;
         for(Obstacle iterObs : statistics.getObstacleList()){
             if(iterObs.getName().equals("Explosive")){
@@ -174,7 +168,7 @@ public class BuildGame {
         int y;
         while (notOverlaps) {
             x = randi.nextInt(900);
-            y = randi.nextInt(392);
+            y = randi.nextInt(432);
             for (Obstacle o: statistics.getObstacleList()) {
                 if (o.compareCoordinates(x,y, 100, 8)) {
                     notOverlaps = false;
@@ -189,7 +183,7 @@ public class BuildGame {
             }
         }
     }
-    public void deleteGiftObstacle(boolean[][]locationCells, Obstacle obstacle) {
+    public void deleteGiftObstacle(Obstacle obstacle) {
         String type = obstacle.getName();
         double x = obstacle.getCoordinates()[0];
         double y = obstacle.getCoordinates()[1];
@@ -236,6 +230,7 @@ public class BuildGame {
         }
         statistics.addObstacle(newCreatedObstacle);
         locationCells[row][column] = true;
+
     }
 
     //Gets the number of obstacles entered as input from the user.

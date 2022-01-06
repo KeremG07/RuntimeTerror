@@ -180,16 +180,16 @@ public class BuildModeFrame extends JFrame {
                         try {
                             switch(obstacleToDelete.getName()) {
                                 case("Simple"):
-                                    Controller.getInstance().getBuildGame().deleteSimpleObstacle(Controller.getInstance().getBuildGame().getLocationCells(), obstacleToDelete);
+                                    Controller.getInstance().getBuildGame().deleteSimpleObstacle(obstacleToDelete);
                                     break;
                                 case("Firm"):
-                                    Controller.getInstance().getBuildGame().deleteFirmObstacle(Controller.getInstance().getBuildGame().getLocationCells(), obstacleToDelete);
+                                    Controller.getInstance().getBuildGame().deleteFirmObstacle(obstacleToDelete);
                                     break;
                                 case("Gift"):
-                                    Controller.getInstance().getBuildGame().deleteGiftObstacle(Controller.getInstance().getBuildGame().getLocationCells(), obstacleToDelete);
+                                    Controller.getInstance().getBuildGame().deleteGiftObstacle(obstacleToDelete);
                                     break;
                                 case("Explosive"):
-                                    Controller.getInstance().getBuildGame().deleteExplosiveObstacle(Controller.getInstance().getBuildGame().getLocationCells(), obstacleToDelete);
+                                    Controller.getInstance().getBuildGame().deleteExplosiveObstacle(obstacleToDelete);
                                     break;
                             }
 
