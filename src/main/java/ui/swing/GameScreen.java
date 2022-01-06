@@ -105,7 +105,7 @@ public class GameScreen extends JPanel {
                         }
                     }
                     // new obstacle location
-                    if (!collides && (dragPoint.y <= 400)) {
+                    if (!collides && (dragPoint.y <= 440)) {
                         locations.put(dragPoint, dragImage);
                         for (Obstacle o : obstacleList) {
                             if (o.equals(obstacleDragged)) {
