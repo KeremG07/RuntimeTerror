@@ -239,7 +239,6 @@ public class BuildGame {
     }
 
     //Gets the number of obstacles entered as input from the user.
-    // THIS METHOD WILL BE EDITED AFTER THE CHANGES IN UI.
     public void setNumObstacles(String[] numOfObstaclesReq) {
         try {
             simpleObstacle = Math.max(Integer.parseInt(numOfObstaclesReq[0]), simpleObstacleReq);

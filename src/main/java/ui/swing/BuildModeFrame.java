@@ -127,7 +127,7 @@ public class BuildModeFrame extends JFrame {
         addObstacle.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(!activeObstacle.equals("None") && Controller.getInstance().getStatistics().getObstacleList().size() < 110) {
+                if(!activeObstacle.equals("None") && Controller.getInstance().getStatistics().getObstacleList().size() < 125) {
                     switch(activeObstacle) {
                         case("Simple"):
                             Controller.getInstance().getBuildGame().addSimpleObstacle();
@@ -176,22 +176,21 @@ public class BuildModeFrame extends JFrame {
                             }
                         }
                         try {
-                            if (Controller.getInstance().getStatistics().getObstacleList().size() > 100) {
-                                switch(obstacleToDelete.getName()) {
-                                    case("Simple"):
-                                        Controller.getInstance().getBuildGame().deleteSimpleObstacle(Controller.getInstance().getBuildGame().getLocationCells(), obstacleToDelete);
-                                        break;
-                                    case("Firm"):
-                                        Controller.getInstance().getBuildGame().deleteFirmObstacle(Controller.getInstance().getBuildGame().getLocationCells(), obstacleToDelete);
-                                        break;
-                                    case("Gift"):
-                                        Controller.getInstance().getBuildGame().deleteGiftObstacle(Controller.getInstance().getBuildGame().getLocationCells(), obstacleToDelete);
-                                        break;
-                                    case("Explosive"):
-                                        Controller.getInstance().getBuildGame().deleteExplosiveObstacle(Controller.getInstance().getBuildGame().getLocationCells(), obstacleToDelete);
-                                        break;
-                                }
+                            switch(obstacleToDelete.getName()) {
+                                case("Simple"):
+                                    Controller.getInstance().getBuildGame().deleteSimpleObstacle(Controller.getInstance().getBuildGame().getLocationCells(), obstacleToDelete);
+                                    break;
+                                case("Firm"):
+                                    Controller.getInstance().getBuildGame().deleteFirmObstacle(Controller.getInstance().getBuildGame().getLocationCells(), obstacleToDelete);
+                                    break;
+                                case("Gift"):
+                                    Controller.getInstance().getBuildGame().deleteGiftObstacle(Controller.getInstance().getBuildGame().getLocationCells(), obstacleToDelete);
+                                    break;
+                                case("Explosive"):
+                                    Controller.getInstance().getBuildGame().deleteExplosiveObstacle(Controller.getInstance().getBuildGame().getLocationCells(), obstacleToDelete);
+                                    break;
                             }
+
                         } catch (Exception a) {
 
                         }
