@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public abstract class FallingBody extends Body {
 
-    private int vy = 1;
+    private int vy = 3;
     private NoblePhantasm np;
 
     public FallingBody(double x_coordinates,
