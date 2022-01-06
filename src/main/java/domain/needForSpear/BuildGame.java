@@ -41,7 +41,7 @@ public class BuildGame {
     public void deleteSimpleObstacle(boolean [][]locationCells, Obstacle obstacle) {
         String type = obstacle.getName();
         double x = obstacle.getCoordinates()[0];
-        double y = obstacle.getCoordinates()[0];
+        double y = obstacle.getCoordinates()[1];
         int currentSimpleObs = 0;
         for(Obstacle iterObs : statistics.getObstacleList()){
             if(iterObs.getName().equals("Simple")){
@@ -64,7 +64,7 @@ public class BuildGame {
     public void deleteFirmObstacle(boolean [][]locationCells, Obstacle obstacle) {
         String type = obstacle.getName();
         double x = obstacle.getCoordinates()[0];
-        double y = obstacle.getCoordinates()[0];
+        double y = obstacle.getCoordinates()[1];
         int currentFirmObs = 0;
         for(Obstacle iterObs : statistics.getObstacleList()){
             if(iterObs.getName().equals("Firm")){
@@ -86,7 +86,7 @@ public class BuildGame {
     public void deleteExplosiveObstacle(boolean [][]locationCells, Obstacle obstacle) {
         String type = obstacle.getName();
         double x = obstacle.getCoordinates()[0];
-        double y = obstacle.getCoordinates()[0];
+        double y = obstacle.getCoordinates()[1];
         int currentExplosiveObs = 0;
         for(Obstacle iterObs : statistics.getObstacleList()){
             if(iterObs.getName().equals("Explosive")){
@@ -108,7 +108,7 @@ public class BuildGame {
     public void deleteGiftObstacle(boolean[][]locationCells, Obstacle obstacle) {
         String type = obstacle.getName();
         double x = obstacle.getCoordinates()[0];
-        double y = obstacle.getCoordinates()[0];
+        double y = obstacle.getCoordinates()[1];
         int currentGiftObs = 0;
         for(Obstacle iterObs : statistics.getObstacleList()){
             if(iterObs.getName().equals("Gift")){

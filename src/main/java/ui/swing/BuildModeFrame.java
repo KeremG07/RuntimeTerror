@@ -164,7 +164,20 @@ public class BuildModeFrame extends JFrame {
                         }
                         try {
                             if (Controller.getInstance().getStatistics().getObstacleList().size() > 100) {
-                                Controller.getInstance().getStatistics().getObstacleList().remove(obstacleToDelete);
+                                switch(obstacleToDelete.getName()) {
+                                    case("Simple"):
+                                        Controller.getInstance().getBuildGame().deleteSimpleObstacle(Controller.getInstance().getBuildGame().getLocationCells(), obstacleToDelete);
+                                        break;
+                                    case("Firm"):
+                                        Controller.getInstance().getBuildGame().deleteFirmObstacle(Controller.getInstance().getBuildGame().getLocationCells(), obstacleToDelete);
+                                        break;
+                                    case("Gift"):
+                                        Controller.getInstance().getBuildGame().deleteGiftObstacle(Controller.getInstance().getBuildGame().getLocationCells(), obstacleToDelete);
+                                        break;
+                                    case("Explosive"):
+                                        Controller.getInstance().getBuildGame().deleteExplosiveObstacle(Controller.getInstance().getBuildGame().getLocationCells(), obstacleToDelete);
+                                        break;
+                                }
                             }
                         } catch (Exception a) {
 
