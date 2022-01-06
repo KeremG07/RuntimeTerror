@@ -43,7 +43,7 @@ public class BuildGame {
         int y;
         while (notOverlaps) {
             x = randi.nextInt(900);
-            y = randi.nextInt(392);
+            y = randi.nextInt(432);
             for (Obstacle o: statistics.getObstacleList()) {
                 if (o.compareCoordinates(x,y, 100, 8)) {
                     notOverlaps = false;
@@ -87,7 +87,7 @@ public class BuildGame {
         int y;
         while (notOverlaps) {
             x = randi.nextInt(900);
-            y = randi.nextInt(392);
+            y = randi.nextInt(432);
             for (Obstacle o: statistics.getObstacleList()) {
                 if (o.compareCoordinates(x,y, 100, 8)) {
                     notOverlaps = false;
@@ -131,7 +131,7 @@ public class BuildGame {
         int y;
         while (notOverlaps) {
             x = randi.nextInt(968);
-            y = randi.nextInt(368);
+            y = randi.nextInt(408);
             for (Obstacle o: statistics.getObstacleList()) {
                 if (o.compareCoordinates(x,y, 32, 32)) {
                     notOverlaps = false;
@@ -174,7 +174,7 @@ public class BuildGame {
         int y;
         while (notOverlaps) {
             x = randi.nextInt(900);
-            y = randi.nextInt(392);
+            y = randi.nextInt(432);
             for (Obstacle o: statistics.getObstacleList()) {
                 if (o.compareCoordinates(x,y, 100, 8)) {
                     notOverlaps = false;
