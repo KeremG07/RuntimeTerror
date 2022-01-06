@@ -162,7 +162,7 @@ public class Controller {
             case 0: return "DoubleNP";
             case 1: return "MagicalHex";
             case 2: return "Unstoppable";
-            case 3: return "Chance";
+            case 3: return "ChanceGiving";
             default: return "";
         }
     }

@@ -276,8 +276,10 @@ public class Player {
                     increaseChance();
                     break;
             }
-            activeAbility = abilityType;
-            abilityActivated = true;
+            if(!abilityType.equals("ChanceGiving")) {
+                activeAbility = abilityType;
+                abilityActivated = true;
+            }
             inventory.getAbilityList().remove(abilityType);
         }
     }

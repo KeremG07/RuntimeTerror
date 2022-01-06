@@ -43,9 +43,9 @@ public class EnchantedSphere extends Body {
     public void shootEnchantedSphere() {
         if (notShot) {
             double normalAngle = np.getNormalAngle();
-            vx = -(2 * np.width * Math.cos(Math.toRadians(normalAngle + 90)));
+            vx = -(2 * 100 * Math.cos(Math.toRadians(normalAngle + 90)));
             if(normalAngle == 0) vx = 0;
-            vy = (2 * np.width * Math.sin(Math.toRadians(normalAngle + 90)));
+            vy = (2 * 100 * Math.sin(Math.toRadians(normalAngle + 90)));
             if(vy > 0){
                 vy = -vy;
             }
