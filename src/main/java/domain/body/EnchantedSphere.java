@@ -2,6 +2,8 @@ package domain.body;
 
 import domain.body.obstacle.*;
 import domain.needForSpear.*;
+import domain.ymirAbility.DoubleAccel;
+import domain.ymirAbility.YmirAbility;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ public class EnchantedSphere extends Body {
     private double vx;
     private double vy;
     private boolean notShot = true;
+    private Ymir ymir;
+
 
     public EnchantedSphere(double  x_coordinates,
                            double  y_coordinates,
@@ -41,11 +45,19 @@ public class EnchantedSphere extends Body {
     //Initializes the speed of the Enchanted sphere according to Noble Phantasm's angle after the player shoots the
     // enchanted sphere, only if it isn't shot yet.
     public void shootEnchantedSphere() {
+        ymir=Controller.getInstance().getYmir();
+        YmirAbility ymirAbility= ymir.getCurrentAbility();
+        int speedMultiplier;
         if (notShot) {
+            if(ymirAbility!= null&&ymirAbility.getName().equals("Double Accel")){
+                speedMultiplier=1;
+            }else{
+                speedMultiplier=2;
+            }
             double normalAngle = np.getNormalAngle();
-            vx = -(2 * 100 * Math.cos(Math.toRadians(normalAngle + 90)));
+            vx = -(speedMultiplier * 100 * Math.cos(Math.toRadians(normalAngle + 90)));
             if(normalAngle == 0) vx = 0;
-            vy = (2 * 100 * Math.sin(Math.toRadians(normalAngle + 90)));
+            vy = (speedMultiplier * 100 * Math.sin(Math.toRadians(normalAngle + 90)));
             if(vy > 0){
                 vy = -vy;
             }
