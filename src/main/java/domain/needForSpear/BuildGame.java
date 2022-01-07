@@ -70,7 +70,6 @@ public class BuildGame {
         }
         if(type.equals("Simple")){
             if(currentSimpleObs > simpleObstacleReq){
-                locationCells[(int)(x-10)/40][(int)(y-20)/100] = false;
                 for(Obstacle iterObs : statistics.getObstacleList()){
                     if(iterObs.equals(obstacle)){
                         statistics.getObstacleList().remove(iterObs);
@@ -115,7 +114,6 @@ public class BuildGame {
         }
         if(type.equals("Firm")){
             if(currentFirmObs > firmObstacleReq){
-                locationCells[(int)(x-10)/40][(int)(y-20)/100] = false;
                 for(Obstacle iterObs : statistics.getObstacleList()){
                     if(iterObs.equals(obstacle)){
                         statistics.getObstacleList().remove(iterObs);
@@ -158,7 +156,6 @@ public class BuildGame {
         }
         if(type.equals("Explosive")){
             if(currentExplosiveObs > explosiveObstacleReq){
-                locationCells[(int)(x-35)/40][(int)(y-10)/100] = false;
                 for(Obstacle iterObs : statistics.getObstacleList()) {
                     if (iterObs.equals(obstacle)) {
                         statistics.getObstacleList().remove(iterObs);
@@ -201,7 +198,6 @@ public class BuildGame {
         }
         if(type.equals("Gift")){
             if(currentGiftObs > giftObstacleReq){
-                locationCells[(int)(x-10)/40][(int)(y-20)/100] = false;
                 for(Obstacle iterObs : statistics.getObstacleList()){
                     if(iterObs.equals(obstacle)){
                         statistics.getObstacleList().remove(iterObs);
