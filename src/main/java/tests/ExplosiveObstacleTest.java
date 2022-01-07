@@ -77,7 +77,7 @@ public class ExplosiveObstacleTest {
         explosiveObstacle.move();
         assertTrue(explosiveObstacle.repOk());
 
-        assertEquals(explosiveObstacle.getCoordinates()[0], 110);
+        assertEquals(explosiveObstacle.getCoordinates()[0], 84);
     }
 
     @Test
@@ -96,7 +96,7 @@ public class ExplosiveObstacleTest {
         explosiveObstacle.move();
         assertTrue(explosiveObstacle.repOk());
 
-        assertEquals(explosiveObstacle.getCoordinates()[1], 83);
+        assertEquals(explosiveObstacle.getCoordinates()[1], 99);
     }
 }
 
