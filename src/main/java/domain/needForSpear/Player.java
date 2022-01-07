@@ -70,6 +70,8 @@ public class Player {
          obstacles on the screen (type location speed isfrozen)
          falling body number on the screen
          falling body type location
+         magical hex number
+         magical hex on the screen(speed location)
          ability list
          ability cooldown
          ymir cooldown
@@ -86,11 +88,17 @@ public class Player {
         for (Obstacle obs : statistics.getObstacleList()) {
             String obsType = obs.getName();
             if (obsType.equals("Explosive")) {
-                saveList.add("" + obstacleNameMap.get(obs.getName()) + "/" + obs.getCoordinates()[0] + "/" + obs.getCoordinates()[1] + "/" + ((ExplosiveObstacle) obs).getDegree() + "/" + obs.isFrozen());
+                saveList.add("" + obstacleNameMap.get(obs.getName()) + "/" + obs.getCoordinates()[0] + "/"
+                        + obs.getCoordinates()[1] + "/" + ((ExplosiveObstacle) obs).getDegree() + "/" + obs.isFrozen() + "/" + obs.isMoving() + "/" + ((ExplosiveObstacle) obs).getMovesRight());
             } else if (obsType.equals("Firm")) {
-                saveList.add("" + obstacleNameMap.get(obs.getName()) + "/" + obs.getCoordinates()[0] + "/" + obs.getCoordinates()[1] + "/" + obs.getNumberOfHits() + "/" + obs.getVx() + "/" + obs.isFrozen());
+                saveList.add("" + obstacleNameMap.get(obs.getName()) + "/" + obs.getCoordinates()[0] + "/"
+                        + obs.getCoordinates()[1] + "/" + obs.getNumberOfHits() + "/" + obs.getVx() + "/" + obs.isFrozen() + "/" + obs.isMoving() + "/" + ((FirmObstacle) obs).getMovesRight());
+            } else if (obsType.equals("Simple")) {
+                saveList.add("" + obstacleNameMap.get(obs.getName()) + "/"
+                        + obs.getCoordinates()[0] + "/" + obs.getCoordinates()[1] + "/" + obs.getVx() + "/" + obs.isFrozen()+ "/" + obs.isMoving() + "/" + ((SimpleObstacle) obs).getMovesRight());
             } else {
-                saveList.add("" + obstacleNameMap.get(obs.getName()) + "/" + obs.getCoordinates()[0] + "/" + obs.getCoordinates()[1] + "/" + obs.getVx() + "/" + obs.isFrozen());
+                saveList.add("" + obstacleNameMap.get(obs.getName()) + "/"
+                        + obs.getCoordinates()[0] + "/" + obs.getCoordinates()[1] + "/" + obs.getVx() + "/" + obs.isFrozen());
             }
         }
         saveList.add("" + statistics.getFallingBodyList().size());
@@ -100,6 +108,10 @@ public class Player {
             } else if (fb instanceof Remains) {
                 saveList.add("Remains" + "/" + fb.getCoordinates()[0] + "/" + fb.getCoordinates()[1]);
             }
+        }
+        saveList.add("" + statistics.getMagicalHexList().size());
+        for (MagicalHex mh : statistics.getMagicalHexList()) {
+            saveList.add("" + mh.getCoordinates()[0] + "/" + mh.getCoordinates()[1] + "/" + mh.getVx() + "/" + mh.getVy());
         }
         int abilityListSize = inventory.getAbilityList().size();
         saveList.add("" + abilityListSize);// ability list size
@@ -111,14 +123,14 @@ public class Player {
         saveList.add("" + abilityDuration);
         saveList.add("" + activeAbility);
         //ymir abilities
-        ymir=Controller.getInstance().getYmir();
+        ymir = Controller.getInstance().getYmir();
         saveList.add("" + ymir.isActive());
         saveList.add("" + ymir.getCooldown());
-        YmirAbility ymirAbility= ymir.getCurrentAbility();
-        if(ymirAbility!=null){
+        YmirAbility ymirAbility = ymir.getCurrentAbility();
+        if (ymirAbility != null) {
             saveList.add(ymirAbility.getName());
-        }else{
-            saveList.add(""+ null);
+        } else {
+            saveList.add("" + null);
         }
 
 
@@ -188,6 +200,10 @@ public class Player {
                         obstacle.setVx(vx);
                         boolean frozen = Boolean.parseBoolean(st.nextToken());
                         obstacle.setFrozen(frozen);
+                        boolean isMoving=Boolean.parseBoolean(st.nextToken());
+                        obstacle.setMoving(isMoving);
+                        boolean movesRight=Boolean.parseBoolean(st.nextToken());
+                        ((SimpleObstacle)obstacle).setMovesRight(movesRight);
                         statistics.addObstacle(obstacle);
                     }
                     if (obsType == 1) {
@@ -197,6 +213,10 @@ public class Player {
                         obstacle.setVx(vx);
                         boolean frozen = Boolean.parseBoolean(st.nextToken());
                         obstacle.setFrozen(frozen);
+                        boolean isMoving=Boolean.parseBoolean(st.nextToken());
+                        obstacle.setMoving(isMoving);
+                        boolean movesRight=Boolean.parseBoolean(st.nextToken());
+                        ((FirmObstacle)obstacle).setMovesRight(movesRight);
                         statistics.addObstacle(obstacle);
                     }
                     if (obsType == 2) {
@@ -205,6 +225,10 @@ public class Player {
                         ((ExplosiveObstacle) obstacle).setDegree(degree);
                         boolean frozen = Boolean.parseBoolean(st.nextToken());
                         obstacle.setFrozen(frozen);
+                        boolean isMoving=Boolean.parseBoolean(st.nextToken());
+                        obstacle.setMoving(isMoving);
+                        boolean movesRight=Boolean.parseBoolean(st.nextToken());
+                        ((ExplosiveObstacle)obstacle).setMovesRight(movesRight);
                         statistics.addObstacle(obstacle);
                     }
                     if (obsType == 3) {
@@ -244,6 +268,22 @@ public class Player {
                     loadListTracker++;
                 }
 
+                int magicalHexNumber = Integer.parseInt(loadList.get(loadListTracker++));
+                statistics.getMagicalHexList().clear();
+                for (int i = 0; i < magicalHexNumber; i++) {
+                    StringTokenizer st = new StringTokenizer(loadList.get(loadListTracker), "/");
+                    double coordX = Double.parseDouble(st.nextToken());
+                    double coordY = Double.parseDouble(st.nextToken());
+                    double vx = Double.parseDouble(st.nextToken());
+                    double vy = Double.parseDouble(st.nextToken());
+                    MagicalHex magicalHex = new MagicalHex(coordX, coordY, 4, 12, noblePhantasm);
+                    magicalHex.setVx(vx);
+                    magicalHex.setVy(vy);
+                    statistics.addMagicalHex(magicalHex);
+                    loadListTracker++;
+                }
+
+
                 inventory.getAbilityList().clear();
                 int abilityNumber = Integer.parseInt(loadList.get(loadListTracker++));
                 for (int i = 0; i < abilityNumber; i++) {
@@ -264,7 +304,7 @@ public class Player {
 
 
                 if (loadList.size() != loadListTracker) {
-                    ymir=Controller.getInstance().getYmir();
+                    ymir = Controller.getInstance().getYmir();
                     ymir.setActive(Boolean.parseBoolean(loadList.get(loadListTracker++)));
                     ymir.setCooldown(Integer.parseInt(loadList.get(loadListTracker++)));
                     String ymirAbility = (loadList.get(loadListTracker++));

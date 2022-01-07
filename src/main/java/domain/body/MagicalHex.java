@@ -58,4 +58,20 @@ public class MagicalHex extends Body {
             }
         }
     }
+
+    public double getVx() {
+        return vx;
+    }
+
+    public void setVx(double vx) {
+        this.vx = vx;
+    }
+
+    public double getVy() {
+        return vy;
+    }
+
+    public void setVy(double vy) {
+        this.vy = vy;
+    }
 }
