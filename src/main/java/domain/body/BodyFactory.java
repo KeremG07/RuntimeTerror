@@ -46,7 +46,7 @@ public class BodyFactory {
     }
 
     public static Gift createGift(double x, double y) {
-        Gift newCreatedGift = new Gift(x, y, 32, 32, Controller.getInstance().getPlayer().getNoblePhantasm(), "Gift", 30);
+        Gift newCreatedGift = new Gift(x, y, 32, 32, Controller.getInstance().getPlayer().getNoblePhantasm());
         return newCreatedGift;
     }
     public static Remains createRemains(double x, double y) {
