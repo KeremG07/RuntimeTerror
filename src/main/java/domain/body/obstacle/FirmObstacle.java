@@ -80,4 +80,11 @@ public class FirmObstacle extends Obstacle {
         Controller.getInstance().getStatistics().setScore(oldScore + (300.0/timeElapsed));
     }
 
+    public boolean getMovesRight() {
+        return movesRight;
+    }
+
+    public void setMovesRight(boolean movesRight) {
+        this.movesRight = movesRight;
+    }
 }
