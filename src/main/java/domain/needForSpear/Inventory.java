@@ -7,7 +7,6 @@ import domain.ymirAbility.*;
 
 public class Inventory {
     private ArrayList<String> abilityList;
-
     public Inventory(){
         abilityList = new ArrayList<String>();
     }
@@ -17,7 +16,6 @@ public class Inventory {
             abilityList.add(ability);
         }
     }
-
     public ArrayList<String> getAbilityList() {
         return abilityList;
     }

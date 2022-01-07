@@ -18,7 +18,7 @@ public class CreateObstacleTest {
         int hitNum =1;
         Obstacle simpleObstacle = new SimpleObstacle(x,y,obsWidth,obsHeight,hitNum);
         Obstacle createdObstacle= BodyFactory.createObstacle(type,x,y,hitNum);
-        assertTrue(simpleObstacle.getName()==createdObstacle.getName());
+        assertTrue(simpleObstacle.getName().equals(createdObstacle.getName()));
     }
     @Test
     //checks if the created obstacle is a firm obstacle.
@@ -31,7 +31,7 @@ public class CreateObstacleTest {
         int hitNum =3;
         Obstacle firmObstacle = new FirmObstacle(x,y,obsWidth,obsHeight,hitNum);
         Obstacle createdObstacle= BodyFactory.createObstacle(type,x,y,hitNum);
-        assertTrue(firmObstacle.getName()==createdObstacle.getName());
+        assertTrue(firmObstacle.getName().equals(createdObstacle.getName()));
     }
     @Test
     //checks if the created obstacle is an explosive obstacle.
@@ -44,7 +44,7 @@ public class CreateObstacleTest {
         int hitNum =1;
         Obstacle explosiveObstacle = new ExplosiveObstacle(x,y,obsWidth,obsHeight,hitNum);
         Obstacle createdObstacle= BodyFactory.createObstacle(type,x,y,hitNum);
-        assertTrue(explosiveObstacle.getName()==createdObstacle.getName());
+        assertTrue(explosiveObstacle.getName().equals(createdObstacle.getName()));
     }
     @Test
     //checks if the created obstacle is a gift obstacle.
@@ -55,10 +55,9 @@ public class CreateObstacleTest {
         double x= 10.0;
         double y= 20.0;
         int hitNum =1;
-        String giftType="chance";
-        Obstacle giftObstacle = new GiftObstacle(x,y,obsWidth,obsHeight,hitNum,giftType);
+        Obstacle giftObstacle = new GiftObstacle(x,y,obsWidth,obsHeight,hitNum);
         Obstacle createdObstacle= BodyFactory.createObstacle(type,x,y,hitNum);
-        assertTrue(giftObstacle.getName()==createdObstacle.getName());
+        assertTrue(giftObstacle.getName().equals(createdObstacle.getName()));
     }
     @Test
     //checks if the created obstacle is a hollow purple obstacle.
@@ -71,7 +70,7 @@ public class CreateObstacleTest {
         int hitNum =1;
         Obstacle hollowPurpleObs = new HollowPurpleObs(x,y,obsWidth,obsHeight,hitNum);
         Obstacle createdObstacle= BodyFactory.createObstacle(type,x,y,hitNum);
-        assertTrue(hollowPurpleObs.getName()==createdObstacle.getName());
+        assertTrue(hollowPurpleObs.getName().equals(createdObstacle.getName()));
     }
 
 }

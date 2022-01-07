@@ -10,14 +10,16 @@ public class BuildGameTest {
     @Test
     //Makes sure the total count of each obstacle is less than the upper bound.
     public void checkUpperBoundObstacle(){
+        Controller.getInstance().getStatistics().getObstacleList().removeAll(Controller.getInstance().getStatistics().getObstacleList());
         String[] numOfObstacles = new String[]{"100", "10000", "4500", "6500"};
         BuildGame bg = new BuildGame(numOfObstacles);
-        assertTrue(bg.getSimpleObstacleNum() + bg.getFirmObstacleNum() + bg.getExplosiveObstacleNum() + bg.getGiftObstacleNum() <= 100);
+        assertTrue(bg.getSimpleObstacleNum() + bg.getFirmObstacleNum() + bg.getExplosiveObstacleNum() + bg.getGiftObstacleNum() <= 110);
     }
 
     @Test
     //Makes sure the count of each obstacle is more than or equal to their minimum requirements.
     public void checkLowerBoundObstacle(){
+        Controller.getInstance().getStatistics().getObstacleList().removeAll(Controller.getInstance().getStatistics().getObstacleList());
         String[] numOfObstacles = new String[]{"0", "8", "2", "-70"};
         BuildGame bg = new BuildGame(numOfObstacles);
         assertTrue(bg.getSimpleObstacleNum() >= bg.simpleObstacleReq);
@@ -29,6 +31,7 @@ public class BuildGameTest {
     @Test
     //Makes sure the correct number of obstacles are created according to the user input.
     public void checkCountObstaclesCreated(){
+        Controller.getInstance().getStatistics().getObstacleList().removeAll(Controller.getInstance().getStatistics().getObstacleList());
         String[] numOfObstacles = new String[]{"75", "10", "5", "10"};
         BuildGame bg = new BuildGame(numOfObstacles);
         int countSimple = 0, countFirm = 0, countExplosive = 0, countGift = 0;
@@ -52,6 +55,7 @@ public class BuildGameTest {
     @Test
     //Makes sure obstacles do not collide.
     public void checkObstacleCollision(){
+        Controller.getInstance().getStatistics().getObstacleList().removeAll(Controller.getInstance().getStatistics().getObstacleList());
         String[] numOfObstacles = new String[]{"75", "10", "5", "10"};
         BuildGame bg = new BuildGame(numOfObstacles);
         for(Obstacle obstacle1 : Controller.getInstance().getStatistics().getObstacleList()){
@@ -67,6 +71,7 @@ public class BuildGameTest {
     @Test
     //Makes sure the firm obstacles have the correct number of hitNum attribute.
     public void checkFirmObstacleHitNum(){
+        Controller.getInstance().getStatistics().getObstacleList().removeAll(Controller.getInstance().getStatistics().getObstacleList());
         String[] numOfObstacles = new String[]{"75", "10", "5", "10"};
         BuildGame bg = new BuildGame(numOfObstacles);
         for(Obstacle obstacle : Controller.getInstance().getStatistics().getObstacleList()){

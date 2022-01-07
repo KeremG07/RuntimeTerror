@@ -1,6 +1,4 @@
 package ui.swing;
-
-import com.sun.corba.se.impl.orbutil.graph.Graph;
 import domain.body.EnchantedSphere;
 import domain.body.MagicalHex;
 import domain.body.NoblePhantasm;
@@ -273,14 +271,9 @@ public class GameScreen extends JPanel {
 
     }
 
-    public static boolean isInitObstacles() {
-        return initObstacles;
-    }
-
     public static void setInitObstacles(boolean initObstacles) {
         GameScreen.initObstacles = initObstacles;
     }
-
 
     public Map<Point2D.Double, Image> getLocations() { return locations; }
 }

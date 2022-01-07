@@ -7,7 +7,6 @@ import domain.needForSpear.Controller;
 
 public class BodyFactory {
     public static final double gameScreenWidth = Controller.getInstance().getFrameBorders()[0],
-            gameScreenHeight = Controller.getInstance().getFrameBorders()[1],
             nPhantasmWidth = gameScreenWidth / 10,
             nPhantasmHeight = 8,
             eSphereWidth = 12,
@@ -39,7 +38,7 @@ public class BodyFactory {
         } else if (typeOfObstacle.equals("Explosive")) {
             newCreatedObs = new ExplosiveObstacle(x, y, expWidth, expHeight, hitNum);
         } else if (typeOfObstacle.equals("Gift")) {
-            newCreatedObs = new GiftObstacle(x, y, obsWidth, obsHeight, hitNum, "chance");
+            newCreatedObs = new GiftObstacle(x, y, obsWidth, obsHeight, hitNum);
         } else {
             newCreatedObs = new HollowPurpleObs(x, y, obsWidth, obsHeight, hitNum);
         }
@@ -51,7 +50,7 @@ public class BodyFactory {
         return newCreatedGift;
     }
     public static Remains createRemains(double x, double y) {
-        Remains newCreatedRemains = new Remains(x, y, 32, 32, Controller.getInstance().getPlayer().getNoblePhantasm(), 1);
+        Remains newCreatedRemains = new Remains(x, y, 32, 32, Controller.getInstance().getPlayer().getNoblePhantasm());
         return newCreatedRemains;
     }
 }

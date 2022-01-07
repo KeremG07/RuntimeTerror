@@ -6,7 +6,6 @@ import java.util.Random;
 
 public class SimpleObstacle extends Obstacle {
     private boolean movesRight;
-
     public SimpleObstacle(double x_coordinates,
                           double y_coordinates,
                           double width,

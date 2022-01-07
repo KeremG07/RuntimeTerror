@@ -80,13 +80,10 @@ public class Statistics {
     public void setLoadedTimeElapsed(long timeElapsed) {
         this.loadedTimeElapsed = timeElapsed;
     }
-    public long getStartTime() {
-        return startTime;
-    }
+
     public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
-
 
     public ArrayList<Obstacle> getObstacleList() {
         return obstacleList;

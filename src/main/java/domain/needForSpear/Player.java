@@ -80,7 +80,6 @@ public class Player {
         saveList.add(Integer.toString(statistics.getChances()));
         saveList.add(Double.toString(statistics.getScore()));
 
-
         saveList.add("" + noblePhantasm.getCoordinates()[0] + "/" + noblePhantasm.getNormalAngle());
         saveList.add("" + enchantedSphere.isNotShot() + "/" + enchantedSphere.getCoordinates()[0]
                 + "/" + enchantedSphere.getCoordinates()[1] + "/" + enchantedSphere.getVx() + "/" + enchantedSphere.getVy());
@@ -132,7 +131,6 @@ public class Player {
         } else {
             saveList.add("" + null);
         }
-
 
         try {
             iLoadAndSaveAdapter.saveGame(saveList, username);
@@ -318,17 +316,13 @@ public class Player {
                         DoubleAccel doubleAccel = new DoubleAccel();
                         ymir.setActiveAbility(doubleAccel);
                     }
-
                 }
-
             }
-
         } catch (IOException e) {
             System.out.println("There is no saved game associated with the given username");
             return false;
         }
         return true;
-
     }
 
     public void shootEnchantedSphere() {
@@ -455,10 +449,6 @@ public class Player {
 
     public EnchantedSphere getEnchantedSphere() {
         return enchantedSphere;
-    }
-
-    public String getSave() {
-        return save;
     }
 
     public void setSave(String save) {

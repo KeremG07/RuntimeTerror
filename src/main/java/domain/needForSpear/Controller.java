@@ -46,8 +46,6 @@ public class Controller {
         newGame = new StartGame();
         buildGame = newGame.buildNewGame(numOfObstaclesReq);
     }
-    public void startTimer(){
-    }
     public void saveGame(){
         player.saveGame(statistics.getUsername());
     }
@@ -74,13 +72,11 @@ public class Controller {
             shootEnchantedSphere();
             moveEnchantedSphere();
             moveMagicalHexes();
-
             //If enchanted sphere falls down set up so that it will be shot again by the player.
             if(player.getEnchantedSphere().getCoordinates()[1] + player.getEnchantedSphere().getHeight()>=gameScreenHeight){
                 playing = false;
                 player.updateEnchantedSphere();
             }
-
             ymir.lifecycle();
             player.playerAbilityLifeCycle();
         }
@@ -172,7 +168,6 @@ public class Controller {
             default: return "";
         }
     }
-
     public Player getPlayer() {
         return player;
     }
@@ -223,7 +218,6 @@ public class Controller {
             return "None";
         }
     }
-
     public BuildGame getBuildGame() { return buildGame; }
 
 }
